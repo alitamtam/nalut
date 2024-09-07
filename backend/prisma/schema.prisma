@@ -1,0 +1,63 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model articles {
+  id         Int       @id @default(autoincrement())
+  title      String
+  article    String
+  created_at DateTime  @default(now()) @db.Timestamptz(6)
+  updated_at DateTime? @db.Timestamptz(6)
+  authorId   Int
+  author     user      @relation(fields: [authorId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+}
+
+model user {
+  id            Int        @id @default(autoincrement())
+  first_name    String
+  last_name     String
+  username      String     @unique
+  email         String     @unique
+  password      String
+  description   String?
+  created_at    DateTime   @default(now()) @db.Timestamptz(6)
+  updated_at    DateTime?  @db.Timestamptz(6)
+  role          String     @default("member")
+  Profile       Profile?
+  articles      articles[] // One-to-many relationship with Article
+  events        event[]  // One-to-many relationship with Event (opposite of owner)
+  publications publications[]
+}
+
+
+model Profile {
+  id     Int     @id @default(autoincrement())
+  bio    String?
+  userId Int     @unique
+  user  user   @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+model event {
+  id          Int       @id @default(autoincrement())
+  title       String
+  description String?
+  location    String?
+  startTime   DateTime
+  endTime     DateTime
+  ownerId     Int       // Assuming the event has an owner (user)
+  owner       user      @relation(fields: [ownerId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+}
+
+model publications {
+  id          Int       @id @default(autoincrement())
+  title       String
+  topic      String
+  content   String  
+  created_at DateTime @default(now())
+  ownerId     Int       // Assuming the event has an owner (user)
+  owner       user      @relation(fields: [ownerId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+}
