@@ -1,12 +1,13 @@
 import prisma from "../../prisma/index.js";
 import bcrypt from "bcrypt";
 import * as userModel from "../models/userModel.js";
-import { generateToken } from "../middleware/auth.middleware.js";
+import * as articleModel from "../models/articleModel.js";
 
+import { generateToken } from "../middleware/auth.middleware.js";
 const adminController = {
   async getDashboardData(req, res) {
     try {
-      const allArticles = await prisma.articles.findMany({
+      const allArticles = await prisma.articleModel.findMany({
         orderBy: {
           created_at: "desc",
         },
@@ -83,7 +84,7 @@ const adminController = {
     try {
       const { title, article } = req.body;
 
-      const newArticle = await prisma.articles.create({
+      const newArticle = await prisma.articleModel.createArticle({
         data: {
           title,
           article,
@@ -103,7 +104,7 @@ const adminController = {
     const articleId = parseInt(req.params.id);
 
     try {
-      const article = await prisma.articles.findUnique({
+      const article = await prisma.articleModel.findUnique({
         where: { id: articleId },
       });
 
@@ -123,7 +124,7 @@ const adminController = {
     const { title, article } = req.body;
 
     try {
-      const updatedArticle = await prisma.articles.update({
+      const updatedArticle = await prisma.articleModel.update({
         where: { id: articleId },
         data: { title, article },
       });
@@ -139,7 +140,7 @@ const adminController = {
 
   async deleteArticle(req, res) {
     try {
-      await prisma.articles.delete({
+      await prisma.articleModel.delete({
         where: { id: parseInt(req.params.id) },
       });
 

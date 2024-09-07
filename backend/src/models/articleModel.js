@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import prisma from "../../prisma/index.js";
 
 const prisma = new PrismaClient();
 
@@ -49,4 +49,12 @@ export const deleteArticle = async (id) => {
   return await prisma.articles.delete({
     where: { id: parseInt(id) },
   });
+};
+
+export default {
+  createArticle,
+  deleteArticle,
+  getAllArticles,
+  getArticleById,
+  updateArticle,
 };
