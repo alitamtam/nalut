@@ -27,7 +27,6 @@ const AboutUs = () => {
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                         {/* Repeat this block for each profile */}
                         <article className="bg-white shadow-lg rounded-lg overflow-hidden">
-                            <img className="w-full h-48 object-cover" src="/img/profile-image.jpg" alt="Profile" />
                             <div className="p-4">
                                 <h3 className="text-xl font-semibold mb-2">Reem Ben Giaber</h3>
                                 <p className="text-gray-600">Profile description here...</p>

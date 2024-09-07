@@ -1,12 +1,21 @@
 // src/App.jsx
+
 import React from 'react';
+import Header from './components/Header/Header';
+import Footer from './components/Footer/Footer';
+import AppRouter from './router';
+import BackToTop from './components/BackToTop';
 import './index.css';
 
-export default function App() {
+function App() {
   return (
-    <h1 className="text-3xl font-bold underline">
-      Hello world!
-    </h1>
-  )
+    <div className="App">
+      <Header />
+      <AppRouter />
+      <BackToTop />
+      <Footer />
+    </div>
+  );
 }
 
+export default App;
