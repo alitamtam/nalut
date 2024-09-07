@@ -1,7 +1,6 @@
-// middlewares/authMiddleware.js
-
 import jwt from "jsonwebtoken";
 
+// Middleware to authenticate tokens
 export const authenticateToken = (req, res, next) => {
   const token = req.header("Authorization")?.split(" ")[1];
   if (!token) return res.status(401).json({ error: "Access denied" });
@@ -22,3 +21,15 @@ export const authorizeAdmin = (req, res, next) => {
   }
   next();
 };
+
+// Function to generate a token
+export const generateToken = (user) => {
+  return jwt.sign(
+    { id: user.id, username: user.username, role: user.role },
+    process.env.JWT_SECRET,
+    { expiresIn: "1h" }
+  );
+};
+
+// Export the authenticate middleware as authenticateToken if used in the route
+export const authenticate = authenticateToken;

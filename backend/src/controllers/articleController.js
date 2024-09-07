@@ -1,47 +1,37 @@
 import prisma from "../../prisma/index.js";
 
 const articleController = {
-  // Render the homepage with articles and topics
-  async renderHomePage(req, res, next) {
+  // Fetch and return homepage data (articles and topics)
+  async getHomePageData(req, res, next) {
     try {
       const articles = await prisma.articles.findMany({
         orderBy: { created_at: "desc" },
         take: 6,
       });
       const topics = await prisma.publications.findMany();
-      res.render("index", { articles, topics });
+      res.status(200).json({ articles, topics });
     } catch (error) {
       console.error(error);
       next(error);
     }
   },
 
-  // Render the About page
-  async renderAboutPage(req, res, next) {
-    try {
-      res.render("about", { currentRoute: "/about" });
-    } catch (error) {
-      console.error(error);
-      next(error);
-    }
-  },
-
-  // Fetch and render all articles
+  // Fetch and return all articles
   async findAllArticles(req, res, next) {
     try {
       const articles = await prisma.articles.findMany({
         orderBy: { created_at: "desc" },
         take: 6,
       });
-      res.render("index", { articles });
+      res.status(200).json(articles);
     } catch (error) {
       console.error(error);
       next(error);
     }
   },
 
-  // Find a specific article by ID
-  async findArticleById(req, res) {
+  // Fetch and return a specific article by ID
+  async findArticleById(req, res, next) {
     try {
       const { id } = req.params;
       const article = await prisma.articles.findUnique({
@@ -50,10 +40,10 @@ const articleController = {
       if (!article) {
         return res.status(404).json({ message: "Article not found" });
       }
-      res.render("fullArticle", { article });
+      res.status(200).json(article);
     } catch (error) {
       console.error(error);
-      res.status(500).json({ message: "Internal server error" });
+      next(error);
     }
   },
 };

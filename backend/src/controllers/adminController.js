@@ -1,6 +1,6 @@
 import prisma from "../../prisma/index.js";
 import bcrypt from "bcrypt";
-import { generateToken } from "../middleware/jwt.middleware.js";
+import { generateToken } from "../middleware/auth.middleware.js";
 
 const adminController = {
   async getDashboardData(req, res) {

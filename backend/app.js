@@ -1,15 +1,13 @@
 import express from "express";
-import dotenv from "dotenv";
-import Router from "./routes/index.js"; // Import your routes
-
-dotenv.config(); // Load environment variables
+import routes from "./src/routes/index.js";
 
 const app = express();
 
 // Middleware
-app.use(express.json()); // Parse JSON bodies
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-// Routes
-app.use(Router); // Use the router for your API routes
+// Use the routes defined in routes/index.js
+app.use("/api", routes);
 
-export default app;
+export default app; // Export the app object
