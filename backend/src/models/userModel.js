@@ -1,9 +1,7 @@
 // models/userModel.js
 
-import { PrismaClient } from "@prisma/client";
+import prisma from "../../prisma/index.js";
 import bcrypt from "bcrypt";
-
-const prisma = new PrismaClient();
 
 // Create a new user
 export const createUser = async (username, password, role = "admin") => {
@@ -26,3 +24,11 @@ export const findUserByUsername = async (username) => {
     where: { username },
   });
 };
+
+export const findUserById = async (id) => {
+  return await prisma.user.findUnique({
+    where: { id },
+  });
+};
+
+export default { createUser, findUserByUsername, findUserById };

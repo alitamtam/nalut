@@ -8,7 +8,7 @@ const router = express.Router();
 router.get("/dashboard", authenticate, adminController.getDashboardData);
 
 // User management routes
-router.post("/register", adminController.createUser); // Create a user
+router.post("/register", adminController.registerUser); // Create a user
 router.post("/login", adminController.logIn); // User login
 router.post("/logout", authenticate, adminController.logout); // User logout
 

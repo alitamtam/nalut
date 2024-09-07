@@ -1,5 +1,6 @@
 import prisma from "../../prisma/index.js";
 import bcrypt from "bcrypt";
+import * as userModel from "../models/userModel.js";
 import { generateToken } from "../middleware/auth.middleware.js";
 
 const adminController = {
@@ -20,12 +21,12 @@ const adminController = {
     }
   },
 
-  async createUser(req, res) {
+  async registerUser(req, res) {
     try {
       const { first_name, last_name, username, email, password } = req.body;
       const hashedPassword = await bcrypt.hash(password, 10);
 
-      const createUser = await prisma.user.create({
+      const registerUser = await prisma.user.create({
         data: {
           first_name,
           last_name,
@@ -35,7 +36,7 @@ const adminController = {
         },
       });
 
-      console.log(createUser);
+      console.log(registerUser);
       res.status(201).json({ message: "User created successfully" });
     } catch (error) {
       if (error.code === "P2002") {
@@ -51,31 +52,25 @@ const adminController = {
     const { username, password } = req.body;
 
     try {
-      const user = await prisma.user.findFirst({
-        where: { username },
-      });
-
+      // Check if the user exists
+      const user = await userModel.findUserByUsername(username);
       if (!user) {
-        return res
-          .status(401)
-          .json({ errorMessage: "Incorrect username or password" });
+        return res.status(400).json({ error: "Invalid username or password" });
       }
 
-      const isPasswordValid = await bcrypt.compare(password, user.password);
-      if (!isPasswordValid) {
-        return res
-          .status(401)
-          .json({ errorMessage: "Incorrect username or password" });
+      // Check the password
+      const validPassword = await bcrypt.compare(password, user.password);
+      if (!validPassword) {
+        return res.status(400).json({ error: "Invalid username or password" });
       }
 
-      // Generate JWT token
+      // Generate JWT
+      // Générer un token JWT
       const token = generateToken(user);
-      res.cookie("token", token, { httpOnly: true }); // Store token in cookie
 
-      res.status(200).json({ message: "Login successful", token });
+      res.json({ token });
     } catch (error) {
-      console.error(error);
-      res.status(500).json({ message: "Internal server error" });
+      res.status(500).json({ error: "Error logging in" });
     }
   },
 

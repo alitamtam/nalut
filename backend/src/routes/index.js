@@ -2,7 +2,6 @@ import express from "express";
 import articleRoutes from "./articles.router.js";
 import userRoutes from "./user.router.js";
 import publicationRoutes from "./publication.router.js";
-
 const router = express.Router();
 
 // Middleware to set default response format
