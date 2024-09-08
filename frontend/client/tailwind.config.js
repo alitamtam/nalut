@@ -1,9 +1,12 @@
-// tailwind.config.js
-/** @type {import('tailwindcss').Config} */
+import twElementsReactPlugin from "tw-elements-react/dist/plugin";
+
 export default {
-  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+  content: [
+    "./src/**/*.{html,js,jsx}", // Make sure this includes the paths to your JS files
+    "./node_modules/tw-elements-react/dist/js/**/*.js", // Add tw-elements
+  ],
   theme: {
     extend: {},
   },
-  plugins: [],
+  plugins: [twElementsReactPlugin],
 };

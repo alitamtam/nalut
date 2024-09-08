@@ -10,6 +10,7 @@ const Layout = () => {
             <main>
                 <Outlet /> {/* This is where nested routes will be rendered */}
             </main>
+
             <Footer />
         </>
     );
