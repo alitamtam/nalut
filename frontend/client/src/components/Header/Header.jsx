@@ -1,9 +1,7 @@
 // src/components/Header.jsx
 
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { FaFacebookF, FaTwitter, FaInstagram } from 'react-icons/fa';
-
 const Header = () => {
     return (
         <header className="bg-white shadow-md">
@@ -51,6 +49,7 @@ const Header = () => {
                         </div>
                     </div>
                 </div>
+
             </nav>
         </header>
     );
