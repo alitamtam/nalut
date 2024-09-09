@@ -10,7 +10,7 @@ const Header = () => {
                 {/* Logo Section */}
                 <a href="/" className="flex items-center">
                     <img className="w-full h-auto rounded-md" src={logo} alt="Logo" />
-                    <span className="ml-2 text-xl font-bold">EduLibya</span>
+                    <span className="ml-2 text-xl font-bold"></span>
                 </a>
 
                 {/* Search Bar and Social Icons */}

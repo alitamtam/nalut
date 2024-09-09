@@ -5,13 +5,10 @@ import './index.css';
 
 function App() {
   return (
-
-    <div className='App md:w-1/2'>
+    <div className="App lg:w-full items-center justify-center"> {/* Full width wrapper */}
       <AppRouter /> {/* Routes handle everything including the homepage */}
       <Footer />
-
     </div>
-
   );
 }
 

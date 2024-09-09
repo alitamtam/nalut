@@ -3,7 +3,7 @@ import { FaChalkboardTeacher, FaUserGraduate, FaSchool, FaBuilding, FaCheck, FaB
 import { MdConstruction } from 'react-icons/md';
 
 const topics = [
-    { name: 'Teacher Education', icon: <FaChalkboardTeacher className="text-4xl" /> },
+    { name: 'Teacher Education', icon: <FaChalkboardTeacher className="text-4xl text-" /> },
     { name: 'Teacher Professional Development', icon: <FaUserGraduate className="text-4xl" /> },
     { name: 'School Governance', icon: <FaSchool className="text-4xl" /> },
     { name: 'Ministry of Education', icon: <FaBuilding className="text-4xl" /> },
@@ -28,11 +28,11 @@ const TopicsSlider = () => {
     };
 
     return (
-        <div className="relative w-full md:w-1/2 p-4">
+        <div className="relative w-full  p-4">
             <div className="flex items-center">
                 <button
                     onClick={slideLeft}
-                    className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white p-2 rounded-full shadow-md hover:bg-gray-200"
+                    className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white p-2 rounded-full shadow-md hover:bg-sky-700"
                 >
                     <FaArrowLeft className="text-xl" />
                 </button>
@@ -44,12 +44,12 @@ const TopicsSlider = () => {
                         {topics.map((topic, index) => (
                             <div
                                 key={index}
-                                className="flex-shrink-0 w-48 h-56 mx-2 flex flex-col items-center justify-center bg-white rounded-lg shadow-lg p-4 transition-transform duration-300 hover:scale-105 hover:bg-gray-100"
+                                className="flex-shrink-0 w-48 h-56 mx-0 flex flex-col items-center justify-center bg-gray-100  shadow-lg p-0 transition-transform duration-300 hover:scale-105 hover:bg-sky-900 hover:text-white"
                             >
                                 <div className="mb-2">
                                     {topic.icon}
                                 </div>
-                                <p className="text-teal-600 text-xs font-semibold tracking-wider uppercase text-center">
+                                <p className="text-teal-600 text-xs font-semibold tracking-wider uppercase text-center hover:text-white">
                                     {topic.name}
                                 </p>
                             </div>
