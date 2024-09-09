@@ -3,17 +3,17 @@ import { FaChalkboardTeacher, FaUserGraduate, FaSchool, FaBuilding, FaCheck, FaB
 import { MdConstruction } from 'react-icons/md';
 
 const topics = [
-    { name: 'Teacher Education', icon: <FaChalkboardTeacher className="text-4xl text-" /> },
-    { name: 'Teacher Professional Development', icon: <FaUserGraduate className="text-4xl" /> },
-    { name: 'School Governance', icon: <FaSchool className="text-4xl" /> },
-    { name: 'Ministry of Education', icon: <FaBuilding className="text-4xl" /> },
-    { name: 'Buildings and Facilities', icon: <MdConstruction className="text-4xl" /> },
-    { name: 'Quality Assurance', icon: <FaCheck className="text-4xl" /> },
-    { name: 'Educational Research', icon: <FaBook className="text-4xl" /> },
-    { name: 'Information Technology in Schools', icon: <FaLaptop className="text-4xl" /> },
-    { name: 'Inclusion and Neuro-divergence', icon: <FaBrain className="text-4xl" /> },
-    { name: 'Student Wellbeing and Enrichment', icon: <FaLeaf className="text-4xl" /> },
-    { name: 'Assessment and Examination', icon: <FaPenAlt className="text-4xl" /> },
+    { name: 'Teacher Education', icon: <FaChalkboardTeacher className="text-6xl " /> },
+    { name: 'Teacher Professional Development', icon: <FaUserGraduate className="text-6xl" /> },
+    { name: 'School Governance', icon: <FaSchool className="text-6xl" /> },
+    { name: 'Ministry of Education', icon: <FaBuilding className="text-6xl" /> },
+    { name: 'Buildings and Facilities', icon: <MdConstruction className="text-6xl" /> },
+    { name: 'Quality Assurance', icon: <FaCheck className="text-6xl" /> },
+    { name: 'Educational Research', icon: <FaBook className="text-6xl" /> },
+    { name: 'Information Technology in Schools', icon: <FaLaptop className="text-6xl" /> },
+    { name: 'Inclusion and Neuro-divergence', icon: <FaBrain className="text-6xl" /> },
+    { name: 'Student Wellbeing and Enrichment', icon: <FaLeaf className="text-6xl" /> },
+    { name: 'Assessment and Examination', icon: <FaPenAlt className="text-6xl" /> },
 ];
 
 const TopicsSlider = () => {
@@ -28,7 +28,7 @@ const TopicsSlider = () => {
     };
 
     return (
-        <div className="relative w-full  p-4">
+        <div className="relative w-full  p-4 py-12 px-7">
             <div className="flex items-center">
                 <button
                     onClick={slideLeft}
@@ -36,7 +36,7 @@ const TopicsSlider = () => {
                 >
                     <FaArrowLeft className="text-xl" />
                 </button>
-                <div className="overflow-hidden whitespace-nowrap">
+                <div className="overflow-hidden whitespace-nowrap  hover:bg-sky-900 hover:text-white">
                     <div
                         className="flex transition-transform duration-300"
                         style={{ transform: `translateX(${scrollPosition}px)` }}
@@ -46,7 +46,7 @@ const TopicsSlider = () => {
                                 key={index}
                                 className="flex-shrink-0 w-48 h-56 mx-0 flex flex-col items-center justify-center bg-gray-100  shadow-lg p-0 transition-transform duration-300 hover:scale-105 hover:bg-sky-900 hover:text-white"
                             >
-                                <div className="mb-2">
+                                <div className="mb-3 t text-6x1 text-teal-600 hover:text-white ">
                                     {topic.icon}
                                 </div>
                                 <p className="text-teal-600 text-xs font-semibold tracking-wider uppercase text-center hover:text-white">
