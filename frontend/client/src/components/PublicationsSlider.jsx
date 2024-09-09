@@ -25,7 +25,7 @@ const PublicationsSlider = () => {
     return (
         <>
             <TECarousel
-                className="h-[400px]"  // Fix the height of the carousel
+                className="h-[400px] w-[600px]  "  // Fix the height of the carousel
                 showControls
                 showIndicators
                 crossfade
