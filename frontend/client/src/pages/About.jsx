@@ -6,7 +6,7 @@ const AboutUs = () => {
     return (
         <div>
 
-            <main className="container mx-auto px-4 py-8">
+            <main className="container mx-auto px-28 py-8">
                 <section className="bg-white shadow-lg rounded-lg p-6 mb-8">
                     <h2 className="text-2xl font-bold mb-4">About Us</h2>
                     <p className="mb-4">All of us in EduLibya are linked to the education sector as students, teachers, parents, workshop leaders, researchers, psycho-social practitioners and so forth.</p>

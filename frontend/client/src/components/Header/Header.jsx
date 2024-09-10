@@ -5,8 +5,8 @@ import logo from '../../assets/img/logo.png';
 
 const Header = () => {
     return (
-        <header className="bg-white shadow-md lg:w-2/3 lg:mx-60">
-            <div className="container mx-auto px-4 py-2 flex items-center justify-between">
+        <header className="bg-white  ">
+            <div className="container mx-auto  px-28 py-8 flex items-center justify-between">
                 {/* Logo Section */}
                 <a href="/" className="flex items-center">
                     <img className="w-full h-auto rounded-md" src={logo} alt="Logo" />

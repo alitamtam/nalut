@@ -5,8 +5,8 @@ import { Link } from 'react-router-dom';
 const HomePage = () => {
     return (
         <>
-            <div className=" lg:w-2/3 lg:mx-60 items-center justify-center">
-                <div className="flex flex-col md:flex-row ">
+            <div className=" lg:mx-80  items-center justify-center" >
+                <div className="flex flex-col md:flex-row  ">
                     {/* Left Side - Publications Slider */}
                     <div className="w-full ">
                         <PublicationsSlider />
@@ -27,12 +27,12 @@ const HomePage = () => {
             </div>
 
             {/* Topics Section */}
-            <div className="mt-8 w-full">
+            <div className="mt-16 w-full">
                 <div className="flex flex-col items-center lg:flex-row lg:justify-between lg:mx-80">
-                    <h2 className="text-3xl font-bold mb-4 text-center uppercase font-sans text-gray-800">
+                    <h2 className="text-3xl font-bold mb-4 text-center capitalcase  font-sans text-gray-800">
                         Our Topics Areas
                     </h2>
-                    <button className="border-2 text-teal-500 border-teal-500 rounded-full hover:bg-teal-500 hover:text-white py-2 px-8 font-sans mb-4 lg:mb-0">
+                    <button className="border-2 text-teal-500 font-body border-teal-500 rounded-full hover:bg-teal-500 hover:text-white py-2 px-8 font-sans mb-4 lg:mb-0">
                         View All
                     </button>
                 </div>

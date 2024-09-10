@@ -54,7 +54,7 @@ const PublicationsSlider = () => {
                 }
                 nextBtnIcon={
                     <>
-                        <span className="inline-block text-black h-8 w-8 [&>svg]:h-8">
+                        <span className="inline-block text-white h-8 w-8 [&>svg]:h-8 border rounded p">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 fill="none"
