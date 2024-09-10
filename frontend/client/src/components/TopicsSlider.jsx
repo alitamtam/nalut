@@ -1,5 +1,7 @@
 import { useState } from 'react';
-import { FaChalkboardTeacher, FaUserGraduate, FaSchool, FaBuilding, FaCheck, FaBook, FaLaptop, FaBrain, FaLeaf, FaPenAlt, FaArrowLeft, FaArrowRight } from 'react-icons/fa';
+import { FaChalkboardTeacher, FaUserGraduate, FaSchool, FaBuilding, FaCheck, FaBook, FaLaptop, FaBrain, FaLeaf, FaPenAlt, } from 'react-icons/fa';
+import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+
 import { MdConstruction } from 'react-icons/md';
 
 const topics = [
@@ -32,9 +34,9 @@ const TopicsSlider = () => {
             <div className="flex items-center">
                 <button
                     onClick={slideLeft}
-                    className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white p-2 rounded-full shadow-md hover:bg-sky-700"
+                    className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-teal-500 p-2 rounded-full shadow-md hover:bg-sky-700 z-10"
                 >
-                    <FaArrowLeft className="text-xl" />
+                    <IoIosArrowBack className="text-3xl text-white " />
                 </button>
                 <div className="overflow-hidden whitespace-nowrap  hover:bg-sky-900 hover:text-white">
                     <div
@@ -58,9 +60,9 @@ const TopicsSlider = () => {
                 </div>
                 <button
                     onClick={slideRight}
-                    className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white p-2 rounded-full shadow-md hover:bg-gray-200"
+                    className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-teal-500 p-2 rounded-full shadow-md hover:bg-sky-700 z-10"
                 >
-                    <FaArrowRight className="text-xl" />
+                    <IoIosArrowForward className="text-3xl text-white" />
                 </button>
             </div>
         </div>
