@@ -4,7 +4,7 @@ import Sidebar from '../components/Navbar/SideVar';
 const sections = [
     {
         name: 'Mission and Purpose', content: (
-            <section className="bg-white shadow-lg rounded-lg p-6 mb-8">
+            <section className="bg-white  rounded-lg p-6 mb-8">
                 <h2 className="text-2xl font-bold mb-4">About Us</h2>
                 <p className="mb-4">All of us in EduLibya are linked to the education sector as students, teachers, parents, workshop leaders, researchers, psycho-social practitioners and so forth.</p>
                 <p className="mb-4">We are a network of pedagogues / educationalists interested in various dimensions of education across Libya.</p>
@@ -37,7 +37,7 @@ const AboutUs = () => {
     const activeContent = sections.find(section => section.name === activeSection).content;
 
     return (
-        <div className="flex">
+        <div className="flex lg:mx-80">
             <Sidebar sections={sections} onSectionClick={handleSectionClick} />
             <div className="p-8">
                 <h2 className="text-2xl font-bold">{activeSection}</h2>
