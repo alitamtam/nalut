@@ -31,4 +31,7 @@ export const findUserById = async (id) => {
   });
 };
 
+export const findMany = async () => {
+  return await prisma.user.findMany();
+};
 export default { createUser, findUserByUsername, findUserById };

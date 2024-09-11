@@ -1,7 +1,5 @@
 import prisma from "../../prisma/index.js";
 
-const prisma = new PrismaClient();
-
 // Fetch all articles
 export const getAllArticles = async () => {
   return await prisma.articles.findMany({
@@ -50,11 +48,4 @@ export const deleteArticle = async (id) => {
     where: { id: parseInt(id) },
   });
 };
-
-export default {
-  createArticle,
-  deleteArticle,
-  getAllArticles,
-  getArticleById,
-  updateArticle,
-};
+//     });

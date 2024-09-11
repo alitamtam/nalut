@@ -1,3 +1,4 @@
+// path client/src/App.jsx
 import Footer from './components/Footer/Footer';
 import AppRouter from './router';
 

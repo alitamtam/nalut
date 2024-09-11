@@ -19,4 +19,5 @@ router.get("/articles/:id", adminController.getArticleById); // Get an article b
 router.put("/articles/:id", authenticate, adminController.updateArticle); // Update an article
 router.delete("/articles/:id", authenticate, adminController.deleteArticle); // Delete an article
 
+router.get("/users", authenticate, adminController.getAllUsers); // Get all users
 export default router;

@@ -1,9 +1,8 @@
 import prisma from "../../prisma/index.js";
 import bcrypt from "bcrypt";
 import * as userModel from "../models/userModel.js";
-import * as articleModel from "../models/articleModel.js";
-
 import { generateToken } from "../middleware/auth.middleware.js";
+
 const adminController = {
   async getDashboardData(req, res) {
     try {
@@ -148,6 +147,16 @@ const adminController = {
     } catch (error) {
       console.error(error);
       res.status(500).json({ message: "Error deleting article" });
+    }
+  },
+
+  async getAllUsers(req, res) {
+    try {
+      const users = await prisma.user.findMany();
+      res.status(200).json(users);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: "Error fetching users" });
     }
   },
 };

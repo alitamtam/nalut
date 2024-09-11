@@ -1,4 +1,4 @@
-import globals from "globals";
+import globals, { node } from "globals";
 import pluginJs from "@eslint/js";
 
 export default [
@@ -16,9 +16,11 @@ export default [
     settings: {
       react: {
         version: "detect", // Automatically detect the React version
+        node: true,
       },
     },
     rules: {
+      type: "module",
       // Custom overrides can be added here
       // Example:
       // "no-console": "off",

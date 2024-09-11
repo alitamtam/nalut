@@ -1,3 +1,4 @@
+// path client/src/main.jsx
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import AppRouter from './router'; // Import the router
@@ -9,3 +10,4 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 
     </React.StrictMode>
 );
+
