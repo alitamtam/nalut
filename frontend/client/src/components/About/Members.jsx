@@ -1,7 +1,5 @@
-// frontend/client/src/components/About/Members.jsx
 import { useState, useEffect } from 'react';
 import MemberCard from './MemberCard';
-// import MemberDetails from './MemberDetails';
 import api from '../../api/axiosConfig'; // Import the axios instance
 
 const Members = () => {
@@ -41,7 +39,7 @@ const Members = () => {
                 <p>No members found.</p>
             )}
         </div>
-    )
+    );
 };
 
 export default Members;
