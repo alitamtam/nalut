@@ -3,8 +3,25 @@ import prisma from "../../prisma/index.js";
 const profileController = {
   async getAllProfiles(req, res) {
     try {
-      const profiles = await prisma.profile.findMany();
-      res.status(200).json(profiles);
+      // Fetch profiles with user data (first_name, last_name)
+      const profiles = await prisma.profile.findMany({
+        include: {
+          user: {
+            select: {
+              first_name: true, // Ensure this matches your database field
+              last_name: true, // Corrected typo
+            },
+          },
+        },
+      });
+
+      // Map through the profiles and concatenate first_name and last_name
+      const profilesWithFullName = profiles.map((profile) => ({
+        ...profile,
+        fullName: `${profile.user.first_name} ${profile.user.last_name}`, // Add full name
+      }));
+
+      res.status(200).json(profilesWithFullName);
     } catch (error) {
       res.status(500).json({ error: "Failed to fetch profiles" });
     }
