@@ -6,7 +6,7 @@ const Navbar = () => {
     return (
         <nav className="bg-sky-950  lg:mx-80 ">
             <div className="container mx-auto px-28 py-8 flex justify-center">
-                <div className="flex space-x-6">
+                <div className="flex space-x-6 uppercase font-semibold">
                     <Link to="/about" className="text-white hover:text-orange-500">About Us</Link>
                     <Link to="/projects" className="text-white hover:text-orange-500">Actions / Projects</Link>
                     <Link to="/publications" className="text-white hover:text-orange-500">Publications / Resources</Link>
