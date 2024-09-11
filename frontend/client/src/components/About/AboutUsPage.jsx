@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import Sidebar from '../components/Navbar/SideVar';
-import Members from '../components/About/Members';
+import Sidebar from '../Navbar/SideVar';
+import Members from './Members';
 
 const sections = [
     {
