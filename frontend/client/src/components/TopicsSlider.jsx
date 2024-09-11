@@ -1,12 +1,12 @@
 import { useState } from 'react';
-import { FaUserGraduate, FaBook, FaLaptop, FaBrain, FaLeaf, FaPenAlt, } from 'react-icons/fa';
-import { LiaChalkboardTeacherSolid } from "react-icons/lia";
-import { FaSchoolCircleCheck } from "react-icons/fa6";
-import { BsBuildingAdd } from "react-icons/bs";
-import { RiGovernmentLine } from "react-icons/ri";
-import { AiOutlineFileProtect } from "react-icons/ai";
+import { FaUserGraduate, FaBook, FaLaptop, FaBrain, FaLeaf, FaPenAlt } from 'react-icons/fa';
+import { LiaChalkboardTeacherSolid } from 'react-icons/lia';
+import { FaSchoolCircleCheck } from 'react-icons/fa6';
+import { BsBuildingAdd } from 'react-icons/bs';
+import { RiGovernmentLine } from 'react-icons/ri';
+import { AiOutlineFileProtect } from 'react-icons/ai';
 
-import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 
 const topics = [
     { name: 'Teacher Education', icon: <LiaChalkboardTeacherSolid className="text-6xl" /> },
@@ -25,20 +25,30 @@ const topics = [
 const TopicsSlider = () => {
     const [scrollPosition, setScrollPosition] = useState(0);
 
+    const itemWidth = 200; // Width of each card
+    const visibleItems = 3; // Number of items visible in the slider at a time
+    const totalWidth = topics.length * itemWidth;
+
     const slideLeft = () => {
-        setScrollPosition(prev => Math.min(prev + 200, 0));
+        setScrollPosition(prev => {
+            if (prev === 0) {
+                return -(totalWidth - visibleItems * itemWidth); // Go to the last cloned item
+            }
+            return prev + itemWidth;
+        });
     };
 
     const slideRight = () => {
-        if (scrollPosition <= -(topics.length * 200 - 200)) {
-            setScrollPosition(0); // Reset to the beginning for continuous loop
-        } else {
-            setScrollPosition(prev => prev - 200);
-        }
+        setScrollPosition(prev => {
+            if (Math.abs(prev) === totalWidth - visibleItems * itemWidth) {
+                return 0; // Go back to the first cloned item
+            }
+            return prev - itemWidth;
+        });
     };
 
     return (
-        <div className="relative w-full pb-10 px-7 mb-40   border-teal-500 border-b">
+        <div className="relative w-full pb-10 px-7 mb-40 border-teal-500 border-b">
             <div className="flex items-center">
                 <button
                     onClick={slideLeft}
@@ -46,15 +56,15 @@ const TopicsSlider = () => {
                 >
                     <IoIosArrowBack className="text-3xl text-white" />
                 </button>
-                <div className="overflow-hidden whitespace-nowrap hover:bg-sky-900 hover:text-white">
+                <div className="overflow-hidden whitespace-nowrap">
                     <div
                         className="flex transition-transform duration-300"
                         style={{ transform: `translateX(${scrollPosition}px)` }}
                     >
                         {/* Cloned Items for infinite loop */}
-                        {topics.map((topic, index) => (
+                        {topics.concat(topics).map((topic, index) => (
                             <div
-                                key={index + topics.length}
+                                key={index}
                                 className="flex-shrink-0 w-48 h-56 mx-0 flex flex-col items-center justify-center bg-gray-100 shadow-lg p-0 transition-transform duration-300 hover:scale-105 hover:bg-sky-900 hover:text-white md:w-60 md:h-72"
                             >
                                 <div className="mb-3 text-6xl text-teal-600 hover:text-white">

@@ -1,7 +1,7 @@
-import TopicsSlider from '../components/TopicsSlider';
+// import TopicsSlider from '../components/TopicsSlider';
 import PublicationsSlider from '../components/PublicationsSlider';
 import { Link } from 'react-router-dom';
-
+import TopicsSlider2 from '../components/TopicSlick';
 const HomePage = () => {
     return (
         <>
@@ -37,7 +37,8 @@ const HomePage = () => {
                     </button>
                 </div>
 
-                <TopicsSlider />
+
+                <TopicsSlider2 />
             </div>
 
         </>
