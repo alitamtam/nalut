@@ -1,24 +1,17 @@
-import { useEffect, useState } from 'react';
-import axios from 'axios';
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { profileActions } from '../../../store/profileSlice'; // Update the path based on your structure
+const { fetchProfiles } = profileActions;
 
 const ProfileList = () => {
-    const [profiles, setProfiles] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+    const dispatch = useDispatch();
+    const profiles = useSelector((state) => state.profile.profiles); // Adjust to match the state
+    const loading = useSelector((state) => state.profile.status === 'loading');
+    const error = useSelector((state) => state.profile.error);
 
     useEffect(() => {
-        const fetchProfiles = async () => {
-            try {
-                const response = await axios.get('/api/profiles');
-                setProfiles(response.data);
-                setLoading(false);
-            } catch {
-                setError('Error fetching profiles');
-                setLoading(false);
-            }
-        };
-        fetchProfiles();
-    }, []);
+        dispatch(fetchProfiles()); // Dispatch action to fetch profiles
+    }, [dispatch]);
 
     if (loading) {
         return <p>Loading...</p>;

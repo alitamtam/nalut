@@ -6,7 +6,6 @@ const publicationController = {
     try {
       const topics = await prisma.publications.findMany({
         orderBy: { created_at: "desc" },
-        take: 6,
       });
       res.status(200).json(topics); // Return the topics as JSON
     } catch (error) {

@@ -1,8 +1,9 @@
-// client/src/components/Admin/EditProfile.jsx
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateProfile, fetchProfile } from '../../store/profileSlice'; // Correct path to profileSlice
+import PropTypes from 'prop-types'; // Import prop-types library
+import { profileActions } from '../../store/profileSlice'; // Import profileActions
 
+const { fetchProfile, updateProfile } = profileActions;
 
 function EditProfile({ userId }) {
     const dispatch = useDispatch();
@@ -12,8 +13,11 @@ function EditProfile({ userId }) {
     const [bio, setBio] = useState('');
     const [image, setImage] = useState(null);
 
+    // Fetch the profile only when userId is available
     useEffect(() => {
-        dispatch(fetchProfile(userId));
+        if (userId) {
+            dispatch(fetchProfile(userId));
+        }
     }, [dispatch, userId]);
 
     useEffect(() => {
@@ -36,7 +40,9 @@ function EditProfile({ userId }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(updateProfile({ userId, bio, image }));
+        if (userId) {
+            dispatch(updateProfile({ userId, bio, image }));
+        }
     };
 
     if (profileStatus === 'loading') return <p>Loading...</p>;
@@ -64,5 +70,15 @@ function EditProfile({ userId }) {
         </form>
     );
 }
+
+// Add prop types validation
+EditProfile.propTypes = {
+    userId: PropTypes.string, // Make sure userId is a string
+};
+
+// Default props to avoid the prop being undefined initially
+EditProfile.defaultProps = {
+    userId: '', // Default value as an empty string
+};
 
 export default EditProfile;

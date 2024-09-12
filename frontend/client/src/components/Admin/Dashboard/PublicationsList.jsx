@@ -10,7 +10,7 @@ const PublicationsList = () => {
     useEffect(() => {
         const fetchPublications = async () => {
             try {
-                const response = await axios.get('/api/publications');
+                const response = await axios.get('/api/publications/topics');
                 setPublications(response.data);
                 setLoading(false);
 

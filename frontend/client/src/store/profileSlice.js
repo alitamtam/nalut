@@ -5,12 +5,13 @@ import axios from "axios";
 // Initial state
 const initialState = {
   profile: null,
+  profiles: [], // Added if you need to store multiple profiles
   status: "idle",
   error: null,
 };
 
 // Thunks
-export const fetchProfile = createAsyncThunk(
+const fetchProfile = createAsyncThunk(
   "profile/fetchProfile",
   async (userId) => {
     const response = await axios.get(`/api/profiles/${userId}`);
@@ -18,7 +19,12 @@ export const fetchProfile = createAsyncThunk(
   }
 );
 
-export const updateProfile = createAsyncThunk(
+const fetchProfiles = createAsyncThunk("profile/fetchProfiles", async () => {
+  const response = await axios.get("/api/profiles");
+  return response.data;
+});
+
+const updateProfile = createAsyncThunk(
   "profile/updateProfile",
   async ({ userId, bio, image }) => {
     const response = await axios.put(`/api/profiles/${userId}`, { bio, image });
@@ -44,10 +50,15 @@ const profileSlice = createSlice({
         state.status = "failed";
         state.error = action.error.message;
       })
+      .addCase(fetchProfiles.fulfilled, (state, action) => {
+        state.profiles = action.payload;
+      })
       .addCase(updateProfile.fulfilled, (state, action) => {
         state.profile = action.payload;
       });
   },
 });
 
+// Export the slice's reducer and the thunks in a single object to avoid duplication
 export default profileSlice.reducer;
+export const profileActions = { fetchProfile, fetchProfiles, updateProfile };
