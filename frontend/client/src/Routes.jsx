@@ -29,7 +29,7 @@ const AppRouter = createBrowserRouter([
     {
         path: 'admin',
         element: (
-            <ProtectedRoute roles={['admin', 'editor']}>
+            <ProtectedRoute roles={['admin', 'member']}>
                 <AdminDashboard /> {/* AdminDashboard will render Sidebar and children */}
             </ProtectedRoute>
         ),

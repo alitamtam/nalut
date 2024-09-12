@@ -6,10 +6,14 @@ export const loginUser = createAsyncThunk(
   "auth/loginUser",
   async ({ username, password }, { rejectWithValue }) => {
     try {
-      const response = await axios.post("/api/users/login", {
-        username,
-        password,
-      });
+      const response = await axios.post(
+        `${import.meta.env.VITE_API_URL}/api/users/login`,
+        {
+          username,
+          password,
+        }
+      );
+
       console.log("User data:", response.data);
       return response.data; // Assuming the API returns user data on successful login
     } catch (error) {
@@ -46,7 +50,7 @@ const authSlice = createSlice({
       })
       .addCase(loginUser.fulfilled, (state, action) => {
         state.loading = false;
-        state.user = action.payload.user;
+        state.user = action.payload.user; // Ensure user includes role
         state.token = action.payload.token;
       })
       .addCase(loginUser.rejected, (state, action) => {

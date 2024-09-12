@@ -53,7 +53,10 @@ const adminController = {
 
     try {
       // Check if the user exists
-      const user = await userModel.findUserByUsername(username);
+      const user = await userModel.findUserByUsername(username, {
+        include: { role: true }, // Ensure the role is included in the user object
+      });
+
       if (!user) {
         return res.status(400).json({ error: "Invalid username or password" });
       }
@@ -64,11 +67,18 @@ const adminController = {
         return res.status(400).json({ error: "Invalid username or password" });
       }
 
-      // Generate JWT
-      // Générer un token JWT
+      // Generate JWT token
       const token = generateToken(user);
 
-      res.json({ token });
+      // Respond with token and user data (including the role)
+      res.json({
+        token,
+        user: {
+          id: user.id,
+          username: user.username,
+          role: user.role, // Assuming the role is in the form of { name: "admin" }
+        },
+      });
     } catch (error) {
       res.status(500).json({ error: "Error logging in" });
     }
@@ -91,7 +101,6 @@ const adminController = {
         },
       });
 
-      console.log(newArticle);
       res.status(201).json({ message: "Article created successfully" });
     } catch (error) {
       console.error(error);

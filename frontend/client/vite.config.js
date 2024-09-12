@@ -2,6 +2,7 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "tailwindcss";
 import autoprefixer from "autoprefixer";
+import process from "process";
 
 // Vite configuration
 export default defineConfig({
@@ -17,7 +18,7 @@ export default defineConfig({
     },
   },
   define: {
-    "process.env": {
+    "import.meta.env": {
       VITE_API_URL: JSON.stringify(process.env.VITE_API_URL),
     },
   },

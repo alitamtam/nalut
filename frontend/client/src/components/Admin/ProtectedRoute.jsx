@@ -1,11 +1,14 @@
 import PropTypes from 'prop-types';
 import { Navigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { selectUserRole } from '../../selectors/userSelectors'; // Adjust the path
 
 const ProtectedRoute = ({ children, roles }) => {
-    const { role } = useSelector((state) => state.auth.user); // Ensure `role` exists in the auth state
+    const role = useSelector(selectUserRole);
+    console.log('User state:', role); // Add this line to check state
 
     if (!role || !roles.includes(role)) {
+        console.log('Redirecting to login');
         return <Navigate to="/login" />;
     }
 

@@ -11,7 +11,7 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const resultAction = await dispatch(loginUser({ username, password }));
+        const resultAction = await dispatch(loginUser({ username, password })); // line 14 in login.jsx
         if (loginUser.fulfilled.match(resultAction)) {
             navigate('/admin'); // Navigate to admin dashboard on successful login
         }
