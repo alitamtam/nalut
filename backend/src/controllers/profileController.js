@@ -2,6 +2,8 @@ import prisma from "../../prisma/index.js";
 
 const profileController = {
   async getAllProfiles(req, res) {
+    console.log(req.body); // Ensure this is correct
+
     try {
       // Fetch profiles with user data (first_name, last_name)
       const profiles = await prisma.profile.findMany({

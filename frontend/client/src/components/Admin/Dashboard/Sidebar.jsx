@@ -1,23 +1,24 @@
+// src/components/Admin/Dashboard/Sidebar.jsx
 import { Link } from 'react-router-dom';
 
 const Sidebar = () => {
     return (
-        <div className="bg-gray-200 w-64 h-full p-6">
+        <nav className="w-64 bg-gray-800 text-white h-screen p-4">
             <ul>
-                <li className="mb-4">
-                    <Link to="/admin/profiles">Manage Profiles</Link>
+                <li>
+                    <Link to="/admin/profiles" className="block py-2 px-4 hover:bg-gray-700">Profiles</Link>
                 </li>
-                <li className="mb-4">
-                    <Link to="/admin/articles">Manage Articles</Link>
+                <li>
+                    <Link to="/admin/articles" className="block py-2 px-4 hover:bg-gray-700">Articles</Link>
                 </li>
-                <li className="mb-4">
-                    <Link to="/admin/events">Manage Events</Link>
+                <li>
+                    <Link to="/admin/events" className="block py-2 px-4 hover:bg-gray-700">Events</Link>
                 </li>
-                <li className="mb-4">
-                    <Link to="/admin/publications">Manage Publications</Link>
+                <li>
+                    <Link to="/admin/publications" className="block py-2 px-4 hover:bg-gray-700">Publications</Link>
                 </li>
             </ul>
-        </div>
+        </nav>
     );
 };
 

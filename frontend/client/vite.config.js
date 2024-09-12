@@ -1,12 +1,9 @@
-// client/vite.config.js
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
-import process from "process";
-
-// Import Tailwind CSS plugin for Vite
 import tailwindcss from "tailwindcss";
 import autoprefixer from "autoprefixer";
 
+// Vite configuration
 export default defineConfig({
   plugins: [react()],
   resolve: {
@@ -27,7 +24,7 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": {
-        target: "http://localhost:3000",
+        target: "http://localhost:3000", // Ensure this URL is correct
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ""),
       },

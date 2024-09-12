@@ -22,12 +22,17 @@ const AppRouter = createBrowserRouter([
             { path: 'about', element: <AboutUsPage /> },
             { path: 'profile/edit', element: <EditProfile /> },
             { path: 'member/:id', element: <MemberDetails /> },
-            { path: '*', element: <NotFound /> }, // Catch-all route for 404 pages
+            { path: 'login', element: <Login /> },
+            { path: '*', element: <NotFound /> },
         ],
     },
     {
         path: 'admin',
-        element: <ProtectedRoute roles={['admin', 'editor']}><AdminDashboard /></ProtectedRoute>,
+        element: (
+            <ProtectedRoute roles={['admin', 'editor']}>
+                <AdminDashboard /> {/* AdminDashboard will render Sidebar and children */}
+            </ProtectedRoute>
+        ),
         children: [
             { path: 'profiles', element: <ProfilesList /> },
             { path: 'articles', element: <ArticlesList /> },
@@ -35,8 +40,7 @@ const AppRouter = createBrowserRouter([
             { path: 'publications', element: <PublicationsList /> },
         ],
     },
-    { path: '/login', element: <Login /> },
-    { path: '*', element: <NotFound /> }, // Catch-all route for 404
+    { path: '*', element: <NotFound /> },
 ]);
 
 export default AppRouter;

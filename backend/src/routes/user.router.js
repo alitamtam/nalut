@@ -9,6 +9,7 @@ router.get("/dashboard", authenticate, adminController.getDashboardData);
 
 // User management routes
 router.post("/register", adminController.registerUser); // Create a user
+// api for login API/USERS/LOGIN
 router.post("/login", adminController.logIn); // User login
 router.post("/logout", authenticate, adminController.logout); // User logout
 

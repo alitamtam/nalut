@@ -1,3 +1,4 @@
+// path: frontend/client/src/store/reducers/someReducer.js
 const initialState = {};
 
 const someReducer = (state = initialState, action) => {

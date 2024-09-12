@@ -4,12 +4,18 @@ import axios from "axios";
 // Async thunk to log in user
 export const loginUser = createAsyncThunk(
   "auth/loginUser",
-  async ({ email, password }, { rejectWithValue }) => {
+  async ({ username, password }, { rejectWithValue }) => {
     try {
-      const response = await axios.post("/api/auth/login", { email, password });
+      const response = await axios.post("/api/api/users/login", {
+        username,
+        password,
+      });
+      console.log("User data:", response.data);
       return response.data; // Assuming the API returns user data on successful login
     } catch (error) {
-      return rejectWithValue(error.response.data);
+      return rejectWithValue(
+        error.response ? error.response.data : error.message
+      );
     }
   }
 );

@@ -1,4 +1,4 @@
-
+// path: frontend/client/src/components/TopicSlick.jsx
 import PropTypes from 'prop-types';
 
 import Slider from "react-slick";
