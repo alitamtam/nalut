@@ -1,13 +1,12 @@
-// path client/src/main.jsx
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import AppRouter from './router'; // Import the router
+import { RouterProvider } from 'react-router-dom';
+import AppRouter from './Routes'; // Your new router setup
 import './index.css';
+const root = ReactDOM.createRoot(document.getElementById('root'));
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+root.render(
     <React.StrictMode>
-        <AppRouter /> {/* RouterProvider should be here, not in App */}
-
+        <RouterProvider router={AppRouter} />
     </React.StrictMode>
 );
-

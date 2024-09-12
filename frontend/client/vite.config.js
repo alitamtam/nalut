@@ -3,11 +3,20 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import process from "process";
 
+// Import Tailwind CSS plugin for Vite
+import tailwindcss from "tailwindcss";
+import autoprefixer from "autoprefixer";
+
 export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
       "@": "/src",
+    },
+  },
+  css: {
+    postcss: {
+      plugins: [tailwindcss(), autoprefixer()],
     },
   },
   define: {
