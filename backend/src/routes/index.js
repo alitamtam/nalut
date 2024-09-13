@@ -1,3 +1,4 @@
+// path backend/src/routes/index.js
 import express from "express";
 import articleRoutes from "./articles.router.js";
 import userRoutes from "./user.router.js";

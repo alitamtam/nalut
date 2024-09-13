@@ -38,6 +38,7 @@ const ProfileList = () => {
                             <td className="border px-4 py-2">{profile.id}</td>
                             <td className="border px-4 py-2">{profile.name}</td>
                             <td className="border px-4 py-2">{profile.bio}</td>
+                            <td className="border px-4 py-2">{profile.image}</td>
                         </tr>
                     ))}
                 </tbody>

@@ -1,3 +1,4 @@
+// path backend/src/middleware/auth.middleware.js
 import jwt from "jsonwebtoken";
 
 // Middleware to authenticate tokens
@@ -16,7 +17,7 @@ export const authenticateToken = (req, res, next) => {
 
 // Optionally, you could have a role-based authorization middleware
 export const authorizeAdmin = (req, res, next) => {
-  if (req.user.role !== "admin") {
+  if (req.user.role !== "member") {
     return res.status(403).json({ error: "Forbidden: Admins only" });
   }
   next();

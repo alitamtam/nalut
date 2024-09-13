@@ -1,7 +1,6 @@
 // client/src/store/profileSlice.js
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
-
+import api from "../api/axiosConfig"; // Import the axios instance
 // Initial state
 const initialState = {
   profile: null,
@@ -14,20 +13,20 @@ const initialState = {
 const fetchProfile = createAsyncThunk(
   "profile/fetchProfile",
   async (userId) => {
-    const response = await axios.get(`/api/profiles/${userId}`);
+    const response = await api.get(`/api/profiles/${userId}`);
     return response.data;
   }
 );
 
 const fetchProfiles = createAsyncThunk("profile/fetchProfiles", async () => {
-  const response = await axios.get("/api/profiles");
+  const response = await api.get("/api/profiles"); // Use the axios instance
   return response.data;
 });
 
 const updateProfile = createAsyncThunk(
   "profile/updateProfile",
   async ({ userId, bio, image }) => {
-    const response = await axios.put(`/api/profiles/${userId}`, { bio, image });
+    const response = await api.put(`/api/profiles/${userId}`, { bio, image });
     return response.data;
   }
 );

@@ -1,8 +1,14 @@
 // path backend/server.js
-import app from "./app.js"; // Import the Express app
+import { createServer } from "node:http";
+import "dotenv/config";
+import app from "./app.js";
 
-const port = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3000;
 
-app.listen(port, () => {
-  console.log(`Listening on http://localhost:${port}`);
+const httpServer = createServer(app);
+
+httpServer.listen(PORT, () => {
+  if (process.env.NODE_ENV !== "production") {
+    console.log(`🚀 HTTP Server launched at http://localhost:${PORT} 🎉`);
+  }
 });

@@ -1,3 +1,4 @@
+// path routes/profile.router.js
 import express from "express";
 import profileController from "../controllers/profileController.js";
 import { authenticate } from "../middleware/auth.middleware.js"; // Make sure to add this middleware if you have it

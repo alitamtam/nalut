@@ -1,7 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { logout } from '../../../store/authSlice'; // Import the logout action from your auth slice
-
 const Sidebar = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -13,6 +12,8 @@ const Sidebar = () => {
 
     return (
         <nav className="w-64 bg-gray-800 text-white h-screen p-4">
+            <p>Sidebar Loaded</p> {/* This will help you confirm if the Sidebar is being rendered */}
+
             <ul>
                 <li>
                     <Link to="/admin/profiles" className="block py-2 px-4 hover:bg-gray-700">Profiles</Link>
@@ -27,6 +28,13 @@ const Sidebar = () => {
                     <Link to="/admin/publications" className="block py-2 px-4 hover:bg-gray-700">Publications</Link>
                 </li>
                 <li>
+                    <Link to="/admin/users" className="block py-2 px-4 hover:bg-gray-700">Users</Link>
+                </li>
+                <li>
+                    <Link to="/admin/register" className="block py-2 px-4 hover:bg-gray-700">Register Member</Link>
+                </li>
+                <li>
+
                     {/* Logout link */}
                     <button
                         onClick={handleLogout}

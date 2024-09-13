@@ -2,25 +2,21 @@ import prisma from "../../prisma/index.js";
 
 const profileController = {
   async getAllProfiles(req, res) {
-    console.log(req.body); // Ensure this is correct
-
     try {
-      // Fetch profiles with user data (first_name, last_name)
       const profiles = await prisma.profile.findMany({
         include: {
           user: {
             select: {
-              first_name: true, // Ensure this matches your database field
-              last_name: true, // Corrected typo
+              first_name: true,
+              last_name: true,
             },
           },
         },
       });
 
-      // Map through the profiles and concatenate first_name and last_name
       const profilesWithFullName = profiles.map((profile) => ({
         ...profile,
-        fullName: `${profile.user.first_name} ${profile.user.last_name}`, // Add full name
+        fullName: `${profile.user.first_name} ${profile.user.last_name}`,
       }));
 
       res.status(200).json(profilesWithFullName);
@@ -34,11 +30,27 @@ const profileController = {
     try {
       const profile = await prisma.profile.findUnique({
         where: { id: parseInt(id, 10) },
+        include: {
+          user: {
+            select: {
+              first_name: true,
+              last_name: true,
+            },
+          },
+        },
       });
+
       if (!profile) {
         return res.status(404).json({ error: "Profile not found" });
       }
-      res.status(200).json(profile);
+
+      // Add full name to the profile response
+      const profileWithFullName = {
+        ...profile,
+        fullName: `${profile.user.first_name} ${profile.user.last_name}`,
+      };
+
+      res.status(200).json(profileWithFullName);
     } catch (error) {
       res.status(500).json({ error: "Failed to fetch profile" });
     }

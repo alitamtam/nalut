@@ -1,10 +1,9 @@
+//  path backend/app.js
 import express from "express";
-import bodyParser from "body-parser";
-import routes from "./src/routes/index.js";
-import dotenv from "dotenv";
 import cors from "cors";
+import bodyParser from "body-parser";
 
-dotenv.config();
+import routes from "./src/routes/index.js";
 
 const app = express();
 
