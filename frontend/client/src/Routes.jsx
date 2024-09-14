@@ -9,7 +9,7 @@ import Login from './components/Admin/Login';
 import HomePage from './pages/HomePage';
 import Layout from './components/Layout';
 import AboutUsPage from './components/About/AboutUsPage';
-import EditProfile from './components/Admin/EditProfile';
+// import EditProfile from './components/Admin/EditProfile';
 import MemberDetails from './components/About/MemberDetails';
 import NotFound from './pages/NotFound';
 import RegisterUser from './components/Admin/RegisterUser';
@@ -21,7 +21,7 @@ const AppRouter = createBrowserRouter([
         children: [
             { index: true, element: <HomePage /> },
             { path: 'about', element: <AboutUsPage /> },
-            { path: 'profile/edit', element: <EditProfile /> },
+            // { path: 'profile/edit', element: <EditProfile /> },
             { path: 'member/:id', element: <MemberDetails /> },
             { path: 'login', element: <Login /> },
             { path: '*', element: <NotFound /> },

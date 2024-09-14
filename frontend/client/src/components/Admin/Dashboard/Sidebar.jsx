@@ -1,12 +1,9 @@
 import { Link, useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { logout } from '../../../store/authSlice'; // Import the logout action from your auth slice
+
 const Sidebar = () => {
-    const dispatch = useDispatch();
     const navigate = useNavigate();
 
     const handleLogout = () => {
-        dispatch(logout()); // Dispatch the logout action to clear user data and token
         navigate('/login'); // Navigate to the login page
     };
 

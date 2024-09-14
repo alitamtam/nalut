@@ -53,10 +53,18 @@ model event {
   owner       user      @relation(fields: [ownerId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 }
 
+model Topic {
+  id          Int      @id @default(autoincrement())
+  name        String   @unique
+  iconClass   String   // Class name for icon styling
+  publications publications[] // Relation to Publications
+}
+
 model publications {
   id          Int       @id @default(autoincrement())
   title       String
-  topic      String
+  topicId     Int       // Foreign key to Topic
+  topic       Topic     @relation(fields: [topicId], references: [id])
   content   String  
   image  String?   // New column for storing the base64 image
   created_at DateTime @default(now())

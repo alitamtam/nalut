@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types';
 import { Navigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { selectUserRole } from '../../selectors/userSelectors'; // Adjust the path
+import { useSettingsStore } from '../../store/useSettingsStore';
 
 const ProtectedRoute = ({ children, roles }) => {
-    const role = useSelector(selectUserRole);
+    const { user } = useSettingsStore();
+    const role = user.role
     console.log('User state:', role); // Add this line to check state
 
     if (!role || !roles.includes(role)) {

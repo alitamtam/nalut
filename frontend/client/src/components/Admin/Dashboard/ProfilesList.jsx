@@ -1,24 +1,13 @@
-import { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { profileActions } from '../../../store/profileSlice'; // Update the path based on your structure
-const { fetchProfiles } = profileActions;
+import { useGetProfiles } from "../Dashboard/hooks/useGetProfiles";
 
 const ProfileList = () => {
-    const dispatch = useDispatch();
-    const profiles = useSelector((state) => state.profile.profiles); // Adjust to match the state
-    const loading = useSelector((state) => state.profile.status === 'loading');
-    const error = useSelector((state) => state.profile.error);
-
-    useEffect(() => {
-        dispatch(fetchProfiles()); // Dispatch action to fetch profiles
-    }, [dispatch]);
-
-    if (loading) {
+    const { data, isPending, isError, error } = useGetProfiles();
+    if (isPending) {
         return <p>Loading...</p>;
     }
 
-    if (error) {
-        return <p>{error}</p>;
+    if (isError) {
+        return <p>{error.message}</p>;
     }
 
     return (
@@ -33,7 +22,7 @@ const ProfileList = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {profiles.map((profile) => (
+                    {data?.map((profile) => (
                         <tr key={profile.id}>
                             <td className="border px-4 py-2">{profile.id}</td>
                             <td className="border px-4 py-2">{profile.name}</td>
