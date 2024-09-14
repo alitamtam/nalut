@@ -22,13 +22,12 @@ export const getPublicationById = async (id) => {
 };
 
 // Create a new publication
-export const createPublication = async ({ title, topic, content, ownerId }) => {
+export const createPublication = async ({ title, topic, content }) => {
   return await prisma.publications.create({
     data: {
       title,
       topic,
       content,
-      ownerId,
       created_at: new Date(), // Default to now
     },
   });

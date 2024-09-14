@@ -8,9 +8,7 @@ import routes from "./src/routes/index.js";
 const app = express();
 
 // CORS configuration
-const corsOptions = {
-  origin: "http://localhost:5173",
-};
+const corsOptions = {};
 app.use(cors(corsOptions));
 
 // Middleware

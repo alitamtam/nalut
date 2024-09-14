@@ -10,11 +10,11 @@ router.get("/", publicationController.findAllPublications);
 // Route to fetch a specific publication/topic by ID
 router.get("/:id", publicationController.findPublicationById);
 
-router.post("/", publicationController.createPublication);
+router.post("/", authenticate, publicationController.createPublication);
 
 router.get("/:id", publicationController.findPublicationById); // Get a specific publication/topic by ID
 
-router.put("/:id", publicationController.updatePublication); // Route to update a publication/topic by ID
+router.put("/:id", authenticate, publicationController.updatePublication); // Route to update a publication/topic by ID
 
 router.delete("/:id", authenticate, publicationController.deletePublication); // Route to delete a publication/topic by ID
 // Route to create a new publication/topic

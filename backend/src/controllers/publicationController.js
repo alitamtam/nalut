@@ -35,19 +35,36 @@ const publicationController = {
   },
 
   // Create a new publication
+  // Create a new publication
   async createPublication(req, res, next) {
     try {
-      const { title, topicId, content, image, ownerId } = req.body;
+      const { title, topicId, topic, content, image, ownerId } = req.body;
 
-      // Create the publication with the base64 image
+      let topicToUse;
+
+      // Handle the topic logic: Either use an existing topic or create a new one
+      if (topicId) {
+        // If topicId is provided, use the existing topic
+        topicToUse = { connect: { id: parseInt(topicId) } };
+      } else if (topic) {
+        // If a new topic is provided, create the topic first
+        const newTopic = await prisma.topics.create({
+          data: {
+            name: topic,
+          },
+        });
+        topicToUse = { connect: { id: newTopic.id } };
+      }
+
+      // Create the publication with the base64 image and connect to ownerId
       const publication = await prisma.publications.create({
         data: {
           title,
           content,
           image, // Store base64-encoded image string
-          ownerId,
-          topicId: parseInt(topicId), // Convert topicId to integer if needed
           created_at: new Date(),
+          owner: { connect: { id: ownerId } }, // Connect to the owner by ID
+          topic: topicToUse, // Either use the existing or newly created topic
         },
       });
 
@@ -62,7 +79,7 @@ const publicationController = {
   async updatePublication(req, res, next) {
     try {
       const { id } = req.params;
-      const { title, topicName, content, image, ownerId } = req.body;
+      const { title, topicName, content, image } = req.body;
 
       // Find the topic by name
       const topic = await prisma.topic.findUnique({
@@ -80,7 +97,6 @@ const publicationController = {
           title,
           content,
           image, // Storing base64 image string
-          ownerId,
           topicId: topic.id,
         },
       });
