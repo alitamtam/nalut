@@ -35,25 +35,33 @@ const publicationController = {
   },
 
   // Create a new publication
-  // Create a new publication
   async createPublication(req, res, next) {
     try {
-      const { title, topicId, topic, content, image, ownerId } = req.body;
+      const { title, topicId, topic, iconClass, content, image, ownerId } =
+        req.body;
+      const topicIdInt = topicId ? parseInt(topicId, 10) : null;
 
-      let topicToUse;
+      let topicData;
 
-      // Handle the topic logic: Either use an existing topic or create a new one
-      if (topicId) {
-        // If topicId is provided, use the existing topic
-        topicToUse = { connect: { id: parseInt(topicId) } };
+      if (topicIdInt) {
+        // Connect to existing topic by ID
+        topicData = { connect: { id: topicIdInt } };
       } else if (topic) {
-        // If a new topic is provided, create the topic first
-        const newTopic = await prisma.topics.create({
-          data: {
-            name: topic,
+        // Create a new topic if no topicId is provided
+        topicData = {
+          connectOrCreate: {
+            where: { name: topic },
+            create: {
+              name: topic,
+              iconClass: iconClass || "", // Use default empty string if iconClass is not provided
+            },
           },
-        });
-        topicToUse = { connect: { id: newTopic.id } };
+        };
+      } else {
+        // Handle cases where neither topicId nor topic is provided
+        return res
+          .status(400)
+          .json({ error: "Either topicId or topic must be provided." });
       }
 
       // Create the publication with the base64 image and connect to ownerId
@@ -64,7 +72,7 @@ const publicationController = {
           image, // Store base64-encoded image string
           created_at: new Date(),
           owner: { connect: { id: ownerId } }, // Connect to the owner by ID
-          topic: topicToUse, // Either use the existing or newly created topic
+          topic: topicData, // Connect or create the topic based on the data
         },
       });
 
