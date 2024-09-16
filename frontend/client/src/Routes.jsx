@@ -13,7 +13,8 @@ import AboutUsPage from './components/About/AboutUsPage';
 import MemberDetails from './components/About/MemberDetails';
 import NotFound from './pages/NotFound';
 import RegisterUser from './components/Admin/RegisterUser';
-
+import TopicPublications from './components/publications/TopicPublications';
+import PublicationDetails from './components/Publications/PublicationsDetails';
 const AppRouter = createBrowserRouter([
     {
         path: '/',
@@ -23,6 +24,8 @@ const AppRouter = createBrowserRouter([
             { path: 'about', element: <AboutUsPage /> },
             // { path: 'profile/edit', element: <EditProfile /> },
             { path: 'member/:id', element: <MemberDetails /> },
+            { path: 'topics/:topicName', element: <TopicPublications /> },
+            { path: 'publications/:id', element: <PublicationDetails /> },
             { path: 'login', element: <Login /> },
             { path: '*', element: <NotFound /> },
         ],

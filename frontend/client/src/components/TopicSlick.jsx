@@ -1,7 +1,7 @@
-// path: frontend/client/src/components/TopicSlick.jsx 
+// path: frontend/client/src/components/TopicsSlick.jsx
 import PropTypes from 'prop-types';
 import Slider from "react-slick";
-import { useGetTopics } from "./Admin/Dashboard/hooks/useGetTopics" // Use hook to fetch topics
+import { useGetTopics } from "./Admin/Dashboard/hooks/useGetTopics"; // Use hook to fetch topics
 import { FaUserGraduate, FaBook, FaLaptop, FaBrain, FaLeaf, FaPenAlt } from 'react-icons/fa';
 import { LiaChalkboardTeacherSolid } from 'react-icons/lia';
 import { FaSchoolCircleCheck } from 'react-icons/fa6';
@@ -9,6 +9,7 @@ import { BsBuildingAdd } from 'react-icons/bs';
 import { RiGovernmentLine } from 'react-icons/ri';
 import { AiOutlineFileProtect } from 'react-icons/ai';
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 
 // Define a mapping of icon names to components
 const iconMap = {
@@ -52,6 +53,7 @@ PrevArrow.propTypes = {
 const TopicsSlick = () => {
     // Fetch the topics using your custom hook
     const { data: topics, isLoading, error } = useGetTopics();
+    const navigate = useNavigate(); // Initialize useNavigate
 
     const settings = {
         infinite: true,
@@ -90,6 +92,7 @@ const TopicsSlick = () => {
                         <div
                             key={index}
                             className="flex-shrink-0 w-48 h-56 mx-0 flex flex-col text-center bg-gray-100 shadow-lg p-4 transition-transform duration-300 hover:scale-105 hover:bg-sky-900 hover:text-white md:w-60 md:h-72 group"
+                            onClick={() => navigate(`/topics/${topic.name}`)} // Navigate on click
                         >
                             <div className="text-6xl text-teal-600 group-hover:text-white pb-4 pl-20 pt-10">
                                 {/* Dynamically render the icon based on iconClass */}
