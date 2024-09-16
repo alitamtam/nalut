@@ -1,13 +1,14 @@
-// path client/src/components/Admin/Dashboard/hooks/useAddTopics.js
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import api from "../../../../api/axiosConfig";
 
-export const useAddTopics = () => {
+export const useEditTopics = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationKey: ["addTopics"],
-    mutationFn: async (data) => {
-      const response = await api.post(`/api/Topics`, data, {
+    mutationKey: ["editTopics"],
+
+    mutationFn: async (id, formData) => {
+      console.log("id", id, "data", formData);
+      const response = await api.put(`/api/topics/topic/${id}`, formData, {
         headers: {
           "Content-Type": "application/json",
         },
@@ -16,7 +17,7 @@ export const useAddTopics = () => {
       return response;
     },
     onSuccess: () => {
-      queryClient.invalidateQueries(["Topics"]);
+      queryClient.invalidateQueries(["topics"]);
     },
   });
 };

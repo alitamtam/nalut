@@ -57,8 +57,9 @@ const topicsController = {
   // Update an existing topic by ID
   async updateTopic(req, res, next) {
     try {
-      const { id } = req.params;
       const { name, iconClass } = req.body;
+      const { id } = req.params;
+
       const updatedTopic = await prisma.topic.update({
         where: { id: parseInt(id) },
         data: {

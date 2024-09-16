@@ -1,3 +1,4 @@
+// path   client/src/components/Admin/Dashboard/hooks/useGetTopics.js
 import { useQuery } from "@tanstack/react-query";
 import api from "../../../../api/axiosConfig";
 

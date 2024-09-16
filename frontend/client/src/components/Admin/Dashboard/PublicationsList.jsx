@@ -5,7 +5,7 @@ import { useDeletePublications } from "./hooks/useDeletePublications";
 import { useEditPublications } from "./hooks/useEditPublications";
 import { useGetPublications } from "./hooks/useGetPublications";
 import { useGetTopics } from "./hooks/useGetTopics";
-
+import ManageTopics from "./ManageTopics";
 const PublicationsList = () => {
     const { data: publications, isPending, error } = useGetPublications();
     const addPublication = useAddPublications();
@@ -239,8 +239,9 @@ const PublicationsList = () => {
                         </tr>
                     ))}
                 </tbody>
-            </table>
 
+            </table>
+            <ManageTopics />
 
 
         </div>
