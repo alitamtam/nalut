@@ -1,7 +1,7 @@
-// path: frontend/client/src/components/TopicSlick.jsx
+// path: frontend/client/src/components/TopicSlick.jsx 
 import PropTypes from 'prop-types';
-
 import Slider from "react-slick";
+import { useGetTopics } from "./Admin/Dashboard/hooks/useGetTopics" // Use hook to fetch topics
 import { FaUserGraduate, FaBook, FaLaptop, FaBrain, FaLeaf, FaPenAlt } from 'react-icons/fa';
 import { LiaChalkboardTeacherSolid } from 'react-icons/lia';
 import { FaSchoolCircleCheck } from 'react-icons/fa6';
@@ -10,20 +10,20 @@ import { RiGovernmentLine } from 'react-icons/ri';
 import { AiOutlineFileProtect } from 'react-icons/ai';
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 
-// Define the topics array
-const topics = [
-    { name: 'Teacher Education', icon: <LiaChalkboardTeacherSolid className="text-6xl border-2 border-teal-500 rounded-[50px] group-hover-border-white " /> },
-    { name: 'Teacher Professional Development', icon: <FaUserGraduate className="text-6xl" /> },
-    { name: 'School Governance', icon: <FaSchoolCircleCheck className="text-6xl" /> },
-    { name: 'Ministry of Education', icon: <RiGovernmentLine className="text-6xl" /> },
-    { name: 'Buildings and Facilities', icon: <BsBuildingAdd className="text-6xl" /> },
-    { name: 'Quality Assurance', icon: <AiOutlineFileProtect className="text-6xl" /> },
-    { name: 'Educational Research', icon: <FaBook className="text-6xl" /> },
-    { name: 'Information Technology in Schools', icon: <FaLaptop className="text-6xl" /> },
-    { name: 'Inclusion and Neuro-divergence', icon: <FaBrain className="text-6xl" /> },
-    { name: 'Student Wellbeing and Enrichment', icon: <FaLeaf className="text-6xl" /> },
-    { name: 'Assessment and Examination', icon: <FaPenAlt className="text-6xl" /> },
-];
+// Define a mapping of icon names to components
+const iconMap = {
+    'Teacher Education': <LiaChalkboardTeacherSolid className="text-6xl" />,
+    'Teacher Professional Development': <FaUserGraduate className="text-6xl" />,
+    'School Governance': <FaSchoolCircleCheck className="text-6xl" />,
+    'Ministry of Education': <RiGovernmentLine className="text-6xl" />,
+    'Buildings and Facilities': <BsBuildingAdd className="text-6xl" />,
+    'Quality Assurance': <AiOutlineFileProtect className="text-6xl" />,
+    'Educational Research': <FaBook className="text-6xl" />,
+    'Information Technology in Schools': <FaLaptop className="text-6xl" />,
+    'Inclusion and Neuro-divergence': <FaBrain className="text-6xl" />,
+    'Student Wellbeing and Enrichment': <FaLeaf className="text-6xl" />,
+    'Assessment and Examination': <FaPenAlt className="text-6xl" />,
+};
 
 // Custom next and previous arrows
 const NextArrow = ({ onClick }) => (
@@ -50,12 +50,14 @@ PrevArrow.propTypes = {
 };
 
 const TopicsSlick = () => {
+    // Fetch the topics using your custom hook
+    const { data: topics, isLoading, error } = useGetTopics();
+
     const settings = {
         infinite: true,
         autoplay: true,
         speed: 200,
         slidesToShow: 7,
-
         slidesToScroll: 1,
         nextArrow: <NextArrow />,
         prevArrow: <PrevArrow />,
@@ -77,23 +79,27 @@ const TopicsSlick = () => {
         ],
     };
 
+    if (isLoading) return <div>Loading...</div>;
+    if (error) return <div>Error loading topics</div>;
+
     return (
-        <div className="relative w-full pb-10 px-7 mb-40 border-teal-500 border-b ">
-            <div >
-                <Slider {...settings} >
-                    {topics.map((topic, index) => (
+        <div className="relative w-full pb-10 px-7 mb-40 border-teal-500 border-b">
+            <div>
+                <Slider {...settings}>
+                    {topics?.map((topic, index) => (
                         <div
                             key={index}
                             className="flex-shrink-0 w-48 h-56 mx-0 flex flex-col text-center bg-gray-100 shadow-lg p-4 transition-transform duration-300 hover:scale-105 hover:bg-sky-900 hover:text-white md:w-60 md:h-72 group"
                         >
-                            <div className="text-6xl  text-teal-600 group-hover:text-white  pb-4 pl-20 pt-10">
-                                {topic.icon}
+                            <div className="text-6xl text-teal-600 group-hover:text-white pb-4 pl-20 pt-10">
+                                {/* Dynamically render the icon based on iconClass */}
+                                {iconMap[topic.iconClass] || <FaBook className="text-6xl" />}
                             </div>
-                            <div className="flex-col ">
-
+                            <div className="flex-col">
                                 <p className="mt-4 text-teal-600 text-xs font-sans font-bold tracking-wider uppercase text-center group-hover:text-white pb-10">
                                     {topic.name}
-                                </p></div>
+                                </p>
+                            </div>
                         </div>
                     ))}
                 </Slider>

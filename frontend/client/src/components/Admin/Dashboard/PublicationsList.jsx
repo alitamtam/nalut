@@ -225,14 +225,13 @@ const PublicationsList = () => {
                             <td className="border px-4 py-2">
                                 <button
                                     onClick={() => handleEdit(publication)}
-                                    className="text-blue-500 mr-2"
+                                    className="bg-yellow-500 text-white px-3 py-1 rounded-md mr-2 hover:bg-yellow-600"
                                 >
                                     Edit
                                 </button>
                                 <button
                                     onClick={() => handleDelete(publication.id)}
-                                    className="text-red-500"
-                                >
+                                    className="bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600"                                >
                                     Delete
                                 </button>
                             </td>
