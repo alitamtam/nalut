@@ -30,7 +30,7 @@ const HomePage = () => {
             <div className="mt-16 w-full">
                 <div className="flex flex-col items-center lg:flex-row lg:justify-between lg:mx-80">
                     <h2 className="text-3xl font-bold mb-4 text-center capitalcase  font-sans text-gray-800">
-                        Our Topics Areas
+                        Topic Areas
                     </h2>
                     <button className="border-2 text-teal-500 font-body border-teal-500 rounded-full hover:bg-teal-500 hover:text-white py-2 px-8 font-sans mb-4 lg:mb-0">
                         View All
