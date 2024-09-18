@@ -8,6 +8,7 @@ const publicationController = {
         orderBy: { created_at: "desc" },
         include: {
           topic: true,
+          owner: { select: { first_name: true, last_name: true } },
         },
       });
       res.status(200).json(topics); // Return the topics as JSON

@@ -209,9 +209,10 @@ const PublicationsList = () => {
             {/* Publications Table */}
             <table className="min-w-full bg-white">
                 <thead>
-                    <tr>
+                    <tr className="bg-gray-200 text-left">
                         <th className="text-left py-2">Topic</th>
                         <th className="text-left py-2">Title</th>
+                        <th className="text-left py-2">Owner</th>
                         <th className="text-left py-2">Published Date</th>
                         <th className="text-left py-2">Actions</th>
                     </tr>
@@ -221,6 +222,7 @@ const PublicationsList = () => {
                         <tr key={publication.id}>
                             <td className="border px-4 py-2">{publication.topic.name}</td>
                             <td className="border px-4 py-2">{publication.title}</td>
+                            <td className="border px-4 py-2">{publication.ownerId}</td>
                             <td className="border px-4 py-2">{publication.created_at}</td>
                             <td className="border px-4 py-2">
                                 <button
