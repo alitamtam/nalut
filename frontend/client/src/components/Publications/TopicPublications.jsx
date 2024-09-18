@@ -1,12 +1,12 @@
 // path: frontend/client/src/components/TopicPublications.jsx
 import { useParams, Link } from 'react-router-dom';
-import { useGetTopics } from "../Admin/Dashboard/hooks/useGetTopics" // Custom hook for fetching publications
+import { useGetPublications } from '../Admin/Dashboard/hooks/useGetPublications';
 
 const TopicPublications = () => {
     const { topicName } = useParams();
 
     // Fetch publications by topic
-    const { data: publications, isLoading, error } = useGetTopics(topicName);
+    const { data: publications, isLoading, error } = useGetPublications(topicName);
 
     if (isLoading) return <div>Loading publications...</div>;
     if (error) return <div>Error loading publications</div>;
