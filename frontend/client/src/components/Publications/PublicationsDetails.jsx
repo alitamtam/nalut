@@ -46,7 +46,7 @@ const PublicationDetails = () => {
                         By: {publication.owner.first_name} {publication.owner.last_name} |  {new Date(publication.created_at).toLocaleDateString()}
                     </p>
                     <Link
-                        to={`/profile/${publication.owner.id}`}
+                        to={`/profile/${publication.owner.profile}`} // Correctly point to the owner's profile
                         className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
                     >
                         View Details

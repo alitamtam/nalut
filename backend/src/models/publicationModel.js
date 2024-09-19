@@ -7,6 +7,17 @@ export const getAllPublications = async () => {
   return await prisma.publications.findMany({
     orderBy: {
       created_at: "desc",
+      include: {
+        owner: true, // Include the owner relation
+        profile: {
+          // Use the correct relation name
+          select: {
+            name: true,
+            bio: true,
+            image: true,
+          },
+        },
+      },
     },
   });
 };
@@ -17,6 +28,7 @@ export const getPublicationById = async (id) => {
     where: { id: parseInt(id) },
     include: {
       owner: true, // Include the owner relation
+      Profile: true,
     },
   });
 };

@@ -1,31 +1,13 @@
 import { useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import axios from 'axios';
+// import { useProfile } from '../Admin/Dashboard/hooks/useGetProfileById'; // Import the custom hook
+import { useGetPublications } from '../Admin/Dashboard/hooks/useGetPublications'; // Hook to fetch publications
 
 const ProfileDetails = () => {
     const { id } = useParams(); // Get the user ID from URL params
-    const [profile, setProfile] = useState(null);
-    const [isLoading, setIsLoading] = useState(true);
-    const [error, setError] = useState(null);
-
-    useEffect(() => {
-        // Fetch profile data based on user ID
-        const fetchProfile = async () => {
-            try {
-                const response = await axios.get(`/api/profiles/${id}`);
-                setProfile(response.data);
-                setIsLoading(false);
-            } catch {
-                setError('Error loading profile');
-                setIsLoading(false);
-            }
-        };
-
-        fetchProfile();
-    }, [id]);
+    const { data: profile, isLoading, error } = useGetPublications(id); // Use the custom hook
 
     if (isLoading) return <div>Loading profile...</div>;
-    if (error) return <div>{error}</div>;
+    if (error) return <div>Error loading profile</div>;
 
     return (
         <div className="lg:mx-80 bg-slate-100 p-6 rounded-lg shadow-md">
@@ -35,10 +17,12 @@ const ProfileDetails = () => {
                 <div className="w-full md:w-1/2 flex flex-col items-center md:items-start justify-center">
                     <img
                         src={profile.image || '/default-profile.jpg'}
-                        alt={profile.first_name}
+                        // alt={profile.user.first_name}
                         className="w-48 h-48 object-cover rounded-full mb-4"
                     />
-                    <h2 className="text-2xl font-bold text-gray-800">{profile.first_name} {profile.last_name}</h2>
+                    <h2 className="text-2xl font-bold text-gray-800">
+                        {/* {profile.user.first_name} {profile.user.last_name} */}
+                    </h2>
                     <p className="text-gray-600 text-lg">{profile.title}</p>
                 </div>
 

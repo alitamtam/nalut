@@ -4,14 +4,27 @@ const publicationController = {
   // Fetch and return a list of publications
   async findAllPublications(req, res, next) {
     try {
-      const topics = await prisma.publications.findMany({
+      const publications = await prisma.publications.findMany({
         orderBy: { created_at: "desc" },
         include: {
           topic: true,
-          owner: { select: { first_name: true, last_name: true } },
+          owner: {
+            // Owner is of type user
+            select: {
+              first_name: true,
+              last_name: true,
+              Profile: {
+                // Include the profile related to the user
+                select: {
+                  bio: true,
+                  image: true,
+                },
+              },
+            },
+          },
         },
       });
-      res.status(200).json(topics); // Return the topics as JSON
+      res.status(200).json(publications); // Return the publications as JSON
     } catch (error) {
       console.error(error);
       next(error);

@@ -38,7 +38,7 @@ model user {
 model Profile {
   id     Int     @id @default(autoincrement())
   bio    String?
-   image  String?   // New column for storing the base64 image
+  image  String?   // New column for storing the base64 image
   userId Int     @unique
   user  user   @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
