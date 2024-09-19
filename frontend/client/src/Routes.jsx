@@ -13,12 +13,15 @@ import AboutUsPage from './components/About/AboutUsPage';
 import MemberDetails from './components/About/MemberDetails';
 import NotFound from './pages/NotFound';
 import RegisterUser from './components/Admin/RegisterUser';
+import EditProfile from './components/Admin/Dashboard/EditProfile'
+
 import TopicPublications from './components/publications/TopicPublications';
 import PublicationDetails from './components/Publications/PublicationsDetails';
 import Publications from './components/Publications/Publications';
 import PublicationsCards from './components/Publications/PublicationsCards';
 import ProfileDetails from './components/Profiles/ProfileDetails';
 import ProfileDisplay from './components/About/ProfileDisplay';
+
 const AppRouter = createBrowserRouter([
     {
         path: '/',
@@ -52,6 +55,9 @@ const AppRouter = createBrowserRouter([
             { path: 'articles', element: <ArticlesList /> },
             { path: 'events', element: <EventsList /> },
             { path: 'publications', element: <PublicationsList /> },
+            { path: 'editProfile', element: <EditProfile /> },
+            { path: 'api/profiles/:id', element: <EditProfile /> },
+
             { path: 'register', element: <RegisterUser /> },
             { path: '*', element: <NotFound /> },
 

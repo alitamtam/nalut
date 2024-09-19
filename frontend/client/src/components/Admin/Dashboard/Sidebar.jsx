@@ -31,6 +31,9 @@ const Sidebar = () => {
                     <Link to="/admin/register" className="block py-2 px-4 hover:bg-gray-700">Register Member</Link>
                 </li>
                 <li>
+                    <Link to="/admin/editProfile" className="block py-2 px-4 hover:bg-gray-700">Edit Profile</Link>
+                    <li />
+
 
                     {/* Logout link */}
                     <button

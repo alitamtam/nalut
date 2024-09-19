@@ -70,11 +70,18 @@ const profileController = {
 
   async updateProfile(req, res) {
     const { id } = req.params;
-    const { bio } = req.body;
+    const { bio, image } = req.body;
     try {
       const profile = await prisma.profile.update({
         where: { id: parseInt(id, 10) },
-        data: { bio },
+        data: { bio, image },
+        include: {
+          user: {
+            select: {
+              userId: true,
+            },
+          },
+        },
       });
       res.status(200).json(profile);
     } catch (error) {

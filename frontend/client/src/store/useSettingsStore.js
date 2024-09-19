@@ -10,6 +10,11 @@ export const useSettingsStore = create(
         id: "",
         username: "",
         role: "",
+        profile: {
+          id: "", // Ensure Profile object exists
+          bio: "",
+          image: "",
+        },
       },
 
       setTokenAndUser: (token, user) =>
@@ -19,6 +24,11 @@ export const useSettingsStore = create(
             id: user.id,
             username: user.username,
             role: user.role,
+            profile: {
+              id: user.Profile?.id || "", // Set Profile ID
+              bio: user.Profile?.bio || "", // Set bio
+              image: user.Profile?.image || "", // Set image
+            },
           },
         }),
     }),
