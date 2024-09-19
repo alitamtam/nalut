@@ -16,6 +16,7 @@ import RegisterUser from './components/Admin/RegisterUser';
 import TopicPublications from './components/publications/TopicPublications';
 import PublicationDetails from './components/Publications/PublicationsDetails';
 import ProfileDetails from './components/Profiles/ProfileDetails';
+import ProfileDisplay from './components/About/ProfileDisplay';
 const AppRouter = createBrowserRouter([
     {
         path: '/',
@@ -26,6 +27,8 @@ const AppRouter = createBrowserRouter([
             // { path: 'profile/edit', element: <EditProfile /> },
             { path: 'member/:id', element: <MemberDetails /> },
             { path: 'profile/:id', element: <ProfileDetails /> },
+            { path: 'profile/:id', element: <ProfileDetails /> },
+            { path: 'profileDisplay/:id', element: <ProfileDisplay /> },
 
             { path: 'topics/:topicName', element: <TopicPublications /> },
             { path: 'publications/:id', element: <PublicationDetails /> },

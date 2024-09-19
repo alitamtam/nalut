@@ -1,11 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
 import api from "../../../../api/axiosConfig";
 
-const fetchProfiles = async () => {
-  const response = await api.get("/api/profiles");
-  return response.data;
-};
+export const useAllProfiles = () => {
+  return useQuery({
+    queryKey: ["profiles"],
+    queryFn: async () => {
+      const response = await api.get(`/api/profiles`);
 
-export const useGetProfiles = () => {
-  return useQuery({ queryKey: ["profile"], queryFn: fetchProfiles });
+      return response.data;
+    },
+  });
 };

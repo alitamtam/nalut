@@ -17,7 +17,6 @@ const PublicationDetails = () => {
 
     // Find the icon based on the publication's topic name
     const topicIcon = iconOptions.find(option => option.name === publication.topic.name)?.icon || null;
-    console.log(publication.owner.Profile);
 
     return (
         <div className="lg:mx-80 bg-slate-100 p-6 rounded-lg shadow-md">

@@ -1,7 +1,7 @@
-import { useGetProfiles } from "../Dashboard/hooks/useGetProfiles";
+import { useAllProfiles } from "../Dashboard/hooks/useGetProfiles";
 
 const ProfileList = () => {
-    const { data, isPending, isError, error } = useGetProfiles();
+    const { data, isPending, isError, error } = useAllProfiles();
     if (isPending) {
         return <p>Loading...</p>;
     }

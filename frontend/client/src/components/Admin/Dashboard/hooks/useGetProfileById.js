@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import api from "../../../../api/axiosConfig";
 
-export const useProfile = (id) => {
+export const useGetProfiles = (id) => {
   return useQuery({
     queryKey: ["profile", id],
     queryFn: async () => {

@@ -1,38 +1,19 @@
-import { useState, useEffect } from 'react';
 import MemberCard from './MemberCard';
-import api from '../../api/axiosConfig'; // Import the axios instance
+import { useAllProfiles } from '../Admin/Dashboard/hooks/useGetProfiles'; // Import the useGetProfiles hook
 
 const Members = () => {
-    const [members, setMembers] = useState([]);
-    const [, setSelectedMember] = useState(null);
+    // Use the custom hook to fetch profiles
+    const { data: members = [], isLoading, error } = useAllProfiles();
 
-    useEffect(() => {
-        // Fetch members from the API
-        const fetchMembers = async () => {
-            try {
-                const response = await api.get('/api/profiles'); // Use the axios instance
-                console.log('API response:', response.data); // Log the response
-
-                setMembers(Array.isArray(response.data) ? response.data : []);
-            } catch (error) {
-                console.error('Error fetching members:', error);
-            }
-        };
-
-        fetchMembers();
-    }, []);
-
-    const handleViewDetails = (id) => {
-        const member = members.find(member => member.id === id);
-        setSelectedMember(member);
-    };
+    if (isLoading) return <p>Loading members...</p>;
+    if (error) return <p>Error loading members: {error.message}</p>;
 
     return (
         <div className="p-8">
             {Array.isArray(members) && members.length > 0 ? (
                 <div className="grid grid-cols-3 gap-6">
-                    {members.map(member => (
-                        <MemberCard key={member.id} member={member} onViewDetails={handleViewDetails} />
+                    {members.map((member) => (
+                        <MemberCard key={member.id} memberId={member.id} member={member} />
                     ))}
                 </div>
             ) : (
