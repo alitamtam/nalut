@@ -1,3 +1,5 @@
+import React from 'react';
+
 import { useParams, Link } from 'react-router-dom';
 import { useGetPublications } from '../Admin/Dashboard/hooks/useGetPublications'; // Hook to fetch publications
 import { useIconOptions } from '../Admin/Dashboard/hooks/useIconOptions'; // Import the icon options hook
@@ -18,6 +20,24 @@ const PublicationDetails = () => {
     // Find the icon based on the publication's topic name
     const topicIcon = iconOptions.find(option => option.name === publication.topic.name)?.icon || null;
 
+
+    const formatContent = (content) => {
+        // Regular expression to match dot followed by a capital letter
+        const regex = /(?<=\.) (?=[A-Z])/g;
+
+        // Split content based on the regular expression
+        const lines = content.split(regex).filter(line => line.trim() !== '');
+
+        return lines.map((line, index) => (
+            <React.Fragment key={index}>
+                {line.trim()}
+                {/* Add line break between sentences, but not after the last one */}
+                {index < lines.length - 1 && <br />}
+            </React.Fragment>
+        ));
+    };
+
+
     return (
         <div className="lg:mx-80 bg-slate-100 p-6 rounded-lg shadow-md">
             <h1 className="text-3xl font-bold mb-4">{publication.title}</h1>
@@ -32,16 +52,22 @@ const PublicationDetails = () => {
                         className="w-full md:w-1/2 h-64 object-cover rounded-lg"
                     />
                 ) : (
-                    <div className="w-full md:w-1/2 h-64 flex flex-row items-center justify-center bg-white border-t-8 border-b-8 border-lime-600  rounded-none">
-                        {topicIcon ? (
-                            <div className="text-lime-600 text-9xl mb-2 mr-10">{topicIcon}</div>
-                        ) : (
-                            <div className="text-6xl text-gray-300 mb-4">No Icon</div>
-                        )}
-                        <h3 className="text-2xl font-bold text-gray-700">
+                    <div className="w-full md:w-1/2 h-64 flex items-center justify-center bg-white border-t-8 border-b-8 border-sky-950 rounded-none p-4">
+                        {/* Icon Section */}
+                        <div className="flex-shrink-0 text-sky-950 text-6xl md:text-9xl mr-6">
+                            {topicIcon ? (
+                                <div className="mb-2">{topicIcon}</div>
+                            ) : (
+                                <div className="text-6xl text-gray-300">No Icon</div>
+                            )}
+                        </div>
+
+                        {/* Title Section */}
+                        <h3 className="text-2xl font-bold text-gray-700 text-center whitespace-normal break-words">
                             {publication.topic.name}
                         </h3>
                     </div>
+
                 )}
 
                 {/* Separator line */}
@@ -52,13 +78,14 @@ const PublicationDetails = () => {
                     <p className="text-gray-600 mb-2 capitalize">
                         By: {publication.owner.first_name} {publication.owner.last_name} | {new Date(publication.created_at).toLocaleDateString()}
                     </p>
-                    <Link
-                        to={`/profile/${publication.owner.Profile.id}`} // Ensure correct capitalization and optional chaining
-                        className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
-                    >
-                        View Details
-                    </Link>
-
+                    <div>
+                        <Link
+                            to={`/profile/${publication.owner.Profile.id}`} // Ensure correct capitalization and optional chaining
+                            className="bg-slate-100 border-sky-950    border-2 text-sky-950  rounded-full hover:bg-blue-950 hover:text-white py-2 px-8 font-sans hover:border-none "
+                        >
+                            View Details
+                        </Link>
+                    </div>
 
                 </div>
             </div>
@@ -67,12 +94,12 @@ const PublicationDetails = () => {
             <hr className="border-t border-gray-300 my-6" />
 
             {/* Article content */}
-            <div className="mt-6 bg-slate-100 p-6 rounded-lg shadow-md">
-                <p className="text-gray-800 text-lg font-sans leading-relaxed tracking-wide">
-                    {publication.content}
+            <div className="mt-6  p-6 rounded-lg ">
+                <p className="text-gray-700 mb-4 flex-grow">
+                    {formatContent(publication.content)}
                 </p>
             </div>
-        </div>
+        </div >
     );
 
 };

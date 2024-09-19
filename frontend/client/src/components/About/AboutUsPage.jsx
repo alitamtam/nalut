@@ -2,12 +2,12 @@
 import { useState } from 'react';
 import Sidebar from '../Navbar/SideVar';
 import Members from './Members';
-
+import JoinOrCommission from './JoinUs';
 const sections = [
     {
         name: 'About Us', content: (
             <section className="bg-white rounded-lg p-6 mb-8 w-auto">
-                <section className="bg-white shadow-lg rounded-lg p-6 mb-8">
+                <section className="text-gray-700 mb-4 flex-grow">
                     <p className="mb-4">All of us in EduLibya are linked to the education sector as students, teachers, parents, workshop leaders, researchers, psycho-social practitioners and so forth.</p>
                     <p className="mb-4">We are a network of pedagogues / educationalists interested in various dimensions of education across Libya.</p>
                     <p className="mb-4">We are a community of people who care enough to try and make a difference in our society by making our education system more meaningful for students and teachers. The value we will create is for society, not for us as individuals.</p>
@@ -29,7 +29,7 @@ const sections = [
     },
     // { name: 'Our Partners', content: 'Details about our partners.' },
     // { name: 'Our Funding', content: 'Funding information.' },
-    { name: 'Join or Commission EduLibya', content: 'How to join or commission EduLibya.' },
+    { name: 'Join or Commission EduLibya', content: <JoinOrCommission /> },
     // { name: 'Job Opportunities', content: 'Available job opportunities.' },
     // { name: 'Internship Opportunities', content: 'Available internship opportunities.' },
 ];

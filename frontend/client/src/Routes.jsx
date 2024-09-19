@@ -15,6 +15,8 @@ import NotFound from './pages/NotFound';
 import RegisterUser from './components/Admin/RegisterUser';
 import TopicPublications from './components/publications/TopicPublications';
 import PublicationDetails from './components/Publications/PublicationsDetails';
+import Publications from './components/Publications/Publications';
+import PublicationsCards from './components/Publications/PublicationsCards';
 import ProfileDetails from './components/Profiles/ProfileDetails';
 import ProfileDisplay from './components/About/ProfileDisplay';
 const AppRouter = createBrowserRouter([
@@ -31,6 +33,8 @@ const AppRouter = createBrowserRouter([
             { path: 'profileDisplay/:id', element: <ProfileDisplay /> },
 
             { path: 'topics/:topicName', element: <TopicPublications /> },
+            { path: 'publications', element: <Publications /> },
+            { path: 'publicationsCard/:id', element: <PublicationsCards /> },
             { path: 'publications/:id', element: <PublicationDetails /> },
             { path: 'login', element: <Login /> },
             { path: '*', element: <NotFound /> },
