@@ -17,6 +17,7 @@ const PublicationDetails = () => {
 
     // Find the icon based on the publication's topic name
     const topicIcon = iconOptions.find(option => option.name === publication.topic.name)?.icon || null;
+    console.log(publication.owner.Profile);
 
     return (
         <div className="lg:mx-80 bg-slate-100 p-6 rounded-lg shadow-md">
@@ -32,9 +33,9 @@ const PublicationDetails = () => {
                         className="w-full md:w-1/2 h-64 object-cover rounded-lg"
                     />
                 ) : (
-                    <div className="w-full md:w-1/2 h-64 flex flex-col items-center justify-center bg-white border border-gray-300 rounded-lg">
+                    <div className="w-full md:w-1/2 h-64 flex flex-row items-center justify-center bg-white border-t-8 border-b-8 border-lime-600  rounded-none">
                         {topicIcon ? (
-                            <div className="text-8xl text-green-600 mb-4">{topicIcon}</div>
+                            <div className="text-lime-600 text-9xl mb-2 mr-10">{topicIcon}</div>
                         ) : (
                             <div className="text-6xl text-gray-300 mb-4">No Icon</div>
                         )}
@@ -53,11 +54,13 @@ const PublicationDetails = () => {
                         By: {publication.owner.first_name} {publication.owner.last_name} | {new Date(publication.created_at).toLocaleDateString()}
                     </p>
                     <Link
-                        to={`/profile/${publication.owner.id}`} // Correctly point to the owner's profile
+                        to={`/profile/${publication.owner.Profile.id}`} // Ensure correct capitalization and optional chaining
                         className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
                     >
                         View Details
                     </Link>
+
+
                 </div>
             </div>
 
@@ -72,6 +75,7 @@ const PublicationDetails = () => {
             </div>
         </div>
     );
+
 };
 
 export default PublicationDetails;

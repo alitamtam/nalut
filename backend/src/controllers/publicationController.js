@@ -18,6 +18,7 @@ const publicationController = {
                 select: {
                   bio: true,
                   image: true,
+                  id: true, // Include the profile ID for linking to the profile page
                 },
               },
             },
