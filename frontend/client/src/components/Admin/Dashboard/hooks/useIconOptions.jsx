@@ -2,7 +2,7 @@
 import { LiaChalkboardTeacherSolid } from "react-icons/lia";
 import {
   FaUserGraduate,
-  FaSchoolCircleCheck,
+  // FaSchoolCircleCheck,
   FaBook,
   FaLaptop,
   FaBrain,
@@ -12,6 +12,7 @@ import {
 import { RiGovernmentLine } from "react-icons/ri";
 import { BsBuildingAdd } from "react-icons/bs";
 import { AiOutlineFileProtect } from "react-icons/ai";
+import { FaConnectdevelop } from "react-icons/fa6";
 
 export const useIconOptions = () => {
   const iconOptions = [
@@ -23,12 +24,16 @@ export const useIconOptions = () => {
       name: "Teacher Professional Development",
       icon: <FaUserGraduate className="text-3xl" />,
     },
-    {
-      name: "School Governance",
-      icon: <FaSchoolCircleCheck className="text-3xl" />,
-    },
+    // {
+    //   name: "School Governance",
+    //   icon: <FaSchoolCircleCheck className="text-3xl" />,
+    // },
     {
       name: "Ministry of Education",
+      icon: <FaConnectdevelop className="text-3xl" />,
+    },
+    {
+      name: "IT and EdTech",
       icon: <RiGovernmentLine className="text-3xl" />,
     },
     {
@@ -41,7 +46,7 @@ export const useIconOptions = () => {
     },
     { name: "Educational Research", icon: <FaBook className="text-3xl" /> },
     {
-      name: "Information Technology in Schools",
+      name: "Information Technology in Education",
       icon: <FaLaptop className="text-3xl" />,
     },
     {

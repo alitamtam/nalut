@@ -1,11 +1,11 @@
 import { useParams, Link } from 'react-router-dom';
 import { useGetPublications } from '../Admin/Dashboard/hooks/useGetPublications'; // Hook to fetch publications
-import { useGetTopics } from '../Admin/Dashboard/hooks/useGetTopics'; // Hook to fetch publications
+import { useIconOptions } from '../Admin/Dashboard/hooks/useIconOptions'; // Import the icon options hook
 
 const PublicationDetails = () => {
     const { id } = useParams(); // Get publication ID from URL
     const { data: publications, isLoading, error } = useGetPublications();
-    const { data: topics } = useGetTopics();
+    const iconOptions = useIconOptions(); // Get the icon options
 
     if (isLoading) return <div>Loading publication...</div>;
     if (error) return <div>Error loading publication</div>;
@@ -14,6 +14,9 @@ const PublicationDetails = () => {
     const publication = publications?.find((pub) => pub.id === parseInt(id));
 
     if (!publication) return <div>Publication not found</div>;
+
+    // Find the icon based on the publication's topic name
+    const topicIcon = iconOptions.find(option => option.name === publication.topic.name)?.icon || null;
 
     return (
         <div className="lg:mx-80 bg-slate-100 p-6 rounded-lg shadow-md">
@@ -30,7 +33,11 @@ const PublicationDetails = () => {
                     />
                 ) : (
                     <div className="w-full md:w-1/2 h-64 flex flex-col items-center justify-center bg-white border border-gray-300 rounded-lg">
-                        <div className="text-6xl text-blue-600 mb-4" />{topics.iconClass}
+                        {topicIcon ? (
+                            <div className="text-8xl text-green-600 mb-4">{topicIcon}</div>
+                        ) : (
+                            <div className="text-6xl text-gray-300 mb-4">No Icon</div>
+                        )}
                         <h3 className="text-2xl font-bold text-gray-700">
                             {publication.topic.name}
                         </h3>
@@ -43,10 +50,10 @@ const PublicationDetails = () => {
                 {/* Author details on the right */}
                 <div className="w-full md:w-1/2 flex flex-col items-start justify-center">
                     <p className="text-gray-600 mb-2 capitalize">
-                        By: {publication.owner.first_name} {publication.owner.last_name} |  {new Date(publication.created_at).toLocaleDateString()}
+                        By: {publication.owner.first_name} {publication.owner.last_name} | {new Date(publication.created_at).toLocaleDateString()}
                     </p>
                     <Link
-                        to={`/profile/${publication.owner.profile}`} // Correctly point to the owner's profile
+                        to={`/profile/${publication.owner.id}`} // Correctly point to the owner's profile
                         className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
                     >
                         View Details
