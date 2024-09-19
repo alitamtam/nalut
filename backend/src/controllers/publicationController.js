@@ -24,6 +24,10 @@ const publicationController = {
       const { id } = req.params;
       const topic = await prisma.publications.findUnique({
         where: { id: parseInt(id) },
+        include: {
+          topic: true,
+          owner: { select: { first_name: true, last_name: true } },
+        }, // Include the topic and owner details
       });
       if (!topic) {
         return res.status(404).json({ message: "Topic not found" });
