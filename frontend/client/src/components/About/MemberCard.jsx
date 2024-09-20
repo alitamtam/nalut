@@ -5,7 +5,7 @@ const MemberCard = ({ member }) => (
     console.log("members list", member),
     <div className="bg-white shadow-md p-4 rounded-md text-center">
         <img
-            src={member.photo || '/images/default-profile.jpg'} // Handle missing photo
+            src={`data:image/jpeg;base64,${member.image}`}// Handle missing photo
             alt={member.fullName || 'Member Photo'}             // Use fullName for alt attribute
             className="w-32 h-32 mx-auto rounded-full object-cover"
         />
@@ -25,7 +25,7 @@ const MemberCard = ({ member }) => (
 MemberCard.propTypes = {
     member: PropTypes.shape({
         id: PropTypes.number.isRequired,
-        photo: PropTypes.string,
+        image: PropTypes.string,
         fullName: PropTypes.string, // Adjusted to use fullName
         title: PropTypes.string,
     }).isRequired,

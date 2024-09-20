@@ -17,7 +17,7 @@ const ProfileDetails = () => {
                 {/* Left Section: Image, Name, and Title */}
                 <div className="w-full md:w-1/2 flex flex-col items-center md:items-start justify-center">
                     <img
-                        src={Profile?.image || '/default-profile.jpg'} // Check if image exists, otherwise show default
+                        src={`data:image/jpeg;base64,${Profile.image}`} // Check if image exists, otherwise show default
                         alt={`${Profile?.first_name} ${Profile?.last_name}`}
                         className="w-48 h-48 object-cover rounded-full mb-4"
                     />
