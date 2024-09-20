@@ -1,6 +1,6 @@
 // path: frontend/client/src/components/About/AboutUsPage.jsx
 import { useState } from 'react';
-import Sidebar from '../Navbar/SideVar';
+import Sidebar from '../Navbar/Sidebar';
 import Members from './Members';
 import JoinOrCommission from './JoinUs';
 const sections = [
