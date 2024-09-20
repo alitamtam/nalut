@@ -9,7 +9,7 @@ const ProfileList = () => {
     if (isError) {
         return <p>{error.message}</p>;
     }
-
+    console.log(data)
     return (
         <div>
             <h2 className="text-2xl font-bold mb-4">Profile List</h2>
@@ -25,9 +25,19 @@ const ProfileList = () => {
                     {data?.map((profile) => (
                         <tr key={profile.id}>
                             <td className="border px-4 py-2">{profile.id}</td>
-                            <td className="border px-4 py-2">{profile.name}</td>
+                            <td className="border px-4 py-2">{profile.fullName}</td>
                             <td className="border px-4 py-2">{profile.bio}</td>
-                            <td className="border px-4 py-2">{profile.image}</td>
+                            <td className="border px-4 py-2">
+                                {profile.image ? (
+                                    <img
+                                        alt="profile"
+                                        src={`data:image/jpeg;base64,${profile.image}`} // Include the base64 prefix here
+                                        className="h-16 w-16 object-cover rounded-full"
+                                    />
+                                ) : (
+                                    <p>No Image</p> // Fallback if no image is provided
+                                )}
+                            </td>
                         </tr>
                     ))}
                 </tbody>
