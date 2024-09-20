@@ -9,9 +9,9 @@ const Members = () => {
     if (error) return <p>Error loading members: {error.message}</p>;
 
     return (
-        <div className="p-8">
+        <div className="p-4 md:p-8">
             {Array.isArray(members) && members.length > 0 ? (
-                <div className="grid grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
                     {members.map((member) => (
                         <MemberCard key={member.id} memberId={member.id} member={member} />
                     ))}

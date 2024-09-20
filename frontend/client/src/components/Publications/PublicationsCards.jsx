@@ -2,38 +2,42 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 const PublicationCard = ({ publication }) => {
-    const { id, image, topic, } = publication;
+    const { id, image, topic } = publication;
     const { name: topicName } = topic;
 
     return (
-        <div className="bg-white shadow-lg rounded-none overflow-hidden flex flex-col">
+        <div className="bg-gray-300 shadow-lg rounded-none overflow-hidden flex flex-col h-full">
             {image ? (
                 <img
                     src={image}
                     alt={publication.title}
-                    className="w-full h-48 object-cover"
+                    className="w-full h-70 object-cover"
                 />
             ) : (
-                <div className="flex items-center justify-center h-48 bg-gray-200 text-gray-600 text-lg">
+                <div className="flex items-center justify-center h-48 bg-gray-300 text-gray-600 text-lg">
                     {topicName || 'No Image'}
                 </div>
             )}
             <div className="p-4 flex flex-col flex-grow">
+                <h1 className="text-sm text-gray-600">
+                    {new Date(publication.created_at).toLocaleDateString()}
+                </h1>
+
                 <h2 className="text-xl font-semibold text-gray-800 mb-2">
                     {publication.title}
                 </h2>
-                <h3 className="text-lg font-medium text-gray-600 mb-2">
+                <h3 className="text-lg font-medium text-gray-600 mb-4">
                     {topicName}
                 </h3>
-                {/* <p className="text-gray-700 mb-4 flex-grow">
-                    {content}
-                </p> */}
-                <Link
-                    to={`/publications/${id}`}
-                    className="bg-teal-500 text-white py-2 px-4 rounded-md hover:bg-teal-600 transition duration-300 text-center"
-                >
-                    View Details
-                </Link>
+
+                <div className="mt-auto"> {/* Ensures button stays at the bottom */}
+                    <Link
+                        to={`/publications/${id}`}
+                        className="text-blue-950 border-2 border-blue-950 text-center rounded-full hover:bg-blue-950 bg-gray-300 hover:text-gray-300 py-2 px-8 font-sans hover:border-none"
+                    >
+                        View Details
+                    </Link>
+                </div>
             </div>
         </div>
     );
@@ -50,6 +54,7 @@ PublicationCard.propTypes = {
         publicatinTitle: PropTypes.string.isRequired,
         topicTitle: PropTypes.string,
         content: PropTypes.string.isRequired,
+        created_at: PropTypes.string.isRequired,
         resumeText: PropTypes.string.isRequired,
     }).isRequired,
 };
