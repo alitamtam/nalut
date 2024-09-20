@@ -59,6 +59,11 @@ const profileController = {
   async createProfile(req, res) {
     const { userId, bio } = req.body;
     try {
+      console.log(
+        "Profile create request received with User ID:",
+        userId,
+        req.body
+      ); // Log for debugging
       const profile = await prisma.profile.create({
         data: { userId, bio },
       });
@@ -69,20 +74,12 @@ const profileController = {
   },
 
   async updateProfile(req, res) {
-    const { id } = req.params;
+    const { userId } = req.params;
     const { bio, image } = req.body;
-    console.log(
-      "Profile update request received with ID:",
-      id,
-      "Bio:",
-      bio,
-      "Image:",
-      image
-    ); // Log for debugging
 
     try {
       const profile = await prisma.profile.update({
-        where: { id: parseInt(id, 10) },
+        where: { userId: parseInt(userId, 10) }, // Use userId to find the profile
         data: { bio, image },
       });
       res.status(200).json(profile);

@@ -17,12 +17,12 @@ export const useSettingsStore = create(
         },
       },
 
-      setTokenAndUser: (token, user) => {
+      setTokenAndUser: (token, user) =>
         // Log profile information for debugging
         console.log("Setting token and user:", {
+          token,
           profile: user.profile, // Logging profile data
-        });
-
+        }) ||
         set({
           token,
           user: {
@@ -30,14 +30,13 @@ export const useSettingsStore = create(
             username: user.username,
             role: user.role,
             profile: {
-              id: user.profile?.id || "", // Set Profile ID
-              bio: user.profile?.bio || "", // Set bio
-              image: user.profile?.image || "", // Set image
+              id: user.Profile?.id || "", // Set Profile ID
+              bio: user.Profile?.bio || "", // Set bio
+              image: user.Profile?.image || "", // Set image
             },
           },
-        });
-      },
+        }),
     }),
-    { name: "SettingsStore" } // Name for better identification in DevTools
-  )
+    { name: "SettingsStore" }
+  ) // You can give your store a name for better identification in DevTools
 );

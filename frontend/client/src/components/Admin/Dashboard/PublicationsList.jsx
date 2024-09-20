@@ -76,7 +76,6 @@ const PublicationsList = () => {
             // eslint-disable-next-line no-self-assign
             updatedFormData.topicId = updatedFormData.topicId; // Ensure this is correctly formatted
         }
-        console.log("Sending data to API: ", updatedFormData); // Log the data to verify
 
         if (isEditing) {
             editPublication.mutate({ id: currentEditId, formData: updatedFormData });

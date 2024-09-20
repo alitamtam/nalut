@@ -8,14 +8,14 @@ const EditProfile = () => {
         user: state.user,
     }));
 
-    const [bio, setBio] = useState(user.profile.bio || ''); // Use user.profile for bio
-    const [image, setImage] = useState(user.profile.image || null); // Use user.profile for image
+    const [bio, setBio] = useState(user.bio || '');
+    const [image, setImage] = useState(user.image || null);
 
-    const { mutate: editProfile, isLoading } = useEditProfiles();
+    const { mutate: editProfile, isPending } = useEditProfiles(); // Import the mutation hook
 
     useEffect(() => {
-        setBio(user.profile.bio || ''); // Update bio from profile
-        setImage(user.profile.image || null); // Update image from profile
+        setBio(user.bio || '');
+        setImage(user.image || null);
     }, [user]);
 
     const handleImageChange = (event) => {
@@ -23,19 +23,24 @@ const EditProfile = () => {
         if (file) {
             const reader = new FileReader();
             reader.onloadend = () => {
-                setImage(reader.result?.toString().split(',')[1]); // Convert to base64
+                const base64String = reader.result.split(',')[1]; // Extract only the base64 part
+                setImage(base64String); // Store only the base64 string
             };
             reader.readAsDataURL(file);
         }
     };
 
+
+
+    console.log("Current user ID:", user); // Log for debugging
+
     const handleSubmit = (event) => {
         event.preventDefault();
         const formData = { bio, image }; // Prepare form data
 
-        // Pass user.profile.id instead of user.id
+        // Call mutation function
         editProfile(
-            { id: user.profile.id, formData }, // Correct profile ID
+            { id: user.id, formData }, // Pass user id and form data to the mutation
             {
                 onSuccess: () => {
                     toast.success('Profile updated successfully!');
@@ -59,7 +64,7 @@ const EditProfile = () => {
                 </div>
                 <div>
                     <h2 className="text-2xl font-semibold text-gray-800">{user.fullName}</h2>
-                    <p className="text-gray-600">{bio}</p>
+                    <p className="text-gray-600">{user.bio}</p>
                 </div>
             </div>
             <form onSubmit={handleSubmit} className="space-y-4">
@@ -85,10 +90,10 @@ const EditProfile = () => {
                 </div>
                 <button
                     type="submit"
-                    disabled={isLoading}
+                    disabled={isPending} // Disable button while loading
                     className="mt-4 py-2 px-4 bg-teal-500 text-white font-semibold rounded-md hover:bg-teal-600 transition duration-300"
                 >
-                    {isLoading ? 'Updating...' : 'Update Profile'}
+                    {isPending ? 'Updating...' : 'Update Profile'}
                 </button>
             </form>
         </div>
