@@ -61,7 +61,7 @@ const PublicationsList = () => {
             content: formData.content,
             image: formData.image,
             ownerId: userId, // Use the dynamic user ID from Zustand store
-            iconClass: formData.iconClass, // Ensure this field is included
+            iconClass: formData.iconClass || "default-icon-class",  // Fallback to a default// Ensure this field is included
         };
 
         // Convert topicId to a number if it exists
@@ -76,6 +76,7 @@ const PublicationsList = () => {
             // eslint-disable-next-line no-self-assign
             updatedFormData.topicId = updatedFormData.topicId; // Ensure this is correctly formatted
         }
+        console.log("Sending data to API: ", updatedFormData); // Log the data to verify
 
         if (isEditing) {
             editPublication.mutate({ id: currentEditId, formData: updatedFormData });

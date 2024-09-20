@@ -103,28 +103,39 @@ const publicationController = {
   },
 
   // Update an existing publication by ID
+  // Update an existing publication by ID
   async updatePublication(req, res, next) {
     try {
+      console.log("Request body: ", req.body); // Log the body to verify incoming data
+
       const { id } = req.params;
       const { title, topicName, content, image } = req.body;
 
-      // Find the topic by name
-      const topic = await prisma.topic.findUnique({
-        where: { name: topicName },
-      });
+      let topicId = null;
 
-      if (!topic) {
-        return res.status(404).json({ message: "Topic not found" });
+      // Check if topicName is provided
+      if (topicName) {
+        // Find the topic by name
+        const topic = await prisma.topic.findUnique({
+          where: { name: topicName },
+        });
+
+        // If the topic is not found, return a 404 error
+        if (!topic) {
+          return res.status(404).json({ message: "Topic not found" });
+        }
+
+        topicId = topic.id;
       }
 
-      // Update the publication with base64 image
+      // Update the publication with base64 image and topicId (if available)
       const updatedPublication = await prisma.publications.update({
-        where: { id: parseInt(id) },
+        where: { id: parseInt(id, 10) },
         data: {
           title,
           content,
           image, // Storing base64 image string
-          topicId: topic.id,
+          ...(topicId && { topicId }), // Only update topicId if it's valid
         },
       });
 

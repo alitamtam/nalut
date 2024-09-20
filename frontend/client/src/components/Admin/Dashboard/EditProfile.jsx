@@ -8,14 +8,14 @@ const EditProfile = () => {
         user: state.user,
     }));
 
-    const [bio, setBio] = useState(user.bio || '');
-    const [image, setImage] = useState(user.image || null);
+    const [bio, setBio] = useState(user.profile.bio || ''); // Use user.profile for bio
+    const [image, setImage] = useState(user.profile.image || null); // Use user.profile for image
 
-    const { mutate: editProfile, isLoading } = useEditProfiles(); // Import the mutation hook
+    const { mutate: editProfile, isLoading } = useEditProfiles();
 
     useEffect(() => {
-        setBio(user.bio || '');
-        setImage(user.image || null);
+        setBio(user.profile.bio || ''); // Update bio from profile
+        setImage(user.profile.image || null); // Update image from profile
     }, [user]);
 
     const handleImageChange = (event) => {
@@ -29,16 +29,13 @@ const EditProfile = () => {
         }
     };
 
-
-    console.log("Current user ID:", user.id);
-
     const handleSubmit = (event) => {
         event.preventDefault();
         const formData = { bio, image }; // Prepare form data
 
-        // Call mutation function
+        // Pass user.profile.id instead of user.id
         editProfile(
-            { id: user.id, formData }, // Pass user id and form data to the mutation
+            { id: user.profile.id, formData }, // Correct profile ID
             {
                 onSuccess: () => {
                     toast.success('Profile updated successfully!');
@@ -62,7 +59,7 @@ const EditProfile = () => {
                 </div>
                 <div>
                     <h2 className="text-2xl font-semibold text-gray-800">{user.fullName}</h2>
-                    <p className="text-gray-600">{user.bio}</p>
+                    <p className="text-gray-600">{bio}</p>
                 </div>
             </div>
             <form onSubmit={handleSubmit} className="space-y-4">
@@ -88,7 +85,7 @@ const EditProfile = () => {
                 </div>
                 <button
                     type="submit"
-                    disabled={isLoading} // Disable button while loading
+                    disabled={isLoading}
                     className="mt-4 py-2 px-4 bg-teal-500 text-white font-semibold rounded-md hover:bg-teal-600 transition duration-300"
                 >
                     {isLoading ? 'Updating...' : 'Update Profile'}

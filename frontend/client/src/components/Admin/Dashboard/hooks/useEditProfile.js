@@ -7,18 +7,17 @@ export const useEditProfiles = () => {
   return useMutation({
     mutationKey: ["editProfiles"],
     mutationFn: async ({ id, formData }) => {
-      console.log("id", id, "data", formData);
-
-      const response = await api.put(`/api/Profiles/${id}`, formData, {
+      const response = await api.put(`/api/profiles/${id}`, formData, {
         headers: {
           "Content-Type": "application/json",
         },
       });
+      console.log("id", id, "data", formData);
 
-      return response.data; // Return response data
+      return response; // Return response data
     },
     onSuccess: () => {
-      queryClient.invalidateQueries(["profiles"]); // Invalidate the query to refresh data
+      queryClient.invalidateQueries(["profile"]); // Invalidate the query to refresh data
     },
     onError: (error) => {
       console.error("Error updating profile:", error);

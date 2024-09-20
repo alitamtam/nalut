@@ -6,7 +6,7 @@ export const useEditPublications = () => {
   return useMutation({
     mutationKey: ["editPublications"],
 
-    mutationFn: async (id, formData) => {
+    mutationFn: async ({ id, formData }) => {
       const response = await api.put(`/api/publications/${id}`, formData, {
         headers: {
           "Content-Type": "application/json",
