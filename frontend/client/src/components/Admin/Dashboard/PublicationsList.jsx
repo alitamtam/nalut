@@ -1,33 +1,35 @@
 import { useState } from "react";
-import { useSettingsStore } from "../../../store/useSettingsStore"; // Import your Zustand store
+import { useSettingsStore } from "../../../store/useSettingsStore";
 import { useAddPublications } from "./hooks/useAddPublications";
 import { useDeletePublications } from "./hooks/useDeletePublications";
 import { useEditPublications } from "./hooks/useEditPublications";
 import { useGetPublications } from "./hooks/useGetPublications";
 import { useGetTopics } from "./hooks/useGetTopics";
 import ManageTopics from "./ManageTopics";
+
 const PublicationsList = () => {
     const { data: publications, isPending, error } = useGetPublications();
     const addPublication = useAddPublications();
     const editPublication = useEditPublications();
     const deletePublication = useDeletePublications();
-    const { data: topics } = useGetTopics(); // Fetching topics
+    const { data: topics } = useGetTopics();
 
-    const { user } = useSettingsStore(); // Get the user data (including user ID)
-    const userId = user.id; // Access the user ID from Zustand store
+    const { user } = useSettingsStore();
+    const userId = user.id;
 
     const [isEditing, setIsEditing] = useState(false);
     const [formData, setFormData] = useState({
         title: "",
-        topicId: "", // For selected topic
-        topic: "", // For new topic
+        topicId: "",
+        topic: "",
         content: "",
         image: "",
         iconClass: "",
     });
     const [currentEditId, setCurrentEditId] = useState(null);
-    const [isNewTopic, setIsNewTopic] = useState(false); // State to check if user wants to create a new topic
+    const [isNewTopic, setIsNewTopic] = useState(false);
 
+    // Handle image upload and conversion to base64
     const handleImageUpload = (e) => {
         const file = e.target.files[0];
         if (file) {
@@ -36,7 +38,7 @@ const PublicationsList = () => {
             reader.onload = () => {
                 setFormData((prevState) => ({
                     ...prevState,
-                    image: reader.result,
+                    image: reader.result, // Base64 encoded string
                 }));
             };
             reader.onerror = (error) => {
@@ -59,22 +61,17 @@ const PublicationsList = () => {
         const updatedFormData = {
             title: formData.title,
             content: formData.content,
-            image: formData.image,
-            ownerId: userId, // Use the dynamic user ID from Zustand store
-            iconClass: formData.iconClass || "default-icon-class",  // Fallback to a default// Ensure this field is included
+            image: formData.image,  // Include base64 image in the request body
+            ownerId: userId,
+            iconClass: formData.iconClass || "default-icon-class",
         };
 
-        // Convert topicId to a number if it exists
         if (formData.topicId) {
             updatedFormData.topicId = parseInt(formData.topicId, 10);
         }
 
-        // If the user is creating a new topic, send the `topic` field, otherwise send `topicId`
         if (isNewTopic) {
             updatedFormData.topic = formData.topic;
-        } else {
-            // eslint-disable-next-line no-self-assign
-            updatedFormData.topicId = updatedFormData.topicId; // Ensure this is correctly formatted
         }
 
         if (isEditing) {
@@ -85,9 +82,8 @@ const PublicationsList = () => {
 
         setFormData({ title: "", topicId: "", topic: "", content: "", image: "", iconClass: "" });
         setIsEditing(false);
-        setIsNewTopic(false); // Reset to default behavior after submission
+        setIsNewTopic(false);
     };
-
 
     const handleEdit = (publication) => {
         setIsEditing(true);
@@ -97,7 +93,7 @@ const PublicationsList = () => {
             topicId: publication.topic.id,
             topic: publication.topic.name,
             content: publication.content,
-            image: publication.image,
+            image: publication.image,  // Prepopulate base64 image
             iconClass: publication.iconClass,
         });
     };
@@ -176,17 +172,19 @@ const PublicationsList = () => {
                         </select>
                     </div>
                 )}
-                <label className="block mb-1">Topic Icon </label>
+
+                <label className="block mb-1">Topic Icon</label>
                 <div className="mb-4">
                     <input
                         type="text"
                         name="iconClass"
                         value={formData.iconClass}
                         onChange={handleChange}
-                        placeholder="Title"
+                        placeholder="Icon Class"
                         className="w-full p-2 border border-gray-300 rounded"
                     />
                 </div>
+
                 <div className="mb-4">
                     <textarea
                         name="content"
@@ -202,10 +200,12 @@ const PublicationsList = () => {
                     <input type="file" onChange={handleImageUpload} />
                     {formData.image && <p className="mt-2 text-sm">Image ready for upload.</p>}
                 </div>
+
                 <button type="submit" className="bg-blue-500 text-white w-full py-2 rounded">
                     {isEditing ? "Update Publication" : "Add Publication"}
                 </button>
             </form>
+
             {/* Publications Table */}
             <table className="min-w-full bg-white">
                 <thead>
@@ -233,18 +233,17 @@ const PublicationsList = () => {
                                 </button>
                                 <button
                                     onClick={() => handleDelete(publication.id)}
-                                    className="bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600"                                >
+                                    className="bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600"
+                                >
                                     Delete
                                 </button>
                             </td>
                         </tr>
                     ))}
                 </tbody>
-
             </table>
+
             <ManageTopics />
-
-
         </div>
     );
 };
