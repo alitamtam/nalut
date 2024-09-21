@@ -57,7 +57,6 @@ const TopicsSlick = () => {
 
     const settings = {
         infinite: true,
-        autoplay: true,
         speed: 200,
         slidesToShow: 7,
         slidesToScroll: 1,

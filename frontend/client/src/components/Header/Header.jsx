@@ -1,4 +1,4 @@
-import { FaFacebookF, FaTwitter, FaInstagram, FaSearch } from 'react-icons/fa';
+import { FaFacebookF, FaTwitter, FaLinkedin, FaSearch } from 'react-icons/fa';
 import { useState } from 'react';
 import logo from '../../assets/img/logo.png';
 
@@ -10,48 +10,50 @@ const Header = () => {
     };
 
     return (
-        <header className="bg-white">
-            <div className="container mx-auto lg:px-48 px-4 py-4 flex items-center justify-between">
+        <header className="bg-white lg:mx-80 lg:py-4">
+            <div className="   px-4 py-4 flex items-center justify-between">
                 {/* Logo Section */}
-                <a href="/" className="flex items-center">
+                <a href="/" className="flex lg:items-center ssm:items-start ssm:pr-14">
                     <img
-                        className="w-20 h-auto md:w-32 md:h-auto rounded-md" // Adjusted sizes for mobile and desktop
+                        className="lg:w-60 h-auto md:w-32 ssm:w-15  md:h-auto rounded-md" // Adjusted sizes for mobile and desktop
                         src={logo}
                         alt="Logo"
                     />
                 </a>
 
                 {/* Search Bar and Social Icons */}
-                <div className="flex items-center space-x-4">
+                <div className="flex items-center space-x-4  lg:border-gray-300 lg:border-y lg:gap-4 lg:py-4 ">
+                    <h2 className=' hover:text-teal-500'><a href="mailto:info@edulibya.ly">info@edulibya.ly</a></h2>
                     {/* Search Icon with Dropdown Input */}
                     <div className="relative">
                         <button
                             className="text-gray-800 text-xl"
                             onClick={toggleSearch}
                         >
-                            <FaSearch />
+                            <FaSearch className='hover:text-teal-500' />
                         </button>
                         {isSearchOpen && (
-                            <div className="absolute right-0 mt-2 w-full sm:w-64 bg-white border border-gray-300 rounded-md shadow-lg p-2">
+                            <div className="absolute right-0 mt-2 w-full sm:w-64 bg-white border  border-gray-300 rounded-none shadow-xl p-2">
                                 <input
                                     type="text"
-                                    placeholder="Search..."
-                                    className="w-full p-2 border-none rounded-md focus:outline-none"
+                                    placeholder="Search... "
+                                    className="w-full p-2 border- bg-gray-100 rounded-none focus:outline-none hover:text-teal-500"
                                 />
                             </div>
                         )}
                     </div>
 
                     {/* Social Icons */}
+                    <h1>Follow Us</h1>
                     <div className="hidden sm:flex space-x-4">
                         <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
-                            <FaFacebookF className="text-gray-800 text-lg" />
+                            <FaFacebookF className="text-gray-800 text-lg hover:text-teal-500" />
                         </a>
                         <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
-                            <FaTwitter className="text-blue-700 text-lg" />
+                            <FaTwitter className="text-gray-900 text-lg hover:text-teal-500" />
                         </a>
-                        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
-                            <FaInstagram className="text-gray-900 text-lg" />
+                        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
+                            <FaLinkedin className="text-gray-900 text-lg hover:text-teal-500" />
                         </a>
                     </div>
                 </div>
