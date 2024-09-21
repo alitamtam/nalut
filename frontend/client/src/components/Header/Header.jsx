@@ -11,7 +11,7 @@ const Header = () => {
 
     return (
         <header className="bg-white">
-            <div className="container mx-auto px-4 py-4 flex items-center justify-between">
+            <div className="container mx-auto lg:px-48 px-4 py-4 flex items-center justify-between">
                 {/* Logo Section */}
                 <a href="/" className="flex items-center">
                     <img
