@@ -43,26 +43,25 @@ const AppRouter = createBrowserRouter([
         path: 'admin',
         element: (
             <ProtectedRoute roles={['admin']}>
-                <AdminDashboard /> {/* AdminDashboard will render Sidebar and children */}
+                <AdminDashboard />
             </ProtectedRoute>
         ),
         children: [
             { path: 'profiles', element: <ProfilesList /> },
             { path: 'articles', element: <ArticlesList /> },
             { path: 'events', element: <EventsList /> },
-            { path: 'editProfile', element: <EditProfile /> },
-
             { path: 'publications', element: <PublicationsList /> },
             { path: 'register', element: <RegisterUser /> },
             { path: 'users', element: <DeleteUsers /> },
+            { path: 'editProfile', element: <EditProfile /> },
             { path: '*', element: <NotFound /> },
         ],
     },
     {
-        path: 'member',
+        path: 'admin',
         element: (
             <ProtectedRoute roles={['member']}>
-                <Layout /> {/* This can be a layout for member-specific routes */}
+                <Layout /> {/* Layout for member-specific routes */}
             </ProtectedRoute>
         ),
         children: [
