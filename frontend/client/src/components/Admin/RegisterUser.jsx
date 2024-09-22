@@ -11,6 +11,7 @@ const RegisterUser = () => {
     const [passwordStrength, setPasswordStrength] = useState('');
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
+    const [role, setRole] = useState('member'); // Default role
 
     // Function to check password strength
     const checkPasswordStrength = (password) => {
@@ -42,6 +43,7 @@ const RegisterUser = () => {
                 username,
                 email,
                 password,
+                role, // Include the role in the request
             });
             setSuccess(response.data.message);
             setFirstName('');
@@ -51,6 +53,7 @@ const RegisterUser = () => {
             setPassword('');
             setConfirmPassword('');
             setPasswordStrength('');
+            setRole('member'); // Reset role to default
         } catch (error) {
             setError(error.response?.data?.error || 'Error creating user');
         }
@@ -141,6 +144,21 @@ const RegisterUser = () => {
                         required
                         className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                     />
+                </div>
+
+                {/* Role Selection */}
+                <div className="mb-4">
+                    <label htmlFor="role" className="block text-sm font-medium text-gray-700">User Role</label>
+                    <select
+                        id="role"
+                        value={role}
+                        onChange={(e) => setRole(e.target.value)}
+                        className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                    >
+                        <option value="member">Member</option>
+                        <option value="editor">Editor</option>
+                        <option value="admin">Admin</option>
+                    </select>
                 </div>
 
                 {/* Error and Success Messages */}

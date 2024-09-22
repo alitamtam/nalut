@@ -23,7 +23,8 @@ const adminController = {
 
   async registerUser(req, res) {
     try {
-      const { first_name, last_name, username, email, password } = req.body;
+      const { first_name, last_name, username, email, password, role } =
+        req.body; // Include role in destructuring
       const hashedPassword = await bcrypt.hash(password, 10);
 
       // Create the user
@@ -34,6 +35,7 @@ const adminController = {
           username,
           email,
           password: hashedPassword,
+          role, // Save the role to the user data
         },
       });
 

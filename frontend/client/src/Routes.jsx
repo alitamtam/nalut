@@ -9,12 +9,10 @@ import Login from './components/Admin/Login';
 import HomePage from './pages/HomePage';
 import Layout from './components/Layout';
 import AboutUsPage from './components/About/AboutUsPage';
-// import EditProfile from './components/Admin/EditProfile';
 import MemberDetails from './components/About/MemberDetails';
 import NotFound from './pages/NotFound';
 import RegisterUser from './components/Admin/RegisterUser';
-import EditProfile from './components/Admin/Dashboard/EditProfile'
-
+import EditProfile from './components/Admin/Dashboard/EditProfile';
 import TopicPublications from './components/publications/TopicPublications';
 import PublicationDetails from './components/Publications/PublicationsDetails';
 import Publications from './components/Publications/Publications';
@@ -22,6 +20,7 @@ import PublicationsCards from './components/Publications/PublicationsCards';
 import ProfileDetails from './components/Profiles/ProfileDetails';
 import ProfileDisplay from './components/About/ProfileDisplay';
 import DeleteUsers from './components/Admin/Dashboard/DeleteUser';
+
 const AppRouter = createBrowserRouter([
     {
         path: '/',
@@ -29,12 +28,9 @@ const AppRouter = createBrowserRouter([
         children: [
             { index: true, element: <HomePage /> },
             { path: 'about', element: <AboutUsPage /> },
-            // { path: 'profile/edit', element: <EditProfile /> },
             { path: 'member/:id', element: <MemberDetails /> },
             { path: 'profile/:id', element: <ProfileDetails /> },
-            { path: 'profile/:id', element: <ProfileDetails /> },
             { path: 'profileDisplay/:id', element: <ProfileDisplay /> },
-
             { path: 'topics/:topicName', element: <TopicPublications /> },
             { path: 'publications', element: <Publications /> },
             { path: 'publicationsCard/:id', element: <PublicationsCards /> },
@@ -46,7 +42,7 @@ const AppRouter = createBrowserRouter([
     {
         path: 'admin',
         element: (
-            <ProtectedRoute roles={['admin', 'member']}>
+            <ProtectedRoute roles={['admin']}>
                 <AdminDashboard /> {/* AdminDashboard will render Sidebar and children */}
             </ProtectedRoute>
         ),
@@ -54,14 +50,25 @@ const AppRouter = createBrowserRouter([
             { path: 'profiles', element: <ProfilesList /> },
             { path: 'articles', element: <ArticlesList /> },
             { path: 'events', element: <EventsList /> },
-            { path: 'publications', element: <PublicationsList /> },
             { path: 'editProfile', element: <EditProfile /> },
-            { path: 'api/profiles/:id', element: <EditProfile /> },
 
+            { path: 'publications', element: <PublicationsList /> },
             { path: 'register', element: <RegisterUser /> },
-            { path: 'users/', element: <DeleteUsers /> },
+            { path: 'users', element: <DeleteUsers /> },
             { path: '*', element: <NotFound /> },
-
+        ],
+    },
+    {
+        path: 'member',
+        element: (
+            <ProtectedRoute roles={['member']}>
+                <Layout /> {/* This can be a layout for member-specific routes */}
+            </ProtectedRoute>
+        ),
+        children: [
+            { path: 'editProfile', element: <EditProfile /> },
+            { path: 'createPublication', element: <PublicationsList /> }, // Adjust based on your component for creating publications
+            { path: '*', element: <NotFound /> },
         ],
     },
     { path: '*', element: <NotFound /> },
