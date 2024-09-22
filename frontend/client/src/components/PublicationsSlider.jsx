@@ -1,105 +1,137 @@
 import { TECarousel, TECarouselItem } from "tw-elements-react";
-
-const publications = [
-    {
-        id: 1,
-        title: 'The Future of Education',
-        author: 'John Doe',
-        img: 'https://cdn.pixabay.com/photo/2016/03/08/20/03/flag-1244649_640.jpg',
-    },
-    {
-        id: 2,
-        title: 'Technology in Classrooms',
-        author: 'Jane Smith',
-        img: 'https://media.istockphoto.com/id/949118068/photo/books.jpg?s=612x612&w=0&k=20&c=1vbRHaA_aOl9tLIy6P2UANqQ27KQ_gSF-BH0sUjQ730=',
-    },
-    {
-        id: 3,
-        title: 'AI and Learning',
-        author: 'Mark Lee',
-        img: 'https://media.istockphoto.com/id/1352603244/photo/shot-of-an-unrecognizable-businessman-working-on-his-laptop-in-the-office.jpg?s=612x612&w=0&k=20&c=upiDYeAZEsxbUBdhX35MXm79drIXA-5Q-FcfmZk71lM=',
-    },
-];
+import { useGetPublications } from "./Admin/Dashboard/hooks/useGetPublications";
+import { Link } from "react-router-dom";
+import { useState } from "react";
 
 const PublicationsSlider = () => {
+    const { data: publications = [], isLoading, isError } = useGetPublications();
+    const [activeIndex, setActiveIndex] = useState(0);
+
+    const recentPublications = publications.slice(0, 3);
+
+    if (isLoading) return <p>Loading publications...</p>;
+    if (isError) return <p>Error fetching publications</p>;
+
+    const handleNext = () => {
+        setActiveIndex((prevIndex) =>
+            prevIndex === recentPublications.length - 1 ? 0 : prevIndex + 1
+        );
+    };
+
+    const handlePrev = () => {
+        setActiveIndex((prevIndex) =>
+            prevIndex === 0 ? recentPublications.length - 1 : prevIndex - 1
+        );
+    };
+
+    const handleIndicatorClick = (index) => {
+        setActiveIndex(index);
+    };
+
     return (
-        <>
+        <div className="relative w-[650px] h-full mx-auto overflow-hidden ">
             <TECarousel
-                className="h-[400px] w-[600px]  "  // Fix the height of the carousel
+                className="relative h-[550px] w-[fill] "
                 showControls
-                showIndicators
                 crossfade
                 ride="carousel"
                 prevBtnIcon={
-                    <>
-                        <span className="inline-block text-black h-8 w-8 [&>svg]:h-8">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                strokeWidth="1.5"
-                                stroke="currentColor"
-                            >
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    d="M15.75 19.5L8.25 12l7.5-7.5"
-                                />
-                            </svg>
-                        </span>
-                        <span className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">
-                            Previous
-                        </span>
-                    </>
+                    <span
+                        className="absolute top-1/2 left-0 transform -translate-y-1/2 text-black h-8 w-8 cursor-pointer"
+                        onClick={handlePrev}
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth="1.5"
+                            stroke="currentColor"
+                        >
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="M15.75 19.5L8.25 12l7.5-7.5"
+                            />
+                        </svg>
+                    </span>
                 }
                 nextBtnIcon={
-                    <>
-                        <span className="inline-block text-white h-8 w-8 [&>svg]:h-8 border rounded p">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                strokeWidth="1.5"
-                                stroke="currentColor"
-                            >
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    d="M8.25 4.5l7.5 7.5-7.5 7.5"
-                                />
-                            </svg>
-                        </span>
-                        <span className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">
-                            Next
-                        </span>
-                    </>
-                }
-                theme={{
-                    indicator:
-                        "mx-[3px] box-content h-[3px] w-[30px] flex-initial cursor-pointer border-0 border-y-[10px] border-solid border-transparent bg-black bg-clip-padding p-0 -indent-[999px] opacity-50 transition-opacity duration-[600ms] ease-[cubic-bezier(0.25,0.1,0.25,1.0)] motion-reduce:transition-none",
-                }}
-            >
-                <div className="relative w-[600px] overflow-hidden after:clear-both after:block after:content-['']">
-                    {publications.map((pub) => (
-                        <TECarouselItem
-                            key={pub.id}
-                            itemID={pub.id}
-                            className="relative float-left -mr-[100%] hidden w-full !transform-none opacity-0 transition-opacity duration-[600ms] ease-in-out motion-reduce:transition-none"
+                    <span
+                        className="absolute top-1/2 right-0 transform -translate-y-1/2 text-black h-8 w-8 cursor-pointer"
+                        onClick={handleNext}
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth="1.5"
+                            stroke="currentColor"
                         >
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="M8.25 4.5l7.5 7.5-7.5 7.5"
+                            />
+                        </svg>
+                    </span>
+                }
+            >
+                {recentPublications.map((pub, index) => (
+                    <TECarouselItem
+                        key={pub.id}
+                        itemID={pub.id}
+                        className={`absolute top-0 left-0 w-full h-full transition-opacity duration-500 ease-in-out ${activeIndex === index
+                            ? "opacity-100 z-10"
+                            : "opacity-0 z-0"
+                            }`}
+                    >
+                        {/* Image Section */}
+                        <div className="relative">
                             <img
-                                src={pub.img}
-                                className="block w-[600px] h-[400px] "  // Ensure images have consistent height and aspect ratio
+                                src={
+                                    pub.image ||
+                                    "https://via.placeholder.com/600x400"
+                                }
+                                className="block w-full h-[400px] object-cover"
                                 alt={pub.title}
                             />
-                            <div className="absolute inset-x-[15%] bottom-5 hidden py-5 text-center text-white md:block">
-                                <h5 className="text-xl font-bold">{pub.title}</h5>
-                                <p>by {pub.author}</p>
-                            </div>
-                        </TECarouselItem>
+
+                            {/* Table Name (Bottom Left on Image) */}
+                            <span className="absolute bottom-2 left-2 bg-sky-950 text-white px-2 py-1 text-xl font-bold">
+                                Publications
+                            </span>
+                        </div>
+
+                        {/* Slide Details Section (White Background) */}
+                        <div className="bg-white p-4 text-black">
+                            <h5 className="text-xl font-bold  text-sky-950 hover:text-teal-500">
+                                <Link to={`/publications/${pub.id}`}>
+                                    {pub.title}
+                                </Link>
+                            </h5>
+                            <p className="text-sm mt-1 font-bold capitalize text-orange-400 hover:text-teal-500">
+                                by {pub.owner.first_name} {pub.owner.last_name}
+                            </p>
+                            <p className="text-sm text-gray-500">Date {new Date(pub.created_at).toLocaleDateString()}</p>
+                        </div>
+                    </TECarouselItem>
+                ))}
+
+                {/* Indicators Below the Image */}
+                <div className="absolute bottom-0 w-full  py-2 flex justify-center space-x-2 border-b-4 border-gray-100 shadow-lg">
+                    {recentPublications.map((_, index) => (
+                        <button
+                            key={index}
+                            onClick={() => handleIndicatorClick(index)}
+                            className={`h-3 w-3 rounded-full transition-all duration-300 ${activeIndex === index
+                                ? "bg-gray-300"
+                                : "bg-blue-950"
+                                }`}
+                        ></button>
                     ))}
                 </div>
             </TECarousel>
-        </>
+        </div>
     );
 };
 

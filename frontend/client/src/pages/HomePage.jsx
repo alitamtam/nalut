@@ -32,7 +32,7 @@ const HomePage = () => {
                     <h2 className="text-3xl font-bold mb-4 text-center capitalcase  font-sans text-gray-800">
                         Topic Areas
                     </h2>
-                    <button className="border-2 text-teal-500 font-body border-teal-500 rounded-full hover:bg-teal-500 hover:text-white py-2 px-8 font-sans mb-4 lg:mb-0">
+                    <button className="border-2 text-teal-500 font-body border-teal-500 rounded-full hover:bg-teal-500 hover:text-white py-2 px-8  mb-4 lg:mb-0">
                         View All
                     </button>
                 </div>
