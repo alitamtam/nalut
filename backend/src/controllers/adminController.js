@@ -223,14 +223,24 @@ const adminController = {
 
   async deleteUser(req, res) {
     try {
-      await prisma.user.delete({
-        where: { id: parseInt(req.params.id) },
-      });
+      const userId = parseInt(req.params.id);
 
-      res.status(200).json({ message: "User deleted successfully" });
+      // Use a Prisma transaction to delete the profile first, then the user
+      await prisma.$transaction([
+        prisma.profile.delete({
+          where: { userId: userId },
+        }),
+        prisma.user.delete({
+          where: { id: userId },
+        }),
+      ]);
+
+      res
+        .status(200)
+        .json({ message: "User and profile deleted successfully" });
     } catch (error) {
       console.error(error);
-      res.status(500).json({ message: "Error deleting user" });
+      res.status(500).json({ message: "Error deleting user and profile" });
     }
   },
 };

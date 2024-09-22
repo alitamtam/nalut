@@ -4,6 +4,7 @@ import { authenticate } from "../middleware/auth.middleware.js"; // Make sure to
 
 const router = express.Router();
 
+// all routes start with api/users
 // Dashboard route
 router.get("/dashboard", authenticate, adminController.getDashboardData);
 
@@ -13,7 +14,7 @@ router.post("/register", adminController.registerUser); // Create a user
 router.post("/login", adminController.logIn); // User login
 router.post("/logout", authenticate, adminController.logout); // User logout
 
-router.delete("/users/:id", authenticate, adminController.deleteUser); // Delete a user
+router.delete("/user/:id", authenticate, adminController.deleteUser); // Delete a user
 router.put("/users/:id", authenticate, adminController.updateUser); // Update a user
 
 // Article management routes

@@ -1,6 +1,5 @@
-// Corrected DeleteUsers Component
-
 import { useState } from "react";
+import { toast } from 'react-toastify';
 import { useDeleteUser } from './hooks/useDeleteUser';
 import api from '../../../api/axiosConfig';
 import { useQuery } from "@tanstack/react-query";
@@ -18,16 +17,21 @@ const DeleteUsers = () => {
         },
     });
 
-    // Handle delete user action
+    // Handle delete user action with confirmation
     const handleDeleteUser = (userId) => {
-        deleteUser(userId, {
-            onSuccess: () => {
-                console.log(`User ${userId} deleted successfully`);
-            },
-            onError: (err) => {
-                setError(err.response?.data?.message || "Error deleting user");
-            },
-        });
+        const confirmDelete = window.confirm("Are you sure you want to delete this user?");
+        if (confirmDelete) {
+            deleteUser(userId, {
+                onSuccess: () => {
+                    toast.success(`User ${userId} deleted successfully`);
+                },
+                onError: (err) => {
+                    const errorMessage = err.response?.data?.message || "Error deleting user";
+                    setError(errorMessage);
+                    toast.error(errorMessage);
+                },
+            });
+        }
     };
 
     if (isLoading) {

@@ -7,7 +7,7 @@ export const useDeleteUser = () => {
   return useMutation({
     mutationKey: ["deleteUser"],
     mutationFn: async (id) => {
-      const response = await api.delete(`/api/users/${id}`);
+      const response = await api.delete(`/api/users/user/${id}`);
       return response;
     },
     onSuccess: () => {
