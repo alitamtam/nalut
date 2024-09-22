@@ -5,6 +5,7 @@ import userRoutes from "./user.router.js";
 import publicationRoutes from "./publication.router.js";
 import profileRouter from "./profile.router.js";
 import topicRoutes from "./topic.router.js";
+import eventsRouter from "./events.router.js";
 const router = express.Router();
 
 // Middleware to set default response format
@@ -19,4 +20,5 @@ router.use("/articles", articleRoutes);
 router.use("/publications", publicationRoutes);
 router.use("/topics", topicRoutes);
 router.use("/profiles", profileRouter);
+router.use("/events", eventsRouter);
 export default router;
