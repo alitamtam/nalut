@@ -9,7 +9,7 @@ const MemberCard = ({ member }) => (
             className="w-32 h-32 mx-auto rounded-full object-cover"
         />
         <h3 className="mt-4 font-bold">{member.fullName || 'Name not available'}</h3> {/* Use fullName */}
-        <p className="text-sm text-white">{member.title || 'Title not available'}</p>
+        {/* <p className="text-sm text-white">{member.title || 'Title not available'}</p> */}
 
         {/* Use Link for navigation to the profile details page */}
         <div className='my-10  '> <Link

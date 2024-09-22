@@ -26,7 +26,8 @@ const adminController = {
       const { first_name, last_name, username, email, password } = req.body;
       const hashedPassword = await bcrypt.hash(password, 10);
 
-      const registerUser = await prisma.user.create({
+      // Create the user
+      const registeredUser = await prisma.user.create({
         data: {
           first_name,
           last_name,
@@ -36,8 +37,21 @@ const adminController = {
         },
       });
 
-      console.log(registerUser);
-      res.status(201).json({ message: "User created successfully" });
+      // Automatically create a profile for the registered user
+      const userId = registeredUser.id;
+      const bio = ""; // You can adjust the bio data or take it from the request
+      const image = ""; // You can adjust the image data or take it from the request
+      await prisma.profile.create({
+        data: {
+          userId,
+          bio,
+          image,
+        },
+      });
+
+      res
+        .status(201)
+        .json({ message: "User and profile created successfully" });
     } catch (error) {
       if (error.code === "P2002") {
         res.status(409).json({ message: "User already exists" });
@@ -166,6 +180,57 @@ const adminController = {
     } catch (error) {
       console.error(error);
       res.status(500).json({ message: "Error fetching users" });
+    }
+  },
+
+  async getUserById(req, res) {
+    const userId = parseInt(req.params.id);
+
+    try {
+      const user = await prisma.user.findUnique({
+        where: { id: userId },
+      });
+
+      if (!user) {
+        return res.status(404).json({ message: "User not found" });
+      }
+
+      res.status(200).json(user);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: "Error retrieving user" });
+    }
+  },
+
+  async updateUser(req, res) {
+    const userId = parseInt(req.params.id);
+    const { first_name, last_name, username, email } = req.body;
+
+    try {
+      const updatedUser = await prisma.user.update({
+        where: { id: userId },
+        data: { first_name, last_name, username, email },
+      });
+
+      res
+        .status(200)
+        .json({ message: "User updated successfully", updatedUser });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: "Error updating user" });
+    }
+  },
+
+  async deleteUser(req, res) {
+    try {
+      await prisma.user.delete({
+        where: { id: parseInt(req.params.id) },
+      });
+
+      res.status(200).json({ message: "User deleted successfully" });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: "Error deleting user" });
     }
   },
 };

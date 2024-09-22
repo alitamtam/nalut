@@ -13,6 +13,9 @@ router.post("/register", adminController.registerUser); // Create a user
 router.post("/login", adminController.logIn); // User login
 router.post("/logout", authenticate, adminController.logout); // User logout
 
+router.delete("/users/:id", authenticate, adminController.deleteUser); // Delete a user
+router.put("/users/:id", authenticate, adminController.updateUser); // Update a user
+
 // Article management routes
 router.post("/articles", authenticate, adminController.createArticle); // Create an article
 router.get("/articles/:id", adminController.getArticleById); // Get an article by ID

@@ -21,7 +21,7 @@ import Publications from './components/Publications/Publications';
 import PublicationsCards from './components/Publications/PublicationsCards';
 import ProfileDetails from './components/Profiles/ProfileDetails';
 import ProfileDisplay from './components/About/ProfileDisplay';
-
+import DeleteUsers from './components/Admin/Dashboard/DeleteUser';
 const AppRouter = createBrowserRouter([
     {
         path: '/',
@@ -59,6 +59,7 @@ const AppRouter = createBrowserRouter([
             { path: 'api/profiles/:id', element: <EditProfile /> },
 
             { path: 'register', element: <RegisterUser /> },
+            { path: 'users/', element: <DeleteUsers /> },
             { path: '*', element: <NotFound /> },
 
         ],

@@ -7,8 +7,8 @@ const router = express.Router();
 // Define your routes here
 router.get("/", profileController.getAllProfiles);
 router.get("/:id", profileController.getProfileById);
-router.post("/", profileController.createProfile);
-router.put("/:userId", profileController.updateProfile);
+router.post("/", authenticate, profileController.createProfile);
+router.put("/:userId", authenticate, profileController.updateProfile);
 router.delete("/:id", authenticate, profileController.deleteProfile);
 
 export default router;
