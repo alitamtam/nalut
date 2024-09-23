@@ -1,12 +1,15 @@
+// path: client/src/components/Admin/Dashboard/ManageEvents.jsx
 import { useState, useEffect } from 'react';
 import { useGetEvents } from './hooks/useGetEvents';
-import { useEditTopics } from './hooks/useEditTopics';
-import { useDeleteTopics } from './hooks/useDeleteTopics';
+import { useAddEvent } from './hooks/useAddEvent';
+import { useEditEvent } from './hooks/useEditEvent';
+import { useDeleteEvent } from './hooks/useDeleteEvent';
 
 const AddEditDeleteEvents = () => {
     const { data: events, isLoading, error } = useGetEvents();
-    const editMutation = useEditTopics();
-    const deleteMutation = useDeleteTopics();
+    const addMutation = useAddEvent();
+    const editMutation = useEditEvent();
+    const deleteMutation = useDeleteEvent();
 
     const [formData, setFormData] = useState({
         title: '',
@@ -26,7 +29,7 @@ const AddEditDeleteEvents = () => {
                     title: currentEvent.title,
                     description: currentEvent.description,
                     location: currentEvent.location,
-                    startTime: new Date(currentEvent.startTime).toISOString().slice(0, 16), // Format for input
+                    startTime: new Date(currentEvent.startTime).toISOString().slice(0, 16),
                     endTime: new Date(currentEvent.endTime).toISOString().slice(0, 16),
                 });
             }
@@ -43,8 +46,7 @@ const AddEditDeleteEvents = () => {
         if (editMode) {
             editMutation.mutate([currentEventId, formData]);
         } else {
-            // Call add event API (assuming you have that implemented)
-            // addMutation.mutate(formData);
+            addMutation.mutate(formData);
         }
         resetForm();
     };

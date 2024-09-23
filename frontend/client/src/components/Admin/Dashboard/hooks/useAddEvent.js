@@ -13,7 +13,7 @@ export const useAddEvent = () => {
         },
       });
 
-      return response;
+      return response.data;
     },
     onSuccess: () => {
       queryClient.invalidateQueries(["events"]);
