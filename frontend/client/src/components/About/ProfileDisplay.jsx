@@ -1,10 +1,10 @@
 import { useParams } from 'react-router-dom'; // Import useParams to get the profile id from URL
 
-import { useGetProfiles } from '../Admin/Dashboard/hooks/useGetProfileById'; // Import the useGetProfiles hook
+import { useGetProfileById } from '../Admin/Dashboard/hooks/useGetProfileById'; // Import the useGetProfiles hook
 
 const ProfileDetails = () => {
     const { id } = useParams(); // Get the user ID from URL params
-    const { data: Profile, isLoading, error } = useGetProfiles(id); // Fetch publications
+    const { data: Profile, isLoading, error } = useGetProfileById(id); // Fetch publications
 
     if (isLoading) return <div>Loading profile...</div>;
     if (error) return <div>Error loading profile</div>;

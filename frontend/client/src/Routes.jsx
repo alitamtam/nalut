@@ -1,7 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom';
 import AdminDashboard from './components/Admin/Dashboard/AdminDashboard';
 import ArticlesList from './components/Admin/Dashboard/ArticlesList';
-import EventsList from './components/Admin/Dashboard/EventsList';
+import ManageEvents from './components/Admin/Dashboard/ManageEvents';
 import ProfilesList from './components/Admin/Dashboard/ProfilesList';
 import PublicationsList from './components/Admin/Dashboard/PublicationsList';
 import ProtectedRoute from './components/Admin/ProtectedRoute';
@@ -52,7 +52,7 @@ const AppRouter = createBrowserRouter([
         children: [
             { path: 'profiles', element: <ProfilesList /> },
             { path: 'articles', element: <ArticlesList /> },
-            { path: 'events', element: <EventsList /> },
+            { path: 'events', element: <ManageEvents /> },
             { path: 'publications', element: <PublicationsList /> },
             { path: 'register', element: <RegisterUser /> },
             { path: 'users', element: <DeleteUsers /> },

@@ -16,7 +16,7 @@ const Sidebar = () => {
                     <Link to="/admin/profiles" className="block py-2 px-4 hover:bg-gray-700">Profiles</Link>
                 </li>
                 <li>
-                    <Link to="/admin/articles" className="block py-2 px-4 hover:bg-gray-700">Articles</Link>
+                    <Link to="/admin/projects" className="block py-2 px-4 hover:bg-gray-700">Projects</Link>
                 </li>
                 <li>
                     <Link to="/admin/events" className="block py-2 px-4 hover:bg-gray-700">Events</Link>

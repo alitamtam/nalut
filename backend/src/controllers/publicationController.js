@@ -13,7 +13,7 @@ const publicationController = {
             select: {
               first_name: true,
               last_name: true,
-              Profile: {
+              profile: {
                 // Include the profile related to the user
                 select: {
                   bio: true,
