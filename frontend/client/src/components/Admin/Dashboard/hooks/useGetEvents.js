@@ -5,7 +5,7 @@ export const useGetEvents = () => {
   return useQuery({
     queryKey: ["events"],
     queryFn: async () => {
-      const response = await api.get(`/api/events`);
+      const response = await api.get(`/api/events/events`);
 
       return response.data;
     },

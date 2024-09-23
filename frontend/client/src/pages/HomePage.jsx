@@ -42,9 +42,8 @@ const HomePage = () => {
                 <TopicsSlider2 />
             </div>
             <div>
-                <h2 className="text-3xl font-bold mb-4 text-center capitalcase  font-sans text-gray-800">
-                    Events Areas
-                </h2>
+
+
                 <FutureEvents />
             </div>
         </>

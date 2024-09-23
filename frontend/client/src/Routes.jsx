@@ -20,7 +20,8 @@ import PublicationsCards from './components/Publications/PublicationsCards';
 import ProfileDetails from './components/Profiles/ProfileDetails';
 import ProfileDisplay from './components/About/ProfileDisplay';
 import DeleteUsers from './components/Admin/Dashboard/DeleteUser';
-
+import ViewAllEvents from './components/Events/VIewAllEvents';
+import EventDetails from './components/Events/EventDetails';
 const AppRouter = createBrowserRouter([
     {
         path: '/',
@@ -35,6 +36,8 @@ const AppRouter = createBrowserRouter([
             { path: 'publications', element: <Publications /> },
             { path: 'publicationsCard/:id', element: <PublicationsCards /> },
             { path: 'publications/:id', element: <PublicationDetails /> },
+            { path: 'events/view-all', element: <ViewAllEvents /> },
+            { path: 'events/:id', element: <EventDetails /> },
             { path: 'login', element: <Login /> },
             { path: '*', element: <NotFound /> },
         ],

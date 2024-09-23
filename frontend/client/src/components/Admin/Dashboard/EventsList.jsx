@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import axios from 'axios';
+import api from "../../../api/axiosConfig";
 
 const EventsList = () => {
     const [events, setEvents] = useState([]);
@@ -9,7 +9,7 @@ const EventsList = () => {
     useEffect(() => {
         const fetchEvents = async () => {
             try {
-                const response = await axios.get('/api/events');
+                const response = await api.get('/api/events/events');
                 setEvents(response.data);
                 setLoading(false);
                 // eslint-disable-next-line no-unused-vars
@@ -46,7 +46,8 @@ const EventsList = () => {
                         <tr key={event.id}>
                             <td className="border px-4 py-2">{event.id}</td>
                             <td className="border px-4 py-2">{event.title}</td>
-                            <td className="border px-4 py-2">{event.date}</td>
+                            <td className="border px-4 py-2">{event.startTime}</td>
+                            <td className="border px-4 py-2">{event.endTime}</td>
                             <td className="border px-4 py-2">{event.location}</td>
                         </tr>
                     ))}
