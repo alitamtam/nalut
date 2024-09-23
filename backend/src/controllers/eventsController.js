@@ -1,26 +1,11 @@
-import prisma from "../../prisma/index.js";
+import { PrismaClient } from "@prisma/client";
 
+const prisma = new PrismaClient();
 const eventsController = {
   async findAllEvents(req, res) {
     try {
-      const events = await prisma.event.findMany({
-        include: {
-          title: true,
-          description: true,
-          date: true,
-          time: true,
-          location: true,
-          user: true,
-        },
-        user: {
-          select: {
-            first_name: true,
-            last_name: true,
-          },
-        },
-      });
-
-      res.status(200).json(profilesWithFullName);
+      const events = await prisma.event.findMany();
+      res.status(200).json(events);
     } catch (error) {
       res.status(500).json({ error: "Failed to fetch events" });
     }
@@ -41,20 +26,26 @@ const eventsController = {
   },
 
   async createEvent(req, res) {
-    const { title, description, date, time, location } = req.body;
     try {
+      const { title, description, location, startTime, endTime, ownerId } =
+        req.body;
+
       const newEvent = await prisma.event.create({
         data: {
           title,
           description,
-          date,
-          time,
           location,
-          owner,
+          startTime: new Date(startTime), // Convert to Date object
+          endTime: new Date(endTime), // Convert to Date object
+          ownerId, // Use ownerId, not owner
         },
       });
-      res.status(201).json(newEvent);
+
+      console.log(req.body);
+
+      res.status(201).json(newEvent); // Success response with new event data
     } catch (error) {
+      console.error(error);
       res.status(500).json({ error: "Failed to create event" });
     }
   },
