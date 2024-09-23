@@ -48,7 +48,7 @@ const Navbar = ({ hideSidebar }) => {
                     <Link to="/projects" className="text-white hover:text-orange-500">
                         Actions / Projects
                     </Link>
-                    <Link to="/news" className="text-white hover:text-orange-500">
+                    <Link to="/events/view-all" className="text-white hover:text-orange-500">
                         Events
                     </Link>
                 </div>
@@ -86,7 +86,7 @@ const Navbar = ({ hideSidebar }) => {
                         <Link to="/projects" className="block hover:text-orange-500" onClick={toggleMenu}>
                             Actions / Projects
                         </Link>
-                        <Link to="/news" className="block hover:text-orange-500" onClick={toggleMenu}>
+                        <Link to="/events/view-all" className="block hover:text-orange-500" onClick={toggleMenu}>
                             Events
                         </Link>
                     </div>
