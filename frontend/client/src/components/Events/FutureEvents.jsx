@@ -6,20 +6,21 @@ import { IoMdTime } from "react-icons/io";
 
 const FutureEvents = () => {
     // Destructure the query result from useGetEvents
-    const { data: events, isLoading, isError, error } = useGetEvents();
+    const { data: events, isLoading, error } = useGetEvents();
 
     if (isLoading) {
         return <p>Loading...</p>; // Show loading state while events are being fetched
     }
 
-    if (isError) {
+    if (error) {
         return <p>Error: {error.message}</p>; // Display error if there's an issue
     }
 
     if (!events || events.length === 0) {
         return <p>No future events found.</p>; // Handle case where no events are returned
     }
-
+    // Get the last 3 events
+    const lastThreeEvents = events.slice(-3);
     return (
         <div>
             <div className="flex flex-col items-center lg:flex-row lg:justify-between lg:mx-80">
@@ -34,7 +35,7 @@ const FutureEvents = () => {
 
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 lg:px-80 gap-4 justify-center mx-auto">
-                    {events.map((event) => (
+                    {lastThreeEvents.map((event) => (
                         <div key={event.id} className="border rounded-none  shadow-lg p-0 bg-slate-200 ">
                             {/* Display event image */}
                             {event.image && (

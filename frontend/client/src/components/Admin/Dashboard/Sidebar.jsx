@@ -25,13 +25,13 @@ const Sidebar = () => {
                     <Link to="/admin/publications" className="block py-2 px-4 hover:bg-gray-700">Publications</Link>
                 </li>
                 <li>
-                    <Link to="/admin/users" className="block py-2 px-4 hover:bg-gray-700">Users</Link>
+                    <Link to="/admin/users" className="block py-2 px-4 hover:bg-gray-700">Manage Members</Link>
                 </li>
                 <li>
                     <Link to="/admin/register" className="block py-2 px-4 hover:bg-gray-700">Register Member</Link>
                 </li>
                 <li>
-                    <Link to="/admin/editProfile" className="block py-2 px-4 hover:bg-gray-700">Edit Profile</Link>
+                    <Link to="/admin/editProfile" className="block py-2 px-4 hover:bg-gray-700">Edit My Profile</Link>
                     <li />
 
 
