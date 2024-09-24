@@ -14,7 +14,7 @@ const HomePage = () => {
                     </div>
 
                     {/* Right Side - About Us Text */}
-                    <div className=" flex flex-col justify-center bg-teal-500 px-6 py-6">
+                    <div className=" flex flex-col justify-center bg-teal-600 px-6 py-6">
                         <h2 className="text-3xl font-bold mb-4 text-white">About Us</h2>
                         <p className="mb-6 px-2 text-white">
                             Welcome to EduLibya, where education and innovation meet. We aim to provide students, teachers, and educators with the best tools and resources for learning and growth. Our mission is to foster an environment of creativity, engagement, and critical thinking.
@@ -29,14 +29,7 @@ const HomePage = () => {
 
             {/* Topics Section */}
             <div className="mt-16 w-full">
-                <div className="flex flex-col items-center lg:flex-row lg:justify-between lg:mx-80">
-                    <h2 className="text-3xl font-bold mb-4 text-center capitalcase  font-sans text-gray-800">
-                        Topic Areas
-                    </h2>
-                    <button className="border-2 text-teal-500 font-body border-teal-500 rounded-full hover:bg-teal-500 hover:text-white py-2 px-8  mb-4 lg:mb-0">
-                        View All
-                    </button>
-                </div>
+
 
 
                 <TopicsSlider2 />

@@ -1,11 +1,10 @@
 import React from 'react';
-
 import { useParams, Link } from 'react-router-dom';
-import { useGetPublications } from '../Admin/Dashboard/hooks/useGetPublications'; // Hook to fetch publications
+import { useGetPublications } from '../Admin/Dashboard/hooks/useGetPublicationById'; // Hook to fetch publications
 import { useIconOptions } from '../Admin/Dashboard/hooks/useIconOptions'; // Import the icon options hook
 
 const PublicationDetails = () => {
-    const { id } = useParams(); // Get publication ID from URL
+    const { id } = useParams(); // Correct usage: Get publication ID from URL without passing id
     const { data: publications, isLoading, error } = useGetPublications();
     const iconOptions = useIconOptions(); // Get the icon options
 
@@ -19,7 +18,6 @@ const PublicationDetails = () => {
 
     // Find the icon based on the publication's topic name
     const topicIcon = iconOptions.find(option => option.name === publication.topic.name)?.icon || null;
-
 
     const formatContent = (content) => {
         // Regular expression to match dot followed by a capital letter
@@ -36,7 +34,6 @@ const PublicationDetails = () => {
             </React.Fragment>
         ));
     };
-
 
     return (
         <div className="lg:mx-80 bg-slate-100 p-6 rounded-lg shadow-md">
@@ -67,7 +64,6 @@ const PublicationDetails = () => {
                             {publication.topic.name}
                         </h3>
                     </div>
-
                 )}
 
                 {/* Separator line */}
@@ -80,13 +76,12 @@ const PublicationDetails = () => {
                     </p>
                     <div>
                         <Link
-                            to={`/profile/${publication.owner.Profile.id}`} // Ensure correct capitalization and optional chaining
-                            className="bg-slate-100 border-sky-950    border-2 text-sky-950  rounded-full hover:bg-blue-950 hover:text-white py-2 px-8 font-sans hover:border-none "
+                            to={`/profile/${publication.owner.Profile?.id}`} // Ensure correct capitalization and optional chaining
+                            className="bg-slate-100 border-sky-950 border-2 text-sky-950 rounded-full hover:bg-blue-950 hover:text-white py-2 px-8 font-sans hover:border-none"
                         >
                             View Details
                         </Link>
                     </div>
-
                 </div>
             </div>
 
@@ -94,14 +89,13 @@ const PublicationDetails = () => {
             <hr className="border-t border-gray-300 my-6" />
 
             {/* Article content */}
-            <div className="mt-6  p-6 rounded-lg ">
+            <div className="mt-6 p-6 rounded-lg">
                 <p className="text-gray-700 mb-4 flex-grow">
                     {formatContent(publication.content)}
                 </p>
             </div>
-        </div >
+        </div>
     );
-
 };
 
 export default PublicationDetails;

@@ -37,7 +37,7 @@ const publicationController = {
     try {
       const { id } = req.params;
       const topic = await prisma.publications.findUnique({
-        where: { id: parseInt(id) },
+        where: { id: parseInt(id, 10) }, // Use parseInt with radix
         include: {
           topic: true,
           owner: { select: { first_name: true, last_name: true } },
