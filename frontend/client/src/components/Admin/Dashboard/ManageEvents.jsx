@@ -1,109 +1,139 @@
-// path: client/src/components/Admin/Dashboard/ManageEvents.jsx
-import { useState, useEffect } from 'react';
-import { useGetEvents } from './hooks/useGetEvents';
-import { useAddEvent } from './hooks/useAddEvent';
-import { useEditEvent } from './hooks/useEditEvent';
-import { useDeleteEvent } from './hooks/useDeleteEvent';
+import { useState } from "react";
+import { useSettingsStore } from "../../../store/useSettingsStore";
+import { useAddEvent } from "./hooks/useAddEvent";
+import { useDeleteEvent } from "./hooks/useDeleteEvent";
+import { useEditEvent } from "./hooks/useEditEvent";
+import { useGetEvents } from "./hooks/useGetEvent";
 
-const AddEditDeleteEvents = () => {
-    const { data: events, isLoading, error } = useGetEvents();
-    const addMutation = useAddEvent();
-    const editMutation = useEditEvent();
-    const deleteMutation = useDeleteEvent();
+const EventsList = () => {
+    const { data: events, isPending, error } = useGetEvents();
+    const addEvent = useAddEvent();
+    const editEvent = useEditEvent();
+    const deleteEvent = useDeleteEvent();
 
+    const { user } = useSettingsStore();
+    const userId = user.id;
+
+    const [isEditing, setIsEditing] = useState(false);
     const [formData, setFormData] = useState({
-        title: '',
-        description: '',
-        location: '',
+        title: "",
+        content: "",
+        image: "",
         startTime: '',
         endTime: '',
+        location: "",
     });
-    const [editMode, setEditMode] = useState(false);
-    const [currentEventId, setCurrentEventId] = useState(null);
+    const [currentEditId, setCurrentEditId] = useState(null);
 
-    useEffect(() => {
-        if (editMode && currentEventId) {
-            const currentEvent = events.find(event => event.id === currentEventId);
-            if (currentEvent) {
-                setFormData({
-                    title: currentEvent.title,
-                    description: currentEvent.description,
-                    location: currentEvent.location,
-                    startTime: new Date(currentEvent.startTime).toISOString().slice(0, 16),
-                    endTime: new Date(currentEvent.endTime).toISOString().slice(0, 16),
-                });
-            }
+    // Handle image upload and conversion to base64
+    const handleImageUpload = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => {
+                setFormData((prevState) => ({
+                    ...prevState,
+                    image: reader.result, // Base64 encoded string
+                }));
+            };
+            reader.onerror = (error) => {
+                console.error("Error converting file to base64:", error);
+            };
         }
-    }, [editMode, currentEventId, events]);
+    };
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setFormData((prev) => ({ ...prev, [name]: value }));
+        setFormData((prevState) => ({
+            ...prevState,
+            [name]: value,
+        }));
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (editMode) {
-            editMutation.mutate([currentEventId, formData]);
-        } else {
-            addMutation.mutate(formData);
-        }
-        resetForm();
-    };
 
-    const resetForm = () => {
+        const updatedFormData = {
+            title: formData.title,
+            content: formData.content,
+            image: formData.image,  // Include base64 image in the request body
+            ownerId: userId,
+            startTime: new Date(formData.startTime).toISOString().slice(0, 16),
+            endTime: new Date(formData.endTime).toISOString().slice(0, 16),
+            location: formData.location,
+        };
+
+        if (isEditing) {
+            editEvent.mutate({ id: currentEditId, formData: updatedFormData });
+        } else {
+            addEvent.mutate(updatedFormData);
+        }
+
         setFormData({
-            title: '',
-            description: '',
-            location: '',
-            startTime: '',
+            title: "", content: "", image: "", date: "", location: "", startTime: '',
             endTime: '',
         });
-        setEditMode(false);
-        setCurrentEventId(null);
+        setIsEditing(false);
     };
 
-    const handleEdit = (eventId) => {
-        setCurrentEventId(eventId);
-        setEditMode(true);
+    const handleEdit = (event) => {
+        setIsEditing(true);
+        setCurrentEditId(event.id);
+        setFormData({
+            title: event.title,
+            content: event.content,
+            image: event.image,  // Prepopulate base64 image
+            startTime: new Date(setFormData.startTime).toISOString().slice(0, 16),
+            endTime: new Date(setFormData.endTime).toISOString().slice(0, 16),
+            location: event.location,
+        });
     };
 
-    const handleDelete = (eventId) => {
-        deleteMutation.mutate(eventId);
+    const handleDelete = (id) => {
+        deleteEvent.mutate(id);
     };
 
-    if (isLoading) return <p>Loading...</p>;
-    if (error) return <p>Error loading events: {error.message}</p>;
+    if (isPending) {
+        return <p>Loading...</p>;
+    }
+
+    if (error) {
+        return <p>{error}</p>;
+    }
 
     return (
-        <div className="p-6 bg-white shadow-lg rounded-lg">
-            <h2 className="text-2xl mb-4">{editMode ? 'Edit Event' : 'Add Event'}</h2>
-            <form onSubmit={handleSubmit} className="mb-4">
-                <input
-                    type="text"
-                    name="title"
-                    value={formData.title}
-                    onChange={handleChange}
-                    placeholder="Event Title"
-                    required
-                    className="border p-2 rounded w-full mb-2"
-                />
-                <textarea
-                    name="description"
-                    value={formData.description}
-                    onChange={handleChange}
-                    placeholder="Event Description"
-                    className="border p-2 rounded w-full mb-2"
-                />
-                <input
-                    type="text"
-                    name="location"
-                    value={formData.location}
-                    onChange={handleChange}
-                    placeholder="Event Location"
-                    required
-                    className="border p-2 rounded w-full mb-2"
-                />
+        <div>
+            <h2 className="text-2xl font-bold mb-4">Events List</h2>
+
+            {/* Form for Add/Edit */}
+            <form onSubmit={handleSubmit} className="mb-6">
+                <label className="block mb-1">Title</label>
+                <div className="mb-4">
+                    <input
+                        type="text"
+                        name="title"
+                        value={formData.title}
+                        onChange={handleChange}
+                        placeholder="Title"
+                        className="w-full p-2 border border-gray-300 rounded"
+                    />
+                </div>
+
+
+
+                <label className="block mb-1">Location</label>
+                <div className="mb-4">
+                    <input
+                        type="text"
+                        name="location"
+                        value={formData.location}
+                        onChange={handleChange}
+                        placeholder="Location"
+                        className="w-full p-2 border border-gray-300 rounded"
+                    />
+                </div>
+
                 <input
                     type="datetime-local"
                     name="startTime"
@@ -120,38 +150,66 @@ const AddEditDeleteEvents = () => {
                     required
                     className="border p-2 rounded w-full mb-4"
                 />
-                <button type="submit" className="bg-teal-500 text-white rounded py-2 px-4">
-                    {editMode ? 'Update Event' : 'Add Event'}
-                </button>
-                <button type="button" onClick={resetForm} className="ml-2 border rounded py-2 px-4">
-                    Cancel
+
+                <div className="mb-4">
+                    <textarea
+                        name="content"
+                        value={formData.content}
+                        onChange={handleChange}
+                        placeholder="Content"
+                        className="w-full p-2 border border-gray-300 rounded"
+                    />
+                </div>
+
+                <div className="mb-4">
+                    <label className="block mb-1">Upload Image</label>
+                    <input type="file" onChange={handleImageUpload} />
+                    {formData.image && <p className="mt-2 text-sm">Image ready for upload.</p>}
+                </div>
+
+                <button type="submit" className="bg-blue-500 text-white w-full py-2 rounded">
+                    {isEditing ? "Update Event" : "Add Event"}
                 </button>
             </form>
 
-            <h3 className="text-xl mb-2">Event List</h3>
-            <ul>
-                {events.map((event) => (
-                    <li key={event.id} className="flex justify-between items-center border-b py-2">
-                        <span>{event.title}</span>
-                        <div>
-                            <button
-                                onClick={() => handleEdit(event.id)}
-                                className="text-teal-500 hover:underline mr-2"
-                            >
-                                Edit
-                            </button>
-                            <button
-                                onClick={() => handleDelete(event.id)}
-                                className="text-red-500 hover:underline"
-                            >
-                                Delete
-                            </button>
-                        </div>
-                    </li>
-                ))}
-            </ul>
+            {/* Events Table */}
+            <table className="min-w-full bg-white">
+                <thead>
+                    <tr className="bg-gray-200 text-left">
+                        <th className="text-left py-2">Title</th>
+                        <th className="text-left py-2">Owner</th>
+                        <th className="text-left py-2">Date</th>
+                        <th className="text-left py-2">Location</th>
+                        <th className="text-left py-2">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {events?.map((event) => (
+                        <tr key={event.id}>
+                            <td className="border px-4 py-2">{event.title}</td>
+                            <td className="border px-4 py-2">{event.ownerId}</td>
+                            <td className="border px-4 py-2">{event.date}</td>
+                            <td className="border px-4 py-2">{event.location}</td>
+                            <td className="border px-4 py-2">
+                                <button
+                                    onClick={() => handleEdit(event)}
+                                    className="bg-yellow-500 text-white px-3 py-1 rounded-md mr-2 hover:bg-yellow-600"
+                                >
+                                    Edit
+                                </button>
+                                <button
+                                    onClick={() => handleDelete(event.id)}
+                                    className="bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600"
+                                >
+                                    Delete
+                                </button>
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
         </div>
     );
 };
 
-export default AddEditDeleteEvents;
+export default EventsList;

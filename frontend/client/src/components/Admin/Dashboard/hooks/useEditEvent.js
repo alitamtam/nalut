@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import api from "../../../../api/axiosConfig";
 
-export const useEditEvents = () => {
+export const useEditEvent = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationKey: ["editEvent"],

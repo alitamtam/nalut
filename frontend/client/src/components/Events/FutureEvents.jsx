@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { useGetEvents } from '../Admin/Dashboard/hooks/useGetEvents';
+import { useGetEvents } from '../Admin/Dashboard/hooks/useGetEvent';
 import { CiCalendar } from "react-icons/ci";
 import { IoLocationOutline } from "react-icons/io5";
 import { IoMdTime } from "react-icons/io";
