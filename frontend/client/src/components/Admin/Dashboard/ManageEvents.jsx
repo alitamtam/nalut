@@ -17,11 +17,12 @@ const EventsList = () => {
     const [isEditing, setIsEditing] = useState(false);
     const [formData, setFormData] = useState({
         title: "",
-        content: "",
+        description: "",
         image: "",
         startTime: '',
         endTime: '',
         location: "",
+        link: "",
     });
     const [currentEditId, setCurrentEditId] = useState(null);
 
@@ -56,12 +57,13 @@ const EventsList = () => {
 
         const updatedFormData = {
             title: formData.title,
-            content: formData.content,
+            description: formData.description,
             image: formData.image,  // Include base64 image in the request body
             ownerId: userId,
-            startTime: new Date(formData.startTime).toISOString().slice(0, 16),
-            endTime: new Date(formData.endTime).toISOString().slice(0, 16),
+            startTime: new Date(formData.startTime).toISOString(),
+            endTime: new Date(formData.endTime).toISOString(),
             location: formData.location,
+            link: formData.link,
         };
 
         if (isEditing) {
@@ -71,8 +73,8 @@ const EventsList = () => {
         }
 
         setFormData({
-            title: "", content: "", image: "", date: "", location: "", startTime: '',
-            endTime: '',
+            title: "", description: "", image: "", date: "", location: "", startTime: '',
+            endTime: '', link: "",
         });
         setIsEditing(false);
     };
@@ -82,11 +84,12 @@ const EventsList = () => {
         setCurrentEditId(event.id);
         setFormData({
             title: event.title,
-            content: event.content,
+            description: event.description,
             image: event.image,  // Prepopulate base64 image
-            startTime: new Date(setFormData.startTime).toISOString().slice(0, 16),
-            endTime: new Date(setFormData.endTime).toISOString().slice(0, 16),
+            startTime: new Date(event.startTime).toISOString().slice(0, 16),
+            endTime: new Date(event.endTime).toISOString().slice(0, 16),
             location: event.location,
+            link: event.link,
         });
     };
 
@@ -142,6 +145,7 @@ const EventsList = () => {
                     required
                     className="border p-2 rounded w-full mb-2"
                 />
+
                 <input
                     type="datetime-local"
                     name="endTime"
@@ -153,11 +157,21 @@ const EventsList = () => {
 
                 <div className="mb-4">
                     <textarea
-                        name="content"
-                        value={formData.content}
+                        name="description"
+                        value={formData.description}
                         onChange={handleChange}
-                        placeholder="Content"
+                        placeholder="description"
                         className="w-full p-2 border border-gray-300 rounded"
+                    />
+                    {/* New input for event link */}
+                    <label className="block mb-1">Event Link </label>
+                    <input
+                        type="url"
+                        placeholder="Event Link (optional)"
+                        value={formData.link}
+                        onChange={handleChange}
+                        className="border p-2 rounded"
+                        name="link"
                     />
                 </div>
 

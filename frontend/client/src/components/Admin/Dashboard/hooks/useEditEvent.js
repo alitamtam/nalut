@@ -6,15 +6,16 @@ export const useEditEvent = () => {
   return useMutation({
     mutationKey: ["editEvent"],
 
-    mutationFn: async (id, formData) => {
+    mutationFn: async ({ id, formData }) => {
       console.log("id", id, "data", formData);
+
       const response = await api.put(`/api/events/events/${id}`, formData, {
         headers: {
           "Content-Type": "application/json",
         },
       });
 
-      return response;
+      return response.data;
     },
     onSuccess: () => {
       queryClient.invalidateQueries(["events"]);

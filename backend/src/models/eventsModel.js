@@ -21,6 +21,7 @@ export const createEvent = async ({
   location,
   startTime,
   endTime,
+  image,
   owner,
 }) => {
   return await prisma.event.create({
@@ -31,6 +32,8 @@ export const createEvent = async ({
       startTime,
       endTime,
       owner,
+      image,
+
       created_at: new Date(),
     },
   });

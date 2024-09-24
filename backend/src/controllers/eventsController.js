@@ -27,8 +27,16 @@ const eventsController = {
 
   async createEvent(req, res) {
     try {
-      const { title, description, location, startTime, endTime, ownerId } =
-        req.body;
+      const {
+        title,
+        description,
+        location,
+        startTime,
+        endTime,
+        ownerId,
+        image,
+        link,
+      } = req.body;
 
       const newEvent = await prisma.event.create({
         data: {
@@ -38,6 +46,8 @@ const eventsController = {
           startTime: new Date(startTime), // Convert to Date object
           endTime: new Date(endTime), // Convert to Date object
           ownerId, // Use ownerId, not owner
+          image,
+          link,
         },
       });
 
@@ -50,26 +60,30 @@ const eventsController = {
     }
   },
 
-  async updateEvent(req, res) {
+  async updateEvent(req, res, next) {
     const { id } = req.params;
-    const { title, description, date, time, location, userId } = req.body;
+    const { title, description, location, startTime, endTime, image, link } =
+      req.body;
+    console.log("Request Body:", req.body); // Debugging line
+
     try {
       const updatedEvent = await prisma.event.update({
-        where: {
-          id: Number(id),
-        },
+        where: { id: parseInt(id, 10) },
+
         data: {
           title,
           description,
-          date,
-          time,
           location,
-          userId,
+          startTime,
+          endTime,
+          image,
+          link,
         },
       });
       res.status(200).json(updatedEvent);
     } catch (error) {
       res.status(500).json({ error: "Failed to update event" });
+      next(error);
     }
   },
 
