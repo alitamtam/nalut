@@ -25,7 +25,7 @@ const FutureEvents = () => {
     return (
         <div>
             <div className="flex flex-col items-center lg:flex-row lg:justify-between lg:mx-80 py-4 ">
-                <h2 className="text-3xl font-bold mb-4 text-center capitalcase  font-sans text-gray-800">
+                <h2 className="text-3xl font-bold mb-4 text-center capitalise  font-sans text-gray-800">
                     Event Areas
                 </h2>
                 <Link to='events/view-all' className="border-2 text-teal-600 font-body border-teal-600 rounded-full hover:bg-teal-600 hover:text-white py-2 px-8  mb-4 lg:mb-0">
@@ -53,7 +53,7 @@ const FutureEvents = () => {
                             </div>
                             <div className="p-4">
                                 <h3 className="text-xl font-semibold mb-2 text-gray-900 capitalize">{event.title}</h3>
-                                <p className="text-gray-700 text-sm mb-3 line-clamp-2">{event.description}</p> {/* Clamp description to 2 lines */}
+                                {/* <p className="text-gray-700 text-sm mb-3 line-clamp-1">{event.description}</p> Clamp description to 2 lines */}
 
                                 <div className="flex items-center text-gray-600 text-sm mb-2">
                                     <IoLocationOutline className="mr-2" />

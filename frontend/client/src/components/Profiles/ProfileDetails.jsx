@@ -11,11 +11,11 @@ const ProfileDetails = () => {
     if (!publication || !publication.owner) return <div>Profile not found</div>; // Ensure publication and owner exist
 
     return (
-        <div className="lg:mx-80 bg-slate-100 p-6 rounded-lg shadow-md">
+        <div className="lg:mx-80 bg-slate-500 p-6  shadow-md">
             {/* Profile Details Layout */}
             <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-6">
                 {/* Left Section: Image, Name, and Title */}
-                <div className="w-full md:w-1/2 flex flex-col items-center md:items-start justify-center">
+                <div className="w-full md:w-1/2 flex flex-col items-center md:items-start justify-center bg-sky-950">
                     <img
                         src={`data:image/jpeg;base64,${publication.owner.Profile?.image || '/default-profile.jpg'}`}  // Check if image exists, otherwise show default
                         alt='profile'

@@ -34,8 +34,9 @@ const publicationController = {
 
   // Fetch and return a specific publication/topic by ID
   async findPublicationById(req, res, next) {
+    const { id } = req.params;
+
     try {
-      const { id } = req.params;
       const topic = await prisma.publications.findUnique({
         where: { id: parseInt(id, 10) }, // Use parseInt with radix
         include: {

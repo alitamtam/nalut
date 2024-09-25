@@ -99,12 +99,17 @@ const EventDetails = () => {
             {/* Description Section (below the image and event details) */}
             <div className="max-w-6xl w-full bg-white  p-6 mt-6 border-b border-sky-950 ">
                 <p className="text-gray-800 text-sm mb-6 leading-relaxed">
-                    {event.description.split('.').map((sentence, index) => (
-                        <span key={index}>
-                            {sentence.trim()}{sentence && '.'} {/* Add the period back after trimming */}
-                            <br /> {/* Start a new line */}
-                        </span>
-                    ))}
+                    {event.description.includes('.') ? (
+                        event.description.split('.').map((sentence, index) => (
+                            <span key={index}>
+                                {sentence.trim()}{sentence && '.'} {/* Add the period back after trimming */}
+                                <br /> {/* Start a new line */}
+                            </span>
+                        ))
+                    ) : (
+                        <span>{event.description}</span>
+                    )}
+
                 </p>
 
 

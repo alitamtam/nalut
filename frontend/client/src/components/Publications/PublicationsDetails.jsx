@@ -5,14 +5,14 @@ import { useIconOptions } from '../Admin/Dashboard/hooks/useIconOptions'; // Imp
 
 const PublicationDetails = () => {
     const { id } = useParams(); // Correct usage: Get publication ID from URL without passing id
-    const { data: publications, isLoading, error } = useGetPublications();
+    const { data: publication, isLoading, error } = useGetPublications(id); // Fetch publications by ID
     const iconOptions = useIconOptions(); // Get the icon options
 
     if (isLoading) return <div>Loading publication...</div>;
     if (error) return <div>Error loading publication</div>;
 
-    // Find the specific publication by ID
-    const publication = publications?.find((pub) => pub.id === parseInt(id));
+    // // Find the specific publication by ID
+    // const publication = publications?.find((pub) => pub.id === parseInt(id));
 
     if (!publication) return <div>Publication not found</div>;
 
@@ -49,9 +49,9 @@ const PublicationDetails = () => {
                         className="w-full md:w-1/2 h-64 object-cover rounded-lg"
                     />
                 ) : (
-                    <div className="w-full md:w-1/2 h-64 flex items-center justify-center bg-white border-t-8 border-b-8 border-sky-950 rounded-none p-4">
+                    <div className="w-full md:w-1/2 h-64 flex items-center justify-center bg-gray-100 border-t-8 border-b-8 border-sky-950 rounded-none p-4">
                         {/* Icon Section */}
-                        <div className="flex-shrink-0 text-sky-950 text-6xl md:text-9xl mr-6">
+                        <div className="flex-shrink-0 text-sky-950 text-9xl md:text-9xl mr-6">
                             {topicIcon ? (
                                 <div className="mb-2">{topicIcon}</div>
                             ) : (
