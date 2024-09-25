@@ -48,15 +48,16 @@ const UpcomingEvent = () => {
                 <div className="lg:w-1/2 lg:h-[340px] bg-[#e2dfd8] lg:px-8 py-12 ">
                     {sortedEvents.length > 0 && (
                         <>
-                            <h2 className="text-gray-800 font-serif lg:px-8 text-lg font-bold mb-4">
+                            <Link to={`/events/${sortedEvents[currentSlide]?.id}`} className="text-gray-800 font-serif  text-lg font-bold mb-12 hover:text-teal-600">
                                 {sortedEvents[currentSlide]?.title}
-                            </h2>
-                            <p className="text-gray-700 mb-2 flex items-center">
-                                <FaMapMarkerAlt className="mr-2" /> {sortedEvents[currentSlide]?.location}
-                            </p>
-                            <p className="text-gray-700 mb-4 flex items-center">
-                                <FaCalendarAlt className="mr-2" /> {new Date(sortedEvents[currentSlide]?.startTime).toLocaleDateString()} at {new Date(sortedEvents[currentSlide]?.startTime).toLocaleTimeString()}
-                            </p>
+                            </Link>
+                            <div className='my-12'>
+                                <p className="text-gray-700 mb-2 flex items-center">
+                                    <FaMapMarkerAlt className="mr-2" /> {sortedEvents[currentSlide]?.location}
+                                </p>
+                                <p className="text-gray-700 mb-4 flex items-center">
+                                    <FaCalendarAlt className="mr-2" /> {new Date(sortedEvents[currentSlide]?.startTime).toLocaleDateString()} at {new Date(sortedEvents[currentSlide]?.startTime).toLocaleTimeString()}
+                                </p></div>
                             <Link to={`/events/${sortedEvents[currentSlide]?.id}`} className="bg-teal-600 text-white font-sans py-4 border-teal-600 text-base rounded-full hover:bg-sky-950 hover:text-white px-8 transition-colors duration-300">
                                 View Details
                             </Link>
