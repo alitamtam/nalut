@@ -4,7 +4,11 @@ const prisma = new PrismaClient();
 const eventsController = {
   async findAllEvents(req, res) {
     try {
-      const events = await prisma.event.findMany();
+      const events = await prisma.event.findMany({
+        orderBy: {
+          startTime: "desc", // Sort events by startTime in descending order
+        },
+      });
       res.status(200).json(events);
     } catch (error) {
       res.status(500).json({ error: "Failed to fetch events" });

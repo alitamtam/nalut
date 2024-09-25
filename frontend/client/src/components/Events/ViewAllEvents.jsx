@@ -30,7 +30,7 @@ const AllEvents = () => {
                 {events.map((event) => (
                     <div
                         key={event.id}
-                        className="rounded-none overflow-hidden  bg-gray-100 hover:shadow-lg transition-shadow duration-300 w-96 py-6 " // Tailwind classes for styling
+                        className="rounded-none overflow-hidden  bg-gray-100 hover:shadow-lg transition-shadow duration-300 w-96  " // Tailwind classes for styling
                     >
                         <div className="w-full h-56">
                             {/* Event image with consistent sizing */}
@@ -43,15 +43,16 @@ const AllEvents = () => {
                             )}
                         </div>
                         <div className="p-4">
-                            <h3 className="font-semibold mb-2 text[#092a40] capitalize font-serif text-lg">{event.title}</h3>
+                            <h3 className="font-semibold mb-2 text[#092a40] capitalize font-serif text-lg py-4">{event.title}</h3>
                             {/* <p className="text-gray-700 text-sm mb-3 line-clamp-2">{event.description}</p> Clamp description to 2 lines */}
 
-                            <div className="flex items-center text[#092a40] text-ssm mb-2">
-                                <IoLocationOutline className="mr-2" />
-                                <span>{event.location}</span>
-                            </div>
+
 
                             <div className="flex flex-col text[#092a40] text-ssm mb-2">
+                                <div className="flex items-center text[#092a40] text-ssm mb-2">
+                                    <IoLocationOutline className="mr-2" />
+                                    <span>{event.location}</span>
+                                </div>
                                 <div className="flex items-center mb-1">
                                     <CiCalendar className="mr-2" />
                                     <span>
