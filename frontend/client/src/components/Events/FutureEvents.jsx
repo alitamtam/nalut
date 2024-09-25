@@ -86,10 +86,10 @@ const FutureEvents = () => {
                                     </div>
                                 </div>
 
-                                <div className="mt-4 text-center">
+                                <div className="my-6 text-center">
                                     <Link
                                         to={`/events/${event.id}`}
-                                        className="bg-teal-600 text-white font-body border-teal-600 rounded-full hover:bg-blue-950 hover:text-white py-2 px-6 transition-colors duration-300"
+                                        className="bg-teal-600 text-white font-sans py-4 border-teal-600 text-base rounded-full hover:bg-sky-950 hover:text-white  px-8 transition-colors duration-300"
                                     >
                                         View Details
                                     </Link>

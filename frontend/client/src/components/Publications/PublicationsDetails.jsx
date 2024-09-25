@@ -51,7 +51,7 @@ const PublicationDetails = () => {
                 ) : (
                     <div className="w-full md:w-1/2 h-64 flex items-center justify-center bg-gray-100 border-t-8 border-b-8 border-sky-950 rounded-none p-4">
                         {/* Icon Section */}
-                        <div className="flex-shrink-0 text-sky-950 text-9xl md:text-9xl mr-6">
+                        <div className="flex-shrink-1 text-sky-950 text-9xl md:text-9xl mr-6">
                             {topicIcon ? (
                                 <div className="mb-2">{topicIcon}</div>
                             ) : (
@@ -71,13 +71,13 @@ const PublicationDetails = () => {
 
                 {/* Author details on the right */}
                 <div className="w-full md:w-1/2 flex flex-col items-start justify-center">
-                    <p className="text-gray-600 mb-2 capitalize">
-                        By: {publication.owner.first_name} {publication.owner.last_name} | {new Date(publication.created_at).toLocaleDateString()}
+                    <p className="text-gray-600 mb-2 capitalize font-bold">
+                        By {publication.owner.first_name} {publication.owner.last_name} | {new Date(publication.created_at).toLocaleDateString()}
                     </p>
                     <div>
                         <Link
                             to={`/profile/${publication.owner.Profile?.id}`} // Ensure correct capitalization and optional chaining
-                            className="bg-slate-100 border-sky-950 border-2 text-sky-950 rounded-full hover:bg-blue-950 hover:text-white py-2 px-8 font-sans hover:border-none"
+                            className="bg-teal-600 text-white font-sans py-4 border-teal-600 text-base rounded-full hover:bg-sky-950 hover:text-white  px-8 transition-colors duration-300"
                         >
                             View Details
                         </Link>

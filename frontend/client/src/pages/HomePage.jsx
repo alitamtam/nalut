@@ -3,6 +3,7 @@ import PublicationsSlider from '../components/PublicationsSlider';
 import { Link } from 'react-router-dom';
 import TopicsSlider2 from '../components/TopicSlick';
 import FutureEvents from '../components/Events/FutureEvents';
+import UpcomingEvent from '../components/Events/UpcomingEvent'
 const HomePage = () => {
     return (
         <>
@@ -38,6 +39,10 @@ const HomePage = () => {
 
 
                 <FutureEvents />
+            </div>
+            <div>
+                <UpcomingEvent />
+
             </div>
         </>
     );

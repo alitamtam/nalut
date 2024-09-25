@@ -1,0 +1,19 @@
+/* Custom styles for slick dots */
+.slick-dots.custom-dots {
+    position: right; /* Positioning the dots relative to the slider container */
+    bottom: -30px; /* Adjust this to move dots higher or lower between the info and image */
+    left: 0; /* Center horizontally */
+    transform: translateX(-50%); /* Translate to ensure perfect centering */
+    display:grid;
+    justify-content: center;
+    z-index: 1; /* Ensure dots are above any other content */
+}
+
+.slick-dots.custom-dots li button:before {
+    font-size: 15px; /* Increase the dot size */
+    color: #989999; /* Change the color */
+}
+
+.slick-dots.custom-dots li.slick-active button:before {
+    color: hsl(204deg 80.25% 15.88%) /* Active dot color */
+}
