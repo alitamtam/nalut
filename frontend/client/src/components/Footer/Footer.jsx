@@ -22,7 +22,7 @@ const Footer = () => {
                     <ul className="flex space-x-4">
                         <li><a href="#"><FaFacebookF /></a></li>
                         <li><a href="#"><FaTwitter /></a></li>
-                        <li><a href="#"><FaLinkedinIn /></a></li>
+                        <li><a href="https://www.linkedin.com/groups/12856663/"><FaLinkedinIn /></a></li>
                     </ul>
                 </div>
             </div>

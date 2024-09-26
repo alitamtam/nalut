@@ -29,15 +29,16 @@ const PublicationsSlider = () => {
     };
 
     return (
-        <div className="relative w-[650px] h-full mx-auto overflow-hidden ">
+        <div className="relative w-[800px] h-full mx-auto overflow-hidden capitalize ">
             <TECarousel
                 className="relative h-[550px] w-[fill] "
                 showControls
+                autoPlay // auto play the
                 crossfade
                 ride="carousel"
                 prevBtnIcon={
                     <span
-                        className="absolute top-1/2 left-0 transform -translate-y-1/2 text-black h-8 w-8 cursor-pointer"
+                        className="absolute top-1/3 left-2 transform-translate-y-1/2 text-white h-8 w-8  bg-sky-950  rounded-full "
                         onClick={handlePrev}
                     >
                         <svg
@@ -57,7 +58,7 @@ const PublicationsSlider = () => {
                 }
                 nextBtnIcon={
                     <span
-                        className="absolute top-1/2 right-0 transform -translate-y-1/2 text-black h-8 w-8 cursor-pointer"
+                        className="absolute top-1/3 right-2 transform-translate-y-1/2 text-white h-8 w-8  bg-sky-950  rounded-full "
                         onClick={handleNext}
                     >
                         <svg
@@ -81,8 +82,8 @@ const PublicationsSlider = () => {
                         key={pub.id}
                         itemID={pub.id}
                         className={`absolute top-0 left-0 w-full h-full transition-opacity duration-500 ease-in-out ${activeIndex === index
-                            ? "opacity-100 z-10"
-                            : "opacity-0 z-0"
+                            ? "opacity-100 "
+                            : "opacity-0 "
                             }`}
                     >
                         {/* Image Section */}
@@ -92,40 +93,43 @@ const PublicationsSlider = () => {
                                     pub.image ||
                                     "https://via.placeholder.com/600x400"
                                 }
-                                className="block w-full h-[400px] object-cover"
+                                className="block w-full h-[435px] object-cover"
                                 alt={pub.title}
                             />
 
                             {/* Table Name (Bottom Left on Image) */}
-                            <span className="absolute bottom-2 left-2 bg-sky-950 text-white px-2 py-1 text-xl font-bold">
+                            {/* <span className="absolute bottom-2 left-2 bg-sky-950 text-white px-2 py-1 text-xl font-bold">
                                 Publications
+                            </span> */}
+                            <span className="absolute bottom-4 left-2  text-white px-2 py-1 text-xl  font-serif text-shad ">
+                                <Link to={`/publications/${pub.id}`}>
+                                    {pub.title}
+                                </Link>
                             </span>
                         </div>
 
                         {/* Slide Details Section (White Background) */}
-                        <div className="bg-white p-4 text-black">
-                            <h5 className="text-xl font-bold  text-sky-950 hover:text-teal-500">
-                                <Link to={`/publications/${pub.id}`}>
-                                    {pub.title}
-                                </Link>
+                        <div className="bg-white p-4 text-black py-1">
+                            <h5 className="flex text-lg font-normal text-sky-950 hover:text-teal-500 py-2">
+                                {pub.topic.name}   <p className="text-gray-400 px-2"> | {new Date(pub.created_at).toLocaleDateString("en-UK", { day: 'numeric', month: 'long', year: 'numeric' })}</p>
+
                             </h5>
                             <p className="text-sm mt-1 font-bold capitalize text-orange-400 hover:text-teal-500">
-                                by {pub.owner.first_name} {pub.owner.last_name}
+                                <span className="text-gray-500 font-medium">by</span>  {pub.owner.first_name} {pub.owner.last_name}
                             </p>
-                            <p className="text-sm text-gray-500">Date {new Date(pub.created_at).toLocaleDateString()}</p>
                         </div>
                     </TECarouselItem>
                 ))}
 
                 {/* Indicators Below the Image */}
-                <div className="absolute bottom-0 w-full  py-2 flex justify-center space-x-2 border-b-4 border-gray-100 shadow-lg">
+                <div className="absolute bottom-0 w-full  py-2 flex justify-right space-x-2 border-b-4 border-gray-100 shadow-lg px-4 ">
                     {recentPublications.map((_, index) => (
                         <button
                             key={index}
                             onClick={() => handleIndicatorClick(index)}
-                            className={`h-3 w-3 rounded-full transition-all duration-300 ${activeIndex === index
-                                ? "bg-gray-300"
-                                : "bg-blue-950"
+                            className={`h-3 w-3 rounded-full transition-all duration-300  ${activeIndex === index
+                                ? "bg-sky-950"
+                                : "bg-gray-300"
                                 }`}
                         ></button>
                     ))}

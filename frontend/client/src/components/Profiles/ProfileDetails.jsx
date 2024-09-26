@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import { useGetPublications } from '../Admin/Dashboard/hooks/useGetPublications'; // Hook to fetch publications
+import { useGetPublications } from '../Admin/Dashboard/hooks/useGetPublicationById'; // Hook to fetch publications
 
 const ProfileDetails = () => {
     const { id } = useParams(); // Get the user ID from URL params

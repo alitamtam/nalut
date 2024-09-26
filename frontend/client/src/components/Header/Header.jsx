@@ -22,12 +22,12 @@ const Header = () => {
                 </a>
 
                 {/* Search Bar and Social Icons */}
-                <div className="flex items-center space-x-4  lg:border-gray-300 lg:border-y lg:gap-4 lg:py-4 ">
-                    <h2 className=' hover:text-teal-500'><a href="mailto:info@edulibya.ly">info@edulibya.ly</a></h2>
+                <div className="flex items-center space-x-4  lg:border-gray-200 lg:border-y lg:gap-4 lg:py-4 ">
+                    <h2 className=' hover:text-teal-500 text-gray-500'><a href="mailto:info@edulibya.ly">info@edulibya.ly</a></h2>
                     {/* Search Icon with Dropdown Input */}
                     <div className="relative">
                         <button
-                            className="text-gray-800 text-xl"
+                            className="text-gray-800 text-xl focus:outline-none"
                             onClick={toggleSearch}
                         >
                             <FaSearch className='hover:text-teal-500' />
@@ -44,7 +44,7 @@ const Header = () => {
                     </div>
 
                     {/* Social Icons */}
-                    <h1>Follow Us</h1>
+                    <h1 className='text-gray-500'> Follow Us</h1>
                     <div className="hidden sm:flex space-x-4">
                         <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
                             <FaFacebookF className="text-gray-800 text-lg hover:text-teal-500" />
@@ -52,7 +52,7 @@ const Header = () => {
                         <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
                             <FaTwitter className="text-gray-900 text-lg hover:text-teal-500" />
                         </a>
-                        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
+                        <a href="https://www.linkedin.com/groups/12856663/" target="_blank" rel="noopener noreferrer">
                             <FaLinkedin className="text-gray-900 text-lg hover:text-teal-500" />
                         </a>
                     </div>

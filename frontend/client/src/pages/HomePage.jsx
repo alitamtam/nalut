@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import TopicsSlider2 from '../components/TopicSlick';
 import FutureEvents from '../components/Events/FutureEvents';
 import UpcomingEvent from '../components/Events/UpcomingEvent'
+import PublicationsArea from '../components/Publications/PublicationsArea';
 const HomePage = () => {
     return (
         <>
@@ -15,13 +16,13 @@ const HomePage = () => {
                     </div>
 
                     {/* Right Side - About Us Text */}
-                    <div className=" flex flex-col justify-center bg-teal-600 px-6 py-6">
+                    <div className=" flex flex-col justify-center bg-teal-600 px-6 pb-6 ">
                         <h2 className="text-3xl font-bold mb-4 text-white">About Us</h2>
-                        <p className="mb-6 px-2 text-white">
+                        <p className="mb-12 px-2 text-white font-serif text-lg pt-0">
                             Welcome to EduLibya, where education and innovation meet. We aim to provide students, teachers, and educators with the best tools and resources for learning and growth. Our mission is to foster an environment of creativity, engagement, and critical thinking.
                         </p>
                         <div>
-                            <Link to="/about" className="border-2 text-white border-white rounded-full hover:bg-blue-950 hover:text-white py-2 px-8 font-sans hover:border-none">
+                            <Link to="/about" className="border-2  text-white border-white rounded-full hover:bg-sky-950 hover:text-white py-4 px-8 font-sans hover:border-none">
                                 Read More
                             </Link></div>
                     </div>
@@ -34,6 +35,9 @@ const HomePage = () => {
 
 
                 <TopicsSlider2 />
+            </div>
+            <div>
+                <PublicationsArea />
             </div>
             <div>
 

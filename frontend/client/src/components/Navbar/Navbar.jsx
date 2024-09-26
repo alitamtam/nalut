@@ -43,10 +43,10 @@ const Navbar = ({ hideSidebar }) => {
                         About Us
                     </Link>
                     <Link to="/publications" className="text-white hover:text-orange-500">
-                        Publications / Resources
+                        Publications
                     </Link>
                     <Link to="/projects" className="text-white hover:text-orange-500">
-                        Actions / Projects
+                        Projects
                     </Link>
                     <Link to="/events/view-all" className="text-white hover:text-orange-500">
                         Events
@@ -81,10 +81,10 @@ const Navbar = ({ hideSidebar }) => {
                         </div>
 
                         <Link to="/publications" className="block hover:text-orange-500" onClick={toggleMenu}>
-                            Publications / Resources
+                            Publications
                         </Link>
                         <Link to="/projects" className="block hover:text-orange-500" onClick={toggleMenu}>
-                            Actions / Projects
+                            Projects
                         </Link>
                         <Link to="/events/view-all" className="block hover:text-orange-500" onClick={toggleMenu}>
                             Events

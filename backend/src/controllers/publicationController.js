@@ -41,7 +41,21 @@ const publicationController = {
         where: { id: parseInt(id, 10) }, // Use parseInt with radix
         include: {
           topic: true,
-          owner: { select: { first_name: true, last_name: true } },
+          owner: {
+            // Owner is of type user
+            select: {
+              first_name: true,
+              last_name: true,
+              profile: {
+                // Include the profile related to the user
+                select: {
+                  bio: true,
+                  image: true,
+                  id: true, // Include the profile ID for linking to the profile page
+                },
+              },
+            },
+          },
         }, // Include the topic and owner details
       });
       if (!topic) {
