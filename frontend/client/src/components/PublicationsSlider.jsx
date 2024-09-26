@@ -115,14 +115,14 @@ const PublicationsSlider = () => {
 
                             </h5>
                             <p className="text-sm mt-1 font-bold capitalize text-orange-400 hover:text-teal-500">
-                                <span className="text-gray-500 font-medium">by</span>  {pub.owner.first_name} {pub.owner.last_name}
+                                <span className="text-gray-500 font-">by</span>  {pub.owner.first_name} {pub.owner.last_name}
                             </p>
                         </div>
                     </TECarouselItem>
                 ))}
 
                 {/* Indicators Below the Image */}
-                <div className="absolute bottom-0 w-full  py-2 flex justify-right space-x-2 border-b-4 border-gray-100 shadow-lg px-4 ">
+                <div className="absolute bottom-0 w-full  py-2 flex justify-center space-x-2 border-b-4 border-gray-100 shadow-lg px-4 ">
                     {recentPublications.map((_, index) => (
                         <button
                             key={index}
