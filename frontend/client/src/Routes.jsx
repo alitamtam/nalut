@@ -22,6 +22,7 @@ import ProfileDisplay from './components/About/ProfileDisplay';
 import DeleteUsers from './components/Admin/Dashboard/DeleteUser';
 import ViewAllEvents from './components/Events/VIewAllEvents';
 import EventDetails from './components/Events/EventDetails';
+import SearchResultPage from './pages/SearchResultPage';
 const AppRouter = createBrowserRouter([
     {
         path: '/',
@@ -38,6 +39,7 @@ const AppRouter = createBrowserRouter([
             { path: 'publications/:id', element: <PublicationDetails /> },
             { path: 'events/view-all', element: <ViewAllEvents /> },
             { path: 'events/:id', element: <EventDetails /> },
+            { path: "/search-results", element: < SearchResultPage /> },
             { path: 'login', element: <Login /> },
             { path: '*', element: <NotFound /> },
         ],
