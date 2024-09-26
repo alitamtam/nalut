@@ -4,13 +4,14 @@ import { Link } from 'react-router-dom';
 import TopicsSlider2 from '../components/TopicSlick';
 import UpcomingEvent from '../components/Events/UpcomingEvent'
 import PublicationsArea from '../components/Publications/PublicationsArea';
+import BackToTop from '../components/BackToTop';
 const HomePage = () => {
     return (
         <>
             <div className=" lg:mx-80  items-center justify-center" >
                 <div className="flex flex-col md:flex-row  ">
                     {/* Left Side - Publications Slider */}
-                    <div className="w-full ">
+                    <div className="w-full    ">
                         <PublicationsSlider />
                     </div>
 
@@ -41,6 +42,7 @@ const HomePage = () => {
 
             <div>
                 <UpcomingEvent />
+                <BackToTop />
 
             </div>
         </>

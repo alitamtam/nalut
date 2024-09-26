@@ -29,9 +29,9 @@ const PublicationsSlider = () => {
     };
 
     return (
-        <div className="relative w-[800px] ssm:w-auto h-full mx-auto overflow-hidden capitalize ">
+        <div className="relative lg:w-[800px] ssm:w-auto lg:h-auto   mx-auto overflow-hidden capitalize  ">
             <TECarousel
-                className="relative h-[550px] w-[fill] "
+                className="relative h-[550px] object-cover w-[fill] "
                 showControls
                 autoPlay // auto play the
                 crossfade
@@ -81,13 +81,13 @@ const PublicationsSlider = () => {
                     <TECarouselItem
                         key={pub.id}
                         itemID={pub.id}
-                        className={`absolute top-0 left-0 w-full h-full transition-opacity duration-500 ease-in-out ${activeIndex === index
+                        className={`absolute top-0 left-0 lg:w-full lg:h-full  transition-opacity duration-500 ease-in-out ${activeIndex === index
                             ? "opacity-100 "
                             : "opacity-0 "
                             }`}
                     >
                         {/* Image Section */}
-                        <div className="relative">
+                        <div className="relative ">
                             <img
                                 src={
                                     pub.image ||

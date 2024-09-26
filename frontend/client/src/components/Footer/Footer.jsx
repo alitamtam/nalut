@@ -1,4 +1,5 @@
 import { FaFacebookF, FaTwitter, FaLinkedinIn } from 'react-icons/fa';
+import BackToTop from '../BackToTop';
 
 const Footer = () => {
     return (
@@ -12,7 +13,7 @@ const Footer = () => {
                     <li><a href="/projects" className="hover:underline hover:text-teal-600">Actions / Projects</a></li>
                     <li><a href="/events/view-all" className="hover:underline hover:text-teal-600">Events</a></li>
                 </ul>
-
+                <BackToTop />
                 {/* Empty middle space for balance */}
                 <div className="hidden lg:block flex-1"></div>
 
@@ -25,6 +26,7 @@ const Footer = () => {
                         <li><a href="https://www.linkedin.com/groups/12856663/"><FaLinkedinIn /></a></li>
                     </ul>
                 </div>
+
             </div>
 
             {/* Footer Bottom Text */}
