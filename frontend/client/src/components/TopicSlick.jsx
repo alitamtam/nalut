@@ -84,9 +84,9 @@ const TopicsSlick = () => {
     if (error) return <div>Error loading topics</div>;
 
     return (
-        <div>
+        <div >
             <div className="flex flex-col items-center lg:flex-row lg:justify-between lg:mx-80 py-4">
-                <h2 className="text-3xl font-bold mb-4 text-center capitalcase  font-sans text-gray-800">
+                <h2 className="text-3xl font-bold mb-4 text-center capitalise  font-sans text-gray-800">
                     Topic Areas
                 </h2>
                 <button className="border-2 text-teal-600 font-body border-teal-600 rounded-full hover:bg-teal-600 hover:text-white py-2 px-8  mb-4 lg:mb-0">
@@ -102,7 +102,7 @@ const TopicsSlick = () => {
                                 className="flex-shrink-0 w-48 h-56 mx-0 flex flex-col text-center bg-gray-100 shadow-lg p-4 transition-transform duration-300 hover:scale-105 hover:bg-sky-900 hover:text-white md:w-60 md:h-72 group"
                                 onClick={() => navigate(`/topics/${topic.name}`)} // Navigate on click
                             >
-                                <div className="text-6xl text-teal-600 group-hover:text-white pb-4 pl-20 pt-10">
+                                <div className="text-6xl text-teal-600 group-hover:text-white pb-4 pl-20 lg:pt-10 ssm:pt-8 ssm:m-6">
                                     {/* Dynamically render the icon based on iconClass */}
                                     {iconMap[topic.iconClass] || <FaBook className="text-6xl" />}
                                 </div>

@@ -35,8 +35,8 @@ const PublicationsArea = () => {
                 </Link>
             </div>
 
-            <div className="flex flex-col items-center p-12 bg-white text-gray-800 h-4/5 border-b border-teal-600 pb-12 mb-12">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 lg:px-80 gap-8 justify-center mx-auto">
+            <div className="flex flex-col lg:items-center lg:p-12 bg-white text-gray-800 lg:h-4/5 border-b border-teal-600 pb-12 mb-12 w-full max-w-full overflow-x-hidden">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 lg:px-80 gap-8 justify-center mx-auto ">
                     {lastThreePublications.map((publication) => {
                         console.log(publication.ownerId);
                         // Safely check if publication.topic exists

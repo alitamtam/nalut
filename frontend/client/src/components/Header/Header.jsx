@@ -15,7 +15,7 @@ const Header = () => {
                 {/* Logo Section */}
                 <a href="/" className="flex lg:items-center ssm:items-start ssm:pr-14">
                     <img
-                        className="lg:w-60 h-auto md:w-32 ssm:w-15  md:h-auto rounded-md" // Adjusted sizes for mobile and desktop
+                        className="lg:w-60 h-auto md:w-32 ssm:w-[150px]  md:h-auto rounded-md" // Adjusted sizes for mobile and desktop
                         src={logo}
                         alt="Logo"
                     />
@@ -23,7 +23,7 @@ const Header = () => {
 
                 {/* Search Bar and Social Icons */}
                 <div className="flex items-center space-x-4  lg:border-gray-200 lg:border-y lg:gap-4 lg:py-4 ">
-                    <h2 className=' hover:text-teal-500 text-gray-500'><a href="mailto:info@edulibya.ly">info@edulibya.ly</a></h2>
+                    <h2 className=' hover:text-teal-500 text-gray-500 ssm:hidden'><a href="mailto:info@edulibya.ly">info@edulibya.ly</a></h2>
                     {/* Search Icon with Dropdown Input */}
                     <div className="relative">
                         <button
@@ -33,7 +33,7 @@ const Header = () => {
                             <FaSearch className='hover:text-teal-500' />
                         </button>
                         {isSearchOpen && (
-                            <div className="absolute right-0 mt-2 w-full sm:w-64 bg-white border  border-gray-300 rounded-none shadow-xl p-2">
+                            <div className="absolute right-0 mt-2 w-full sm:w-64 bg-white border  border-gray-300 rounded-none shadow-xl p-2 ssm:w-64">
                                 <input
                                     type="text"
                                     placeholder="Search... "
@@ -44,8 +44,8 @@ const Header = () => {
                     </div>
 
                     {/* Social Icons */}
-                    <h1 className='text-gray-500'> Follow Us</h1>
-                    <div className="hidden sm:flex space-x-4">
+                    <h1 className='text-gray-500 ssm:hidden'> Follow Us</h1>
+                    <div className="hidden sm:flex space-x-4 ssm:hidden">
                         <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
                             <FaFacebookF className="text-gray-800 text-lg hover:text-teal-500" />
                         </a>

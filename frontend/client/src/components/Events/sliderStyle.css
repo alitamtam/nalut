@@ -7,6 +7,10 @@
     display:grid;
     justify-content: center;
     z-index: 1; /* Ensure dots are above any other content */
+    @media screen and (max-width: 768px) {
+        left: 50%;
+        
+    }
 }
 
 .slick-dots.custom-dots li button:before {
@@ -17,3 +21,4 @@
 .slick-dots.custom-dots li.slick-active button:before {
     color: hsl(204deg 80.25% 15.88%) /* Active dot color */
 }
+

@@ -11,6 +11,8 @@
 html, body {
   height: 100%;
   margin: 0; /* Ensure there's no margin */
+  overflow-x: hidden;
+
 }
 
 /* Ensure that the App component takes up the full height */

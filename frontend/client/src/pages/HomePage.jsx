@@ -2,7 +2,6 @@
 import PublicationsSlider from '../components/PublicationsSlider';
 import { Link } from 'react-router-dom';
 import TopicsSlider2 from '../components/TopicSlick';
-import FutureEvents from '../components/Events/FutureEvents';
 import UpcomingEvent from '../components/Events/UpcomingEvent'
 import PublicationsArea from '../components/Publications/PublicationsArea';
 const HomePage = () => {
@@ -30,20 +29,16 @@ const HomePage = () => {
             </div>
 
             {/* Topics Section */}
-            <div className="mt-16 w-full">
+            <div className="mt-16 w-full  mx-auto p-4 max-w-full overflow-x-hidden">
 
 
 
                 <TopicsSlider2 />
             </div>
-            <div>
+            <div className="mt-16 w-full  mx-auto p-4 max-w-full overflow-x-hidden">
                 <PublicationsArea />
             </div>
-            <div>
 
-
-                <FutureEvents />
-            </div>
             <div>
                 <UpcomingEvent />
 
