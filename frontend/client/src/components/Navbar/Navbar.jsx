@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { FaBars, FaTimes } from 'react-icons/fa';
-import PropTypes from 'prop-types';
+import { IoIosArrowDown } from 'react-icons/io';
 
-const Navbar = ({ hideSidebar }) => {
+const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false); // State for burger menu
     const [aboutUsOpen, setAboutUsOpen] = useState(false); // State for About Us dropdown
 
@@ -14,17 +14,33 @@ const Navbar = ({ hideSidebar }) => {
 
     const toggleAboutUs = () => {
         setAboutUsOpen(!aboutUsOpen);
-        hideSidebar(aboutUsOpen); // Disable sidebar when About Us dropdown is active
     };
 
+    // Close the burger menu when scrolling
+    useEffect(() => {
+        const handleScroll = () => {
+            if (isOpen) {
+                setIsOpen(false);
+                setAboutUsOpen(false); // Close the dropdown as well
+            }
+        };
+
+        window.addEventListener('scroll', handleScroll);
+
+        // Clean up the event listener on component unmount
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, [isOpen]); // Add isOpen as a dependency so it runs when the menu is open
+
     return (
-        <nav className="bg-sky-950 lg:mx-80 ">
+        <nav className="bg-sky-950 lg:mx-80">
             <div className="container mx-auto px-4 lg:py-8 ssm:py-4 flex justify-between items-center">
-                <Link to="/" className="text-yellow-500 font-thin text-base lg:hidden">
+                <Link to="/" className="text-orange-500 font-bold text-base lg:hidden shadow-sm">
                     Menu
                 </Link>
 
-                {/* Burger Menu Icon */}
+                {/* Burger Menu Icon for mobile */}
                 <div className="lg:hidden">
                     <button
                         onClick={toggleMenu}
@@ -35,7 +51,7 @@ const Navbar = ({ hideSidebar }) => {
                 </div>
 
                 {/* Desktop Menu */}
-                <div className="hidden lg:flex space-x-8  mx-auto uppercase font-thin">
+                <div className="hidden lg:flex space-x-8 mx-auto uppercase font-thin">
                     <Link to="/" className="text-yellow-500 font-bold">
                         Main
                     </Link>
@@ -55,15 +71,18 @@ const Navbar = ({ hideSidebar }) => {
 
                 {/* Mobile Menu (Burger Menu) */}
                 {isOpen && (
-                    <div className="lg:hidden absolute top-16 left-0 w-full bg-sky-950 text-white p-4 space-y-4 z-20">
+                    <div className="lg:hidden absolute top-20 left-0 w-full bg-sky-950 text-white p-4 space-y-4 z-20">
                         <Link to="/" className="block hover:text-orange-500" onClick={toggleMenu}>
                             Main
                         </Link>
 
                         {/* About Us with Dropdown */}
                         <div className="block hover:text-orange-500">
-                            <button onClick={toggleAboutUs} className="w-full text-left">
-                                About Us {aboutUsOpen ? '-' : '+'}
+                            <button
+                                onClick={toggleAboutUs}
+                                className="w-full flex justify-between items-center text-left"
+                            >
+                                About Us <IoIosArrowDown className={`${aboutUsOpen ? 'rotate-180' : ''}`} />
                             </button>
                             {aboutUsOpen && (
                                 <div className="ml-4 mt-2 space-y-2">
@@ -94,9 +113,6 @@ const Navbar = ({ hideSidebar }) => {
             </div>
         </nav>
     );
-};
-Navbar.propTypes = {
-    hideSidebar: PropTypes.func.isRequired,
 };
 
 export default Navbar;

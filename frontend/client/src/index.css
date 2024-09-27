@@ -39,22 +39,34 @@ main {
 }
 
 /* src/components/BackToTop.css */
-
 .back-to-top {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
-  opacity: 1;
-  visibility: visible;
-  transition: opacity 0.3s, visibility 0.3s;
-  background-color: #333;
-  color: white;
-  border: none;
-  border-radius: 50%;
-  padding: 10px;
-  cursor: pointer;
+  bottom: 20px; /* Distance from the bottom */
+  right: 20px; /* Distance from the right */
+  opacity: 0; /* Default hidden */
+  visibility: hidden; /* Default hidden */
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  z-index: 1000; /* Ensure it is above other elements */
 }
 
-.back-to-top:hover {
-  background-color: #555;
+.back-to-top.visible {
+  opacity: 1; /* Show the button */
+  visibility: visible; /* Make it visible */
+}
+
+.back-to-top-btn {
+  background-color: #333; /* Button background */
+  color: white; /* Text color */
+  border: none; /* No border */
+  border-radius: 50%; /* Circular shape */
+  padding: 10px; /* Padding around the icon */
+  cursor: pointer; /* Pointer cursor */
+  display: flex; /* Flexbox for centering */
+  align-items: center; /* Center vertically */
+  justify-content: center; /* Center horizontally */
+  font-size: 24px; /* Increase size for visibility */
+}
+
+.back-to-top-btn:hover {
+  background-color: #555; /* Change background on hover */
 }
