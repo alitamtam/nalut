@@ -23,6 +23,12 @@ import DeleteUsers from './components/Admin/Dashboard/DeleteUser';
 import ViewAllEvents from './components/Events/VIewAllEvents';
 import EventDetails from './components/Events/EventDetails';
 import SearchResultPage from './pages/SearchResultPage';
+import ProjectDetails from './components/projects/ProjectDetails';
+import ProjectsList from './components/projects/ProjectsList';
+import ProjectForm from './components/Admin/Dashboard/ProjectForm';
+
+
+
 const AppRouter = createBrowserRouter([
     {
         path: '/',
@@ -39,7 +45,10 @@ const AppRouter = createBrowserRouter([
             { path: 'publications/:id', element: <PublicationDetails /> },
             { path: 'events/view-all', element: <ViewAllEvents /> },
             { path: 'events/:id', element: <EventDetails /> },
-            { path: "/search-results", element: < SearchResultPage /> },
+            { path: 'projects', element: <ProjectsList /> },  // <-- New route for Projects
+            { path: 'projects/:id', element: <ProjectDetails /> },  // <-- New route for Projects
+
+            { path: "/search-results", element: <SearchResultPage /> },
             { path: 'login', element: <Login /> },
             { path: '*', element: <NotFound /> },
         ],
@@ -56,22 +65,10 @@ const AppRouter = createBrowserRouter([
             { path: 'articles', element: <ArticlesList /> },
             { path: 'events', element: <ManageEvents /> },
             { path: 'publications', element: <PublicationsList /> },
+            { path: 'projects', element: <ProjectForm /> },  // Admin-specific route for Projects if needed
             { path: 'register', element: <RegisterUser /> },
             { path: 'users', element: <DeleteUsers /> },
             { path: 'editProfile', element: <EditProfile /> },
-            { path: '*', element: <NotFound /> },
-        ],
-    },
-    {
-        path: 'admin',
-        element: (
-            <ProtectedRoute roles={['member']}>
-                <Layout /> {/* Layout for member-specific routes */}
-            </ProtectedRoute>
-        ),
-        children: [
-            { path: 'editProfile', element: <EditProfile /> },
-            { path: 'createPublication', element: <PublicationsList /> }, // Adjust based on your component for creating publications
             { path: '*', element: <NotFound /> },
         ],
     },
@@ -79,3 +76,4 @@ const AppRouter = createBrowserRouter([
 ]);
 
 export default AppRouter;
+
