@@ -24,18 +24,19 @@ const projectsController = {
     }
   },
   async createProject(req, res) {
-    const { title, content1, project_images } = req.body;
+    const { title, content1, content2, content3, project_image, actors } =
+      req.body; // Add content2, content3, project_image, and actors
     try {
       const project = await prisma.projects.create({
         data: {
           title,
           link: "https://www.example.com",
           content1,
-          content2: "",
-          content3: "",
-
-          project_images: {
-            create: project_images,
+          content2,
+          content3,
+          project_image, // Update the field name to match the schema
+          actors: {
+            connect: { id: actors }, // Assuming 'actors' is the ID of the user you want to connect
           },
         },
       });
@@ -44,17 +45,22 @@ const projectsController = {
       res.status(500).json({ error: error.message });
     }
   },
+
   async updateProject(req, res) {
     const { id } = req.params;
-    const { title, content1, project_images } = req.body;
+    const { title, content1, content2, content3, project_image, actors } =
+      req.body; // Add other fields as needed
     try {
       const project = await prisma.projects.update({
-        where: { id: parseInt(id) },
+        where: { id: parseInt(id, 10) },
         data: {
           title,
           content1,
-          project_images: {
-            update: project_images,
+          content2, // Include content2 if it's part of your model
+          content3, // Include content3 if it's part of your model
+          project_image, // Update to correct field name
+          actors: {
+            connect: { id: actors }, // Assuming you're connecting the actors as needed
           },
         },
       });
