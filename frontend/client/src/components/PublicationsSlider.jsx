@@ -29,7 +29,7 @@ const PublicationsSlider = () => {
     };
 
     return (
-        <div className="relative lg:w-[800px] ssm:w-auto lg:h-auto   mx-auto overflow-hidden capitalize  ">
+        <div className="relative lg:w-[800px] ssm:w-auto h-auto   mx-auto overflow-hidden capitalize  ">
             <TECarousel
                 className="relative h-[550px] object-cover w-[fill] "
                 showControls

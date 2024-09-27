@@ -30,7 +30,7 @@ const iconMap = {
 const NextArrow = ({ onClick }) => (
     <button
         onClick={onClick}
-        className="absolute ssm:mx-4 md::mx-4 md:my-6 right-0 ssm:-top-1/4 lg:top-1/2 transform -translate-y-1/2 bg-sky-950 lg:p-2 rounded-full shadow-md hover:bg-teal-600 z-10"
+        className="absolute ssm:mx-4 md::mx-4 md:my-6 right-0   ssm:-top-1/4 top-1/2 transform -translate-y-1/2 bg-sky-950 lg:p-2 rounded-full shadow-md hover:bg-teal-600 z-10"
     >
         <IoIosArrowForward className="text-3xl text-white" />
     </button>
@@ -41,7 +41,7 @@ NextArrow.propTypes = {
 const PrevArrow = ({ onClick }) => (
     <button
         onClick={onClick}
-        className="absolute ssm:mx-4 md::mx-4 md:my-6 left-0 ssm:-top-1/4 lg:top-1/2 transform -translate-y-1/2 bg-sky-950 lg:p-2 rounded-full shadow-md hover:bg-teal-600 z-10"
+        className="absolute ssm:mx-4 md::mx-4 md:my-6 left-0  ssm:-top-1/4 top-1/2 transform -translate-y-1/2 bg-sky-950 lg:p-2 rounded-full shadow-md hover:bg-teal-600 z-10"
     >
         <IoIosArrowBack className="text-3xl text-white" />
     </button>
