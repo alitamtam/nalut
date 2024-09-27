@@ -41,7 +41,7 @@ const UpcomingEvent = () => {
                 <h2 className="text-2xl  lg:mb-4 text-center capitalise font-bold text-gray-800">
                     Upcoming Events
                 </h2>
-                <Link to='events/view-all' className="border-2 text-teal-600 font-body border-teal-600 rounded-full hover:bg-teal-600 hover:text-white py-2 px-8 mb-4 lg:mb-0 hidden lg:block md:block">
+                <Link to='events/view-all' className="border-2 text-teal-600 font-body border-teal-600 rounded-full hover:bg-teal-600 hover:text-white py-2 px-8 mb-4 lg:mb-0 hidden lg:block md:hidden">
                     View All
                 </Link>
             </div>
@@ -51,7 +51,7 @@ const UpcomingEvent = () => {
             <div className="mx-auto px-4  lg:py-8 flex flex-col-reverse lg:flex-row justify-between items-center">
                 {/* Left Side: Event Details */}
                 <div className='pt-20  m-auto '>
-                    <Link to='events/view-all' className="border-2 text-teal-600 font-body border-teal-600 rounded-full hover:bg-teal-600 hover:text-white py-2 px-14 mb-4 lg:mb-0 lg:hidden md:hidden ssm:block "
+                    <Link to='events/view-all' className="border-2 text-teal-600 font-body border-teal-600 rounded-full hover:bg-teal-600 hover:text-white py-2 px-14 mb-4 lg:mb-0 lg:hidden md:block ssm:block "
                     >
                         View All
                     </Link>

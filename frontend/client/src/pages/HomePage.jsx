@@ -30,7 +30,7 @@ const HomePage = () => {
             </div>
 
             {/* Topics Section */}
-            <div className="mt-16 w-full  mx-auto p-4 max-w-full overflow-x-hidden">
+            <div className="lg:mt-16 w-full  lg:mx-auto lg:p-4 max-w-full overflow-x-hidden">
 
 
 

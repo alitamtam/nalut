@@ -9,7 +9,7 @@ import { BsBuildingAdd } from 'react-icons/bs';
 import { RiGovernmentLine } from 'react-icons/ri';
 import { AiOutlineFileProtect } from 'react-icons/ai';
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate
 
 // Define a mapping of icon names to components
 const iconMap = {
@@ -30,7 +30,7 @@ const iconMap = {
 const NextArrow = ({ onClick }) => (
     <button
         onClick={onClick}
-        className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-teal-500 p-2 rounded-full shadow-md hover:bg-sky-700 z-10"
+        className="absolute ssm:mx-4 md::mx-4 right-0 ssm:-top-1/4 lg:top-1/2 transform -translate-y-1/2 bg-sky-950 lg:p-2 rounded-full shadow-md hover:bg-teal-600 z-10"
     >
         <IoIosArrowForward className="text-3xl text-white" />
     </button>
@@ -41,7 +41,7 @@ NextArrow.propTypes = {
 const PrevArrow = ({ onClick }) => (
     <button
         onClick={onClick}
-        className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-teal-500 p-2 rounded-full shadow-md hover:bg-sky-700 z-10"
+        className="absolute ssm:mx-4 md::mx-4 left-0 ssm:-top-1/4 lg:top-1/2 transform -translate-y-1/2 bg-sky-950 lg:p-2 rounded-full shadow-md hover:bg-teal-600 z-10"
     >
         <IoIosArrowBack className="text-3xl text-white" />
     </button>
@@ -73,7 +73,7 @@ const TopicsSlick = () => {
             {
                 breakpoint: 640,
                 settings: {
-                    slidesToShow: 1,
+                    slidesToShow: 2,
                     slidesToScroll: 1,
                 },
             },
@@ -89,31 +89,37 @@ const TopicsSlick = () => {
                 <h2 className="text-3xl font-bold mb-4 text-center capitalise  font-sans text-gray-800">
                     Topic Areas
                 </h2>
-                <button className="border-2 text-teal-600 font-body border-teal-600 rounded-full hover:bg-teal-600 hover:text-white py-2 px-8  mb-4 lg:mb-0">
+                <Link to='topics/view-all' className="border-2 text-teal-600 font-body border-teal-600 rounded-full hover:bg-teal-600 hover:text-white py-2 px-8  mb-4 lg:mb-0 hidden lg:block md:block">
                     View All
-                </button>
+                </Link>
             </div>
-            <div className="relative w-full pb-12 px-7  border-teal-500 border-b ">
+            <div className="relative w-full pb-12 lg:px-7  border-teal-500 border-b ">
                 <div>
                     <Slider {...settings}>
                         {topics?.map((topic, index) => (
                             <div
                                 key={index}
-                                className="flex-shrink-0 w-48 h-56 mx-0 flex flex-col text-center bg-gray-100 shadow-lg p-4 transition-transform duration-300 hover:scale-105 hover:bg-sky-900 hover:text-white md:w-60 md:h-72 group"
+                                className="flex-shrink-0 w-48 h-56 ssm:h-[200px] ssm:w-full mx-none flex flex-col text-center bg-gray-100 shadow-lg lg:p-4 transition-transform duration-300 hover:scale-105 hover:bg-sky-900 hover:text-white md:w-60 md:h-72 group"
                                 onClick={() => navigate(`/topics/${topic.name}`)} // Navigate on click
                             >
-                                <div className="text-6xl text-teal-600 group-hover:text-white pb-4 pl-20 lg:pt-10 ssm:pt-8 ssm:m-6">
+                                <div className="lg:text-6xl text-teal-600 group-hover:text-white pb-4 pl-20 lg:pt-10 ssm:pt-8 ">
                                     {/* Dynamically render the icon based on iconClass */}
                                     {iconMap[topic.iconClass] || <FaBook className="text-6xl" />}
                                 </div>
                                 <div className="flex-col">
-                                    <p className="mt-4 text-teal-600 text-xs font-sans font-bold tracking-wider uppercase text-center group-hover:text-white pb-10">
+                                    <p className="lg:mt-4 text-teal-600 lg:text-xs ssm:text-xs font-sans font-bold tracking-wider uppercase text-center group-hover:text-white pb-10">
                                         {topic.name}
                                     </p>
                                 </div>
                             </div>
                         ))}
                     </Slider>
+
+                </div>
+                <div className='pt-5 w-[200px]  m-auto'>
+                    <Link to='topics/view-all' className="border-2 text-teal-600 font-body border-teal-600 rounded-full hover:bg-teal-600 hover:text-white py-2 text-center mb-4 lg:mb-0 lg:hidden md:block ssm:block">
+                        View All
+                    </Link>
                 </div>
             </div>
         </div>

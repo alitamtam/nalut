@@ -107,7 +107,7 @@ const PublicationsArea = () => {
                     })}
                 </div>
                 <div className='pt-10 m-auto'>
-                    <Link to='/publications/view-all' className="border-2 text-teal-600 font-body border-teal-600 rounded-full hover:bg-teal-600 hover:text-white py-2 px-14 mb-4 lg:mb-0 lg:hidden md:hidden ssm:block ">
+                    <Link to='/publications/view-all' className="border-2 text-teal-600 font-body border-teal-600 rounded-full hover:bg-teal-600 hover:text-white py-2 px-14 mb-4 lg:mb-0 hidden md:block ssm:block ">
                         View All
                     </Link></div>
             </div>
