@@ -30,7 +30,7 @@ const PublicationsArea = () => {
                 <h2 className="text-3xl font-bold lg:mb-4 text-center capitalize font-body text-gray-800">
                     Publications Area
                 </h2>
-                <Link to='/publications/view-all' className="border-2 text-teal-600 font-body border-teal-600 rounded-full hover:bg-teal-600 hover:text-white py-2 px-8 mb-4 lg:mb-0 hidden lg:block md:block">
+                <Link to='/publications/view-all' className="border-2 text-teal-600 font-body border-teal-600 rounded-full hover:bg-teal-600 hover:text-white py-2 px-8 mb-4 lg:mb-0 hidden lg:block ">
                     View All
                 </Link>
             </div>

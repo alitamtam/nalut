@@ -9,7 +9,7 @@ const HomePage = () => {
     return (
         <>
             <div className=" lg:mx-80  items-center justify-center " >
-                <div className="flex flex-col md:flex-row  ">
+                <div className="flex lg:flex-row md:flex-row">
                     {/* Left Side - Publications Slider */}
                     <div className=" ">
                         <PublicationsSlider />

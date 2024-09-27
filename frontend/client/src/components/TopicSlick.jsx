@@ -30,7 +30,7 @@ const iconMap = {
 const NextArrow = ({ onClick }) => (
     <button
         onClick={onClick}
-        className="absolute ssm:mx-4 md::mx-4 right-0 ssm:-top-1/4 lg:top-1/2 transform -translate-y-1/2 bg-sky-950 lg:p-2 rounded-full shadow-md hover:bg-teal-600 z-10"
+        className="absolute ssm:mx-4 md::mx-4 md:my-6 right-0 ssm:-top-1/4 lg:top-1/2 transform -translate-y-1/2 bg-sky-950 lg:p-2 rounded-full shadow-md hover:bg-teal-600 z-10"
     >
         <IoIosArrowForward className="text-3xl text-white" />
     </button>
@@ -41,7 +41,7 @@ NextArrow.propTypes = {
 const PrevArrow = ({ onClick }) => (
     <button
         onClick={onClick}
-        className="absolute ssm:mx-4 md::mx-4 left-0 ssm:-top-1/4 lg:top-1/2 transform -translate-y-1/2 bg-sky-950 lg:p-2 rounded-full shadow-md hover:bg-teal-600 z-10"
+        className="absolute ssm:mx-4 md::mx-4 md:my-6 left-0 ssm:-top-1/4 lg:top-1/2 transform -translate-y-1/2 bg-sky-950 lg:p-2 rounded-full shadow-md hover:bg-teal-600 z-10"
     >
         <IoIosArrowBack className="text-3xl text-white" />
     </button>
@@ -89,7 +89,7 @@ const TopicsSlick = () => {
                 <h2 className="text-3xl font-bold mb-4 text-center capitalise  font-sans text-gray-800">
                     Topic Areas
                 </h2>
-                <Link to='topics/view-all' className="border-2 text-teal-600 font-body border-teal-600 rounded-full hover:bg-teal-600 hover:text-white py-2 px-8  mb-4 lg:mb-0 hidden lg:block md:block">
+                <Link to='topics/view-all' className="border-2 text-teal-600 font-body border-teal-600 rounded-full hover:bg-teal-600 hover:text-white py-2 px-8  mb-4 lg:mb-0 hidden lg:block ">
                     View All
                 </Link>
             </div>
