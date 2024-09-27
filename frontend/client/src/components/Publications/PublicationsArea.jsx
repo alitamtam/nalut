@@ -26,17 +26,17 @@ const PublicationsArea = () => {
     const lastThreePublications = publications.slice(-3);
     return (
         <div>
-            <div className="flex flex-col items-center lg:flex-row lg:justify-between lg:mx-80 py-4">
-                <h2 className="text-3xl font-bold mb-4 text-center capitalize font-sans text-gray-800">
+            <div className="flex flex-col items-center lg:flex-row lg:justify-between lg:mx-80 pb-4">
+                <h2 className="text-3xl font-bold lg:mb-4 text-center capitalize font-body text-gray-800">
                     Publications Area
                 </h2>
-                <Link to='/publications/view-all' className="border-2 text-teal-600 font-body border-teal-600 rounded-full hover:bg-teal-600 hover:text-white py-2 px-8 mb-4 lg:mb-0">
+                <Link to='/publications/view-all' className="border-2 text-teal-600 font-body border-teal-600 rounded-full hover:bg-teal-600 hover:text-white py-2 px-8 mb-4 lg:mb-0 hidden lg:block md:block">
                     View All
                 </Link>
             </div>
 
             <div className="flex flex-col lg:items-center lg:p-12 bg-white text-gray-800 lg:h-4/5 border-b border-teal-600 pb-12 mb-12 w-full max-w-full overflow-x-hidden">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 lg:px-80 gap-8 justify-center mx-auto ">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 lg:px-80 lg:gap-14 ssm:gap-3 justify-center mx-auto ">
                     {lastThreePublications.map((publication) => {
                         console.log(publication.ownerId);
                         // Safely check if publication.topic exists
@@ -74,11 +74,11 @@ const PublicationsArea = () => {
                                         </div>
                                     )}
                                 </div>
-                                <div className="py-12 px-6">
-                                    <p className="text-gray-400 text-sm capitalize font-bold">
-                                        {new Date(publication.created_at).toLocaleDateString()}
+                                <div className="pt-12 pb-6 px-6">
+                                    <p className="text-gray-400 pb-2 text-sm capitalize font-semibold">
+                                        {new Date(publication.created_at).toLocaleDateString("en-UK", { day: 'numeric', month: 'long', year: 'numeric' })}
                                     </p>
-                                    <div className='py-12'>
+                                    <div className='pb-8'>
                                         <Link to={`/publications/${publication.id}`} className="text-lg font-normal  mb-2 text-gray-800 capitalize hover:text-teal-600 ">
                                             {publication.title}
                                         </Link></div>
@@ -99,12 +99,19 @@ const PublicationsArea = () => {
 
 
                                     </div>
+
                                 </div>
+
                             </div>
                         );
                     })}
                 </div>
+                <div className='pt-10 m-auto'>
+                    <Link to='/publications/view-all' className="border-2 text-teal-600 font-body border-teal-600 rounded-full hover:bg-teal-600 hover:text-white py-2 px-14 mb-4 lg:mb-0 lg:hidden md:hidden ssm:block ">
+                        View All
+                    </Link></div>
             </div>
+
         </div>
     );
 };

@@ -8,16 +8,16 @@ import BackToTop from '../components/BackToTop';
 const HomePage = () => {
     return (
         <>
-            <div className=" lg:mx-80  items-center justify-center" >
+            <div className=" lg:mx-80  items-center justify-center " >
                 <div className="flex flex-col md:flex-row  ">
                     {/* Left Side - Publications Slider */}
-                    <div className="w-full    ">
+                    <div className=" ">
                         <PublicationsSlider />
                     </div>
 
                     {/* Right Side - About Us Text */}
                     <div className=" flex flex-col justify-center bg-teal-600 px-6 pb-6 ">
-                        <h2 className="text-3xl font-bold mb-4 text-white">About Us</h2>
+                        <h2 className="lg:text-3xl ssm:text-2xl font-bold mb-4 text-white ssm:pt-4 ssm:font-body">About us</h2>
                         <p className="mb-12 px-2 text-white font-serif text-lg pt-0">
                             Welcome to EduLibya, where education and innovation meet. We aim to provide students, teachers, and educators with the best tools and resources for learning and growth. Our mission is to foster an environment of creativity, engagement, and critical thinking.
                         </p>
@@ -36,11 +36,11 @@ const HomePage = () => {
 
                 <TopicsSlider2 />
             </div>
-            <div className="mt-16 w-full  mx-auto p-4 max-w-full overflow-x-hidden">
+            <div className="lg:mt-16 w-full  mx-auto p-4 max-w-full overflow-x-hidden">
                 <PublicationsArea />
             </div>
 
-            <div>
+            <div className="lg:mt-0 w-full  mx-auto  max-w-full overflow-x-hidden">
                 <UpcomingEvent />
                 <BackToTop />
 

@@ -1,4 +1,6 @@
-import { FaFacebookF, FaTwitter, FaLinkedinIn } from 'react-icons/fa';
+import { FaFacebookF, FaLinkedinIn } from 'react-icons/fa';
+import { CiMail } from "react-icons/ci";
+
 import BackToTop from '../BackToTop';
 
 const Footer = () => {
@@ -19,10 +21,10 @@ const Footer = () => {
 
                 {/* Contact and Social Icons on the right */}
                 <div className="flex flex-col items-center lg:items-end space-y-4">
-                    <p className="text-center lg:text-right">Contact: <a href="mailto:contact@edulibya.ly" className="hover:underline">contact@edulibya.ly</a></p>
-                    <ul className="flex space-x-4">
+                    <p className="flex text-center lg:text-right"><CiMail className='text-lg mr-2 mt-1 text-sky-950' />  <a href="mailto:contact@edulibya.ly" className="hover:underline text-gray-500"> contact@edulibya.ly</a></p>
+                    <ul className="flex space-x-2 text-lg lg:pr-10"> <span className='text-gray-500 py-0 mb-2'></span>
                         <li><a href="#"><FaFacebookF /></a></li>
-                        <li><a href="#"><FaTwitter /></a></li>
+                        {/* <li><a href="#"><FaTwitter /></a></li> */}
                         <li><a href="https://www.linkedin.com/groups/12856663/"><FaLinkedinIn /></a></li>
                     </ul>
                 </div>
@@ -30,7 +32,7 @@ const Footer = () => {
             </div>
 
             {/* Footer Bottom Text */}
-            <div className="text-center mt-8">
+            <div className="text-center mt-8 text-gray-500">
                 <p>&copy; {new Date().getFullYear()} EduLibya | All Rights Reserved</p>
             </div>
         </div>

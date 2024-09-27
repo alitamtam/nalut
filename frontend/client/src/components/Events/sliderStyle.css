@@ -9,7 +9,11 @@
     z-index: 1; /* Ensure dots are above any other content */
     @media screen and (max-width: 768px) {
         left: 50%;
+        grid-row: auto;        
+        transform: translateX(-50%); /* Translate to ensure perfect centering */
+        bottom: -260px;
         
+
     }
 }
 

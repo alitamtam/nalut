@@ -71,17 +71,10 @@ const PublicationDetails = () => {
 
                 {/* Author details on the right */}
                 <div className="w-full md:w-1/2 flex flex-col items-start justify-center">
-                    <p className="text-gray-600 mb-2 capitalize font-bold">
-                        By {publication.owner.first_name} {publication.owner.last_name} | {new Date(publication.created_at).toLocaleDateString()}
-                    </p>
-                    <div>
-                        <Link
-                            to={`/profile/${publication.owner.Profile?.id}`} // Ensure correct capitalization and optional chaining
-                            className="bg-teal-600 text-white font-sans py-4 border-teal-600 text-base rounded-full hover:bg-sky-950 hover:text-white  px-8 transition-colors duration-300"
-                        >
-                            View Details
-                        </Link>
-                    </div>
+                    <Link to={`/profile/${publication.owner.Profile?.id}`} className="text-gray-600 mb-2 capitalize font-bold hover:text-teal-600 py-5">
+                        By {publication.owner.first_name} {publication.owner.last_name} | {new Date(publication.created_at).toLocaleDateString("en-UK", { day: 'numeric', month: 'long', year: 'numeric' })}
+                    </Link>
+
                 </div>
             </div>
 

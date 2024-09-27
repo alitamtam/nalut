@@ -18,7 +18,7 @@ const Navbar = ({ hideSidebar }) => {
     };
 
     return (
-        <nav className="bg-sky-950 lg:mx-80">
+        <nav className="bg-sky-950 lg:mx-80 ">
             <div className="container mx-auto px-4 lg:py-8 ssm:py-4 flex justify-between items-center">
                 <Link to="/" className="text-yellow-500 font-thin text-base lg:hidden">
                     Menu
