@@ -5,8 +5,8 @@ const ProjectDetails = () => {
     const { id } = useParams();
     const { data: project, isLoading, error } = useGetProjectById(id);
 
-    if (isLoading) return <div>Loading...</div>;
-    if (error) return <div>Error: {error.message}</div>;
+    if (isLoading) return <div className="flex items-center justify-center bg-green-100 border lg:mx-80 border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">Loading...</div>;
+    if (error) return <div className="flex items-center justify-center bg-red-100 border lg:mx-80 border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">Error: {error.message}</div>;
 
     return (
         <div className="lg:mx-80 bg-white p-6  ">
@@ -18,7 +18,7 @@ const ProjectDetails = () => {
                 <img
                     src={project.project_image}
                     alt={project.title}
-                    className="w-full md:w-1/2 h-64 object-cover rounded-lg"
+                    className="w-full md:w-1/2 h-64 object-cover "
                 />
 
                 {/* Separator line */}
@@ -29,14 +29,14 @@ const ProjectDetails = () => {
                     <Link to={`/profileDisplay/${project.actors.profile?.id}`} className="text-gray-600 mb-2 capitalize font-bold hover:text-teal-600 py-5">
                         By {project.actors.first_name} {project.actors.last_name} | {new Date(project.created_at).toLocaleDateString("en-UK", { day: 'numeric', month: 'long', year: 'numeric' })}
                     </Link>
-                    {/* Display Actor Profile Image */}
+                    {/* Display Actor Profile Image
                     {project.actors.profile?.image && (
                         <img
                             src={`data:image/png;base64,${project.actors.profile.image}`}
                             alt={`${project.actors.first_name} ${project.actors.last_name}`}
                             className="w-16 h-16 rounded-full border-2 border-gray-300 mb-2"
                         />
-                    )}
+                    )} */}
                     {/* Display Actor Bio */}
                 </div>
             </div>

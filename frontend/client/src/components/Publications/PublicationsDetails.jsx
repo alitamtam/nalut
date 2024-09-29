@@ -8,9 +8,13 @@ const PublicationDetails = () => {
     const { data: publication, isLoading, error } = useGetPublications(id); // Fetch publications by ID
     const iconOptions = useIconOptions(); // Get the icon options
 
-    if (isLoading) return <div>Loading publication...</div>;
-    if (error) return <div>Error loading publication</div>;
-
+    if (isLoading) return <div className="flex items-center justify-center bg-green-100 border lg:mx-80 border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">Loading publication...</div>;
+    if (error) return (
+        <div className="flex items-center justify-center bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+            <strong className="font-bold">Error!</strong>
+            <span className="block sm:inline ml-2">Error loading publication.</span>
+        </div>
+    );
     // // Find the specific publication by ID
     // const publication = publications?.find((pub) => pub.id === parseInt(id));
 
@@ -71,7 +75,7 @@ const PublicationDetails = () => {
 
                 {/* Author details on the right */}
                 <div className="w-full md:w-1/2 flex flex-col items-start justify-center">
-                    <Link to={`/profile/${publication.owner.Profile?.id}`} className="text-gray-600 mb-2 capitalize font-bold hover:text-teal-600 py-5">
+                    <Link to={`/profileDisplay/${publication.owner.profile?.id}`} className="text-gray-600 mb-2 capitalize font-bold hover:text-teal-600 py-5">
                         By {publication.owner.first_name} {publication.owner.last_name} | {new Date(publication.created_at).toLocaleDateString("en-UK", { day: 'numeric', month: 'long', year: 'numeric' })}
                     </Link>
 

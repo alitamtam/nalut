@@ -6,9 +6,15 @@ const ProfileDetails = () => {
     const { id } = useParams(); // Get the user ID from URL params
     const { data: Profile, isLoading, error } = useGetProfileById(id); // Fetch publications
 
-    if (isLoading) return <div>Loading profile...</div>;
-    if (error) return <div>Error loading profile</div>;
+    if (isLoading) return <div className="flex items-center justify-center bg-green-100 border lg:mx-80 border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">Loading profile...</div>;
+    if (error) return (
+        <div className="flex items-center justify-center bg-red-100 border lg:mx-80 border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+            <strong className="font-bold">Error!</strong>
+            <span className="block sm:inline ml-2 lg:mx-80">Error loading profile.</span>
+        </div>
+    );
     if (!Profile || !Profile.user) return <div>Profile not found</div>; // Ensure publication and owner exist
+
 
     return (
         <div className="lg:mx-80 bg-slate-100 p-6 rounded-lg shadow-md">

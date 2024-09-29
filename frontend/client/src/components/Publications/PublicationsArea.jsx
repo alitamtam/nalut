@@ -92,7 +92,7 @@ const PublicationsArea = () => {
                                     <div>
                                         <p className="text-sm capitalize font-bold">
                                             <span className="text-gray-600">By</span> {/* Style 'By' with a different color */}
-                                            <Link to={`/profile/${publication.ownerId}`} className="text-orange-600 hover:underline">
+                                            <Link to={`/profileDisplay/${publication.owner.profile?.id}`} className="text-orange-600 hover:underline">
                                                 {publication.owner.first_name} {publication.owner.last_name}
                                             </Link>
                                         </p>

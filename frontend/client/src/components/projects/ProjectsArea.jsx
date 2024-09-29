@@ -8,7 +8,7 @@ const ProjectsArea = () => {
     const { data: projects, isPending, error } = useGetProjects();
 
     if (isPending) return <div>Loading...</div>;
-    if (error) return <div>Error: {error.message}</div>;
+    if (error) return <div className="flex items-center justify-center bg-red-100 border lg:mx-80 border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">Error: {error.message}</div>;
 
     // Ensure projects is not undefined before mapping
     if (!projects || projects.length === 0) {

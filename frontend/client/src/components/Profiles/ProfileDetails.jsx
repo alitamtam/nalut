@@ -6,8 +6,8 @@ const ProfileDetails = () => {
     const { data: publications, isLoading, error } = useGetPublications(); // Fetch publications
     const publication = publications?.find((pub) => pub.owner.Profile?.id === parseInt(id)); // Find the specific publication based on profile ID
 
-    if (isLoading) return <div>Loading profile...</div>;
-    if (error) return <div>Error loading profile</div>;
+    if (isLoading) return <div className="flex items-center justify-center bg-green-100 border lg:mx-80 border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">Loading profile...</div>;
+    if (error) return <div className="flex items-center justify-center bg-red-100 border lg:mx-80 border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">Error loading profile</div>;
     if (!publication || !publication.owner) return <div>Profile not found</div>; // Ensure publication and owner exist
 
     return (
