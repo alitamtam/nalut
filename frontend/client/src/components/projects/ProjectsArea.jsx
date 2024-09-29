@@ -47,7 +47,7 @@ const ProjectsArea = () => {
                 <h2 className="text-3xl font-bold lg:mb-4 text-center capitalize font-body text-gray-800">
                     Projects Area
                 </h2>
-                <Link to='/publications/view-all' className="border-2 text-teal-600 font-body border-teal-600 rounded-full hover:bg-teal-600 hover:text-white py-2 px-8 mb-4 lg:mb-0 hidden lg:block ">
+                <Link to='/projects/ViewAllProjects' className="border-2 text-teal-600 font-body border-teal-600 rounded-full hover:bg-teal-600 hover:text-white py-2 px-8 mb-4 lg:mb-0 hidden lg:block ">
                     View All
                 </Link>
             </div>
@@ -70,7 +70,7 @@ const ProjectsArea = () => {
                 </Slider>
             </div>
             <div className="pt-10 ">
-                <Link to='/projects/view-all' className="border-2 text-teal-600 font-body border-teal-600 rounded-full hover:bg-teal-600 hover:text-white py-2 px-14 mb-4 lg:mb-0 lg:hidden md:block ssm:block ">
+                <Link to='/projects/ViewAllProjects' className="border-2 text-teal-600 font-body border-teal-600 rounded-full hover:bg-teal-600 hover:text-white py-2 px-14 mb-4 lg:mb-0 lg:hidden md:block ssm:block ">
                     View All
                 </Link>
             </div>

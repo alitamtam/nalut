@@ -25,6 +25,7 @@ import EventDetails from './components/Events/EventDetails';
 import SearchResultPage from './pages/SearchResultPage';
 import ProjectDetails from './components/projects/ProjectDetails';
 import ProjectsArea from './components/projects/ProjectsArea';
+import ViewAllProjects from './components/projects/ViewAllProjects';
 import ProjectForm from './components/Admin/Dashboard/ProjectForm';
 import ErrorPage from './pages/ErrorPage';
 
@@ -49,6 +50,7 @@ const AppRouter = createBrowserRouter([
             { path: 'events/:id', element: <EventDetails /> },
             { path: 'projects', element: <ProjectsArea /> },  // <-- New route for Projects
             { path: 'projects/:id', element: <ProjectDetails /> },  // <-- New route for Projects
+            { path: 'projects/ViewAllProjects', element: <ViewAllProjects /> },  // <-- New route for Projects
 
             { path: "/search-results", element: <SearchResultPage /> },
             { path: 'login', element: <Login /> },
