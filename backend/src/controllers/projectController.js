@@ -9,15 +9,28 @@ const projectsController = {
       res.status(500).json({ error: error.message });
     }
   },
-  async getProject(req, res) {
+  async getProjectById(req, res) {
     const { id } = req.params;
     try {
       const project = await prisma.projects.findUnique({
-        where: { id: parseInt(id) },
+        where: { id: parseInt(id, 10) }, // Use parseInt with radix
         include: {
-          project_images: true,
+          actors: {
+            // Use 'actors' to match the relation name
+            select: {
+              first_name: true,
+              last_name: true,
+              profile: true, // Include the profile object
+            },
+          },
         },
       });
+
+      // Handle the case where the project is not found
+      if (!project) {
+        return res.status(404).json({ error: "Project not found" });
+      }
+
       res.json(project);
     } catch (error) {
       res.status(500).json({ error: error.message });

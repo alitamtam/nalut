@@ -24,15 +24,17 @@ import ViewAllEvents from './components/Events/VIewAllEvents';
 import EventDetails from './components/Events/EventDetails';
 import SearchResultPage from './pages/SearchResultPage';
 import ProjectDetails from './components/projects/ProjectDetails';
-import ProjectsList from './components/projects/ProjectsList';
+import ProjectsArea from './components/projects/ProjectsArea';
 import ProjectForm from './components/Admin/Dashboard/ProjectForm';
-
+import ErrorPage from './pages/ErrorPage';
 
 
 const AppRouter = createBrowserRouter([
     {
         path: '/',
         element: <Layout />,
+        errorElement: <ErrorPage />,  // Set errorElement for the main layout
+
         children: [
             { index: true, element: <HomePage /> },
             { path: 'about', element: <AboutUsPage /> },
@@ -45,7 +47,7 @@ const AppRouter = createBrowserRouter([
             { path: 'publications/:id', element: <PublicationDetails /> },
             { path: 'events/view-all', element: <ViewAllEvents /> },
             { path: 'events/:id', element: <EventDetails /> },
-            { path: 'projects', element: <ProjectsList /> },  // <-- New route for Projects
+            { path: 'projects', element: <ProjectsArea /> },  // <-- New route for Projects
             { path: 'projects/:id', element: <ProjectDetails /> },  // <-- New route for Projects
 
             { path: "/search-results", element: <SearchResultPage /> },

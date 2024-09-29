@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import TopicsSlider2 from '../components/TopicSlick';
 import UpcomingEvent from '../components/Events/UpcomingEvent'
 import PublicationsArea from '../components/Publications/PublicationsArea';
+import ProjectsList from '../components/projects/ProjectsArea';
 import BackToTop from '../components/BackToTop';
 const HomePage = () => {
     return (
@@ -39,7 +40,9 @@ const HomePage = () => {
             <div className="lg:mt-16 w-full  mx-auto p-4 max-w-full overflow-x-hidden">
                 <PublicationsArea />
             </div>
-
+            <div>
+                <ProjectsList />
+            </div>
             <div className="lg:mt-0 w-full  mx-auto  max-w-full overflow-x-hidden">
                 <UpcomingEvent />
                 <BackToTop />

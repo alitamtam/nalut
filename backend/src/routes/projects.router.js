@@ -7,7 +7,7 @@ const router = express.Router();
 router.get("/", projectController.getProjects);
 
 // Route to fetch a specific project by ID
-router.get("/:id", projectController.getProject);
+router.get("/:id", projectController.getProjectById);
 
 router.post("/", authenticate, projectController.createProject);
 
