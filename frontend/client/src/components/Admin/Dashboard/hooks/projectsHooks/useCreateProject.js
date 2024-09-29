@@ -4,9 +4,9 @@ import api from "../../../../../api/axiosConfig";
 export const useCreateProject = () => {
   const queryClient = useQueryClient();
 
-  return useMutation(
-    async (newProject) => {
-      const response = await api.post("/api/projects", newProject, {
+  return useMutation({
+    mutationFn: async (data) => {
+      const response = await api.post("/api/projects", data, {
         headers: {
           "Content-Type": "application/json",
         },
@@ -14,10 +14,8 @@ export const useCreateProject = () => {
 
       return response.data;
     },
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries(["events"]);
-      },
-    }
-  );
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["projects"] }); // Use object form
+    },
+  });
 };

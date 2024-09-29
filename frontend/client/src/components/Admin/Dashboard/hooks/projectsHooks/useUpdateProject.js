@@ -4,14 +4,16 @@ import api from "../../../../../api/axiosConfig";
 export const useUpdateProject = () => {
   const queryClient = useQueryClient();
 
-  return useMutation(
-    async (updatedProject) => {
-      await api.put(`/api/projects/${updatedProject.id}`, updatedProject);
+  return useMutation({
+    mutationFn: async ({ id, updatedProject }) => {
+      await api.put(`/api/projects/${id}`, updatedProject, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
     },
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries("projects");
-      },
-    }
-  );
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["projects"] }); // Use object form
+    },
+  });
 };
