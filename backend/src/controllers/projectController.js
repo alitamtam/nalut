@@ -24,20 +24,26 @@ const projectsController = {
     }
   },
   async createProject(req, res) {
-    const { title, content1, content2, content3, project_image, actors } =
-      req.body; // Add content2, content3, project_image, and actors
     try {
+      const {
+        title,
+        link,
+        content1,
+        content2,
+        content3,
+        project_image,
+        actorId,
+      } = req.body; // Add content2, content3, project_image, and actors
+
       const project = await prisma.projects.create({
         data: {
           title,
-          link: "https://www.example.com",
+          link,
           content1,
           content2,
           content3,
           project_image, // Update the field name to match the schema
-          actors: {
-            connect: { id: actors }, // Assuming 'actors' is the ID of the user you want to connect
-          },
+          actorId, // Map each user ID
         },
       });
       res.json(project);
@@ -48,23 +54,36 @@ const projectsController = {
 
   async updateProject(req, res) {
     const { id } = req.params;
-    const { title, content1, content2, content3, project_image, actors } =
-      req.body; // Add other fields as needed
+
+    // Check if req.body exists and contains required fields
+    const {
+      title,
+      link,
+      content1,
+      content2,
+      content3,
+      project_image,
+      actorId,
+    } = req.body || {};
+
+    if (!title) {
+      return res.status(400).json({ error: "Title is required" });
+    }
+
     try {
-      const project = await prisma.projects.update({
+      const updatedProject = await prisma.projects.update({
         where: { id: parseInt(id, 10) },
         data: {
           title,
+          link,
           content1,
-          content2, // Include content2 if it's part of your model
-          content3, // Include content3 if it's part of your model
-          project_image, // Update to correct field name
-          actors: {
-            connect: { id: actors }, // Assuming you're connecting the actors as needed
-          },
+          content2,
+          content3,
+          project_image,
+          actorId, // Map each user ID
         },
       });
-      res.json(project);
+      res.json(updatedProject);
     } catch (error) {
       res.status(500).json({ error: error.message });
     }

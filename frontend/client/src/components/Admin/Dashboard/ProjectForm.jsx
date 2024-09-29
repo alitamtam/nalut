@@ -63,9 +63,10 @@ const ManageProjects = () => {
             link: formData.link,
             actorId: userId,
         };
+        console.log('Form Data: ', updatedFormData); // Debugging to see if title is set correctly
 
         if (isEditing) {
-            updateProject.mutate({ id: currentEditId, ...updatedFormData });
+            updateProject.mutate({ id: currentEditId, formData: updatedFormData });
         } else {
             createProject.mutate(updatedFormData);
         }

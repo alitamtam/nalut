@@ -118,11 +118,8 @@ const publicationController = {
   },
 
   // Update an existing publication by ID
-  // Update an existing publication by ID
   async updatePublication(req, res, next) {
     try {
-      console.log("Request body: ", req.body); // Log the body to verify incoming data
-
       const { id } = req.params;
       const { title, topicName, content, image } = req.body;
 

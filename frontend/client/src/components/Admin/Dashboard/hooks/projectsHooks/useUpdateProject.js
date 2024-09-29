@@ -5,12 +5,16 @@ export const useUpdateProject = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: async ({ id, updatedProject }) => {
-      await api.put(`/api/projects/${id}`, updatedProject, {
+    mutationKey: ["editProject"],
+
+    mutationFn: async ({ id, formData }) => {
+      const response = await api.put(`/api/projects/${id}`, formData, {
         headers: {
           "Content-Type": "application/json",
         },
       });
+
+      return response.data;
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["projects"] }); // Use object form

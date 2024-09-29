@@ -5,6 +5,8 @@ export const useCreateProject = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
+    mutationKey: ["addProjects"],
+
     mutationFn: async (data) => {
       const response = await api.post("/api/projects", data, {
         headers: {

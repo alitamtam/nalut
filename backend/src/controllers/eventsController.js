@@ -68,7 +68,6 @@ const eventsController = {
     const { id } = req.params;
     const { title, description, location, startTime, endTime, image, link } =
       req.body;
-    console.log("Request Body:", req.body); // Debugging line
 
     try {
       const updatedEvent = await prisma.event.update({
