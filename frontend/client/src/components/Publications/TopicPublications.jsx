@@ -37,7 +37,7 @@ const TopicPublications = () => {
                     />
                     <div className="md:ml-6">
                         <h4 className="text-xl font-bold">{recentPublication.title}</h4>
-                        <p className="text-sm text-gray-500 capitalize">By: {recentPublication.owner.first_name} {recentPublication.owner.last_name} | {new Date(recentPublication.created_at).toLocaleDateString()}</p>
+                        <p className="text-sm text-gray-500 capitalize">By: {recentPublication.owner.firstName} {recentPublication.owner.lastName} | {new Date(recentPublication.createdAt).toLocaleDateString()}</p>
                         <p className="mt-4 text-gray-700">{recentPublication.summary}</p>
                         <Link to={`/publications/${recentPublication.id}`} className="text-teal-500 hover:underline mt-4 inline-block">
                             Read Full Publication

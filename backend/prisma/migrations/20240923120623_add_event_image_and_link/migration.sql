@@ -33,7 +33,7 @@ CREATE TABLE "projects" (
     "title" TEXT NOT NULL,
     "link" TEXT,
     "content" TEXT NOT NULL,
-    "created_at" TIMESTAMPTZ(6) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "createdAt" TIMESTAMPTZ(6) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMPTZ(6),
     "authorId" INTEGER NOT NULL,
 

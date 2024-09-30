@@ -8,7 +8,7 @@ const adminController = {
     try {
       const allArticles = await prisma.articleModel.findMany({
         orderBy: {
-          created_at: "desc",
+          createdAt: "desc",
         },
         take: 6,
       });
@@ -23,15 +23,14 @@ const adminController = {
 
   async registerUser(req, res) {
     try {
-      const { first_name, last_name, username, email, password, role } =
-        req.body; // Include role in destructuring
+      const { firstName, lastName, username, email, password, role } = req.body; // Include role in destructuring
       const hashedPassword = await bcrypt.hash(password, 10);
 
       // Create the user
       const registeredUser = await prisma.user.create({
         data: {
-          first_name,
-          last_name,
+          firstName,
+          lastName,
           username,
           email,
           password: hashedPassword,
@@ -206,12 +205,12 @@ const adminController = {
 
   async updateUser(req, res) {
     const userId = parseInt(req.params.id);
-    const { first_name, last_name, username, email } = req.body;
+    const { firstName, lastName, username, email } = req.body;
 
     try {
       const updatedUser = await prisma.user.update({
         where: { id: userId },
-        data: { first_name, last_name, username, email },
+        data: { firstName, lastName, username, email },
       });
 
       res

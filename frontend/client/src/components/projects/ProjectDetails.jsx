@@ -16,7 +16,7 @@ const ProjectDetails = () => {
             <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-6">
                 {/* Image on the left */}
                 <img
-                    src={project.project_image}
+                    src={project.projectImage}
                     alt={project.title}
                     className="w-full md:w-1/2 h-64 object-cover "
                 />
@@ -26,14 +26,14 @@ const ProjectDetails = () => {
 
                 {/* Author details on the right */}
                 <div className="w-full md:w-1/2 flex flex-col items-start justify-center">
-                    <Link to={`/profileDisplay/${project.actors.profile?.id}`} >
-                        <span className="text-gray-600 mb-2 capitalize font-bold hover:text-teal-600 py-5">   By {project.actors.first_name} {project.actors.last_name} </span>| <span className='text-gray-500 mb-2 capitalize font-normal'>{new Date(project.created_at).toLocaleDateString("en-UK", { day: 'numeric', month: 'long', year: 'numeric' })}</span>
+                    <Link to={`/profileDisplay/${project.creator.profile?.id}`} >
+                        <span className="text-gray-600 mb-2 capitalize font-bold hover:text-teal-600 py-5">   By {project.creator.firstName} {project.creator.lastName} </span>| <span className='text-gray-500 mb-2 capitalize font-normal'>{new Date(project.createdAt).toLocaleDateString("en-UK", { day: 'numeric', month: 'long', year: 'numeric' })}</span>
                     </Link>
                     {/* Display Actor Profile Image
-                    {project.actors.profile?.image && (
+                    {project.creator.profile?.image && (
                         <img
-                            src={`data:image/png;base64,${project.actors.profile.image}`}
-                            alt={`${project.actors.first_name} ${project.actors.last_name}`}
+                            src={`data:image/png;base64,${project.creator.profile.image}`}
+                            alt={`${project.creator.firstName} ${project.creator.lastName}`}
                             className="w-16 h-16 rounded-full border-2 border-gray-300 mb-2"
                         />
                     )} */}

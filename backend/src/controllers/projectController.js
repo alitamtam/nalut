@@ -3,13 +3,13 @@ import prisma from "../../prisma/index.js";
 const projectsController = {
   async getProjects(req, res) {
     try {
-      const projects = await prisma.projects.findMany({
+      const projects = await prisma.project.findMany({
         include: {
-          actors: {
-            // Use 'actors' to match the relation name
+          creator: {
+            // Use 'creator' to match the relation name
             select: {
-              first_name: true,
-              last_name: true,
+              firstName: true,
+              lastName: true,
               profile: true, // Include the profile object
             },
           },
@@ -23,14 +23,14 @@ const projectsController = {
   async getProjectById(req, res) {
     const { id } = req.params;
     try {
-      const project = await prisma.projects.findUnique({
+      const project = await prisma.project.findUnique({
         where: { id: parseInt(id, 10) }, // Use parseInt with radix
         include: {
-          actors: {
-            // Use 'actors' to match the relation name
+          creator: {
+            // Use 'creator' to match the relation name
             select: {
-              first_name: true,
-              last_name: true,
+              firstName: true,
+              lastName: true,
               profile: true, // Include the profile object
             },
           },
@@ -55,19 +55,19 @@ const projectsController = {
         content1,
         content2,
         content3,
-        project_image,
-        actorId,
-      } = req.body; // Add content2, content3, project_image, and actors
+        projectImage,
+        creatorId,
+      } = req.body; // Add content2, content3, projectImage, and creator
 
-      const project = await prisma.projects.create({
+      const project = await prisma.project.create({
         data: {
           title,
           link,
           content1,
           content2,
           content3,
-          project_image, // Update the field name to match the schema
-          actorId, // Map each user ID
+          projectImage, // Update the field name to match the schema
+          creatorId, // Map each user ID
         },
       });
       res.json(project);
@@ -86,8 +86,8 @@ const projectsController = {
       content1,
       content2,
       content3,
-      project_image,
-      actorId,
+      projectImage,
+      creatorId,
     } = req.body || {};
 
     if (!title) {
@@ -95,7 +95,7 @@ const projectsController = {
     }
 
     try {
-      const updatedProject = await prisma.projects.update({
+      const updatedProject = await prisma.project.update({
         where: { id: parseInt(id, 10) },
         data: {
           title,
@@ -103,8 +103,8 @@ const projectsController = {
           content1,
           content2,
           content3,
-          project_image,
-          actorId, // Map each user ID
+          projectImage,
+          creatorId, // Map each user ID
         },
       });
       res.json(updatedProject);
@@ -115,7 +115,7 @@ const projectsController = {
   async deleteProject(req, res) {
     const { id } = req.params;
     try {
-      await prisma.projects.delete({
+      await prisma.project.delete({
         where: { id: parseInt(id) },
       });
       res.json({ message: "Project deleted" });

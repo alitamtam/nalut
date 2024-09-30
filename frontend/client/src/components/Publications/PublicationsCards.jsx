@@ -20,7 +20,7 @@ const PublicationCard = ({ publication }) => {
             )}
             <div className="p-4 flex flex-col flex-grow">
                 <h1 className="text-sm text-gray-600">
-                    {new Date(publication.created_at).toLocaleDateString()}
+                    {new Date(publication.createdAt).toLocaleDateString()}
                 </h1>
 
                 <h2 className="text-xl font-semibold text-gray-800 mb-2">
@@ -54,7 +54,7 @@ PublicationCard.propTypes = {
         publicatinTitle: PropTypes.string.isRequired,
         topicTitle: PropTypes.string,
         content: PropTypes.string.isRequired,
-        created_at: PropTypes.string.isRequired,
+        createdAt: PropTypes.string.isRequired,
         resumeText: PropTypes.string.isRequired,
     }).isRequired,
 };

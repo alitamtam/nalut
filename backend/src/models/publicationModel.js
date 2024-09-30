@@ -4,9 +4,9 @@ const prisma = new PrismaClient();
 
 // Fetch all publications
 export const getAllPublications = async () => {
-  return await prisma.publications.findMany({
+  return await prisma.Publication.findMany({
     orderBy: {
-      created_at: "desc",
+      createdAt: "desc",
       include: {
         owner: true, // Include the owner relation
         profile: {
@@ -24,7 +24,7 @@ export const getAllPublications = async () => {
 
 // Fetch a single publication by its ID
 export const getPublicationById = async (id) => {
-  return await prisma.publications.findUnique({
+  return await prisma.Publication.findUnique({
     where: { id: parseInt(id) },
     include: {
       owner: true, // Include the owner relation
@@ -35,19 +35,19 @@ export const getPublicationById = async (id) => {
 
 // Create a new publication
 export const createPublication = async ({ title, topic, content }) => {
-  return await prisma.publications.create({
+  return await prisma.Publication.create({
     data: {
       title,
       topic,
       content,
-      created_at: new Date(), // Default to now
+      createdAt: new Date(), // Default to now
     },
   });
 };
 
 // Update a publication by its ID
 export const updatePublication = async (id, data) => {
-  return await prisma.publications.update({
+  return await prisma.Publication.update({
     where: { id: parseInt(id) },
     data: {
       ...data,
@@ -58,7 +58,7 @@ export const updatePublication = async (id, data) => {
 
 // Delete a publication by its ID
 export const deletePublication = async (id) => {
-  return await prisma.publications.delete({
+  return await prisma.Publication.delete({
     where: { id: parseInt(id) },
   });
 };

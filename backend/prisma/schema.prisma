@@ -7,46 +7,69 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model projects { // Changed from articles to projects
-  id         Int       @id @default(autoincrement())
-  title      String
-  link       String?   // New column for storing project links
-  content1    String    // Renamed from article to content
-  content2    String?   // New column for storing additional content
-  content3    String?   // New column for storing additional content
-  project_image      String?   // New column for storing the base64 image
-  created_at DateTime  @default(now()) @db.Timestamptz(6)
-  updated_at DateTime?  @db.Timestamptz(6)
-  actorId   Int
-  actors     user      @relation(fields: [actorId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+model Project {
+  id              Int                 @id @default(autoincrement())
+  title           String
+  link            String?             // Column for storing project links
+  content1        String               // Main content
+  content2        String?              // Additional content
+  content3        String?              // Additional content
+  projectImage    String?              // Column for storing the base64 image
+  createdAt       DateTime            @default(now()) @db.Timestamptz(6)
+  updatedAt       DateTime?           @db.Timestamptz(6)
+  creatorId       Int
+  creator         User                @relation(fields: [creatorId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  translations    ProjectTranslation[]
 }
 
-model user {
+model ProjectTranslation {
+  id          Int       @id @default(autoincrement())
+  projectId   Int
+  language    String    // e.g., 'en' or 'ar'
+  title       String
+  content1    String
+  content2    String?
+  content3    String?   // Additional content
+  project     Project   @relation(fields: [projectId], references: [id], onDelete: Cascade)
+}
+
+model User {
   id            Int        @id @default(autoincrement())
-  first_name    String
-  last_name     String
+  firstName     String
+  lastName      String
   username      String     @unique
   email         String     @unique
   password      String
   description   String?
-  created_at    DateTime   @default(now()) @db.Timestamptz(6)
-  updated_at    DateTime?  @db.Timestamptz(6)
+  createdAt     DateTime   @default(now()) @db.Timestamptz(6)
+  updatedAt     DateTime?  @db.Timestamptz(6)
   role          String     @default("member")
-  profile       profile?
-  projects      projects[]  // Updated relation name
-  events        event[]    // One-to-many relationship with Event (opposite of owner)
-  publications  publications[]
+  profile       Profile?
+  projects      Project[]  // One-to-many relationship with Project
+  events        Event[]    // One-to-many relationship with Event
+  publications  Publication[] // One-to-many relationship with Publication
 }
 
-model profile {
-  id     Int     @id @default(autoincrement())
-  bio    String?
-  image  String?   // Column for storing the base64 image
-  userId Int     @unique
-  user   user    @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+model Profile {
+  id          Int     @id @default(autoincrement())
+  bio         String?
+  title       String?
+  image       String?  // Column for storing the base64 image
+  userId     Int     @unique
+  user       User    @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  translations ProfileTranslation[]
 }
 
-model event {
+model ProfileTranslation {
+  id          Int       @id @default(autoincrement())
+  profileId   Int
+  language    String    @default("ar") // e.g., 'en' or 'ar'
+  bio         String
+  title       String?
+  profile     Profile   @relation(fields: [profileId], references: [id], onDelete: Cascade)
+}
+
+model Event {
   id          Int       @id @default(autoincrement())
   title       String
   description String?
@@ -54,27 +77,60 @@ model event {
   startTime   DateTime
   endTime     DateTime
   ownerId     Int
-  owner       user      @relation(fields: [ownerId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  image       String?   // New column for storing event images
-  link        String?   // New column for storing event links
+  owner       User      @relation(fields: [ownerId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  image       String?   // Column for storing event images
+  link        String?   // Column for storing event links
+  translations EventTranslation[]
 }
 
-model topic {
+model EventTranslation {
+  id          Int       @id @default(autoincrement())
+  eventId     Int
+  language    String    @default("ar") // e.g., 'en' or 'ar'
+  title       String
+  description String?
+  location    String?
+  event       Event     @relation(fields: [eventId], references: [id], onDelete: Cascade)
+}
+
+model Topic {
   id          Int      @id @default(autoincrement())
   name        String   @unique
   iconClass   String   // Class name for icon styling
-  publications publications[] // Relation to Publications
+  publications Publication[] // One-to-many relationship with Publication
+  translations TopicTranslation[] // Relation for translations
 }
 
-model publications {
+model TopicTranslation {
+  id          Int       @id @default(autoincrement())
+  topicId     Int
+  language    String    @default("ar") // e.g., 'en' or 'ar'
+  name        String
+  topic       Topic     @relation(fields: [topicId], references: [id], onDelete: Cascade)
+}
+
+model Publication {
   id          Int       @id @default(autoincrement())
   title       String
   topicId     Int       // Foreign key to Topic
-  topic       topic     @relation(fields: [topicId], references: [id])
-  content     String  
-  image       String?   // New column for storing the base64 image
-  created_at  DateTime  @default(now())
-  ownerId     Int       // Assuming the event has an owner (user)
-  owner       user      @relation(fields: [ownerId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  topic       Topic      @relation(fields: [topicId], references: [id])
+  content     String 
+  content2    String?   // Additional content
+  content3    String?   // Additional content
+  image       String?   // Column for storing the base64 image
+  createdAt   DateTime  @default(now())
+  ownerId     Int       // Assuming the publication has an owner (User)
+  owner       User      @relation(fields: [ownerId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  translations PublicationTranslation[] // Relation for translations
 }
 
+model PublicationTranslation {
+  id               Int       @id @default(autoincrement())
+  publicationId    Int
+  language         String    @default("ar") // e.g., 'en' or 'ar'
+  title            String
+  content          String
+  content2        String?   // Additional content
+  content3        String?   // Additional content
+  publication      Publication @relation(fields: [publicationId], references: [id], onDelete: Cascade)
+}

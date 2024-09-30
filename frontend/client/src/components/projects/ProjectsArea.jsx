@@ -65,20 +65,20 @@ const ProjectsArea = () => {
                                             <p className="h-12 mb-6">{project.title}</p>
                                         </Link>
                                     </div>
-                                    {project.project_image && (
+                                    {project.projectImage && (
                                         <Link to={`/projects/${project.id}`}>
                                             <div>
                                                 <img
-                                                    src={project.project_image}
+                                                    src={project.projectImage}
                                                     alt={project.title}
                                                     className="w-[480px] lg:h-60 object-cover mt-2 my-4"
                                                 />
                                             </div>
                                         </Link>
                                     )}
-                                    <Link to={`/profileDisplay/${project.actors.profile?.id}`}>
+                                    <Link to={`/profileDisplay/${project.creator.profile?.id}`}>
                                         <span className="text-gray-600">By |</span>
-                                        <span className="text-orange-600 hover:underline"> {project.actors.first_name} {project.actors.last_name}</span>
+                                        <span className="text-orange-600 hover:underline"> {project.creator.firstName} {project.creator.lastName}</span>
                                     </Link></div>
                             </div>
                         ))}

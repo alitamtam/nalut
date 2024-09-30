@@ -17,7 +17,7 @@ ADD COLUMN     "actorId" INTEGER NOT NULL,
 ADD COLUMN     "content1" TEXT NOT NULL,
 ADD COLUMN     "content2" TEXT,
 ADD COLUMN     "content3" TEXT,
-ADD COLUMN     "project_image" TEXT;
+ADD COLUMN     "projectImage" TEXT;
 
 -- AddForeignKey
 ALTER TABLE "projects" ADD CONSTRAINT "projects_actorId_fkey" FOREIGN KEY ("actorId") REFERENCES "user"("id") ON DELETE CASCADE ON UPDATE CASCADE;

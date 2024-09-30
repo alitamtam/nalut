@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+      "seed": "node prisma/seed.js",
     "start": "nodemon --watch app --watch libs server.js"
   },
   "keywords": [],

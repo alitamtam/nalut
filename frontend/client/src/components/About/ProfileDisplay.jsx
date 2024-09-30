@@ -24,7 +24,7 @@ const ProfileDetails = () => {
                 <div className="lg:w-[300px] p-6  md:w-1/2 flex flex-col items-center md:items-start justify-center bg-sky-950">
                     <img
                         src={`data:image/jpeg;base64,${Profile.image}`} // Check if image exists, otherwise show default
-                        alt={`${Profile?.first_name} ${Profile?.last_name}`}
+                        alt={`${Profile?.firstName} ${Profile?.lastName}`}
                         className="w-48 h-48 object-cover rounded-full mb-4 my-3"
                     />
                     <h2 className="text-lg font-normal text-white capitalize my-3 center items-center lg:px-6">

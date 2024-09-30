@@ -63,7 +63,7 @@ const EditProfile = () => {
                     />
                 </div>
                 <div>
-                    <h2 className="text-2xl font-semibold text-gray-800">{user.first_name}</h2>
+                    <h2 className="text-2xl font-semibold text-gray-800">{user.firstName}</h2>
                     <p className="text-gray-600">{user.bio}</p>
                 </div>
             </div>

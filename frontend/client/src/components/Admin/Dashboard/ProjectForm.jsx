@@ -21,7 +21,7 @@ const ManageProjects = () => {
         content1: "",
         content2: "",
         content3: "",
-        project_image: "",
+        projectImage: "",
         link: "",
     });
     const [currentEditId, setCurrentEditId] = useState(null);
@@ -35,7 +35,7 @@ const ManageProjects = () => {
             reader.onload = () => {
                 setFormData((prevState) => ({
                     ...prevState,
-                    project_image: reader.result, // Base64 encoded string
+                    projectImage: reader.result, // Base64 encoded string
                 }));
             };
             reader.onerror = (error) => {
@@ -59,9 +59,9 @@ const ManageProjects = () => {
             content1: formData.content1,
             content2: formData.content2,
             content3: formData.content3,
-            project_image: formData.project_image,
+            projectImage: formData.projectImage,
             link: formData.link,
-            actorId: userId,
+            creatorId: userId,
         };
         console.log('Form Data: ', updatedFormData); // Debugging to see if title is set correctly
 
@@ -71,7 +71,7 @@ const ManageProjects = () => {
             createProject.mutate(updatedFormData);
         }
 
-        setFormData({ title: "", content1: "", content2: "", content3: "", project_image: "", link: "" });
+        setFormData({ title: "", content1: "", content2: "", content3: "", projectImage: "", link: "" });
         setIsEditing(false);
     };
 
@@ -83,7 +83,7 @@ const ManageProjects = () => {
             content1: project.content1,
             content2: project.content2,
             content3: project.content3,
-            project_image: project.project_image, // Prepopulate base64 image
+            projectImage: project.projectImage, // Prepopulate base64 image
             link: project.link,
         });
     };
@@ -161,7 +161,7 @@ const ManageProjects = () => {
                 <label className="block mb-1">Upload Project Image</label>
                 <div className="mb-4">
                     <input type="file" onChange={handleImageUpload} />
-                    {formData.project_image && <p className="mt-2 text-sm">Image ready for upload.</p>}
+                    {formData.projectImage && <p className="mt-2 text-sm">Image ready for upload.</p>}
                 </div>
 
                 <button type="submit" className="bg-blue-500 text-white w-full py-2 rounded">
@@ -188,12 +188,12 @@ const ManageProjects = () => {
                                     {project.link ? "View Project" : "No Link"}
                                 </a>
                             </td>
-                            <td className="border px-4 py-2">{project.actors.first_name} {project.actors.last_name}</td>
+                            <td className="border px-4 py-2">{project.creator.firstName} {project.creator.lastName}</td>
                             <td className="border px-4 py-2">
-                                {project.project_image ? (
+                                {project.projectImage ? (
                                     <img
                                         alt="project"
-                                        src={project.project_image} // Include the base64 prefix here
+                                        src={project.projectImage} // Include the base64 prefix here
                                         className="h-16 w-16 object-cover rounded-full"
                                     />
                                 ) : (

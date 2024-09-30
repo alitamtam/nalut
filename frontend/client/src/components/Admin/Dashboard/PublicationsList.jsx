@@ -107,7 +107,7 @@ const PublicationsList = () => {
     }
 
     if (error) {
-        return <p>{error}</p>;
+        return <p>{error.message || "An unexpected error occurred."}</p>;
     }
 
     return (
@@ -223,7 +223,7 @@ const PublicationsList = () => {
                             <td className="border px-4 py-2">{publication.topic.name}</td>
                             <td className="border px-4 py-2">{publication.title}</td>
                             <td className="border px-4 py-2">{publication.ownerId}</td>
-                            <td className="border px-4 py-2">{publication.created_at}</td>
+                            <td className="border px-4 py-2">{publication.createdAt}</td>
                             <td className="border px-4 py-2">
                                 <button
                                     onClick={() => handleEdit(publication)}

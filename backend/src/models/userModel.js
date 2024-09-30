@@ -11,8 +11,8 @@ export const createUser = async (username, password, role = "admin") => {
       username,
       password: hashedPassword,
       role,
-      first_name: "",
-      last_name: "",
+      firstName: "",
+      lastName: "",
       email: "",
     },
   });

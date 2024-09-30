@@ -111,11 +111,11 @@ const PublicationsSlider = () => {
                         {/* Slide Details Section (White Background) */}
                         <div className="bg-white p-4 text-black py-1">
                             <h5 className="flex text-lg font-normal text-sky-950 hover:text-teal-500 py-2">
-                                {pub.topic.name}   <p className="text-gray-400 px-2"> | {new Date(pub.created_at).toLocaleDateString("en-UK", { day: 'numeric', month: 'long', year: 'numeric' })}</p>
+                                {pub.topic.name}   <p className="text-gray-400 px-2"> | {new Date(pub.createdAt).toLocaleDateString("en-UK", { day: 'numeric', month: 'long', year: 'numeric' })}</p>
 
                             </h5>
                             <p className="text-sm mt-1 font-bold capitalize text-orange-400 hover:text-teal-500">
-                                <span className="text-gray-500 font-">by</span>  {pub.owner.first_name} {pub.owner.last_name}
+                                <span className="text-gray-500 font-">by</span>  {pub.owner.firstName} {pub.owner.lastName}
                             </p>
                         </div>
                     </TECarouselItem>

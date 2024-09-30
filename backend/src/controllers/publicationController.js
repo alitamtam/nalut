@@ -4,15 +4,15 @@ const publicationController = {
   // Fetch and return a list of publications
   async findAllPublications(req, res, next) {
     try {
-      const publications = await prisma.publications.findMany({
-        orderBy: { created_at: "desc" },
+      const publications = await prisma.publication.findMany({
+        orderBy: { createdAt: "desc" },
         include: {
           topic: true,
           owner: {
             // Owner is of type user
             select: {
-              first_name: true,
-              last_name: true,
+              firstName: true,
+              lastName: true,
               profile: {
                 // Include the profile related to the user
                 select: {
@@ -37,15 +37,15 @@ const publicationController = {
     const { id } = req.params;
 
     try {
-      const topic = await prisma.publications.findUnique({
+      const topic = await prisma.publication.findUnique({
         where: { id: parseInt(id, 10) }, // Use parseInt with radix
         include: {
           topic: true,
           owner: {
             // Owner is of type user
             select: {
-              first_name: true,
-              last_name: true,
+              firstName: true,
+              lastName: true,
               profile: {
                 // Include the profile related to the user
                 select: {
@@ -99,12 +99,12 @@ const publicationController = {
       }
 
       // Create the publication with the base64 image and connect to ownerId
-      const publication = await prisma.publications.create({
+      const publication = await prisma.Publication.create({
         data: {
           title,
           content,
           image, // Store base64-encoded image string
-          created_at: new Date(),
+          createdAt: new Date(),
           owner: { connect: { id: ownerId } }, // Connect to the owner by ID
           topic: topicData, // Connect or create the topic based on the data
         },
@@ -141,7 +141,7 @@ const publicationController = {
       }
 
       // Update the publication with base64 image and topicId (if available)
-      const updatedPublication = await prisma.publications.update({
+      const updatedPublication = await prisma.publication.update({
         where: { id: parseInt(id, 10) },
         data: {
           title,
@@ -162,7 +162,7 @@ const publicationController = {
   async deletePublication(req, res, next) {
     try {
       const { id } = req.params;
-      const deletedPublication = await prisma.publications.delete({
+      const deletedPublication = await prisma.publication.delete({
         where: { id: parseInt(id) },
       });
       res.status(200).json(deletedPublication); // Return the deleted publication

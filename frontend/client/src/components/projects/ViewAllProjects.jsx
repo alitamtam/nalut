@@ -30,9 +30,9 @@ const ViewAllProjects = () => {
                     <div key={project.id} className="border bg-neutral-100 border-gray-200 p-6 shadow-lg rounded-lg transition-transform duration-300 transform hover:scale-105">
                         <h3 className="text-xl font-semibold capitalize">{project.title}</h3>
                         <p className="text-gray-600">{project.content1}</p>
-                        {project.project_image && (
+                        {project.projectImage && (
                             <img
-                                src={project.project_image}
+                                src={project.projectImage}
                                 alt={project.title}
                                 className="w-full h-40 object-cover mt-4 rounded-lg"
                             />

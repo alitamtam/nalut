@@ -47,7 +47,7 @@ const DeleteUsers = () => {
             <ul className="mb-4">
                 {users?.map((user) => (
                     <li key={user.id} className="flex justify-between items-center mb-2">
-                        <span>{`${user.first_name} ${user.last_name} (${user.username})`}</span>
+                        <span>{`${user.firstName} ${user.lastName} (${user.username})`}</span>
                         <button
                             onClick={() => handleDeleteUser(user.id)}
                             disabled={isDeleting}

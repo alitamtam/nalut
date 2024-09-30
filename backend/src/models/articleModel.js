@@ -4,7 +4,7 @@ import prisma from "../../prisma/index.js";
 export const getAllArticles = async () => {
   return await prisma.articles.findMany({
     orderBy: {
-      created_at: "desc",
+      createdAt: "desc",
     },
   });
 };
@@ -26,7 +26,7 @@ export const createArticle = async ({ title, article, authorId }) => {
       title,
       article, // Corresponds to the 'article' column in the table
       authorId,
-      created_at: new Date(), // Default to now
+      createdAt: new Date(), // Default to now
     },
   });
 };

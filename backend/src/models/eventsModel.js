@@ -4,7 +4,7 @@ const prisma = new PrismaClient();
 export const getAllEvents = async () => {
   return await prisma.event.findMany({
     orderBy: {
-      created_at: "desc",
+      createdAt: "desc",
     },
   });
 };
@@ -34,7 +34,7 @@ export const createEvent = async ({
       owner,
       image,
 
-      created_at: new Date(),
+      createdAt: new Date(),
     },
   });
 };

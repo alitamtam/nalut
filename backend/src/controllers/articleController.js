@@ -5,7 +5,7 @@ const articleController = {
   async getHomePageData(req, res, next) {
     try {
       const articles = await prisma.articles.findMany({
-        orderBy: { created_at: "desc" },
+        orderBy: { createdAt: "desc" },
         take: 6,
       });
       const topics = await prisma.publications.findMany();
@@ -20,7 +20,7 @@ const articleController = {
   async findAllArticles(req, res, next) {
     try {
       const articles = await prisma.articles.findMany({
-        orderBy: { created_at: "desc" },
+        orderBy: { createdAt: "desc" },
         take: 6,
       });
       res.status(200).json(articles);

@@ -7,8 +7,8 @@ const profileController = {
         include: {
           user: {
             select: {
-              first_name: true,
-              last_name: true,
+              firstName: true,
+              lastName: true,
             },
           },
         },
@@ -16,7 +16,7 @@ const profileController = {
 
       const profilesWithFullName = profiles.map((profile) => ({
         ...profile,
-        fullName: `${profile.user.first_name} ${profile.user.last_name}`,
+        fullName: `${profile.user.firstName} ${profile.user.lastName}`,
       }));
 
       res.status(200).json(profilesWithFullName);
@@ -33,8 +33,8 @@ const profileController = {
         include: {
           user: {
             select: {
-              first_name: true,
-              last_name: true,
+              firstName: true,
+              lastName: true,
             },
           },
         },
@@ -47,7 +47,7 @@ const profileController = {
       // Add full name to the profile response
       const profileWithFullName = {
         ...profile,
-        fullName: `${profile.user.first_name} ${profile.user.last_name}`,
+        fullName: `${profile.user.firstName} ${profile.user.lastName}`,
       };
 
       res.status(200).json(profileWithFullName);

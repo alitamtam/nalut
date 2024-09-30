@@ -76,7 +76,7 @@ const PublicationsArea = () => {
                                 </div>
                                 <div className="pt-12 pb-6 px-6">
                                     <p className="text-gray-400 pb-2 text-sm capitalize font-semibold">
-                                        {new Date(publication.created_at).toLocaleDateString("en-UK", { day: 'numeric', month: 'long', year: 'numeric' })}
+                                        {new Date(publication.createdAt).toLocaleDateString("en-UK", { day: 'numeric', month: 'long', year: 'numeric' })}
                                     </p>
                                     <div className='pb-8'>
                                         <Link to={`/publications/${publication.id}`} className="text-lg font-normal  mb-2 text-gray-800 capitalize hover:text-teal-600 ">
@@ -93,7 +93,7 @@ const PublicationsArea = () => {
                                         <p className="text-sm capitalize font-bold">
                                             <span className="text-gray-600">By</span> {/* Style 'By' with a different color */}
                                             <Link to={`/profileDisplay/${publication.owner.profile?.id}`} className="text-orange-600 hover:underline">
-                                                {publication.owner.first_name} {publication.owner.last_name}
+                                                {publication.owner.firstName} {publication.owner.lastName}
                                             </Link>
                                         </p>
 

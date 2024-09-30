@@ -24,8 +24,8 @@ export const searchDatabase = async (req, res) => {
       prisma.user.findMany({
         where: {
           OR: [
-            { first_name: { contains: searchTerm, mode: "insensitive" } },
-            { last_name: { contains: searchTerm, mode: "insensitive" } },
+            { firstName: { contains: searchTerm, mode: "insensitive" } },
+            { lastName: { contains: searchTerm, mode: "insensitive" } },
             { username: { contains: searchTerm, mode: "insensitive" } },
             { email: { contains: searchTerm, mode: "insensitive" } },
             { description: { contains: searchTerm, mode: "insensitive" } },

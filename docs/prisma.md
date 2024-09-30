@@ -4,7 +4,7 @@ After updating your schema, generate a migration using the Prisma CLI. This will
 
 '
 
-npx prisma migrate dev --name project_image
+npx prisma migrate dev --name projectImage
 
 '
 

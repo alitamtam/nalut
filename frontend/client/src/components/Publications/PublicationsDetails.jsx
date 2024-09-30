@@ -73,7 +73,7 @@ const PublicationDetails = () => {
                 {/* Separator line */}
                 {/* Author details on the right */}
                 <div className="w-auto   justify-center ssm:py-3  ">
-                    <span className="text-gray-600 mb-2 capitalize font-bold hover:text-teal-600 py-5">By</span>  <Link to={`/profileDisplay/${publication.owner.profile?.id}`} className="text-gray-600 mb-2 capitalize font-bold hover:text-teal-600 py-5">{publication.owner.first_name} {publication.owner.last_name} </Link>| <span className='text-gray-500 mb-2 capitalize font-normal'>{new Date(publication.created_at).toLocaleDateString("en-UK", { day: 'numeric', month: 'long', year: 'numeric' })}</span>
+                    <span className="text-gray-600 mb-2 capitalize font-bold hover:text-teal-600 py-5">By</span>  <Link to={`/profileDisplay/${publication.owner.profile?.id}`} className="text-gray-600 mb-2 capitalize font-bold hover:text-teal-600 py-5">{publication.owner.firstName} {publication.owner.lastName} </Link>| <span className='text-gray-500 mb-2 capitalize font-normal'>{new Date(publication.createdAt).toLocaleDateString("en-UK", { day: 'numeric', month: 'long', year: 'numeric' })}</span>
 
                 </div>
             </div>

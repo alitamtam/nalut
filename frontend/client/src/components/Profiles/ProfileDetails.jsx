@@ -22,7 +22,7 @@ const ProfileDetails = () => {
                         className="w-48 h-48 object-cover rounded-full mb-4"
                     />
                     <h2 className="text-2xl font-bold text-gray-800 capitalize">
-                        {publication.owner.first_name} {publication.owner.last_name}
+                        {publication.owner.firstName} {publication.owner.lastName}
                     </h2>
                 </div>
 
