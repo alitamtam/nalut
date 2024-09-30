@@ -13,6 +13,10 @@ export default {
         md: "768px", // Tablet
         lg: "1024px", // Laptop/Desktop
       },
+      fontFamily: {
+        arabic: ["Al-Jazeera", "sans-serif"], // Add the new font family
+        ubuntu: ["Ubuntu", "sans-serif"],
+      },
     },
     container: {
       center: true,

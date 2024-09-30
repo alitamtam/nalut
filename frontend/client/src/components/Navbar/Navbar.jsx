@@ -37,7 +37,7 @@ const Navbar = () => {
 
     return (
         <nav className="bg-sky-950 lg:mx-80">
-            <div className={`flex ${isArabic ? 'flex-row-reverse' : 'flex-row'} container mx-auto px-4 lg:py-8 ssm:py-4 flex justify-between items-center`}>
+            <div className={`flex ${isArabic ? 'flex-row ' : 'flex-row'} container mx-auto px-4 lg:py-8 ssm:py-4 flex justify-between items-center`}>
                 <Link to="/" className="text-orange-500 font-bold text-base lg:hidden shadow-sm">
                     Menu
                 </Link>
@@ -53,7 +53,7 @@ const Navbar = () => {
                 </div>
 
                 {/* Desktop Menu */}
-                <div className="hidden lg:flex space-x-8 mx-auto uppercase font-thin">
+                <div className={`hidden lg:flex space-x-8 mx-auto uppercase font-body text-xl text-ssm ${isArabic ? ' gap-10 font-arabic text-2xl flex-row-reverse  ' : 'flex-row'}  `}>
                     <Link to="/" className="text-yellow-500 font-bold">
                         {t('home')}
                     </Link>
@@ -74,7 +74,7 @@ const Navbar = () => {
 
                 {/* Mobile Menu (Burger Menu) */}
                 {isOpen && (
-                    <div className="lg:hidden absolute top-20 left-0 w-full bg-sky-950 text-white p-4 space-y-4 z-20">
+                    <div className={`lg:hidden absolute top-20 left-0 w-full bg-sky-950 text-white p-4 space-y-4 z-20  ${isArabic ? 'font-arabic text-lg ' : ''}`}>
                         <Link to="/" className="block hover:text-orange-500" onClick={toggleMenu}>
                             {t('home')}
                         </Link>
