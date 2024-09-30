@@ -18,8 +18,9 @@ const ProjectsArea = () => {
     const settings = {
         dots: true,
         infinite: true,
-        autoplay: true,
+        // autoplay: true,
         speed: 500,
+
         slidesToShow: 3,
         slidesToScroll: 1,
         responsive: [
@@ -39,7 +40,7 @@ const ProjectsArea = () => {
             }
         ]
     };
-    const lastThreePublications = projects.slice(-3);
+    const lastThreePublications = projects.slice(-9);
 
     return (
         <div className="p-4">
@@ -51,28 +52,35 @@ const ProjectsArea = () => {
                     View All
                 </Link>
             </div>
-            <div className=" lg:mx-80 ">
-                <Slider {...settings}>
-                    {lastThreePublications.map((project) => (
-                        <div key={project.id} className=" border bg-neutral-100 border-gray-100 lg:gap-4  p-4 shadow-lg">
-                            <h3 className="text-xl font-semibold capitalize">{project.title}</h3>
-                            <p className="text-gray-600">{project.content1}</p>
-                            {project.project_image && (
-                                <img
-                                    src={project.project_image}
-                                    alt={project.title}
-                                    className="w-full h-40 object-cover  mt-2"
-                                />
-                            )}
-                            <Link to={`/projects/${project.id}`} className="text-blue-500 mt-2 inline-block">View Details</Link>
-                        </div>
-                    ))}
-                </Slider>
-            </div>
-            <div className="pt-10 ">
-                <Link to='/projects/ViewAllProjects' className="border-2 text-teal-600 font-body border-teal-600 rounded-full hover:bg-teal-600 hover:text-white py-2 px-14 mb-4 lg:mb-0 lg:hidden md:block ssm:block ">
-                    View All
-                </Link>
+            <div className=" bg-white text-gray-800 lg:h-4/5 border-b border-teal-600 pb-12 mb-12 w-full max-w-full overflow-x-hidden">
+
+                <div className=" lg:mx-80  bg-white px-3 space-y-12">
+
+                    <Slider {...settings} >
+                        {lastThreePublications.map((project) => (
+                            <div key={project.id} className="  bg-neutral-200  m-4  p-4  space-y-4 py-12">
+                                <Link to={`/projects/${project.id}`} className=" space-y-12 text-xl font-semibold capitalize hover:text-teal-600">{project.title}</Link>
+                                {project.project_image && (
+                                    <Link to={`/projects/${project.id}`} >
+                                        <img
+                                            src={project.project_image}
+                                            alt={project.title}
+                                            className="w-full lg:h-60 object-cover  mt-2 my-4"
+                                        /></Link>
+                                )}
+                                <Link to={`/profileDisplay/${project.actors.profile?.id}`}>
+                                    <span className="text-gray-600">By |</span>  <span className="text-orange-600 hover:underline"> {project.actors.first_name} {project.actors.last_name}</span>
+                                </Link>
+
+                            </div>
+                        ))}
+                    </Slider>
+                </div>
+                <div className="pt-10 ">
+                    <Link to='/projects/ViewAllProjects' className="border-2 text-teal-600 font-body border-teal-600 rounded-full hover:bg-teal-600 hover:text-white py-2 px-14 mb-4 lg:mb-0 lg:hidden md:block ssm:block ">
+                        View All
+                    </Link>
+                </div>
             </div>
         </div>
     );

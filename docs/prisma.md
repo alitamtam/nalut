@@ -1,5 +1,3 @@
-
-
 ### 2. Generate a Migration
 
 After updating your schema, generate a migration using the Prisma CLI. This will create a new migration file that contains the necessary SQL commands to update your database schema:

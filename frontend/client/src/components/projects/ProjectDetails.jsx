@@ -26,8 +26,8 @@ const ProjectDetails = () => {
 
                 {/* Author details on the right */}
                 <div className="w-full md:w-1/2 flex flex-col items-start justify-center">
-                    <Link to={`/profileDisplay/${project.actors.profile?.id}`} className="text-gray-600 mb-2 capitalize font-bold hover:text-teal-600 py-5">
-                        By {project.actors.first_name} {project.actors.last_name} | {new Date(project.created_at).toLocaleDateString("en-UK", { day: 'numeric', month: 'long', year: 'numeric' })}
+                    <Link to={`/profileDisplay/${project.actors.profile?.id}`} >
+                        <span className="text-gray-600 mb-2 capitalize font-bold hover:text-teal-600 py-5">   By {project.actors.first_name} {project.actors.last_name} </span>| <span className='text-gray-500 mb-2 capitalize font-normal'>{new Date(project.created_at).toLocaleDateString("en-UK", { day: 'numeric', month: 'long', year: 'numeric' })}</span>
                     </Link>
                     {/* Display Actor Profile Image
                     {project.actors.profile?.image && (

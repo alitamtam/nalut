@@ -188,7 +188,19 @@ const ManageProjects = () => {
                                     {project.link ? "View Project" : "No Link"}
                                 </a>
                             </td>
-                            <td className="border px-4 py-2">{project.actorId}</td>
+                            <td className="border px-4 py-2">{project.actors.first_name} {project.actors.last_name}</td>
+                            <td className="border px-4 py-2">
+                                {project.project_image ? (
+                                    <img
+                                        alt="project"
+                                        src={project.project_image} // Include the base64 prefix here
+                                        className="h-16 w-16 object-cover rounded-full"
+                                    />
+                                ) : (
+                                    <p>No Image</p> // Fallback if no image is provided
+                                )}
+                            </td>
+
                             <td className="border px-4 py-2">
                                 <button
                                     onClick={() => handleEdit(project)}

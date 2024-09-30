@@ -3,7 +3,18 @@ import prisma from "../../prisma/index.js";
 const projectsController = {
   async getProjects(req, res) {
     try {
-      const projects = await prisma.projects.findMany();
+      const projects = await prisma.projects.findMany({
+        include: {
+          actors: {
+            // Use 'actors' to match the relation name
+            select: {
+              first_name: true,
+              last_name: true,
+              profile: true, // Include the profile object
+            },
+          },
+        },
+      });
       res.json(projects);
     } catch (error) {
       res.status(500).json({ error: error.message });
