@@ -3,10 +3,12 @@ import { CiCalendar } from "react-icons/ci";
 import { IoLocationOutline } from "react-icons/io5";
 import { IoMdTime } from "react-icons/io";
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next'; // Import the hook
 
 const AllEvents = () => {
     // Fetch all events using the useGetEvents hook
     const { data: events, isLoading, isError, error } = useGetEvents();
+    const { t } = useTranslation('navbar'); // Use the hook to get the translation function
 
     if (isLoading) {
         return <p>Loading...</p>; // Show loading state while fetching events
@@ -23,7 +25,7 @@ const AllEvents = () => {
     return (
         <div className="flex flex-col items-center py-12 bg-white text-gray-800 h-4/5">
             <h2 className="text-3xl font-bold mb-4 items-start capitalise font-sans text-gray-800">
-                Our Latest  Events
+                {t('Our Latest  Events')}
             </h2>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 lg:px-80 gap-4 justify-center mx-auto py-6 ">

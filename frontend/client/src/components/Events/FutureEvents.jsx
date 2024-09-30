@@ -29,7 +29,7 @@ const FutureEvents = () => {
                     Event Areas
                 </h2>
                 <Link to='events/view-all' className="border-2 text-teal-600 font-body border-teal-600 rounded-full hover:bg-teal-600 hover:text-white py-2 px-8  mb-4 lg:mb-0">
-                    View All
+                    {t('view_all')}
                 </Link>
             </div>
             <div className="flex flex-col items-center p-12 bg-white text-gray-800 h-4/5 border-b border-teal-600 pb-12 mb-12">

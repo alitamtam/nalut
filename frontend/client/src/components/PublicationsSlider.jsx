@@ -2,10 +2,12 @@ import { TECarousel, TECarouselItem } from "tw-elements-react";
 import { useGetPublications } from "./Admin/Dashboard/hooks/useGetPublications";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { useTranslation } from 'react-i18next'; // Import the hook
 
 const PublicationsSlider = () => {
     const { data: publications = [], isLoading, isError } = useGetPublications();
     const [activeIndex, setActiveIndex] = useState(0);
+    const { t } = useTranslation('navbar'); // Use the hook to get the translation function
 
     const recentPublications = publications.slice(0, 3);
 
@@ -115,7 +117,7 @@ const PublicationsSlider = () => {
 
                             </h5>
                             <p className="text-sm mt-1 font-bold capitalize text-orange-400 hover:text-teal-500">
-                                <span className="text-gray-500 font-">by</span>  {pub.owner.firstName} {pub.owner.lastName}
+                                <span className="text-gray-500 font-">{t('by')}</span>  {pub.owner.firstName} {pub.owner.lastName}
                             </p>
                         </div>
                     </TECarouselItem>

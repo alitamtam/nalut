@@ -6,10 +6,12 @@ import { useGetEvents } from '../Admin/Dashboard/hooks/useGetEvent'; // Importin
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import './sliderStyle.css'; // Import your custom CSS for dots
+import { useTranslation } from 'react-i18next'; // Import the hook
 
 const UpcomingEvent = () => {
     const { data: events, isLoading, isError } = useGetEvents();
     const [currentSlide, setCurrentSlide] = useState(0); // State to track the current slide
+    const { t } = useTranslation('navbar'); // Use the hook to get the translation function
 
     const settings = {
         dots: true,
@@ -36,13 +38,13 @@ const UpcomingEvent = () => {
 
     return (
         <div className='lg:mx-80 mb-20'>
-            {/* Heading and View All Button */}
+            {/* Heading and {t('view_all')} Button */}
             <div className="flex flex-col items-center lg:flex-row lg:justify-between pb-5">
                 <h2 className="text-2xl  lg:mb-4 text-center capitalise font-bold text-gray-800">
-                    Upcoming Events
+                    {t('upcoming events')}
                 </h2>
                 <Link to='events/view-all' className="border-2 text-teal-600 font-body border-teal-600 rounded-full hover:bg-teal-600 hover:text-white py-2 px-8 mb-4 lg:mb-0 hidden lg:block md:hidden">
-                    View All
+                    {t('view_all')}
                 </Link>
             </div>
 
@@ -53,7 +55,7 @@ const UpcomingEvent = () => {
                 <div className='pt-20  m-auto '>
                     <Link to='events/view-all' className="border-2 text-teal-600 font-body border-teal-600 rounded-full hover:bg-teal-600 hover:text-white py-2 px-14 mb-4 lg:mb-0 lg:hidden md:block ssm:block "
                     >
-                        View All
+                        {t('view_all')}
                     </Link>
                 </div>
                 <div className="w-full lg:w-1/2 bg-[#e2dfd8] lg:h-[340px] px-4 py-6 lg:px-8 lg:py-12 lg:mb-0 h-full  ">

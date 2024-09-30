@@ -13,53 +13,55 @@ import { RiGovernmentLine } from "react-icons/ri";
 import { BsBuildingAdd } from "react-icons/bs";
 import { AiOutlineFileProtect } from "react-icons/ai";
 import { FaConnectdevelop } from "react-icons/fa6";
+import { useTranslation } from 'react-i18next'; // Import the hook
 
 export const useIconOptions = () => {
+  const { t } = useTranslation('navbar'); // Use translation for topics
+
   const iconOptions = [
     {
-      name: "Teacher Education",
-      icon: <LiaChalkboardTeacherSolid className="text-3xl" />,
+      name: t("topics.Teacher Education"),
+      icon: <LiaChalkboardTeacherSolid className="text-8xl" />,
     },
     {
-      name: "Teacher Professional Development",
-      icon: <FaUserGraduate className="text-3xl" />,
-    },
-    // {
-    //   name: "School Governance",
-    //   icon: <FaSchoolCircleCheck className="text-3xl" />,
-    // },
-    {
-      name: "Ministry of Education",
-      icon: <FaConnectdevelop className="text-3xl" />,
+      name: t("topics.Teacher Professional Development"),
+      icon: <FaUserGraduate className="text-5xl" />,
     },
     {
-      name: "IT and EdTech",
-      icon: <RiGovernmentLine className="text-3xl" />,
+      name: t("topics.Ministry of Education"),
+      icon: <FaConnectdevelop className="text-5xl" />,
     },
     {
-      name: "Buildings and Facilities",
-      icon: <BsBuildingAdd className="text-3xl" />,
+      name: t("topics.IT and EdTech"),
+      icon: <RiGovernmentLine className="text-5xl" />,
     },
     {
-      name: "Quality Assurance",
-      icon: <AiOutlineFileProtect className="text-3xl" />,
-    },
-    { name: "Educational Research", icon: <FaBook className="text-3xl" /> },
-    {
-      name: "Information Technology in Education",
-      icon: <FaLaptop className="text-3xl" />,
+      name: t("topics.Buildings and Facilities"),
+      icon: <BsBuildingAdd className="text-5xl" />,
     },
     {
-      name: "Inclusion and Neuro-divergence",
-      icon: <FaBrain className="text-3xl" />,
+      name: t("topics.Quality Assurance"),
+      icon: <AiOutlineFileProtect className="text-5xl" />,
     },
     {
-      name: "Student Wellbeing and Enrichment",
-      icon: <FaLeaf className="text-3xl" />,
+      name: t("topics.Educational Research"),
+      icon: <FaBook className="text-5xl" />,
     },
     {
-      name: "Assessment and Examination",
-      icon: <FaPenAlt className="text-3xl" />,
+      name: t("topics.Information Technology in Education"),
+      icon: <FaLaptop className="text-5xl" />,
+    },
+    {
+      name: t("topics.Inclusion and Neuro-divergence"),
+      icon: <FaBrain className="text-5xl" />,
+    },
+    {
+      name: t("topics.Student Wellbeing and Enrichment"),
+      icon: <FaLeaf className="text-5xl" />,
+    },
+    {
+      name: t("topics.Assessment and Examination"),
+      icon: <FaPenAlt className="text-5xl" />,
     },
   ];
 

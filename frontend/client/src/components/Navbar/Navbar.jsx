@@ -2,8 +2,10 @@ import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import { IoIosArrowDown } from 'react-icons/io';
-
+import { useTranslation } from 'react-i18next'; // Import the hook
 const Navbar = () => {
+    const { t, i18n } = useTranslation('navbar'); // Use the hook to get the translation function
+    const isArabic = i18n.language === 'ar'; // Check if the current language is Arabic
     const [isOpen, setIsOpen] = useState(false); // State for burger menu
     const [aboutUsOpen, setAboutUsOpen] = useState(false); // State for About Us dropdown
 
@@ -35,7 +37,7 @@ const Navbar = () => {
 
     return (
         <nav className="bg-sky-950 lg:mx-80">
-            <div className="container mx-auto px-4 lg:py-8 ssm:py-4 flex justify-between items-center">
+            <div className={`flex ${isArabic ? 'flex-row-reverse' : 'flex-row'} container mx-auto px-4 lg:py-8 ssm:py-4 flex justify-between items-center`}>
                 <Link to="/" className="text-orange-500 font-bold text-base lg:hidden shadow-sm">
                     Menu
                 </Link>
@@ -53,19 +55,20 @@ const Navbar = () => {
                 {/* Desktop Menu */}
                 <div className="hidden lg:flex space-x-8 mx-auto uppercase font-thin">
                     <Link to="/" className="text-yellow-500 font-bold">
-                        Main
+                        {t('home')}
                     </Link>
                     <Link to="/about" className="text-white hover:text-orange-500">
-                        About Us
+                        {t('about.title')}
                     </Link>
                     <Link to="/publications" className="text-white hover:text-orange-500">
-                        Publications
+                        {t('publications.title')}
                     </Link>
                     <Link to="/projects" className="text-white hover:text-orange-500">
-                        Projects
+                        {t('projects.title')}
                     </Link>
                     <Link to="/events/view-all" className="text-white hover:text-orange-500">
-                        Events
+                        {t('events.title')}
+
                     </Link>
                 </div>
 
@@ -73,7 +76,7 @@ const Navbar = () => {
                 {isOpen && (
                     <div className="lg:hidden absolute top-20 left-0 w-full bg-sky-950 text-white p-4 space-y-4 z-20">
                         <Link to="/" className="block hover:text-orange-500" onClick={toggleMenu}>
-                            Main
+                            {t('home')}
                         </Link>
 
                         {/* About Us with Dropdown */}
@@ -82,31 +85,33 @@ const Navbar = () => {
                                 onClick={toggleAboutUs}
                                 className="w-full flex justify-between items-center text-left"
                             >
-                                About Us <IoIosArrowDown className={`${aboutUsOpen ? 'rotate-180' : ''}`} />
+                                {t('about.title')}
+                                <IoIosArrowDown className={`${aboutUsOpen ? 'rotate-180' : ''}`} />
                             </button>
                             {aboutUsOpen && (
                                 <div className="ml-4 mt-2 space-y-2">
                                     <Link to="/about#about-us" onClick={toggleMenu} className="block hover:text-orange-500">
-                                        About Us Overview
+                                        {t('about.title')}
                                     </Link>
                                     <Link to="/about#our-team" onClick={toggleMenu} className="block hover:text-orange-500">
-                                        Our Team
+                                        {t('our team')}
                                     </Link>
                                     <Link to="/about#join-us" onClick={toggleMenu} className="block hover:text-orange-500">
-                                        Join or Commission EduLibya
+                                        {t('join us')}
                                     </Link>
                                 </div>
                             )}
                         </div>
 
                         <Link to="/publications" className="block hover:text-orange-500" onClick={toggleMenu}>
-                            Publications
+                            {t('publications.title')}
                         </Link>
                         <Link to="/projects" className="block hover:text-orange-500" onClick={toggleMenu}>
-                            Projects
+                            {t('projects.title')}
                         </Link>
                         <Link to="/events/view-all" className="block hover:text-orange-500" onClick={toggleMenu}>
-                            Events
+                            {t('events.title')}
+
                         </Link>
                     </div>
                 )}

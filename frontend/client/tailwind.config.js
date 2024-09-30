@@ -24,5 +24,25 @@ export default {
       },
     },
   },
-  plugins: [twElementsReactPlugin],
+  plugins: [
+    twElementsReactPlugin,
+    // Adding a plugin for text direction
+    function ({ addUtilities }) {
+      const newUtilities = {
+        ".text-start": {
+          textAlign: "start",
+        },
+        ".text-end": {
+          textAlign: "end",
+        },
+        ".direction-rtl": {
+          direction: "rtl",
+        },
+        ".direction-ltr": {
+          direction: "ltr",
+        },
+      };
+      addUtilities(newUtilities, ["responsive", "hover"]);
+    },
+  ],
 };

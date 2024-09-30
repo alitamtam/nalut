@@ -1,19 +1,21 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import Sidebar from '../Navbar/Sidebar';
 import Members from './Members';
 import JoinOrCommission from './JoinUs';
 import AboutUsContent from './AboutUsContent';
+import { useTranslation } from 'react-i18next';
 
-const sections = [
-    { name: 'About Us', id: 'about-us', content: <AboutUsContent /> },
-    { name: 'Our Team', id: 'our-team', content: <Members /> },
-    { name: 'Join or Commission EduLibya', id: 'join-us', content: <JoinOrCommission /> },
-];
 
 const AboutUsPage = () => {
+    const { t } = useTranslation('navbar');
+    const sections = useMemo(() => [
+        { name: t('about.title'), id: 'about-us', content: <AboutUsContent /> },
+        { name: t('our team'), id: 'our-team', content: <Members /> },
+        { name: t('join us'), id: 'join-us', content: <JoinOrCommission /> },
+    ], [t]);
+
     const [activeSection, setActiveSection] = useState(sections[0].name);
     const [isMobile, setIsMobile] = useState(window.innerWidth < 1024);
-
     const handleSectionClick = (sectionName) => {
         setActiveSection(sectionName);
         const section = sections.find(sec => sec.name === sectionName);
@@ -40,7 +42,7 @@ const AboutUsPage = () => {
             setActiveSection(section.name);
             document.getElementById(section.id)?.scrollIntoView({ behavior: 'smooth' });
         }
-    }, []); // Trigger when hash changes
+    }, [sections]); // Trigger when hash changes
 
     return (
         <div className="lg:mx-80">

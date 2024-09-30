@@ -2,12 +2,12 @@ import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useGetPublications } from '../Admin/Dashboard/hooks/useGetPublicationById'; // Hook to fetch publications
 import { useIconOptions } from '../Admin/Dashboard/hooks/useIconOptions'; // Import the icon options hook
-
+import { useTranslation } from 'react-i18next'; // Import the hook
 const PublicationDetails = () => {
     const { id } = useParams(); // Correct usage: Get publication ID from URL without passing id
     const { data: publication, isLoading, error } = useGetPublications(id); // Fetch publications by ID
     const iconOptions = useIconOptions(); // Get the icon options
-
+    const { t } = useTranslation('navbar'); // Use the hook to get the translation function
     if (isLoading) return <div className="flex items-center justify-center bg-green-100 border lg:mx-80 border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">Loading publication...</div>;
     if (error) return (
         <div className="flex items-center justify-center bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
@@ -73,7 +73,7 @@ const PublicationDetails = () => {
                 {/* Separator line */}
                 {/* Author details on the right */}
                 <div className="w-auto   justify-center ssm:py-3  ">
-                    <span className="text-gray-600 mb-2 capitalize font-bold hover:text-teal-600 py-5">By</span>  <Link to={`/profileDisplay/${publication.owner.profile?.id}`} className="text-gray-600 mb-2 capitalize font-bold hover:text-teal-600 py-5">{publication.owner.firstName} {publication.owner.lastName} </Link>| <span className='text-gray-500 mb-2 capitalize font-normal'>{new Date(publication.createdAt).toLocaleDateString("en-UK", { day: 'numeric', month: 'long', year: 'numeric' })}</span>
+                    <span className="text-gray-600 mb-2 capitalize font-bold hover:text-teal-600 py-5">{t('By')}</span>  <Link to={`/profileDisplay/${publication.owner.profile?.id}`} className="text-gray-600 mb-2 capitalize font-bold hover:text-teal-600 py-5">{publication.owner.firstName} {publication.owner.lastName} </Link>| <span className='text-gray-500 mb-2 capitalize font-normal'>{new Date(publication.createdAt).toLocaleDateString("en-UK", { day: 'numeric', month: 'long', year: 'numeric' })}</span>
 
                 </div>
             </div>

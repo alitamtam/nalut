@@ -2,29 +2,14 @@
 import PropTypes from 'prop-types';
 import Slider from "react-slick";
 import { useGetTopics } from "./Admin/Dashboard/hooks/useGetTopics"; // Use hook to fetch topics
-import { FaUserGraduate, FaBook, FaLaptop, FaBrain, FaLeaf, FaPenAlt } from 'react-icons/fa';
-import { LiaChalkboardTeacherSolid } from 'react-icons/lia';
-import { FaSchoolCircleCheck } from 'react-icons/fa6';
-import { BsBuildingAdd } from 'react-icons/bs';
-import { RiGovernmentLine } from 'react-icons/ri';
-import { AiOutlineFileProtect } from 'react-icons/ai';
+import { FaBook } from 'react-icons/fa'; // Import the icon component
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate
+import { useTranslation } from 'react-i18next'; // Import the hook
+import { useIconOptions } from './Admin/Dashboard/hooks/useIconOptions'; // Import the mapping of icon names to components
 
 // Define a mapping of icon names to components
-const iconMap = {
-    'Teacher Education': <LiaChalkboardTeacherSolid className="text-6xl" />,
-    'Teacher Professional Development': <FaUserGraduate className="text-6xl" />,
-    'School Governance': <FaSchoolCircleCheck className="text-6xl" />,
-    'Ministry of Education': <RiGovernmentLine className="text-6xl" />,
-    'Buildings and Facilities': <BsBuildingAdd className="text-6xl" />,
-    'Quality Assurance': <AiOutlineFileProtect className="text-6xl" />,
-    'Educational Research': <FaBook className="text-6xl" />,
-    'Information Technology in Schools': <FaLaptop className="text-6xl" />,
-    'Inclusion and Neuro-divergence': <FaBrain className="text-6xl" />,
-    'Student Wellbeing and Enrichment': <FaLeaf className="text-6xl" />,
-    'Assessment and Examination': <FaPenAlt className="text-6xl" />,
-};
+
 
 // Custom next and previous arrows
 const NextArrow = ({ onClick }) => (
@@ -53,7 +38,10 @@ PrevArrow.propTypes = {
 const TopicsSlick = () => {
     // Fetch the topics using your custom hook
     const { data: topics, isLoading, error } = useGetTopics();
+    const iconOptions = useIconOptions(); // Get the icon options
+
     const navigate = useNavigate(); // Initialize useNavigate
+    const { t } = useTranslation('navbar'); // Use the hook to get the translation function
 
     const settings = {
         infinite: true,
@@ -90,7 +78,7 @@ const TopicsSlick = () => {
                     Topic Areas
                 </h2>
                 <Link to='topics/view-all' className="border-2 text-teal-600 font-body border-teal-600 rounded-full hover:bg-teal-600 hover:text-white py-2 px-8  mb-4 lg:mb-0 hidden lg:block ">
-                    View All
+                    {t('view_all')}
                 </Link>
             </div>
             <div className="relative w-full pb-12 lg:px-7  border-teal-500 border-b ">
@@ -104,11 +92,11 @@ const TopicsSlick = () => {
                             >
                                 <div className="lg:text-6xl text-teal-600 group-hover:text-white pb-4 pl-20 lg:pt-10 ssm:pt-8 ">
                                     {/* Dynamically render the icon based on iconClass */}
-                                    {iconMap[topic.iconClass] || <FaBook className="text-6xl" />}
+                                    {iconOptions[topic.iconClass] || <FaBook className="text-6xl" />}
                                 </div>
                                 <div className="flex-col">
                                     <p className="lg:mt-4 text-teal-600 lg:text-xs ssm:text-xs font-sans font-bold tracking-wider uppercase text-center group-hover:text-white pb-10">
-                                        {topic.name}
+                                        {t(`topics.${topic.name}`)}
                                     </p>
                                 </div>
                             </div>
@@ -118,7 +106,7 @@ const TopicsSlick = () => {
                 </div>
                 <div className='pt-5 w-[200px]  m-auto'>
                     <Link to='topics/view-all' className="border-2 text-teal-600 font-body border-teal-600 rounded-full hover:bg-teal-600 hover:text-white py-2 text-center mb-4 lg:mb-0 lg:hidden md:block ssm:block">
-                        View All
+                        {t('view_all')}
                     </Link>
                 </div>
             </div>

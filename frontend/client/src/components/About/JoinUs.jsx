@@ -1,47 +1,44 @@
+import { useTranslation } from 'react-i18next';
 
 const JoinOrCommission = () => {
+    const { t, i18n } = useTranslation('navbar');
+    const isArabic = i18n.language === 'ar';
+
     return (
-        <div className="container mx-auto px-4 py-6">
-            <h2 className="text-3xl font-bold text-gray-800 mb-6">
-                How to Collaborate with EduLibya
+        <div className={`container mx-auto px-4 py-6 ${isArabic ? 'direction-rtl' : 'direction-ltr'}`}>
+            <h2 className={`text-3xl font-bold text-gray-800 mb-6 ${isArabic ? 'text-end' : 'text-start'}`}>
+                {t('joinUs.header')}
             </h2>
 
             <div className="mb-6">
-                <h3 className="text-2xl font-semibold text-gray-700 mb-4">
-                    Share Your Publications
+                <h3 className={`text-2xl font-semibold text-gray-700 mb-4 ${isArabic ? 'text-end' : 'text-start'}`}>
+                    {t('joinUs.sharePublications')}
                 </h3>
-                <p className="text-lg text-gray-600 mb-4">
-                    EduLibya is dedicated to fostering a community of knowledge and learning. We welcome contributions in the form of publications, research, and educational materials that align with our mission.
+                <p className={`text-lg text-gray-600 mb-4 ${isArabic ? 'text-end' : 'text-start'}`}>
+                    {t('joinUs.description')}
                 </p>
-                <p className="text-lg text-gray-600 mb-4">
-                    To share your work with us, follow these simple steps:
+                <p className={`text-lg text-gray-600 mb-4 ${isArabic ? 'text-end' : 'text-start'}`}>
+                    {t('joinUs.steps.description')}
                 </p>
-                <ul className="list-disc list-inside text-lg text-gray-600 mb-4">
+                <ul className={`list-disc list-inside text-lg text-gray-600 mb-4 ${isArabic ? 'text-end' : 'text-start'}`}>
                     <li>
-                        <strong>Submit Your Work:</strong> Use our{' '}
-                        <a href="#" className="text-teal-500 hover:underline">
-                            publication submission form
-                        </a>{' '}
-                        to provide details about your publication.
+                        <strong>{t('joinUs.steps.submitYourWork')}</strong>
                     </li>
                     <li>
-                        <strong>Review Process:</strong> Our team will review your submission and get in touch if any further information is needed.
+                        <strong>{t('joinUs.steps.reviewProcess')}</strong>
                     </li>
                     <li>
-                        <strong>Publication Display:</strong> Accepted publications will be featured on our platform, allowing others to benefit from your work.
+                        <strong>{t('joinUs.steps.publicationDisplay')}</strong>
                     </li>
                 </ul>
             </div>
 
             <div>
-                <p className="text-lg text-gray-600 mb-4">
-                    By sharing your publications with EduLibya, you contribute to a broader exchange of knowledge and help advance educational and cultural initiatives.
+                <p className={`text-lg text-gray-600 mb-4 ${isArabic ? 'text-end' : 'text-start'}`}>
+                    {t('joinUs.contribution')}
                 </p>
-                <p className="text-lg text-gray-600">
-                    For more information or to get started, reach out to us at{' '}
-                    <a href="mailto:contact@edulibya.ly" className="text-teal-500 hover:underline">
-                        contact@edulibya.org
-                    </a>.
+                <p className={`text-lg text-gray-600 ${isArabic ? 'text-end' : 'text-start'}`}>
+                    {t('joinUs.contact')}
                 </p>
             </div>
         </div>

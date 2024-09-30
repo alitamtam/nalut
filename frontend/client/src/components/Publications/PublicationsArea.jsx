@@ -1,11 +1,13 @@
 import { Link } from 'react-router-dom';
 import { useGetPublications } from '../Admin/Dashboard/hooks/useGetPublications';
 import { useIconOptions } from '../Admin/Dashboard/hooks/useIconOptions'; // Import the icon options hook
+import { useTranslation } from 'react-i18next'; // Import the hook
 
 const PublicationsArea = () => {
     // Destructure the query result from useGetPublications
     const { data: publications, isLoading, error } = useGetPublications();
     const iconOptions = useIconOptions(); // Get the icon options
+    const { t } = useTranslation('navbar'); // Use the hook to get the translation function
 
     // console.log publications to find profile data
 
@@ -28,10 +30,10 @@ const PublicationsArea = () => {
         <div>
             <div className="flex flex-col items-center lg:flex-row lg:justify-between lg:mx-80 pb-4">
                 <h2 className="text-3xl font-bold lg:mb-4 text-center capitalize font-body text-gray-800">
-                    Publications Area
+                    {t('publication area')}
                 </h2>
                 <Link to='/publications/view-all' className="border-2 text-teal-600 font-body border-teal-600 rounded-full hover:bg-teal-600 hover:text-white py-2 px-8 mb-4 lg:mb-0 hidden lg:block ">
-                    View All
+                    {t('view_all')}
                 </Link>
             </div>
 
@@ -91,7 +93,7 @@ const PublicationsArea = () => {
                                     )}
                                     <div>
                                         <p className="text-sm capitalize font-bold">
-                                            <span className="text-gray-600">By</span> {/* Style 'By' with a different color */}
+                                            <span className="text-gray-600">{t('By')}</span> {/* Style 'By' with a different color */}
                                             <Link to={`/profileDisplay/${publication.owner.profile?.id}`} className="text-orange-600 hover:underline">
                                                 {publication.owner.firstName} {publication.owner.lastName}
                                             </Link>
@@ -108,7 +110,7 @@ const PublicationsArea = () => {
                 </div>
                 <div className='pt-10 m-auto'>
                     <Link to='/publications/view-all' className="border-2 text-teal-600 font-body border-teal-600 rounded-full hover:bg-teal-600 hover:text-white py-2 px-14 mb-4 lg:mb-0 lg:hidden md:block ssm:block ">
-                        View All
+                        {t('view_all')}
                     </Link></div>
             </div>
 

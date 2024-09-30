@@ -3,9 +3,11 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useGetProjects } from "../Admin/Dashboard/hooks/projectsHooks/useGetProjects";
 import { Link } from "react-router-dom";
+import { useTranslation } from 'react-i18next'; // Import the hook
 
 const ProjectsArea = () => {
     const { data: projects, isPending, error } = useGetProjects();
+    const { t } = useTranslation('navbar'); // Use the hook to get the translation function
 
     if (isPending) return <div>Loading...</div>;
     if (error) return <div className="flex items-center justify-center bg-red-100 border lg:mx-80 border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">Error: {error.message}</div>;
@@ -49,7 +51,7 @@ const ProjectsArea = () => {
                     Projects Area
                 </h2>
                 <Link to='/projects/ViewAllProjects' className="border-2 text-teal-600 font-body border-teal-600 rounded-full hover:bg-teal-600 hover:text-white py-2 px-8 mb-4 lg:mb-0 hidden lg:block ">
-                    View All
+                    {t('view_all')}
                 </Link>
             </div>
             <div className=" bg-white text-gray-800 lg:h-4/5 border-b border-teal-600 pb-12 mb-12 w-full max-w-full overflow-x-hidden">
@@ -86,7 +88,7 @@ const ProjectsArea = () => {
                 </div>
                 <div className="pt-10 flex justify-center ">
                     <Link to='/projects/ViewAllProjects' className="border-2 text-teal-600 font-body border-teal-600 rounded-full hover:bg-teal-600 hover:text-white py-2 px-14 mb-4 lg:mb-0 lg:hidden md:block ssm:block ">
-                        View All
+                        {t('view_all')}
                     </Link>
                 </div>
             </div >
