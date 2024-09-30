@@ -31,8 +31,7 @@ const ProfileDetails = () => {
 
                 {/* Right Section: Bio */}
                 <div className="w-full md:w-1/2">
-                    <h3 className="text-xl font-bold text-gray-800 mb-2">Bio</h3>
-                    <p className="text-gray-700 text-lg leading-relaxed">
+                    <p className="text-gray-700 text-ssm leading-relaxed ">
                         {publication.owner.Profile?.bio || 'No bio available.'} {/* Check if bio exists */}
                     </p>
                 </div>

@@ -17,30 +17,29 @@ const ProfileDetails = () => {
 
 
     return (
-        <div className="lg:mx-80 bg-slate-100 p-6 rounded-lg shadow-md">
+        <div className="lg:mx-80 bg-white p-4  ">
             {/* Profile Details Layout */}
-            <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-6">
+            <div className="flex flex-col md:flex-row items-start ssm:items-center md:items-center justify-between lg:mb-6 lg:pt-6">
                 {/* Left Section: Image, Name, and Title */}
-                <div className="w-full md:w-1/2 flex flex-col items-center md:items-start justify-center">
+                <div className="lg:w-[300px] p-6  md:w-1/2 flex flex-col items-center md:items-start justify-center bg-sky-950">
                     <img
                         src={`data:image/jpeg;base64,${Profile.image}`} // Check if image exists, otherwise show default
                         alt={`${Profile?.first_name} ${Profile?.last_name}`}
-                        className="w-48 h-48 object-cover rounded-full mb-4"
+                        className="w-48 h-48 object-cover rounded-full mb-4 my-3"
                     />
-                    <h2 className="text-2xl font-bold text-gray-800 capitalize">
+                    <h2 className="text-lg font-normal text-white capitalize my-3 center items-center lg:px-6">
                         {Profile.fullName}
                     </h2>
                 </div>
 
                 {/* Separator Line */}
-                <div className="hidden md:block w-px bg-gray-300 mx-6"></div>
 
                 {/* Right Section: Bio */}
-                <div className="w-full md:w-1/2">
-                    <h3 className="text-xl font-bold text-gray-800 mb-2">Bio</h3>
-                    <p className="text-gray-700 text-lg leading-relaxed">
+                <div className="lg:w-full md:w-1/2 ssm:my-3 lg:mx-6">
+                    <p className="text-gray-700 text- font-light md:text-ssm leading-relaxed mb-4 p-4 border-white border  bg-white">
                         {Profile?.bio || 'No bio available.'} {/* Check if bio exists */}
                     </p>
+
                 </div>
             </div>
         </div>

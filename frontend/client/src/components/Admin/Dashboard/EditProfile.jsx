@@ -32,7 +32,7 @@ const EditProfile = () => {
 
 
 
-    console.log("Current user ID:", user); // Log for debugging
+    console.log("Current user ID:", user.profile); // Log for debugging
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -57,8 +57,8 @@ const EditProfile = () => {
             <div className="flex items-center mb-6">
                 <div className="w-24 h-24 rounded-full overflow-hidden mr-6">
                     <img
-                        src={image ? `data:image/jpeg;base64,${image}` : '/path/to/default/avatar.png'}
-                        alt={`${user.first_name}'s profile`}
+                        src={user.profile?.image}
+                        alt={`${user.fullName}'s profile`}
                         className="w-full h-full object-cover"
                     />
                 </div>

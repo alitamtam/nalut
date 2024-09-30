@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 
-// Create the Zustand store with Redux DevTools enabled
+// Zustand store with Redux DevTools enabled
 export const useSettingsStore = create(
   devtools(
     (set) => ({
@@ -11,18 +11,13 @@ export const useSettingsStore = create(
         username: "",
         role: "",
         profile: {
-          id: "", // Ensure Profile object exists
+          id: "",
           bio: "",
           image: "",
         },
       },
 
-      setTokenAndUser: (token, user) =>
-        // Log profile information for debugging
-        console.log("Setting token and user:", {
-          token,
-          profile: user.profile, // Logging profile data
-        }) ||
+      setTokenAndUser: (token, user) => {
         set({
           token,
           user: {
@@ -30,13 +25,14 @@ export const useSettingsStore = create(
             username: user.username,
             role: user.role,
             profile: {
-              id: user.Profile?.id || "", // Set Profile ID
-              bio: user.Profile?.bio || "", // Set bio
-              image: user.Profile?.image || "", // Set image
+              id: user.Profile?.id || "",
+              bio: user.Profile?.bio || "",
+              image: user.Profile?.image || "",
             },
           },
-        }),
+        });
+      },
     }),
     { name: "SettingsStore" }
-  ) // You can give your store a name for better identification in DevTools
+  )
 );
