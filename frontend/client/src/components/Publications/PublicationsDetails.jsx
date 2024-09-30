@@ -40,22 +40,22 @@ const PublicationDetails = () => {
     };
 
     return (
-        <div className="lg:mx-80 bg-slate-100 p-6 rounded-lg shadow-md">
+        <div className="lg:mx-80 bg-[#f1f1f1] p-6 ">
             <h1 className="text-3xl font-bold mb-4">{publication.title}</h1>
 
             {/* Flex container for image and author details */}
-            <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-6">
+            <div className="flex flex-col md:flex-row items-start md:items-center space-x-6  mb-6">
                 {/* Image on the left */}
                 {publication.image ? (
                     <img
                         src={publication.image}
                         alt={publication.title}
-                        className="w-full md:w-1/2 h-64 object-cover rounded-lg"
+                        className="w-full md:w-1/2 h-[300px] object-cover border-b  border-gray-300 rounded-none  "
                     />
                 ) : (
                     <div className="w-full md:w-1/2 h-64 flex items-center justify-center bg-gray-100 border-t-8 border-b-8 border-sky-950 rounded-none p-4">
                         {/* Icon Section */}
-                        <div className="flex-shrink-1 text-sky-950 text-9xl md:text-9xl mr-6">
+                        <div className="flex-shrink-1 text-sky-950 text-9xl md:text-9xl mr-6 border-b border-gray-200 ">
                             {topicIcon ? (
                                 <div className="mb-2">{topicIcon}</div>
                             ) : (
@@ -71,22 +71,16 @@ const PublicationDetails = () => {
                 )}
 
                 {/* Separator line */}
-                <div className="hidden md:block w-px bg-gray-300 mx-6"></div>
-
                 {/* Author details on the right */}
-                <div className="w-full md:w-1/2 flex flex-col items-start justify-center">
-                    <Link to={`/profileDisplay/${publication.owner.profile?.id}`} className="text-gray-600 mb-2 capitalize font-bold hover:text-teal-600 py-5">
-                        By {publication.owner.first_name} {publication.owner.last_name} | {new Date(publication.created_at).toLocaleDateString("en-UK", { day: 'numeric', month: 'long', year: 'numeric' })}
-                    </Link>
+                <div className="w-auto   justify-center ssm:py-3  ">
+                    <span className="text-gray-600 mb-2 capitalize font-bold hover:text-teal-600 py-5">By</span>  <Link to={`/profileDisplay/${publication.owner.profile?.id}`} className="text-gray-600 mb-2 capitalize font-bold hover:text-teal-600 py-5">{publication.owner.first_name} {publication.owner.last_name} </Link>| <span className='text-gray-500 mb-2 capitalize font-normal'>{new Date(publication.created_at).toLocaleDateString("en-UK", { day: 'numeric', month: 'long', year: 'numeric' })}</span>
 
                 </div>
             </div>
 
-            {/* Thin line divider */}
-            <hr className="border-t border-gray-300 my-6" />
 
             {/* Article content */}
-            <div className="mt-6 p-6 rounded-lg">
+            <div className="w-auto mt-6 p-6 ssm:border-t border-gray-300">
                 <p className="text-gray-700 mb-4 flex-grow">
                     {formatContent(publication.content)}
                 </p>
