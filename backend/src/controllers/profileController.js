@@ -59,11 +59,6 @@ const profileController = {
   async createProfile(req, res) {
     const { userId, bio } = req.body;
     try {
-      console.log(
-        "Profile create request received with User ID:",
-        userId,
-        req.body
-      ); // Log for debugging
       const profile = await prisma.profile.create({
         data: { userId, bio },
       });
@@ -73,17 +68,38 @@ const profileController = {
     }
   },
 
+  // Controller logic for updating or creating a profile
   async updateProfile(req, res) {
-    const { userId } = req.params;
+    const { id } = req.params; // Assuming you're passing userId in params
     const { bio, image } = req.body;
 
     try {
-      const profile = await prisma.profile.update({
-        where: { userId: parseInt(userId, 10) }, // Use userId to find the profile
-        data: { bio, image },
+      // Check if the profile exists using the userId
+      let profile = await prisma.profile.findUnique({
+        where: { userId: parseInt(id, 10) }, // Ensure userId is passed as an integer
       });
+      console.log("Updating profile for userId:", id);
+
+      if (!profile) {
+        // Create the profile if it doesn't exist
+        profile = await prisma.profile.create({
+          data: {
+            userId: parseInt(id, 10),
+            bio,
+            image,
+          },
+        });
+      } else {
+        // Update the profile if it exists
+        profile = await prisma.profile.update({
+          where: { userId: parseInt(id, 10) }, // Ensure userId is passed correctly
+          data: { bio, image },
+        });
+      }
+
       res.status(200).json(profile);
     } catch (error) {
+      console.error("Error updating or creating profile:", error);
       res.status(500).json({ error: "Failed to update profile" });
     }
   },

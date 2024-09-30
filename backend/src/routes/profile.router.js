@@ -8,7 +8,7 @@ const router = express.Router();
 router.get("/", profileController.getAllProfiles);
 router.get("/:id", profileController.getProfileById);
 router.post("/", authenticate, profileController.createProfile);
-router.put("/:userId", authenticate, profileController.updateProfile);
+router.put("/:id", authenticate, profileController.updateProfile);
 router.delete("/:id", authenticate, profileController.deleteProfile);
 
 export default router;
