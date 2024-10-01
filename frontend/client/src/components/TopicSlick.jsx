@@ -38,10 +38,10 @@ PrevArrow.propTypes = {
 const TopicsSlick = () => {
     // Fetch the topics using your custom hook
     const { data: topics, isLoading, error } = useGetTopics();
+    const { t, i18n } = useTranslation('navbar'); // Use the hook to get the translation function
     const iconOptions = useIconOptions(); // Get the icon options
-
+    const isArabic = i18n.language === 'ar'; // Check if the current language is Arabic
     const navigate = useNavigate(); // Initialize useNavigate
-    const { t } = useTranslation('navbar'); // Use the hook to get the translation function
 
     const settings = {
         infinite: true,
@@ -87,15 +87,17 @@ const TopicsSlick = () => {
                         {topics?.map((topic, index) => (
                             <div
                                 key={index}
-                                className="flex-shrink-0 w-48 h-56 ssm:h-[200px] ssm:w-full mx-none flex flex-col text-center bg-gray-100 shadow-lg lg:p-4 transition-transform duration-300 hover:scale-105 hover:bg-sky-900 hover:text-white md:w-60 md:h-72 group"
+                                className={`${isArabic ? 'font-arabic text-lg' : 'font-arabic'} flex-shrink-0 w-48 h-56 ssm:h-[200px] ssm:w-full mx-none flex flex-col text-center bg-gray-100 shadow-lg lg:p-4 transition-transform duration-300 hover:scale-105 hover:bg-sky-900 hover:text-white md:w-60 md:h-72 group`}
                                 onClick={() => navigate(`/topics/${topic.name}`)} // Navigate on click
                             >
+                                {/* Content goes here */}
+
                                 <div className="lg:text-6xl text-teal-600 group-hover:text-white pb-4 pl-20 lg:pt-10 ssm:pt-8 ">
                                     {/* Dynamically render the icon based on iconClass */}
                                     {iconOptions[topic.iconClass] || <FaBook className="text-6xl" />}
                                 </div>
                                 <div className="flex-col">
-                                    <p className="lg:mt-4 text-teal-600 lg:text-xs ssm:text-xs font-sans font-bold tracking-wider uppercase text-center group-hover:text-white pb-10">
+                                    <p className={`${isArabic ? ' lg:text-lg lg:font-arabic' : ''} lg:mt-4 text-teal-600 lg:text-xs ssm:text-xs font-sans font-bold tracking-wider uppercase text-center group-hover:text-white pb-10`}>
                                         {t(`topics.${topic.name}`)}
                                     </p>
                                 </div>
@@ -109,8 +111,8 @@ const TopicsSlick = () => {
                         {t('view_all')}
                     </Link>
                 </div>
-            </div>
-        </div>
+            </div >
+        </div >
     );
 };
 

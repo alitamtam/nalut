@@ -23,7 +23,15 @@
   "our team": "Our Team",
   "our partners": "Our Partners",
   "join us": "Join Us",
-  "By": "By",
+     "Loading publication...": "Loading publication...",
+    "Error!": "Error!",
+    "Error loading publication.": "Error loading publication.",
+    "Publication not found": "Publication not found",
+    "No Icon": "No Icon",
+    "By": "By",
+    "translated to": "translated to",
+
+
   "eduLibyaDescription": {
   "part1": "All of us in EduLibya are connected to the education sector as students, teachers, parents, workshop leaders, researchers, social-psychological practitioners, and so on.",
   "part2": "We are a network of educators interested in various dimensions of education across Libya.",
@@ -93,6 +101,11 @@
     "title": "View All",
     "description": "View all items"
   },
+  "viewDetails": {
+    "title": "View Details",
+    "description": "View details"
+  },
+  
   
   "search": {
     "title": "Search",
@@ -113,6 +126,8 @@
     "title": "No Results",
     "description": "No search results"
   },
+
+  
   
   "topics": {
     "Teacher Education": "Teacher Education",

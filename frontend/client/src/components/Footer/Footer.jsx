@@ -25,7 +25,7 @@ const Footer = () => {
                 <div className="flex flex-col items-center lg:items-end space-y-4">
                     <p className="flex text-center lg:text-right"><CiMail className='text-lg mr-2 mt-1 text-sky-950' />  <a href="mailto:contact@edulibya.ly" className="hover:underline text-gray-500"> contact@edulibya.ly</a></p>
                     <ul className="flex space-x-2 text-lg lg:pr-10"> <span className='text-gray-500 py-0 mb-2'></span>
-                        <li><a href="#"><FaFacebookF /></a></li>
+                        <li><a href="https://www.facebook.com/groups/527521202798857/"><FaFacebookF /></a></li>
                         {/* <li><a href="#"><FaTwitter /></a></li> */}
                         <li><a href="https://www.linkedin.com/groups/12856663/"><FaLinkedinIn /></a></li>
                     </ul>

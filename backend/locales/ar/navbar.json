@@ -20,8 +20,13 @@
   "publication area": "ساحة النشر",
   "projects area": "ساحة المشاريع",
   "upcoming events": "الأحداث القادمة",
+  "Loading publication...": "جارٍ تحميل النشر...",
+  "Error!": "خطأ!",
+  "Error loading publication.": "حدث خطأ أثناء تحميل النشر.",
+  "Publication not found": "النشر غير موجود",
+  "No Icon": "لا توجد أيقونة",
   "By": "بواسطة",
-  
+  "translated to": "مترجم إلى",
   "our team": "فريقنا",
   "our partners": "شركاؤنا",
   "join us": "انضم إلينا",
@@ -58,7 +63,7 @@
   
     "events": {
       "title": "الأحداث",
-      "description": "استكشاف أحداثنا"
+      "description": "استكشف أحداثنا"
     },
   
     "contactUs": {
@@ -94,6 +99,11 @@
     "viewAll": {
       "title": "عرض الكل",
       "description": "عرض جميع العناصر"
+    },
+
+    "viewDetails": {
+      "title": "عرض التفاصيل",
+      "description": "عرض التفاصيل"
     },
   
     "search": {
@@ -148,7 +158,9 @@
         }
       
      
-    
+        
+         
+      
     
     
   }

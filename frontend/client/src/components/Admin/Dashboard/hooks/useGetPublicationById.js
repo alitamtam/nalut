@@ -10,7 +10,6 @@ export const useGetPublications = (id) => {
       const response = await api.get(
         `/api/publications/${id}?lang=${i18n.language}`
       );
-      console.log("Response: ", response.data); // Log the response data
       return response.data;
     },
     enabled: !!id, // Only run the query if id is defined

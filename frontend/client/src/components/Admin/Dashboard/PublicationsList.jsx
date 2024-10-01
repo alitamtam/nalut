@@ -5,7 +5,6 @@ import { useDeletePublications } from "./hooks/useDeletePublications";
 import { useEditPublications } from "./hooks/useEditPublications";
 import { useGetPublications } from "./hooks/useGetPublications";
 import { useGetTopics } from "./hooks/useGetTopics";
-import ManageTopics from "./ManageTopics";
 
 const PublicationsList = () => {
     const { data: publications, isPending, error } = useGetPublications();
@@ -13,7 +12,6 @@ const PublicationsList = () => {
     const editPublication = useEditPublications();
     const deletePublication = useDeletePublications();
     const { data: topics } = useGetTopics();
-
     const { user } = useSettingsStore();
     const userId = user.id;
 
@@ -23,8 +21,14 @@ const PublicationsList = () => {
         topicId: "",
         topic: "",
         content: "",
+        content2: "",
+        content3: "",
         image: "",
         iconClass: "",
+        arabicTitle: "", // Arabic title
+        arabicContent: "", // Arabic content
+        arabicContent2: "", // Arabic content 2
+        arabicContent3: "", // Arabic content 3
     });
     const [currentEditId, setCurrentEditId] = useState(null);
     const [isNewTopic, setIsNewTopic] = useState(false);
@@ -61,9 +65,16 @@ const PublicationsList = () => {
         const updatedFormData = {
             title: formData.title,
             content: formData.content,
-            image: formData.image,  // Include base64 image in the request body
+            image: formData.image,
             ownerId: userId,
             iconClass: formData.iconClass || "default-icon-class",
+            translations: [
+                {
+                    language: "ar",
+                    title: formData.arabicTitle,
+                    content: formData.arabicContent,
+                },
+            ],
         };
 
         if (formData.topicId) {
@@ -80,7 +91,7 @@ const PublicationsList = () => {
             addPublication.mutate(updatedFormData);
         }
 
-        setFormData({ title: "", topicId: "", topic: "", content: "", image: "", iconClass: "" });
+        setFormData({ title: "", topicId: "", topic: "", content: "", content2: "", content3: "", image: "", iconClass: "", arabicTitle: "", arabicContent: "", arabicContent2: "", arabicContent3: "" });
         setIsEditing(false);
         setIsNewTopic(false);
     };
@@ -93,8 +104,10 @@ const PublicationsList = () => {
             topicId: publication.topic.id,
             topic: publication.topic.name,
             content: publication.content,
-            image: publication.image,  // Prepopulate base64 image
+            image: publication.image,
             iconClass: publication.iconClass,
+            arabicTitle: publication.translations.find(t => t.language === 'ar')?.title || "", // Prepopulate Arabic title
+            arabicContent: publication.translations.find(t => t.language === 'ar')?.content || "", // Prepopulate Arabic content
         });
     };
 
@@ -128,7 +141,20 @@ const PublicationsList = () => {
                     />
                 </div>
 
-                {/* Toggle between creating a new topic or selecting an existing one */}
+                {/* Arabic Title */}
+                <label className="block mb-1">Arabic Title</label>
+                <div className="mb-4">
+                    <input
+                        type="text"
+                        name="arabicTitle"
+                        value={formData.arabicTitle}
+                        onChange={handleChange}
+                        placeholder="Arabic Title"
+                        className="w-full p-2 border border-gray-300 rounded"
+                    />
+                </div>
+
+                {/* Topic Handling */}
                 <div className="mb-4">
                     <label className="block mb-1">Topic</label>
                     <div className="flex items-center">
@@ -142,7 +168,6 @@ const PublicationsList = () => {
                     </div>
                 </div>
 
-                {/* If creating a new topic, show text input, otherwise show dropdown */}
                 {isNewTopic ? (
                     <div className="mb-4">
                         <input
@@ -155,36 +180,22 @@ const PublicationsList = () => {
                         />
                     </div>
                 ) : (
-                    <div className="mb-4">
-                        <select
-                            name="topicId"
-                            value={formData.topicId}
-                            onChange={handleChange}
-                            className="w-full border p-2"
-                            required
-                        >
-                            <option value="">Select Topic</option>
-                            {topics?.map((topic) => (
-                                <option key={topic.id} value={topic.id}>
-                                    {topic.name}
-                                </option>
-                            ))}
-                        </select>
-                    </div>
+                    <select
+                        name="topicId"
+                        value={formData.topicId}
+                        onChange={handleChange}
+                        className="mb-4 w-full p-2 border border-gray-300 rounded"
+                    >
+                        <option value="">Select Topic</option>
+                        {topics.map((topic) => (
+                            <option key={topic.id} value={topic.id}>
+                                {topic.name}
+                            </option>
+                        ))}
+                    </select>
                 )}
 
-                <label className="block mb-1">Topic Icon</label>
-                <div className="mb-4">
-                    <input
-                        type="text"
-                        name="iconClass"
-                        value={formData.iconClass}
-                        onChange={handleChange}
-                        placeholder="Icon Class"
-                        className="w-full p-2 border border-gray-300 rounded"
-                    />
-                </div>
-
+                <label className="block mb-1">Content</label>
                 <div className="mb-4">
                     <textarea
                         name="content"
@@ -194,56 +205,98 @@ const PublicationsList = () => {
                         className="w-full p-2 border border-gray-300 rounded"
                     />
                 </div>
-
                 <div className="mb-4">
-                    <label className="block mb-1">Upload Image</label>
-                    <input type="file" onChange={handleImageUpload} />
-                    {formData.image && <p className="mt-2 text-sm">Image ready for upload.</p>}
+                    <textarea
+                        name="content option"
+                        value={formData.content2}
+                        onChange={handleChange}
+                        placeholder="Content"
+                        className="w-full p-2 border border-gray-300 rounded"
+                    />
+                </div>
+                <div className="mb-4">
+                    <textarea
+                        name="content option"
+                        value={formData.content3}
+                        onChange={handleChange}
+                        placeholder="Content"
+                        className="w-full p-2 border border-gray-300 rounded"
+                    />
                 </div>
 
-                <button type="submit" className="bg-blue-500 text-white w-full py-2 rounded">
-                    {isEditing ? "Update Publication" : "Add Publication"}
+                {/* Arabic Content */}
+                <label className="block mb-1">Arabic Content</label>
+                <div className="mb-4">
+                    <textarea
+                        name="arabicContent"
+                        value={formData.arabicContent}
+                        onChange={handleChange}
+                        placeholder="Arabic Content"
+                        className="w-full p-2 border border-gray-300 rounded"
+                    />
+                </div>
+                <div className="mb-4">
+                    <textarea
+                        name="arabicContent option"
+                        value={formData.arabicContent2}
+                        onChange={handleChange}
+                        placeholder="Arabic Content"
+                        className="w-full p-2 border border-gray-300 rounded"
+                    />
+                </div>
+                <div className="mb-4">
+                    <textarea
+                        name="arabicContent option"
+                        value={formData.arabicContent3}
+                        onChange={handleChange}
+                        placeholder="Arabic Content"
+                        className="w-full p-2 border border-gray-300 rounded"
+                    />
+                </div>
+
+                <label className="block mb-1">Image</label>
+                <input type="file" onChange={handleImageUpload} className="mb-4" />
+
+                <label className="block mb-1">Icon Class</label>
+                <input
+                    type="text"
+                    name="iconClass"
+                    value={formData.iconClass}
+                    onChange={handleChange}
+                    placeholder="Icon Class"
+                    className="w-full p-2 border border-gray-300 rounded"
+                />
+
+                <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded">
+                    {isEditing ? "Edit Publication" : "Add Publication"}
                 </button>
             </form>
 
-            {/* Publications Table */}
-            <table className="min-w-full bg-white">
+            <table className="min-w-full border-collapse">
                 <thead>
-                    <tr className="bg-gray-200 text-left">
-                        <th className="text-left py-2">Topic</th>
+                    <tr>
                         <th className="text-left py-2">Title</th>
-                        <th className="text-left py-2">Owner</th>
-                        <th className="text-left py-2">Published Date</th>
+                        <th className="text-left py-2">Arabic Title</th>
+                        <th className="text-left py-2">Content</th>
+                        <th className="text-left py-2">Arabic Content</th>
                         <th className="text-left py-2">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {publications?.map((publication) => (
+                    {publications.map((publication) => (
                         <tr key={publication.id}>
-                            <td className="border px-4 py-2">{publication.topic.name}</td>
                             <td className="border px-4 py-2">{publication.title}</td>
-                            <td className="border px-4 py-2">{publication.ownerId}</td>
-                            <td className="border px-4 py-2">{publication.createdAt}</td>
+                            <td className="border px-4 py-2">{publication.translations.find(t => t.language === 'ar')?.title || "N/A"}</td>
+                            <td className="border px-4 py-2">{publication.content}</td>
+                            <td className="border px-4 py-2">{publication.translations.find(t => t.language === 'ar')?.content || "N/A"}</td>
                             <td className="border px-4 py-2">
-                                <button
-                                    onClick={() => handleEdit(publication)}
-                                    className="bg-yellow-500 text-white px-3 py-1 rounded-md mr-2 hover:bg-yellow-600"
-                                >
-                                    Edit
-                                </button>
-                                <button
-                                    onClick={() => handleDelete(publication.id)}
-                                    className="bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600"
-                                >
-                                    Delete
-                                </button>
+                                <button onClick={() => handleEdit(publication)} className="text-blue-500">Edit</button>
+                                <button onClick={() => handleDelete(publication.id)} className="text-red-500 ml-2">Delete</button>
                             </td>
                         </tr>
                     ))}
                 </tbody>
             </table>
-
-            <ManageTopics />
         </div>
     );
 };

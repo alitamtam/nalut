@@ -23,7 +23,11 @@ const EventsList = () => {
         endTime: '',
         location: "",
         link: "",
+        arabicTitle: "", // Arabic title
+        arabicDescription: "", // Arabic description
+        arabicLocation: "", // Arabic location
     });
+
     const [currentEditId, setCurrentEditId] = useState(null);
 
     // Handle image upload and conversion to base64
@@ -64,6 +68,14 @@ const EventsList = () => {
             endTime: new Date(formData.endTime).toISOString(),
             location: formData.location,
             link: formData.link,
+            translations: [
+                {
+                    language: "ar",
+                    title: formData.arabicTitle,
+                    description: formData.arabicDescription,
+                    location: formData.arabicLocation,
+                },
+            ], // Include translations as an array of objects
         };
 
         if (isEditing) {
@@ -72,9 +84,18 @@ const EventsList = () => {
             addEvent.mutate(updatedFormData);
         }
 
+        // Reset form fields
         setFormData({
-            title: "", description: "", image: "", date: "", location: "", startTime: '',
-            endTime: '', link: "",
+            title: "",
+            description: "",
+            image: "",
+            location: "",
+            startTime: '',
+            endTime: '',
+            link: "",
+            arabicTitle: "", // Reset Arabic title
+            arabicDescription: "", // Reset Arabic description
+            arabicLocation: "", // Reset Arabic location
         });
         setIsEditing(false);
     };
@@ -82,14 +103,19 @@ const EventsList = () => {
     const handleEdit = (event) => {
         setIsEditing(true);
         setCurrentEditId(event.id);
+        // Prepopulate form data including translations
+        const arabicTranslation = event.translations.find(t => t.language === 'ar') || {};
         setFormData({
-            title: event.title,
-            description: event.description,
+            title: event.title || '',
+            description: event.description || '',
             image: event.image,  // Prepopulate base64 image
             startTime: new Date(event.startTime).toISOString().slice(0, 16),
             endTime: new Date(event.endTime).toISOString().slice(0, 16),
-            location: event.location,
+            location: event.location || '',
             link: event.link,
+            arabicTitle: arabicTranslation.title || "", // Prepopulate Arabic title
+            arabicDescription: arabicTranslation.description || "", // Prepopulate Arabic description
+            arabicLocation: arabicTranslation.location || "", // Prepopulate Arabic location
         });
     };
 
@@ -111,29 +137,54 @@ const EventsList = () => {
 
             {/* Form for Add/Edit */}
             <form onSubmit={handleSubmit} className="mb-6">
-                <label className="block mb-1">Title</label>
+                <label className="block mb-1">Title (English)</label>
                 <div className="mb-4">
                     <input
                         type="text"
                         name="title"
                         value={formData.title}
                         onChange={handleChange}
-                        placeholder="Title"
+                        placeholder="Title in English"
                         className="w-full p-2 border border-gray-300 rounded"
+                        required
+                    />
+                </div>
+                <label className="block mb-1">Title (Arabic)</label>
+                <div className="mb-4">
+                    <input
+                        type="text"
+                        name="arabicTitle" // Changed name to arabicTitle
+                        value={formData.arabicTitle}
+                        onChange={handleChange}
+                        placeholder="Title in Arabic"
+                        className="w-full p-2 border border-gray-300 rounded"
+                        required
                     />
                 </div>
 
-
-
-                <label className="block mb-1">Location</label>
+                <label className="block mb-1">Location (English)</label>
                 <div className="mb-4">
                     <input
                         type="text"
                         name="location"
                         value={formData.location}
                         onChange={handleChange}
-                        placeholder="Location"
+                        placeholder="Location in English"
                         className="w-full p-2 border border-gray-300 rounded"
+                        required
+                    />
+                </div>
+
+                <label className="block mb-1">Location (Arabic)</label>
+                <div className="mb-4">
+                    <input
+                        type="text"
+                        name="arabicLocation" // Changed name to arabicLocation
+                        value={formData.arabicLocation}
+                        onChange={handleChange}
+                        placeholder="Location in Arabic"
+                        className="w-full p-2 border border-gray-300 rounded"
+                        required
                     />
                 </div>
 
@@ -155,25 +206,39 @@ const EventsList = () => {
                     className="border p-2 rounded w-full mb-4"
                 />
 
+                <label className="block mb-1">Description (English)</label>
                 <div className="mb-4">
                     <textarea
                         name="description"
                         value={formData.description}
                         onChange={handleChange}
-                        placeholder="description"
+                        placeholder="Description in English"
                         className="w-full p-2 border border-gray-300 rounded"
-                    />
-                    {/* New input for event link */}
-                    <label className="block mb-1">Event Link </label>
-                    <input
-                        type="url"
-                        placeholder="Event Link (optional)"
-                        value={formData.link}
-                        onChange={handleChange}
-                        className="border p-2 rounded"
-                        name="link"
+                        required
                     />
                 </div>
+
+                <label className="block mb-1">Description (Arabic)</label>
+                <div className="mb-4">
+                    <textarea
+                        name="arabicDescription" // Changed name to arabicDescription
+                        value={formData.arabicDescription}
+                        onChange={handleChange}
+                        placeholder="Description in Arabic"
+                        className="w-full p-2 border border-gray-300 rounded"
+                        required
+                    />
+                </div>
+
+                <label className="block mb-1">Event Link (optional)</label>
+                <input
+                    type="url"
+                    placeholder="Event Link (optional)"
+                    value={formData.link}
+                    onChange={handleChange}
+                    className="border p-2 rounded"
+                    name="link"
+                />
 
                 <div className="mb-4">
                     <label className="block mb-1">Upload Image</label>
@@ -190,33 +255,23 @@ const EventsList = () => {
             <table className="min-w-full bg-white">
                 <thead>
                     <tr className="bg-gray-200 text-left">
-                        <th className="text-left py-2">Title</th>
-                        <th className="text-left py-2">Owner</th>
-                        <th className="text-left py-2">Date</th>
-                        <th className="text-left py-2">Location</th>
-                        <th className="text-left py-2">Actions</th>
+                        <th className="text-left py-2 px-4">Title (English)</th>
+                        <th className="text-left py-2 px-4">Location (English)</th>
+                        <th className="text-left py-2 px-4">Start Time</th>
+                        <th className="text-left py-2 px-4">End Time</th>
+                        <th className="text-left py-2 px-4">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {events?.map((event) => (
-                        <tr key={event.id}>
-                            <td className="border px-4 py-2">{event.title}</td>
-                            <td className="border px-4 py-2">{event.ownerId}</td>
-                            <td className="border px-4 py-2">{event.date}</td>
-                            <td className="border px-4 py-2">{event.location}</td>
-                            <td className="border px-4 py-2">
-                                <button
-                                    onClick={() => handleEdit(event)}
-                                    className="bg-yellow-500 text-white px-3 py-1 rounded-md mr-2 hover:bg-yellow-600"
-                                >
-                                    Edit
-                                </button>
-                                <button
-                                    onClick={() => handleDelete(event.id)}
-                                    className="bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600"
-                                >
-                                    Delete
-                                </button>
+                    {events?.map(event => (
+                        <tr key={event.id} className="border-t">
+                            <td className="py-2 px-4">{event.title}</td>
+                            <td className="py-2 px-4">{event.location}</td>
+                            <td className="py-2 px-4">{new Date(event.startTime).toLocaleString()}</td>
+                            <td className="py-2 px-4">{new Date(event.endTime).toLocaleString()}</td>
+                            <td className="py-2 px-4">
+                                <button onClick={() => handleEdit(event)} className="bg-yellow-500 text-white px-2 py-1 rounded mr-2">Edit</button>
+                                <button onClick={() => handleDelete(event.id)} className="bg-red-500 text-white px-2 py-1 rounded">Delete</button>
                             </td>
                         </tr>
                     ))}

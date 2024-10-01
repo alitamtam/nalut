@@ -80,15 +80,16 @@ const PublicationDetails = () => {
 
                 {/* Author details on the right */}
                 <div className="w-auto justify-center ssm:py-3">
-                    <span className="text-gray-600 mb-2 capitalize font-bold hover:text-teal-600 py-5">{t('By')}</span>
+                    <span className="text-gray-600 mb-2 capitalize font-bold hover:text-teal-600 py-5">{t('By')} </span>
                     <Link
                         to={`/profileDisplay/${publication.owner.profile?.id}`}
                         className="text-gray-600 mb-2 capitalize font-bold hover:text-teal-600 py-5"
                     >
                         {publication.owner.firstName} {publication.owner.lastName}
-                    </Link> |
+                    </Link>  |  {/* Add a separator between author and date */}
                     <span className="text-gray-500 mb-2 capitalize font-normal">
-                        {t('Published on')}: {new Date(publication.createdAt).toLocaleDateString(t('locale'), { day: 'numeric', month: 'long', year: 'numeric' })}
+                        {new Date(publication.createdAt).toLocaleDateString('en-UK', { day: 'numeric', month: 'numeric', year: 'numeric' })}
+
                     </span>
                 </div>
             </div>

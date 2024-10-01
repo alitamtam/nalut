@@ -58,7 +58,7 @@ const AllEvents = () => {
                                 <div className="flex items-center mb-1">
                                     <CiCalendar className="mr-2" />
                                     <span>
-                                        {new Date(event.startTime).toLocaleDateString('en-US', {
+                                        {new Date(event.startTime).toLocaleDateString('en-UK', {
                                             year: 'numeric',
                                             month: 'short',
                                             day: 'numeric',
@@ -68,11 +68,11 @@ const AllEvents = () => {
                                 <div className="flex items-center">
                                     <IoMdTime className="mr-2" />
                                     <span>
-                                        {new Date(event.startTime).toLocaleTimeString('en-US', {
+                                        {new Date(event.startTime).toLocaleTimeString('en-UK', {
                                             hour: '2-digit',
                                             minute: '2-digit',
                                         })} -{' '}
-                                        {new Date(event.endTime).toLocaleTimeString('en-US', {
+                                        {new Date(event.endTime).toLocaleTimeString('en-UK', {
                                             hour: '2-digit',
                                             minute: '2-digit',
                                         })}

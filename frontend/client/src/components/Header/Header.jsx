@@ -97,7 +97,7 @@ const Header = () => {
                     {/* Social Icons */}
                     <h1 className="text-gray-500 hidden md:block lg:block">{t('follow_us')}</h1>
                     <div className="hidden sm:flex space-x-4 ssm:hidden">
-                        <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
+                        <a href="https://www.facebook.com/groups/527521202798857/" target="_blank" rel="noopener noreferrer">
                             <FaFacebookF className="text-gray-800 text-lg hover:text-teal-500" />
                         </a>
                         <a href="https://www.linkedin.com/groups/12856663/" target="_blank" rel="noopener noreferrer">

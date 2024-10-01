@@ -18,7 +18,6 @@ router.use((req, _, next) => {
 
 // Define routes
 router.use("/users", userRoutes); // Use the routes defined in user.router.js
-router.use("/articles", articleRoutes);
 router.use("/publications", publicationRoutes);
 router.use("/topics", topicRoutes);
 router.use("/profiles", profileRouter);
