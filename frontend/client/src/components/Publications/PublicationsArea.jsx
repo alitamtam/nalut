@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { useGetPublications } from '../Admin/Dashboard/hooks/useGetPublications';
 import { useIconOptions } from '../Admin/Dashboard/hooks/useIconOptions';
 import { useTranslation } from 'react-i18next';
+import { FaPenSquare } from "react-icons/fa";
 
 const PublicationsArea = () => {
     const { data: publications, isLoading, error } = useGetPublications();
@@ -82,9 +83,10 @@ const PublicationsArea = () => {
                                         </p>
                                     )}
                                     <div>
-                                        <p className="text-sm capitalize font-bold">
-                                            <span className="text-gray-600">{t('By')}</span>
-                                            <Link to={`/profileDisplay/${publication.owner.profile?.id}`} className="text-orange-600 hover:underline">
+                                        <p className=" flex space-x-2 text-ssm capitalize font-bold">
+                                            <span className="text-sky-950 pt-0 pb-0 mt-1"><FaPenSquare />
+                                            </span>
+                                            <Link to={`/profileDisplay/${publication.owner.profile?.id}`} className=" capitalize text-orange-600 hover:underline">
                                                 {publication.owner.firstName} {publication.owner.lastName}
                                             </Link>
                                         </p>
