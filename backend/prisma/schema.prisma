@@ -130,7 +130,8 @@ model PublicationTranslation {
   language         String    @default("ar") // e.g., 'en' or 'ar'
   title            String
   content          String
-  content2        String?   // Additional content
-  content3        String?   // Additional content
+  content2         String?   // Additional content
+  content3         String?   // Additional content
   publication      Publication @relation(fields: [publicationId], references: [id], onDelete: Cascade)
+  @@unique([publicationId, language])  // Composite unique constraint
 }

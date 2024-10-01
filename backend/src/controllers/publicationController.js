@@ -4,28 +4,32 @@ const publicationController = {
   // Fetch and return a list of publications
   async findAllPublications(req, res, next) {
     try {
+      const lang = req.query.lang || "en"; // Default to 'en' if no language is specified
       const publications = await prisma.publication.findMany({
         orderBy: { createdAt: "desc" },
         include: {
           topic: true,
           owner: {
-            // Owner is of type user
             select: {
               firstName: true,
               lastName: true,
               profile: {
-                // Include the profile related to the user
                 select: {
                   bio: true,
                   image: true,
-                  id: true, // Include the profile ID for linking to the profile page
+                  id: true,
                 },
               },
             },
           },
+          translations: {
+            where: {
+              language: lang,
+            },
+          },
         },
       });
-      res.status(200).json(publications); // Return the publications as JSON
+      res.status(200).json(publications);
     } catch (error) {
       console.error(error);
       next(error);
@@ -33,21 +37,21 @@ const publicationController = {
   },
 
   // Fetch and return a specific publication/topic by ID
+  // Fetch and return a specific publication with translations by ID
   async findPublicationById(req, res, next) {
     const { id } = req.params;
+    const lang = req.query.lang || "en"; // Default to 'en' if no language is specified
 
     try {
-      const topic = await prisma.publication.findUnique({
+      const publication = await prisma.publication.findUnique({
         where: { id: parseInt(id, 10) }, // Use parseInt with radix
         include: {
           topic: true,
           owner: {
-            // Owner is of type user
             select: {
               firstName: true,
               lastName: true,
               profile: {
-                // Include the profile related to the user
                 select: {
                   bio: true,
                   image: true,
@@ -56,23 +60,37 @@ const publicationController = {
               },
             },
           },
-        }, // Include the topic and owner details
+          translations: {
+            where: {
+              language: lang,
+            },
+          },
+        },
       });
-      if (!topic) {
-        return res.status(404).json({ message: "Topic not found" });
+
+      if (!publication) {
+        return res.status(404).json({ message: "Publication not found" });
       }
-      res.status(200).json(topic); // Return the topic as JSON
+
+      res.status(200).json(publication); // Return the publication as JSON
     } catch (error) {
       console.error(error);
       next(error);
     }
   },
-
-  // Create a new publication
+  // Create a new publication with translations
   async createPublication(req, res, next) {
     try {
-      const { title, topicId, topic, iconClass, content, image, ownerId } =
-        req.body;
+      const {
+        title,
+        topicId,
+        topic,
+        iconClass,
+        content,
+        image,
+        ownerId,
+        translations,
+      } = req.body;
       const topicIdInt = topicId ? parseInt(topicId, 10) : null;
 
       let topicData;
@@ -92,40 +110,48 @@ const publicationController = {
           },
         };
       } else {
-        // Handle cases where neither topicId nor topic is provided
         return res
           .status(400)
           .json({ error: "Either topicId or topic must be provided." });
       }
 
-      // Create the publication with the base64 image and connect to ownerId
-      const publication = await prisma.Publication.create({
+      // Create the publication
+      const publication = await prisma.publication.create({
         data: {
           title,
           content,
-          image, // Store base64-encoded image string
+          image,
           createdAt: new Date(),
-          owner: { connect: { id: ownerId } }, // Connect to the owner by ID
-          topic: topicData, // Connect or create the topic based on the data
+          owner: { connect: { id: ownerId } },
+          topic: topicData,
+          // Include translations in the publication creation
+          translations: {
+            create: translations.map((translation) => ({
+              language: translation.language,
+              title: translation.title,
+              content: translation.content,
+              content2: translation.content2 || null,
+              content3: translation.content3 || null,
+            })),
+          },
         },
       });
 
-      res.status(201).json(publication); // Return the created publication
+      res.status(201).json(publication);
     } catch (error) {
       console.error(error);
       next(error);
     }
   },
-
-  // Update an existing publication by ID
+  // Update an existing publication by ID with translations
   async updatePublication(req, res, next) {
     try {
       const { id } = req.params;
-      const { title, topicName, content, image } = req.body;
+      const { title, topicName, content, image, translations } = req.body;
 
       let topicId = null;
 
-      // Check if topicName is provided
+      // Check if topicName is provided and update the topic
       if (topicName) {
         // Find the topic by name
         const topic = await prisma.topic.findUnique({
@@ -140,7 +166,7 @@ const publicationController = {
         topicId = topic.id;
       }
 
-      // Update the publication with base64 image and topicId (if available)
+      // Update the publication
       const updatedPublication = await prisma.publication.update({
         where: { id: parseInt(id, 10) },
         data: {
@@ -148,6 +174,33 @@ const publicationController = {
           content,
           image, // Storing base64 image string
           ...(topicId && { topicId }), // Only update topicId if it's valid
+          // Update translations
+          translations: {
+            upsert: translations.map((translation) => ({
+              where: {
+                publicationId_language: {
+                  publicationId: parseInt(id, 10),
+                  language: translation.language,
+                },
+              },
+              update: {
+                title: translation.title,
+                content: translation.content,
+                content2: translation.content2 || null,
+                content3: translation.content3 || null,
+              },
+              create: {
+                language: translation.language,
+                title: translation.title,
+                content: translation.content,
+                content2: translation.content2 || null,
+                content3: translation.content3 || null,
+              },
+            })),
+          },
+        },
+        include: {
+          translations: true, // Return translations with the updated publication
         },
       });
 
@@ -157,7 +210,6 @@ const publicationController = {
       next(error);
     }
   },
-
   // Delete a publication by ID
   async deletePublication(req, res, next) {
     try {
