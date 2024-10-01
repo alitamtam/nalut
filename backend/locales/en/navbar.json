@@ -49,7 +49,8 @@
   "about": {
     "title": "About us",
     "welcomeMessage": "Welcome to EduLibya, where education and innovation meet. We aim to provide students, teachers, and educators with the best tools and resources for learning and growth. Our mission is to foster an environment of creativity, engagement, and critical thinking.",
-    "description": "Learn more about EduLibya"
+    "description": "Learn more about EduLibya",
+    "members": "Members"
   },
   
   "publications": {
@@ -141,7 +142,8 @@
     "Inclusion and Neuro-divergence": "Inclusion and Neuro-divergence",
     "Student Wellbeing and Enrichment": "Student Wellbeing and Enrichment",
     "Assessment and Examination": "Assessment and Examination",
-    "view_all": "View All"
+    "view_all": "View All",
+    "topic area": "Topics Area"
   },
   
   "joinUs": {

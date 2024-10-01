@@ -4,14 +4,28 @@
 @import 'slick-carousel/slick/slick-theme.css';
 /* src/fonts/fonts.css */
 @font-face {
-  font-family: 'Al-Jazeera';
-  src: url('../fonts/Al-Jazeera-Arabic-Regular.ttf') format('truetype');
+  font-family: 'Almarai-Regular';
+  src: url('../src/fonts/Almarai-Regular.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
 @font-face {
+  font-family: 'Ubuntu-Bold';
+  src: url('../src/fonts/Ubuntu-Bold.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Almarai-Light';
+  src: url('../src/fonts/Almarai-Light.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
   font-family: 'Ubuntu-Medium';
-  src: url('../fonts/Ubuntu-Medium.ttf') format('truetype');
+  src: url('../src/fonts/Ubuntu-Medium.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
@@ -24,6 +38,7 @@
 html, body {
   height: 100%;
   margin: 0; /* Ensure there's no margin */
+  font-family: 'Almarai-Regular', sans-serif;
   overflow-y: auto; /* Allow vertical scrolling */
 
 
@@ -38,6 +53,8 @@ html, body {
 
 .App {
   flex: 1; /* Allow content to grow and push footer down */
+  font-family: 'Almarai-Regular', sans-serif;
+
 }
 
 main {

@@ -53,11 +53,11 @@ const Navbar = () => {
                 </div>
 
                 {/* Desktop Menu */}
-                <div className={`hidden lg:flex space-x-8 mx-auto uppercase font-body text-xl text-ssm ${isArabic ? ' gap-10 font-arabic text-2xl flex-row-reverse  ' : 'flex-row'}  `}>
-                    <Link to="/" className="text-yellow-500 font-bold">
+                <div className={`hidden lg:flex space-x-8 mx-auto uppercase font-body text-xl  ${isArabic ? ' gap-10 lg:font-arabic lg:text-lg flex-row-reverse  ' : 'flex-row'}  `}>
+                    <Link to="/" className="text-orange-500 font-bold">
                         {t('home')}
                     </Link>
-                    <Link to="/about" className="text-white hover:text-orange-500">
+                    <Link to="/about" className="text-white hover:text-orange-500 ">
                         {t('about.title')}
                     </Link>
                     <Link to="/publications" className="text-white hover:text-orange-500">
@@ -75,12 +75,12 @@ const Navbar = () => {
                 {/* Mobile Menu (Burger Menu) */}
                 {isOpen && (
                     <div className={`lg:hidden absolute top-20 left-0 w-full bg-sky-950 text-white p-4 space-y-4 z-20  ${isArabic ? 'font-arabic text-lg ' : ''}`}>
-                        <Link to="/" className="block hover:text-orange-500" onClick={toggleMenu}>
+                        <Link to="/" className="block hover:text-orange-500 font-arabic" onClick={toggleMenu}>
                             {t('home')}
                         </Link>
 
                         {/* About Us with Dropdown */}
-                        <div className="block hover:text-orange-500">
+                        <div className="block hover:text-orange-500 font-arabic">
                             <button
                                 onClick={toggleAboutUs}
                                 className="w-full flex justify-between items-center text-left"

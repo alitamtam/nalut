@@ -27,7 +27,7 @@ const ProfileDetails = () => {
                         alt={`${Profile?.firstName} ${Profile?.lastName}`}
                         className="w-48 h-48 object-cover rounded-full mb-4 my-3"
                     />
-                    <h2 className="text-lg font-normal text-white capitalize my-3 center items-center lg:px-6">
+                    <h2 className="text-lg font-normal text-white capitalize my-3 center items-center lg:px-6 font-arabic">
                         {Profile.fullName}
                     </h2>
                 </div>
@@ -36,7 +36,7 @@ const ProfileDetails = () => {
 
                 {/* Right Section: Bio */}
                 <div className="lg:w-full md:w-1/2 ssm:my-3 lg:mx-6">
-                    <p className="text-gray-700 text- font-light md:text-ssm leading-relaxed mb-4 p-4 border-white border  bg-white">
+                    <p className="text-gray-600 font-arabic font-light md:text-ssm leading-relaxed mb-4 p-4 border-white border  bg-white ">
                         {Profile?.bio || 'No bio available.'} {/* Check if bio exists */}
                     </p>
 

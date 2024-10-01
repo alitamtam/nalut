@@ -7,14 +7,14 @@ import { useTranslation } from 'react-i18next'; // Import the hook
 
 const ProjectsArea = () => {
     const { data: projects, isPending, error } = useGetProjects();
-    const { t } = useTranslation('navbar'); // Use the hook to get the translation function
-
+    const { t, i18n } = useTranslation('navbar'); // Use the hook to get the translation function
+    const isArabic = i18n.language === 'ar'; // Check if the current language is Arabic
     if (isPending) return <div>Loading...</div>;
     if (error) return <div className="flex items-center justify-center bg-red-100 border lg:mx-80 border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">Error: {error.message}</div>;
 
     // Ensure projects is not undefined before mapping
     if (!projects || projects.length === 0) {
-        return <div>No projects available.</div>;
+        return <div></div>;
     }
 
     const settings = {
@@ -46,11 +46,11 @@ const ProjectsArea = () => {
 
     return (
         <div className="p-4 ">
-            <div className="flex flex-col items-center lg:flex-row lg:justify-between lg:mx-80 pb-4">
-                <h2 className="text-3xl font-bold lg:mb-4 text-center capitalize font-body text-gray-800">
-                    Projects Area
+            <div className={`flex flex-col items-center  ${isArabic ? ' lg:text-base lg:font-arabic ssm:font-arabic md:font-arabic ssm:text-2xl ssm:font-bold lg:flex-row-reverse ' : ''} lg:flex-row lg:justify-between lg:mx-80 py-4`}>
+                <h2 className={`text-3xl font-bold mb-4 text-center capitalise  ${isArabic ? ' lg:text-2xl lg:font-arabic ssm:font-arabic md:font-arabic ssm:text-2xl ssm:font-bold' : ''} font-sans text-sky-950`}>
+                    {t('projects.title')}
                 </h2>
-                <Link to='/projects/ViewAllProjects' className="border-2 text-teal-600 font-body border-teal-600 rounded-full hover:bg-teal-600 hover:text-white py-2 px-8 mb-4 lg:mb-0 hidden lg:block ">
+                <Link to='/projects/ViewAllProjects' className={`border-2 text-teal-600 font-body ${isArabic ? ' lg:text-base lg:font-arabic ssm:font-arabic md:font-arabic ssm:text-sm ssm:font-bold' : ''} border-teal-600 rounded-full hover:bg-teal-600 hover:text-white py-2 px-8  mb-4 lg:mb-0 hidden lg:block`}>
                     {t('view_all')}
                 </Link>
             </div>

@@ -8,8 +8,8 @@ import { useTranslation } from 'react-i18next';
 const FutureEvents = () => {
     // Destructure the query result from useGetEvents
     const { data: events, isLoading, error } = useGetEvents();
-    const { t } = useTranslation('navbar'); // Get the translation function from i18n
-
+    const { t, i18n } = useTranslation('navbar'); // Get the translation function from i18n
+    const isArabic = i18n.language === 'ar'; // Check if the current language is Arabic
     if (isLoading) {
         return <p>Loading...</p>; // Show loading state while events are being fetched
     }
@@ -29,7 +29,7 @@ const FutureEvents = () => {
                 <h2 className="text-3xl font-bold mb-4 text-center capitalise  font-sans text-gray-800">
                     {t('events.description')}
                 </h2>
-                <Link to='events/view-all' className="border-2 text-teal-600 font-body border-teal-600 rounded-full hover:bg-teal-600 hover:text-white py-2 px-8  mb-4 lg:mb-0">
+                <Link to='events/view-all' className={`border-2 text-teal-600 font-body border-teal-600 rounded-full hover:bg-teal-600 hover:text-white py-2 text-center mb-4${isArabic ? ' lg:text-base lg:font-arabic ssm:font-arabic md:font-arabic ssm:text-sm ssm:font-bold' : ''} lg:mb-0 lg:hidden md:block ssm:block`}>
                     {t('view_all')}
                 </Link>
             </div>

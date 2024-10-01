@@ -8,8 +8,8 @@ import ProjectsList from '../components/projects/ProjectsArea';
 import BackToTop from '../components/BackToTop';
 import { useTranslation } from 'react-i18next'; // Import the hook
 const HomePage = () => {
-    const { t } = useTranslation('navbar'); // Use the hook to get the translation function
-
+    const { t, i18n } = useTranslation('navbar'); // Use the hook to get the translation function
+    const isArabic = i18n.language === 'ar'; // Check if the current language is Arabic
     return (
         <>
             <div className=" lg:mx-80  items-center justify-center " >
@@ -20,11 +20,11 @@ const HomePage = () => {
                     </div>
 
                     {/* Right Side - About Us Text */}
-                    <div className=" flex flex-col justify-center bg-teal-600 px-6 pb-6 ">
-                        <h2 className="lg:text-3xl ssm:text-2xl font-bold mb-4 text-white ssm:pt-4 ssm:font-body">{t('about.title')}</h2>
-                        <p className="mb-12 px-2 text-white font-serif text-lg pt-0">{t('about.welcomeMessage')}</p>
+                    <div className=" flex flex-col justify-center bg-teal-600 px-12 pb-6 ">
+                        <h2 className={`lg:text-3xl ssm:text-2xl lg:font-arabic ssm:font-arabic md:font-arabic  font-bold mb-4 ${isArabic ? ' lg:text-3x1  ssm:text-4xl ssm:font-bold text-right' : ''} text-white ssm:pt-4 ssm:font-body`}>{t('about.title')}</h2>
+                        <p className={`mb-12 px-2 text-white break-normal lg:font-arabic ssm:font-arabic md:font-arabic ${isArabic ? ' lg:text-lg lg:font-arabic ssm:font-arabic md:font-arabic ssm:text-lg ssm:font-normal text-right font-medium' : ''} font-serif text-lg pt-0`}>{t('about.welcomeMessage')}</p>
                         <div>
-                            <Link to="/about" className="border-2  text-white border-white rounded-full hover:bg-sky-950 hover:text-white py-4 px-8 font-sans hover:border-none">
+                            <Link to="/about" className={`border-2 ${isArabic ? ' lg:text-lg lg:font-arabic ssm:font-arabic md:font-arabic ssm:text-base ssm:font-bold lg:font-extralight' : ''} text-white border-white rounded-full hover:bg-sky-950 hover:text-white py-2 px-8 font-sans hover:border-none`}>
                                 {t('Read More')}
                             </Link></div>
                     </div>

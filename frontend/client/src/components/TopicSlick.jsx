@@ -73,11 +73,11 @@ const TopicsSlick = () => {
 
     return (
         <div >
-            <div className="flex flex-col items-center lg:flex-row lg:justify-between lg:mx-80 py-4">
-                <h2 className="text-3xl font-bold mb-4 text-center capitalise  font-sans text-gray-800">
-                    Topic Areas
+            <div className={`flex flex-col items-center  ${isArabic ? ' lg:text-base lg:font-arabic ssm:font-arabic md:font-arabic ssm:text-2xl ssm:font-bold lg:flex-row-reverse ' : ''} lg:flex-row lg:justify-between lg:mx-80 py-4`}>
+                <h2 className={`text-3xl font-bold mb-4 text-center capitalise  ${isArabic ? ' lg:text-2xl lg:font-arabic ssm:font-arabic md:font-arabic ssm:text-2xl ssm:font-bold' : ''} font-sans text-sky-950`}>
+                    {t('topics.topic area')}
                 </h2>
-                <Link to='topics/view-all' className="border-2 text-teal-600 font-body border-teal-600 rounded-full hover:bg-teal-600 hover:text-white py-2 px-8  mb-4 lg:mb-0 hidden lg:block ">
+                <Link to='topics/view-all' className={`border-2 text-teal-600 font-body ${isArabic ? ' lg:text-base lg:font-arabic ssm:font-arabic md:font-arabic ssm:text-sm ssm:font-bold' : ''} border-teal-600 rounded-full hover:bg-teal-600 hover:text-white py-2 px-8  mb-4 lg:mb-0 hidden lg:block`}>
                     {t('view_all')}
                 </Link>
             </div>
@@ -97,7 +97,7 @@ const TopicsSlick = () => {
                                     {iconOptions[topic.iconClass] || <FaBook className="text-6xl" />}
                                 </div>
                                 <div className="flex-col">
-                                    <p className={`${isArabic ? ' lg:text-lg lg:font-arabic' : ''} lg:mt-4 text-teal-600 lg:text-xs ssm:text-xs font-sans font-bold tracking-wider uppercase text-center group-hover:text-white pb-10`}>
+                                    <p className={`${isArabic ? ' lg:text-base lg:font-arabic ssm:font-arabic md:font-arabic ssm:text-sm ssm:font-bold' : ''} lg:mt-4 text-teal-700  ssm:text-xs lg:text-sm font-body tracking-wider uppercase text-center group-hover:text-white pb-10`}>
                                         {t(`topics.${topic.name}`)}
                                     </p>
                                 </div>
@@ -107,7 +107,7 @@ const TopicsSlick = () => {
 
                 </div>
                 <div className='pt-5 w-[200px]  m-auto'>
-                    <Link to='topics/view-all' className="border-2 text-teal-600 font-body border-teal-600 rounded-full hover:bg-teal-600 hover:text-white py-2 text-center mb-4 lg:mb-0 lg:hidden md:block ssm:block">
+                    <Link to='topics/view-all' className={`border-2 text-teal-600 font-body border-teal-600 rounded-full hover:bg-teal-600 hover:text-white py-2 text-center mb-4 lg:text-base lg:font-arabic ssm:py-1 ssm:font-arabic md:font-arabic ssm:text-lg lg:mb-0 lg:hidden md:block ssm:block`}>
                         {t('view_all')}
                     </Link>
                 </div>

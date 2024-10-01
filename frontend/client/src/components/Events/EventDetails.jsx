@@ -30,7 +30,7 @@ const EventDetails = () => {
                 {/* Left Section: Title and Date */}
                 <div className="flex-1 bg-neutral-200 p-6 flex flex-col justify-between">
                     <div>
-                        <h2 className="text-3xl  mb-4 py-6 px-6 text-gray-700 ">{event.title}</h2>
+                        <h2 className="text-3xl  mb-4 py-6 px-6 text-gray-700 lg:font-arabic ">{event.title}</h2>
                         <div className="flex items-center text-gray-700 text-xl mb-4">
                             <CiCalendar className="mr-2" />
                             <span>

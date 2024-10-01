@@ -7,34 +7,34 @@ const Footer = () => {
     const { t } = useTranslation('navbar'); // Use the hook to get the translation function
 
     return (
-        <div className="bg-neutral-200 text-gray-800 py-12 lg:py-16">
+        <div className="bg-neutral-200 text-gray-600 py-12 lg:py-16">
             <BackToTop />
             <div className="container mx-auto px-4 lg:px-8 flex flex-col lg:flex-row justify-between items-center space-y-8 lg:space-y-0">
                 {/* Navigation Links on the left */}
-                <ul className="flex flex-col lg:flex-row lg:space-x-6 space-y-3 lg:space-y-0 text-center lg:text-left font-semibold font-mono uppercase text-lg">
-                    <li><a href="/" className=" text-teal-600 font-extrabold hover:underline hover:text-teal-600">{t('home')}</a></li>
-                    <li><a href="/about" className="hover:underline hover:text-teal-600">{t('about.title')}</a></li>
-                    <li><a href="/publications" className="hover:underline hover:text-teal-600">{t('publications.title')}</a></li>
-                    <li><a href="/projects" className="hover:underline hover:text-teal-600">{t('projects.title')}</a></li>
-                    <li><a href="/events/view-all" className="hover:underline hover:text-teal-600">{t('events.title')}</a></li>
+                <ul className="flex flex-col lg:flex-row lg:space-x-6 space-y-3 lg:space-y-0 text-center lg:text-left font-semibold font-arabic uppercase text-lg">
+                    <li><a href="/" className=" text-teal-600 font-extrabold  hover:text-teal-600">{t('home')}</a></li>
+                    <li><a href="/about" className=" hover:text-teal-600">{t('about.title')}</a></li>
+                    <li><a href="/publications" className=" hover:text-teal-600">{t('publications.title')}</a></li>
+                    <li><a href="/projects" className=" hover:text-teal-600">{t('projects.title')}</a></li>
+                    <li><a href="/events/view-all" className=" hover:text-teal-600">{t('events.title')}</a></li>
                 </ul>
                 {/* Empty middle space for balance */}
                 <div className="hidden lg:block flex-1"></div>
 
                 {/* Contact and Social Icons on the right */}
-                <div className="flex flex-col items-center lg:items-end space-y-4">
-                    <p className="flex text-center lg:text-right"><CiMail className='text-lg mr-2 mt-1 text-sky-950' />  <a href="mailto:contact@edulibya.ly" className="hover:underline text-gray-500"> contact@edulibya.ly</a></p>
+                <div className="flex flex-col items-center lg:items-end space-y-4 font-arabic">
+                    <p className="flex text-center lg:text-right"><CiMail className='text-lg mr-2 mt-1 text-sky-950' />  <a href="mailto:contact@edulibya.ly" className="hover:underline text-gray-500 hover:text-teal-600"> contact@edulibya.ly</a></p>
                     <ul className="flex space-x-2 text-lg lg:pr-10"> <span className='text-gray-500 py-0 mb-2'></span>
-                        <li><a href="https://www.facebook.com/groups/527521202798857/"><FaFacebookF /></a></li>
+                        <li><a href="https://www.facebook.com/groups/527521202798857/"><FaFacebookF className='hover:text-teal-600' /></a></li>
                         {/* <li><a href="#"><FaTwitter /></a></li> */}
-                        <li><a href="https://www.linkedin.com/groups/12856663/"><FaLinkedinIn /></a></li>
+                        <li><a href="https://www.linkedin.com/groups/12856663/"><FaLinkedinIn className='hover:text-teal-600' /></a></li>
                     </ul>
                 </div>
 
             </div>
 
             {/* Footer Bottom Text */}
-            <div className="text-center mt-8 text-gray-500">
+            <div className="text-center mt-8 text-gray-500 font-arabic">
                 <p>&copy; {new Date().getFullYear()} EduLibya | All Rights Reserved</p>
             </div>
         </div>

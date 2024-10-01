@@ -14,8 +14,12 @@ export default {
         lg: "1024px", // Laptop/Desktop
       },
       fontFamily: {
-        arabic: ["Al-Jazeera", "sans-serif"], // Add the new font family
-        ubuntu: ["Ubuntu", "sans-serif"],
+        // Setting Almarai-Regular as the default sans-serif font for the whole project
+        sans: ["Almarai-Regular", "sans-serif"],
+        arabic: ["Almarai-Regular", "sans-serif"],
+        ubuntu: ["Ubuntu-Bold", "sans-serif"],
+        button: ["Almarai-Light", "sans-serif"],
+        body: ["Ubuntu-Medium", "sans-serif"],
       },
     },
     container: {
