@@ -12,6 +12,11 @@ export const useGetProfileById = (id) => {
       const response = await api.get(
         `/api/profiles/${id}?lang=${i18n.language}`
       );
+
+      if (!response.data) {
+        throw new Error("Profile not found");
+      }
+
       return response.data;
     },
     enabled: !!id, // Make sure the query only runs if id is defined

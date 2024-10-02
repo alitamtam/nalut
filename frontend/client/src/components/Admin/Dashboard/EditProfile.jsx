@@ -7,7 +7,8 @@ import { useEffect, useState } from 'react'; // Import useEffect and useState
 
 const EditProfile = () => {
     const { user } = useSettingsStore(state => ({ user: state.user }));
-    const { data, isLoading, error } = useGetProfileById(user?.id); // Pass user.id to the hook
+
+    const { data, isLoading, error } = useGetProfileById(); // Pass user.id to the hook
 
     const [bio, setBio] = useState('');
     const [image, setImage] = useState(null);
