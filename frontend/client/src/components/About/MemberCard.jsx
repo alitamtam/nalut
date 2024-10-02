@@ -16,8 +16,8 @@ const MemberCard = ({ member }) => {
                 alt={member.fullName || 'Member Photo'} // Use fullName for alt attribute
                 className="w-32 h-32 mx-auto rounded-full object-cover"
             />
-            <h3 className="mt-4 font-bold">
-                {isArabic ? translation?.name || member.fullName : member.fullName || 'Name not available'}
+            <h3 className="mt-4 ">
+                {isArabic ? translation?.title || member.fullName : member.fullName || 'Name not available'}
             </h3>
 
             {/* Use Link for navigation to the profile details page */}
