@@ -25,7 +25,7 @@ const PublicationsSlider = () => {
                     <span className="inline-block text-black h-8 w-8 [&>svg]:h-8">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
+                            stretch="none"
                             viewBox="0 0 24 24"
                             strokeWidth="1.5"
                             stroke="currentColor"
@@ -47,7 +47,7 @@ const PublicationsSlider = () => {
                     <span className="inline-block text-white h-8 w-8 [&>svg]:h-8 border rounded p">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
+                            stretch="none"
                             viewBox="0 0 24 24"
                             strokeWidth="1.5"
                             stroke="currentColor"

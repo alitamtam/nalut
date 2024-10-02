@@ -67,7 +67,7 @@ const EventDetails = () => {
                         <img
                             src={event.image}
                             alt={event.title}
-                            className=" h-60 object-fill"
+                            className=" h-60 object-stretch"
                         />
                     )}
 
