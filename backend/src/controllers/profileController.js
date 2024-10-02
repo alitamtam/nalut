@@ -5,6 +5,8 @@ const profileController = {
     try {
       const profiles = await prisma.profile.findMany({
         include: {
+          translations: true, // Fetch all translations for the event
+
           user: {
             select: {
               firstName: true,
@@ -27,10 +29,14 @@ const profileController = {
 
   async getProfileById(req, res) {
     const { id } = req.params;
+    const lang = req.query.lang || "en"; // Default to 'en' if no language is specified
+
     try {
       const profile = await prisma.profile.findUnique({
         where: { id: parseInt(id, 10) },
         include: {
+          translations: true, // Fetch all translations for the event
+
           user: {
             select: {
               firstName: true,
@@ -57,10 +63,22 @@ const profileController = {
   },
 
   async createProfile(req, res) {
-    const { userId, bio } = req.body;
+    const {
+      userId,
+      bio,
+      title,
+      translations, // Expecting translations from the request
+    } = req.body;
     try {
       const profile = await prisma.profile.create({
-        data: { userId, bio },
+        data: {
+          userId,
+          bio,
+          title,
+          translations: {
+            create: translations, // Create translations for the event
+          },
+        },
       });
       res.status(201).json(profile);
     } catch (error) {
@@ -70,40 +88,63 @@ const profileController = {
 
   // Controller logic for updating or creating a profile
   async updateProfile(req, res) {
-    const { id } = req.params; // Assuming you're passing userId in params
-    const { bio, image } = req.body;
+    const { id } = req.params;
+    const { bio, image, title, translations } = req.body;
 
     try {
-      // Check if the profile exists using the userId
+      // Check if profile exists
       let profile = await prisma.profile.findUnique({
-        where: { userId: parseInt(id, 10) }, // Ensure userId is passed as an integer
+        where: { userId: parseInt(id, 10) },
       });
-      console.log("Updating profile for userId:", id);
 
       if (!profile) {
-        // Create the profile if it doesn't exist
+        // Create new profile
         profile = await prisma.profile.create({
           data: {
             userId: parseInt(id, 10),
             bio,
             image,
+            title,
+            translations: {
+              create: translations.map((translation) => ({
+                language: translation.language,
+                title: translation.title,
+                bio: translation.bio,
+              })),
+            },
           },
         });
       } else {
-        // Update the profile if it exists
+        // Update existing profile
         profile = await prisma.profile.update({
-          where: { userId: parseInt(id, 10) }, // Ensure userId is passed correctly
-          data: { bio, image },
+          where: { userId: parseInt(id, 10) },
+          data: {
+            bio,
+            image,
+            translations: {
+              upsert: translations.map((translation) => ({
+                where: { id: translation.id || 0 }, // Update or create based on existence of ID
+                update: {
+                  title: translation.title,
+                  bio: translation.bio,
+                },
+                create: {
+                  language: translation.language,
+                  title: translation.title,
+                  bio: translation.bio,
+                },
+              })),
+            },
+          },
         });
       }
 
       res.status(200).json(profile);
     } catch (error) {
-      console.error("Error updating or creating profile:", error);
+      console.error("Error updating profile:", error);
       res.status(500).json({ error: "Failed to update profile" });
     }
   },
-
   async deleteProfile(req, res) {
     const { id } = req.params;
     try {

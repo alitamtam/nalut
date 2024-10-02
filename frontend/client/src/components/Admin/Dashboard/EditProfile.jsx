@@ -10,6 +10,10 @@ const EditProfile = () => {
 
     const [bio, setBio] = useState(user.bio || '');
     const [image, setImage] = useState(user.image || null);
+    const [translations, setTranslations] = useState({
+        en: { bio: user.bio || '', title: user.title || '' },
+        ar: { bio: '', title: '' },
+    });
 
     const { mutate: editProfile, isPending } = useEditProfiles(); // Import the mutation hook
 
@@ -30,13 +34,24 @@ const EditProfile = () => {
         }
     };
 
-
-
-    console.log("Current user ID:", user.profile); // Log for debugging
+    const handleTranslationChange = (lang, key, value) => {
+        setTranslations((prev) => ({
+            ...prev,
+            [lang]: {
+                ...prev[lang],
+                [key]: value,
+            },
+        }));
+    };
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        const formData = { bio, image }; // Prepare form data
+        const formData = {
+            bio, image, translations: [
+                { language: 'en', ...translations.en },
+                { language: 'ar', ...translations.ar },
+            ]
+        };
 
         // Call mutation function
         editProfile(
@@ -68,18 +83,40 @@ const EditProfile = () => {
                 </div>
             </div>
             <div className="max-w-3xl mx-auto p-6 bg-white rounded-lg shadow-md">
-
                 <form onSubmit={handleSubmit} className="space-y-4">
+                    {/* English Version */}
                     <div>
-                        <label htmlFor="bio" className="block text-gray-700 font-medium">Bio:</label>
+                        <label htmlFor="bio" className="block text-gray-700 font-medium">English Bio:</label>
                         <textarea
                             id="bio"
-                            value={bio}
-                            onChange={(e) => setBio(e.target.value)}
+                            value={translations.en.bio}
+                            onChange={(e) => handleTranslationChange('en', 'bio', e.target.value)}
                             className="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
                             rows="4"
                         />
                     </div>
+
+                    {/* Arabic Version */}
+                    <div>
+                        <label htmlFor="bio" className="block text-gray-700 font-medium">Arabic Bio:</label>
+                        <textarea
+                            id="bio"
+                            value={translations.ar.bio}
+                            onChange={(e) => handleTranslationChange('ar', 'bio', e.target.value)}
+                            className="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
+                            rows="4"
+                        />
+                        <label htmlFor="bio" className="block text-gray-700 font-medium">Arabic Full Name:</label>
+                        <textarea
+                            id="bio"
+                            value={translations.ar.title}
+                            onChange={(e) => handleTranslationChange('ar', 'title', e.target.value)}
+                            className="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
+                            rows="4"
+                        />
+                    </div>
+
+                    {/* Profile Image */}
                     <div>
                         <label htmlFor="image" className="block text-gray-700 font-medium">Profile Image:</label>
                         <input
@@ -90,15 +127,18 @@ const EditProfile = () => {
                             className="mt-1 block w-full text-gray-700"
                         />
                     </div>
+
+                    {/* Submit Button */}
                     <button
                         type="submit"
-                        disabled={isPending} // Disable button while loading
+                        disabled={isPending}
                         className="mt-4 py-2 px-4 bg-teal-500 text-white font-semibold rounded-md hover:bg-teal-600 transition duration-300"
                     >
                         {isPending ? 'Updating...' : 'Update Profile'}
                     </button>
                 </form>
-            </div></>
+            </div>
+        </>
     );
 };
 

@@ -1,6 +1,5 @@
 // path backend/src/routes/index.js
 import express from "express";
-import articleRoutes from "./articles.router.js";
 import userRoutes from "./user.router.js";
 import publicationRoutes from "./publication.router.js";
 import profileRouter from "./profile.router.js";
