@@ -35,8 +35,9 @@ const profileController = {
       const profile = await prisma.profile.findUnique({
         where: { id: parseInt(id, 10) },
         include: {
-          translations: true, // Fetch all translations for the event
-
+          translations: {
+            where: { language: lang },
+          },
           user: {
             select: {
               firstName: true,
@@ -63,32 +64,40 @@ const profileController = {
   },
 
   async createProfile(req, res) {
-    const {
-      userId,
-      bio,
-      title,
-      translations, // Expecting translations from the request
-    } = req.body;
+    const { userId, bio, title, translations } = req.body;
+
     try {
+      // Check if profile exists for the given userId
+      const existingProfile = await prisma.profile.findUnique({
+        where: { userId: parseInt(userId, 10) },
+      });
+
+      if (existingProfile) {
+        return res.status(400).json({ error: "Profile already exists" });
+      }
+
+      // If profile doesn't exist, create a new one
       const profile = await prisma.profile.create({
         data: {
-          userId,
+          userId: parseInt(userId, 10),
           bio,
           title,
           translations: {
-            create: translations, // Create translations for the event
+            create: translations,
           },
         },
       });
+
       res.status(201).json(profile);
     } catch (error) {
+      console.error("Error creating profile:", error);
       res.status(500).json({ error: "Failed to create profile" });
     }
   },
 
   // Controller logic for updating or creating a profile
   async updateProfile(req, res) {
-    const { id } = req.params;
+    const { id } = req.params; // userId in this case
     const { bio, image, title, translations } = req.body;
 
     try {
@@ -98,7 +107,7 @@ const profileController = {
       });
 
       if (!profile) {
-        // Create new profile
+        // Create new profile if it doesn't exist
         profile = await prisma.profile.create({
           data: {
             userId: parseInt(id, 10),
@@ -115,27 +124,23 @@ const profileController = {
           },
         });
       } else {
-        // Update existing profile
+        // Update existing profile and handle translations carefully
         profile = await prisma.profile.update({
           where: { userId: parseInt(id, 10) },
           data: {
             bio,
             image,
+            title,
             translations: {
-              upsert: translations.map((translation) => ({
-                where: { id: translation.id || 0 }, // Update or create based on existence of ID
-                update: {
-                  title: translation.title,
-                  bio: translation.bio,
-                },
-                create: {
-                  language: translation.language,
-                  title: translation.title,
-                  bio: translation.bio,
-                },
+              deleteMany: {}, // Delete existing translations (if you want to replace them)
+              create: translations.map((translation) => ({
+                language: translation.language,
+                title: translation.title,
+                bio: translation.bio,
               })),
             },
           },
+          include: { translations: true }, // To return updated translations
         });
       }
 
@@ -149,7 +154,7 @@ const profileController = {
     const { id } = req.params;
     try {
       await prisma.profile.delete({
-        where: { id: parseInt(id, 10) },
+        where: { userId: parseInt(id, 10) },
       });
       res.status(204).send();
     } catch (error) {

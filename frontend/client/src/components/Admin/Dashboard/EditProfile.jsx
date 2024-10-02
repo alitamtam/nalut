@@ -1,26 +1,34 @@
-import { useState, useEffect } from 'react';
-import { toast } from 'react-toastify';
-import { useSettingsStore } from '../../../store/useSettingsStore'; // Assuming this manages user state
+import { useDeleteProfile } from '../Dashboard/hooks/useDeleteProfile'; // Adjust the path
 import { useEditProfiles } from '../Dashboard/hooks/useEditProfile'; // Adjust the path
+import { useGetProfileById } from './hooks/useGetProfileById';
+import { useSettingsStore } from '../../../store/useSettingsStore'; // Adjust the path
+import { toast } from 'react-toastify'; // Import toast for notifications
+import { useEffect, useState } from 'react'; // Import useEffect and useState
 
 const EditProfile = () => {
-    const { user } = useSettingsStore(state => ({
-        user: state.user,
-    }));
+    const { user } = useSettingsStore(state => ({ user: state.user }));
+    const { data, isLoading, error } = useGetProfileById(user?.id); // Pass user.id to the hook
 
-    const [bio, setBio] = useState(user.bio || '');
-    const [image, setImage] = useState(user.image || null);
+    const [bio, setBio] = useState('');
+    const [image, setImage] = useState(null);
     const [translations, setTranslations] = useState({
-        en: { bio: user.bio || '', title: user.title || '' },
+        en: { bio: '', title: '' },
         ar: { bio: '', title: '' },
     });
 
-    const { mutate: editProfile, isPending } = useEditProfiles(); // Import the mutation hook
+    const { mutate: editProfile, isLoading: isUpdating } = useEditProfiles();
+    const { mutate: deleteProfile, isLoading: isDeleting } = useDeleteProfile();
 
     useEffect(() => {
-        setBio(user.bio || '');
-        setImage(user.image || null);
-    }, [user]);
+        if (data) {
+            setBio(data.bio || '');
+            setImage(data.image || null);
+            setTranslations({
+                en: { bio: data.bio || '', title: data.title || '' },
+                ar: { bio: data.translations?.ar?.bio || '', title: data.translations?.ar?.title || '' },
+            });
+        }
+    }, [data]);
 
     const handleImageChange = (event) => {
         const file = event.target.files?.[0];
@@ -47,44 +55,76 @@ const EditProfile = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
         const formData = {
-            bio, image, translations: [
+            bio,
+            image,
+            translations: [
                 { language: 'en', ...translations.en },
                 { language: 'ar', ...translations.ar },
-            ]
+            ],
         };
 
-        // Call mutation function
         editProfile(
-            { id: user.id, formData }, // Pass user id and form data to the mutation
+            { id: user.id, formData },
             {
-                onSuccess: () => {
-                    toast.success('Profile updated successfully!');
-                },
-                onError: () => {
-                    toast.error('Failed to update profile.');
-                },
+                onSuccess: () => toast.success('Profile updated successfully!'),
+                onError: () => toast.error('Failed to update profile.'),
             }
         );
     };
 
+    const handleDelete = () => {
+        if (window.confirm('Are you sure you want to delete your profile?')) {
+            deleteProfile(user.id, {
+                onSuccess: () => {
+                    toast.success('Profile deleted successfully.');
+                },
+                onError: () => toast.error('Failed to delete profile.'),
+            });
+        }
+    };
+
+    if (isLoading) return <p>Loading...</p>;
+    if (error) return <p>{error.message}</p>;
+
     return (
         <>
-            <div className="flex items-center mb-6">
-                <div className="w-24 h-24 rounded-full overflow-hidden mr-6">
-                    <img
-                        src={user.profile?.image}
-                        alt={`${user.fullName}'s profile`}
-                        className="w-full h-full object-cover"
-                    />
-                </div>
-                <div>
-                    <h2 className="text-2xl font-semibold text-gray-800">{user.firstName}</h2>
-                    <p className="text-gray-600">{user.bio}</p>
-                </div>
+            <div>
+                <h2 className="text-2xl font-bold mb-4">Profile Details</h2>
+                <table className="min-w-full bg-white">
+                    <thead>
+                        <tr>
+                            <th className="text-left py-2">ID</th>
+                            <th className="text-left py-2">Name</th>
+                            <th className="text-left py-2">Bio</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {data && (
+                            <tr>
+                                <td className="border px-4 py-2">{data.id}</td>
+                                <td className="border px-4 py-2">{data.fullName}</td>
+                                <td className="border px-4 py-2">{data.bio}</td>
+                                <td className="border px-4 py-2">{data.translations.bio}</td>
+
+                                <td className="border px-4 py-2">
+                                    {data.image ? (
+                                        <img
+                                            alt="profile"
+                                            src={`data:image/jpeg;base64,${data.image}`}
+                                            className="h-16 w-16 object-cover rounded-full"
+                                        />
+                                    ) : (
+                                        <p>No Image</p>
+                                    )}
+                                </td>
+                            </tr>
+                        )}
+                    </tbody>
+                </table>
             </div>
+
             <div className="max-w-3xl mx-auto p-6 bg-white rounded-lg shadow-md">
                 <form onSubmit={handleSubmit} className="space-y-4">
-                    {/* English Version */}
                     <div>
                         <label htmlFor="bio" className="block text-gray-700 font-medium">English Bio:</label>
                         <textarea
@@ -96,7 +136,6 @@ const EditProfile = () => {
                         />
                     </div>
 
-                    {/* Arabic Version */}
                     <div>
                         <label htmlFor="bio" className="block text-gray-700 font-medium">Arabic Bio:</label>
                         <textarea
@@ -106,9 +145,9 @@ const EditProfile = () => {
                             className="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
                             rows="4"
                         />
-                        <label htmlFor="bio" className="block text-gray-700 font-medium">Arabic Full Name:</label>
+                        <label htmlFor="title" className="block text-gray-700 font-medium">Arabic Full Name:</label>
                         <textarea
-                            id="bio"
+                            id="title"
                             value={translations.ar.title}
                             onChange={(e) => handleTranslationChange('ar', 'title', e.target.value)}
                             className="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
@@ -116,7 +155,6 @@ const EditProfile = () => {
                         />
                     </div>
 
-                    {/* Profile Image */}
                     <div>
                         <label htmlFor="image" className="block text-gray-700 font-medium">Profile Image:</label>
                         <input
@@ -128,13 +166,21 @@ const EditProfile = () => {
                         />
                     </div>
 
-                    {/* Submit Button */}
                     <button
                         type="submit"
-                        disabled={isPending}
+                        disabled={isUpdating}
                         className="mt-4 py-2 px-4 bg-teal-500 text-white font-semibold rounded-md hover:bg-teal-600 transition duration-300"
                     >
-                        {isPending ? 'Updating...' : 'Update Profile'}
+                        {isUpdating ? 'Updating...' : 'Update Profile'}
+                    </button>
+
+                    <button
+                        type="button"
+                        onClick={handleDelete}
+                        disabled={isDeleting}
+                        className="mt-4 py-2 px-4 bg-red-500 text-white font-semibold rounded-md hover:bg-red-600 transition duration-300"
+                    >
+                        {isDeleting ? 'Deleting...' : 'Delete Profile'}
                     </button>
                 </form>
             </div>

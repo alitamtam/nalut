@@ -5,7 +5,10 @@ import { useTranslation } from 'react-i18next'; // Import useTranslation from re
 const ProfileDetails = () => {
     const { id } = useParams(); // Get the profile ID from URL params
     const { data: Profile, isLoading, error } = useGetProfileById(id); // Fetch the profile by ID
-    const { t } = useTranslation(); // Use the translation hook
+    const { t, i18n } = useTranslation(); // Use the translation hook
+    const isArabic = i18n.language === 'ar'; // Check if the language is Arabic
+
+    const translation = Profile?.translations?.[0]; // Assuming only one translation per language
 
     // Loading, error, or profile not found states
     if (isLoading) return <div className="flex items-center justify-center bg-green-100 border lg:mx-80 border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">{t('loading_profile')}</div>;
@@ -28,15 +31,18 @@ const ProfileDetails = () => {
                         alt={`${Profile?.firstName} ${Profile?.lastName}`}
                         className="w-48 h-48 object-cover rounded-full mb-4 my-3"
                     />
-                    <h2 className="text-lg font-normal text-white capitalize my-3 center items-center lg:px-6 font-arabic">
-                        {Profile.fullName}
-                    </h2>
+                    <div className={`text-lg font-normal ${isArabic ? 'lg:text-left  lg:pl-12 ' : 'lg:text-center'} text-white capitalize  items-center lg:px-6 font-arabic}`}>
+
+                        <h2 >
+                            {isArabic ? translation?.title || Profile.fullName : Profile.fullName}
+                        </h2>
+                    </div>
                 </div>
 
                 {/* Right Section: Bio */}
-                <div className="lg:w-full md:w-1/2 ssm:my-3 lg:mx-6">
+                <div className={`lg:w-full md:w-1/2 ssm:my-3 lg:mx-6 ${isArabic ? ' text-right ' : ''}`}>
                     <p className="text-gray-600 font-arabic font-light md:text-ssm leading-relaxed mb-4 p-4 border-white border bg-white">
-                        {Profile?.bio || t('no_bio_available')} {/* Display bio or fallback */}
+                        {translation?.bio || t('no_bio_available')} {/* Display bio or fallback */}
                     </p>
                 </div>
             </div>
