@@ -3,7 +3,6 @@ import { useGetPublications } from '../Admin/Dashboard/hooks/useGetPublications'
 import { useIconOptions } from '../Admin/Dashboard/hooks/useIconOptions';
 import { useTranslation } from 'react-i18next';
 import { FaPenSquare } from "react-icons/fa";
-
 const PublicationsArea = () => {
     const { data: publications, isLoading, error } = useGetPublications();
     const iconOptions = useIconOptions();
@@ -102,6 +101,8 @@ const PublicationsArea = () => {
                         {t('view_all')}
                     </Link>
                 </div>
+            </div>
+            <div>
             </div>
         </div >
     );

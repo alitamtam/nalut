@@ -44,7 +44,7 @@ const UpcomingEvent = () => {
     };
 
     return (
-        <div className=''>
+        <div className='lg:w-full lg:h-auto'>
             {/* Heading and View All Button */}
             <div className={`flex flex-col items-center  ${isArabic ? ' lg:text-base lg:font-arabic ssm:font-arabic md:font-arabic ssm:text-2xl ssm:font-bold lg:flex-row-reverse ' : ''} lg:flex-row lg:justify-between lg:mx-80 py-4`}>
                 <h2 className={`text-3xl font-bold mb-4 text-center capitalise  ${isArabic ? ' lg:text-2xl lg:font-arabic ssm:font-arabic md:font-arabic ssm:text-2xl ssm:font-bold' : ''} font-sans text-sky-950`}>
@@ -56,7 +56,7 @@ const UpcomingEvent = () => {
             </div>
 
             {/* Event Details and Slider */}
-            <div className="mx-auto px-4 lg:py-8 flex flex-col-reverse lg:flex-row justify-between items-center lg:mx-80">
+            <div className=" mx-auto px-4 lg:py-8 flex flex-col-reverse lg:flex-row justify-between items-center lg:mx-80">
                 <div className='pt-20 m-auto'>
                     <Link to='events/view-all' className="border-2 text-teal-600 font-arabic ssm:text-lg  border-teal-600 rounded-full hover:bg-teal-600 hover:text-white ssm:py-1 px-14 mb-4 lg:mb-0 lg:hidden md:block ssm:block">
                         {t('topics.view_all')}

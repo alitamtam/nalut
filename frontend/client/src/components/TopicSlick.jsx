@@ -103,26 +103,34 @@ const TopicsSlick = () => {
             <div className="relative w-full pb-12 lg:px-7  border-teal-500 border-b ">
                 <div>
                     <Slider {...settings}>
-                        {topics?.map((topic, index) => (
-                            <div
-                                key={index}
-                                className={`${isArabic ? 'font-arabic text-lg' : 'font-arabic'} flex-shrink-0 w-48 h-56 ssm:h-[200px] ssm:w-full mx-none flex flex-col text-center bg-gray-100 shadow-lg lg:p-4 transition-transform duration-300 hover:scale-105 hover:bg-sky-900 hover:text-white md:w-60 md:h-72 group`}
-                                onClick={() => navigate(`/topics/${topic.name}`)} // Navigate on click
-                            >
-                                {/* Content goes here */}
+                        {topics?.map((topic) => {
+                            const translation = topic.translations.find(tr => tr.language === i18n.language)?.name || topic.name;
+                            console.log("Current Topic:", topic.translations);
+                            console.log("Translation found:", translation);
 
-                                <div className="lg:text-6xl text-teal-600 group-hover:text-white pb-4 pl-20  lg:pt-10 ssm:pt-8 lg:border lg:rounded-full ">
-                                    {/* Dynamically render the icon based on iconClass */}
-                                    {iconMap[topic.iconClass] || <FaBook className="text-6xl" />}
+                            return (
+                                <div
+                                    key={topic.id}
+                                    className={`${isArabic ? 'font-arabic text-lg' : 'font-arabic'}  flex-shrink-0 w-48 h-56 ssm:h-[200px] ssm:w-full mx-none flex flex-col text-center  bg-gray-100 shadow-lg lg:p-4 transition-transform duration-300 hover:scale-105 hover:bg-sky-900 hover:text-white md:w-60 md:h-72 group`}
+                                    onClick={() => navigate(`/topics/${topic.name}`)} // Navigate on click
+                                >
+                                    {/* Content goes here */}
+
+                                    <div className="lg:text-6xl text-teal-600 group-hover:text-white py-4 pl-20  lg:pt-10 ssm:pt-8 lg:border lg:rounded-full  ">
+                                        {/* Dynamically render the icon based on iconClass */}
+                                        {iconMap[topic.iconClass] || <LiaChalkboardTeacherSolid className="text-6xl " />}
+                                    </div>
+                                    <div className="flex-col py-6">
+                                        {topic.translations && (
+                                            <p className={`${isArabic ? 'lg:text-xl lg:font-arabic ssm:font-arabic md:font-arabic ssm:text-sm ssm:font-bold' : ''} lg:mt-4 text-teal-700 ssm:text-xs lg:text-sm font-body tracking-wider uppercase text-center group-hover:text-white pb-10`}>
+                                                {translation}
+                                            </p>
+                                        )}
+
+                                    </div>
                                 </div>
-                                <div className="flex-col">
-                                    <p className={`${isArabic ? ' lg:text-base lg:font-arabic ssm:font-arabic md:font-arabic ssm:text-sm ssm:font-bold' : ''} lg:mt-4 text-teal-700  ssm:text-xs lg:text-sm font-body tracking-wider uppercase text-center group-hover:text-white pb-10`}>
-                                        {t(`topics.${topic.name}`)}
-                                    </p>
-                                </div>
-                            </div>
-                        ))}
-                    </Slider>
+                            );
+                        })}                    </Slider>
 
                 </div>
                 <div className='pt-5 w-[200px]  m-auto'>

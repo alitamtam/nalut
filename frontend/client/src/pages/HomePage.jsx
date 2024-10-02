@@ -12,7 +12,7 @@ const HomePage = () => {
     const isArabic = i18n.language === 'ar'; // Check if the current language is Arabic
     return (
         <>
-            <div className=" lg:mx-80  items-center justify-center " >
+            <section className=" lg:mx-80  items-center justify-center " >
                 <div className="flex flex-row md:flex-row ssm:flex-col ">
                     {/* Left Side - Publications Slider */}
                     <div className=" ">
@@ -29,25 +29,27 @@ const HomePage = () => {
                             </Link></div>
                     </div>
                 </div>
-            </div>
+            </section>
 
             {/* Topics Section */}
-            <div className="lg:mt-16 w-full  lg:mx-auto lg:p-4 max-w-full overflow-x-hidden">
+            <section className="lg:mt-16 w-full  lg:mx-auto lg:p-4 max-w-full overflow-x-hidden">
 
 
 
                 <TopicsSlider2 />
-            </div>
-            <div className="lg:mt-16 w-full  mx-auto p-4 max-w-full overflow-x-hidden">
+            </section>
+            <section className="lg:mt-16 w-full  mx-auto p-4 max-w-full overflow-x-hidden">
                 <PublicationsArea />
-            </div>
-            <div>
+            </section>
+            <section>
                 <ProjectsList />
-            </div>
-            <div className="lg:mt-0 w-full  mx-auto  max-w-full overflow-x-hidden">
+            </section>
+            <section >
                 <UpcomingEvent />
-                <BackToTop />
 
+            </section>
+            <div>
+                <BackToTop />
             </div>
         </>
     );

@@ -31,6 +31,7 @@ model ProjectTranslation {
   content2    String?
   content3    String?   // Additional content
   project     Project   @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  @@unique([projectId, language]) // Composite unique constraint
 }
 
 model User {
@@ -67,6 +68,7 @@ model ProfileTranslation {
   bio         String
   title       String?
   profile     Profile   @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  @@unique([profileId, language]) // Composite unique constraint
 }
 
 model Event {
@@ -91,6 +93,8 @@ model EventTranslation {
   description String?
   location    String?
   event       Event     @relation(fields: [eventId], references: [id], onDelete: Cascade)
+    @@unique([eventId, language]) // Composite unique constraint
+
 }
 
 model Topic {
@@ -99,6 +103,7 @@ model Topic {
   iconClass   String   // Class name for icon styling
   publications Publication[] // One-to-many relationship with Publication
   translations TopicTranslation[] // Relation for translations
+  
 }
 
 model TopicTranslation {
@@ -107,6 +112,8 @@ model TopicTranslation {
   language    String    @default("ar") // e.g., 'en' or 'ar'
   name        String
   topic       Topic     @relation(fields: [topicId], references: [id], onDelete: Cascade)
+  @@unique([topicId, language]) // Composite unique constraint
+
 }
 
 model Publication {

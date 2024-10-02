@@ -5,9 +5,9 @@ import { useDeletePublications } from "./hooks/useDeletePublications";
 import { useEditPublications } from "./hooks/useEditPublications";
 import { useGetPublications } from "./hooks/useGetPublications";
 import { useGetTopics } from "./hooks/useGetTopics";
-
+import ManageTopics from "./ManageTopics";
 const PublicationsList = () => {
-    const { data: publications, isPending, error } = useGetPublications();
+    const { data: publications = [], isPending, error } = useGetPublications();
     const addPublication = useAddPublications();
     const editPublication = useEditPublications();
     const deletePublication = useDeletePublications();
@@ -115,12 +115,11 @@ const PublicationsList = () => {
         deletePublication.mutate(id);
     };
 
-    if (isPending) {
-        return <p>Loading...</p>;
-    }
+    if (isPending) return <div>Loading...</div>;
+
 
     if (error) {
-        return <p>{error.message || "An unexpected error occurred."}</p>;
+        if (error) return <div>Error loading publications.</div>;
     }
 
     return (
@@ -283,20 +282,38 @@ const PublicationsList = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {publications.map((publication) => (
-                        <tr key={publication.id}>
-                            <td className="border px-4 py-2">{publication.title}</td>
-                            <td className="border px-4 py-2">{publication.translations.find(t => t.language === 'ar')?.title || "N/A"}</td>
-                            <td className="border px-4 py-2">{publication.content}</td>
-                            <td className="border px-4 py-2">{publication.translations.find(t => t.language === 'ar')?.content || "N/A"}</td>
-                            <td className="border px-4 py-2">
-                                <button onClick={() => handleEdit(publication)} className="text-blue-500">Edit</button>
-                                <button onClick={() => handleDelete(publication.id)} className="text-red-500 ml-2">Delete</button>
-                            </td>
+                    {publications?.length > 0 ? (
+                        publications.map((publication) => (
+                            <tr key={publication.id} className="border-b">
+                                <td className="p-2">{publication.id}</td>
+                                <td className="p-2">{publication.title}</td>
+                                <td className="p-2">
+                                    <button
+                                        onClick={() => handleEdit(publication)}
+                                        className="bg-yellow-500 text-white px-3 py-1 rounded-md mr-2 hover:bg-yellow-600"
+                                    >
+                                        Edit
+                                    </button>
+                                    <button
+                                        onClick={() => handleDelete(publication.id)}
+                                        className="bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600"
+                                    >
+                                        Delete
+                                    </button>
+                                </td>
+                            </tr>
+                        ))
+                    ) : (
+                        <tr>
+                            <td colSpan="3" className="p-2 text-center">No publications found.</td>
                         </tr>
-                    ))}
+                    )}
                 </tbody>
             </table>
+            <div>
+                ManageTopics: <ManageTopics />
+
+            </div>
         </div>
     );
 };

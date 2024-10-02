@@ -26,73 +26,110 @@ const iconOptions = [
 ];
 
 const ManageTopics = () => {
-    const { data: topics, isLoading, error } = useGetTopics();
-
-    const { mutate: deleteTopic } = useDeleteTopics();
+    const { data: topics = [], isPending, error } = useGetTopics();
     const { mutate: addTopic } = useAddTopics();
     const { mutate: editTopic } = useEditTopics();
+    const { mutate: deleteTopic } = useDeleteTopics();
 
-    const [newTopic, setNewTopic] = useState({ name: "", iconClass: "" });
+    const [newTopic, setNewTopic] = useState({
+        name: "",
+        iconClass: "",
+        translations: [{ language: "ar", name: "" }],
+    });
     const [selectedIcon, setSelectedIcon] = useState(iconOptions[0]);
     const [isEditing, setIsEditing] = useState(false);
     const [editingTopicId, setEditingTopicId] = useState(null);
 
-    if (isLoading) return <div className="flex items-center justify-center bg-green-100 border lg:mx-80 border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">Loading...</div>;
+    // Handle loading and error states
+    if (isPending) return <div className="flex items-center justify-center bg-green-100 border lg:mx-80 border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">Loading...</div>;
     if (error) return <div className="flex items-center justify-center bg-red-100 border lg:mx-80 border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">Error loading topics</div>;
 
-    // Handle Delete Topic
     const handleDelete = (id) => {
         if (window.confirm("Are you sure you want to delete this topic?")) {
             deleteTopic(id);
         }
     };
 
-    // Edit topic
     const handleEdit = (topic) => {
-        setNewTopic({ name: topic.name, iconClass: topic.iconClass });
+        setNewTopic({
+            name: topic.name,
+            iconClass: topic.iconClass,
+            translations: topic.translations.filter(trans => trans.language === 'ar'),
+        });
         setSelectedIcon(iconOptions.find(icon => icon.name === topic.iconClass));
         setIsEditing(true);
         setEditingTopicId(topic.id);
     };
 
-    const handleAdd = (e) => {
+    const handleAdd = async (e) => {
         e.preventDefault();
-        const topicWithIcon = { ...newTopic, iconClass: selectedIcon.name };
+        const topicWithIcon = {
+            ...newTopic,
+            iconClass: selectedIcon.name,
+            translations: [
+                {
+                    language: 'en',
+                    name: newTopic.name, // Set the English name to the topic name directly
+                },
+                ...newTopic.translations,
+            ]
+        };
 
-        if (isEditing) {
-            editTopic({ ...topicWithIcon, id: editingTopicId });
-        } else {
-            addTopic(topicWithIcon);
+        const hasEmptyName = !topicWithIcon.name.trim() || topicWithIcon.translations.some(trans => !trans.name.trim());
+        if (hasEmptyName) {
+            alert("Both the Topic name and Arabic translation are required.");
+            return;
         }
-        setNewTopic({ name: "", iconClass: "" });
-        setSelectedIcon(iconOptions[0]); // Reset to default icon
-        setIsEditing(false); // Reset editing state
-        setEditingTopicId(null); // Reset editing topic id
+
+        try {
+            if (isEditing) {
+                await editTopic({ ...topicWithIcon, id: editingTopicId });
+            } else {
+                await addTopic(topicWithIcon);
+            }
+
+            setNewTopic({ name: "", iconClass: "", translations: [{ language: "ar", name: "" }] });
+            setSelectedIcon(iconOptions[0]);
+            setIsEditing(false);
+            setEditingTopicId(null);
+        } catch (error) {
+            console.error("Error adding/updating topic:", error);
+            alert("Failed to add/update topic. Please try again.");
+        }
     };
 
-    // Handle Select Icon
     const handleSelectIcon = (e) => {
         const index = e.target.value;
         setSelectedIcon(iconOptions[index]);
+    };
+
+    const handleTranslationChange = (language, value) => {
+        setNewTopic(prev => ({
+            ...prev,
+            translations: prev.translations.map(trans =>
+                trans.language === language ? { ...trans, name: value } : trans
+            ),
+        }));
     };
 
     return (
         <div className="p-6 bg-white shadow-md rounded-md">
             <h2 className="text-2xl font-bold mb-4">Manage Topics</h2>
 
-            {/* Add / Edit Form */}
             <form onSubmit={handleAdd} className="mb-6">
                 <div className="flex flex-col gap-4">
-                    <input
-                        type="text"
-                        placeholder="Topic Name"
-                        value={newTopic.name}
-                        onChange={(e) => setNewTopic({ ...newTopic, name: e.target.value })}
-                        className="border p-2 rounded-md"
-                        required
-                    />
+                    <div className="flex flex-col">
+                        <label className="mb-1">Topic Name:</label>
+                        <input
+                            type="text"
+                            placeholder="Enter topic name"
+                            value={newTopic.name}
+                            onChange={(e) => setNewTopic(prev => ({ ...prev, name: e.target.value }))}
+                            className="border p-2 rounded-md"
+                            required
+                        />
+                    </div>
 
-                    {/* Icon Preview */}
                     <div className="flex items-center">
                         <p className="mr-4">Selected Icon: {selectedIcon.icon}</p>
                         <select
@@ -108,6 +145,20 @@ const ManageTopics = () => {
                         </select>
                     </div>
 
+                    {newTopic.translations.map((trans) => (
+                        <div key={trans.language} className="flex flex-col">
+                            <label className="mb-1">Translation ({trans.language}):</label>
+                            <input
+                                type="text"
+                                placeholder={`Translation for ${trans.language}`}
+                                value={trans.name}
+                                onChange={(e) => handleTranslationChange(trans.language, e.target.value)}
+                                className="border p-2 rounded-md"
+                                required={trans.language === "ar"}
+                            />
+                        </div>
+                    ))}
+
                     <button
                         type="submit"
                         className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600"
@@ -117,7 +168,6 @@ const ManageTopics = () => {
                 </div>
             </form>
 
-            {/* List of Topics */}
             <table className="w-full table-auto">
                 <thead>
                     <tr className="bg-gray-200 text-left">
@@ -131,18 +181,22 @@ const ManageTopics = () => {
                     {topics?.map((topic) => (
                         <tr key={topic.id} className="border-b">
                             <td className="p-2">{topic.id}</td>
-                            <td className="p-2">{topic.name}</td>
+                            <td className="p-2">
+                                {topic.translations.find(trans => trans.language === 'en')?.name || ""}
+                                <br />
+                                {topic.translations.find(trans => trans.language === 'ar')?.name || ""}
+                            </td>
                             <td className="p-2">{iconOptions.find(opt => opt.name === topic.iconClass)?.icon}</td>
                             <td className="p-2">
                                 <button
                                     onClick={() => handleEdit(topic)}
-                                    className="bg-yellow-500 text-white px-3 py-1 rounded-md mr-2 hover:bg-yellow-600"
+                                    className="text-green-500 hover:text-green-600 mr-2"
                                 >
                                     Edit
                                 </button>
                                 <button
                                     onClick={() => handleDelete(topic.id)}
-                                    className="bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600"
+                                    className="text-red-500 hover:text-red-600"
                                 >
                                     Delete
                                 </button>

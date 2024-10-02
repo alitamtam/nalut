@@ -54,7 +54,7 @@ html, body {
 .App {
   flex: 1; /* Allow content to grow and push footer down */
   font-family: 'Almarai-Regular', sans-serif;
-
+ 
 }
 
 main {
