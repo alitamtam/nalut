@@ -17,7 +17,7 @@ const Login = () => {
     return (
         <div className="flex justify-center items-center h-screen">
             <form className="bg-white p-8 shadow-md rounded-md">
-                <h2 className="text-xl font-bold mb-6">Admin Login</h2>
+                <h2 className="text-xl font-bold mb-6">EduLibya Login</h2>
                 <div>
                     <input
                         type="text" // Correct type for username

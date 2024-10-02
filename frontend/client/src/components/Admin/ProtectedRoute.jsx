@@ -1,22 +1,24 @@
 import PropTypes from 'prop-types';
-import { Navigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom'; // Re-import Navigate
 import { useSettingsStore } from '../../store/useSettingsStore';
 
 const ProtectedRoute = ({ children, roles }) => {
-    const { user } = useSettingsStore();
-    const role = user?.role; // Directly access the role as a string
+    const { user } = useSettingsStore();  // Access user from the store
+    const role = user?.role || '';  // Default to empty string if undefined
 
-    console.log('User state:', user); // Check the entire user object
-    console.log('User role:', role); // Now this should correctly log the user's role
+    // Log user information for debugging
+    console.log('User object:', user);
+    console.log('User role:', role);
     console.log('Expected roles:', roles);
 
-    // Check if user role is defined and if it includes the required roles
+    // Check if the user is logged in and if their role is authorized
     if (!user || !role || !roles.includes(role)) {
-        console.log('Redirecting to login or not authorized');
-        return <Navigate to="/login" replace />; // Use replace to prevent going back to the protected route
+        console.log('User not authorized. Redirecting...');
+        return <Navigate to="/login" replace />; // Redirect if not authorized
     }
 
-    return children; // Render the children if authorized
+    // If authorized, render the children components
+    return children;
 };
 
 // Define PropTypes for your component

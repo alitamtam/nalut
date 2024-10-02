@@ -17,8 +17,15 @@ export const authenticateToken = (req, res, next) => {
 
 // Optionally, you could have a role-based authorization middleware
 export const authorizeAdmin = (req, res, next) => {
-  if (req.user.role !== "member") {
+  if (req.user.role !== "admin") {
     return res.status(403).json({ error: "Forbidden: Admins only" });
+  }
+  next();
+};
+
+export const authorizeMember = (req, res, next) => {
+  if ((req.user.role !== "member", "admin")) {
+    return res.status(403).json({ error: "Forbidden: Members only" });
   }
   next();
 };

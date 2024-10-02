@@ -4,7 +4,7 @@ import Sidebar from './Sidebar';
 import Header from './Header';
 import Footer from '../../Footer/Footer';
 
-const AdminDashboard = () => {
+export const AdminDashboard = () => {
     return (
         <div className="flex flex-col min-h-screen">
             <Header />

@@ -34,8 +34,7 @@ const AppRouter = createBrowserRouter([
     {
         path: '/',
         element: <Layout />,
-        errorElement: <ErrorPage />,  // Set errorElement for the main layout
-
+        errorElement: <ErrorPage />,
         children: [
             { index: true, element: <HomePage /> },
             { path: 'about', element: <AboutUsPage /> },
@@ -48,11 +47,10 @@ const AppRouter = createBrowserRouter([
             { path: 'publications/:id', element: <PublicationDetails /> },
             { path: 'events/view-all', element: <ViewAllEvents /> },
             { path: 'events/:id', element: <EventDetails /> },
-            { path: 'projects', element: <ProjectsArea /> },  // <-- New route for Projects
-            { path: 'projects/:id', element: <ProjectDetails /> },  // <-- New route for Projects
-            { path: 'projects/ViewAllProjects', element: <ViewAllProjects /> },  // <-- New route for Projects
-
-            { path: "/search-results", element: <SearchResultPage /> },
+            { path: 'projects', element: <ProjectsArea /> },
+            { path: 'projects/:id', element: <ProjectDetails /> },
+            { path: 'projects/ViewAllProjects', element: <ViewAllProjects /> },
+            { path: '/search-results', element: <SearchResultPage /> },
             { path: 'login', element: <Login /> },
             { path: '*', element: <NotFound /> },
         ],
@@ -60,7 +58,7 @@ const AppRouter = createBrowserRouter([
     {
         path: 'admin',
         element: (
-            <ProtectedRoute roles={['admin']}>
+            <ProtectedRoute roles={['admin', 'member']}>
                 <AdminDashboard />
             </ProtectedRoute>
         ),
@@ -69,15 +67,33 @@ const AppRouter = createBrowserRouter([
             { path: 'articles', element: <ArticlesList /> },
             { path: 'events', element: <ManageEvents /> },
             { path: 'publications', element: <PublicationsList /> },
-            { path: 'projects', element: <ProjectForm /> },  // Admin-specific route for Projects if needed
-            { path: 'register', element: <RegisterUser /> },
-            { path: 'users', element: <DeleteUsers /> },
+            { path: 'projects', element: <ProjectForm /> },
+            { path: 'register', element: <RegisterUser /> }, // Admin-specific
+            { path: 'users', element: <DeleteUsers /> },    // Admin-specific
+            { path: 'editProfile', element: <EditProfile /> },
+            { path: '*', element: <NotFound /> },
+        ],
+    },
+    {
+        path: 'member-dashboard',
+        element: (
+            <ProtectedRoute roles={['member']}>
+                <AdminDashboard />
+            </ProtectedRoute>
+        ),
+        children: [
+            { path: 'profiles', element: <ProfilesList /> },
+            { path: 'articles', element: <ArticlesList /> },
+            { path: 'events', element: <ManageEvents /> },
+            { path: 'publications', element: <PublicationsList /> },
+            { path: 'projects', element: <ProjectForm /> },
             { path: 'editProfile', element: <EditProfile /> },
             { path: '*', element: <NotFound /> },
         ],
     },
     { path: '*', element: <NotFound /> },
 ]);
+
 
 export default AppRouter;
 
