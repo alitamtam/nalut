@@ -83,9 +83,9 @@ const ManageTopics = () => {
 
         try {
             if (isEditing) {
-                await editTopic({ ...topicWithIcon, id: editingTopicId });
+                editTopic({ ...topicWithIcon, id: editingTopicId });
             } else {
-                await addTopic(topicWithIcon);
+                addTopic(topicWithIcon);
             }
 
             setNewTopic({ name: "", iconClass: "", translations: [{ language: "ar", name: "" }] });

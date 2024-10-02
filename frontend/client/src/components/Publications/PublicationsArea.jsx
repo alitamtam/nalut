@@ -18,7 +18,7 @@ const PublicationsArea = () => {
     }
 
     if (!publications || publications.length === 0) {
-        return <p>No publications found.</p>;
+        return <p></p>;
     }
 
     const lastThreePublications = publications.slice(-3);
