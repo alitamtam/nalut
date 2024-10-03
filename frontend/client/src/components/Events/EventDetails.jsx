@@ -1,122 +1,124 @@
-import { useParams } from 'react-router-dom'; // Import useParams to get the event ID
+import { useParams } from 'react-router-dom';
 import { useGetEventById } from '../Admin/Dashboard/hooks/useGetEventById';
 import { CiCalendar } from "react-icons/ci";
 import { IoLocationOutline } from "react-icons/io5";
 import { IoMdTime } from "react-icons/io";
-import { FaFacebookF, FaTwitter, FaLinkedinIn } from "react-icons/fa"; // Icons for social media
+import { FaFacebookF, FaTwitter, FaLinkedinIn } from "react-icons/fa";
 import FutureEvents from './FutureEvents';
-const EventDetails = () => {
-    const { id } = useParams(); // Get the event ID from the URL
-    const { data: event, isLoading, error } = useGetEventById(id); // Fetch event by ID
-    const currentUrl = window.location.href; // Get current page URL
+import { useTranslation } from 'react-i18next'; // Import useTranslation
 
+const EventDetails = () => {
+    const { id } = useParams();
+    const { data: event, isLoading, error } = useGetEventById(id);
+    const currentUrl = window.location.href;
+    const { t, i18n } = useTranslation(); // Use i18n for translations
+    const isArabic = i18n.language === 'ar'; // Check if the current language is Arabic
     if (isLoading) {
-        return <p>Loading...</p>; // Show loading state while fetching event
+        return <p>{t('event.loading')}</p>; // Translated loading message
     }
 
     if (error) {
-        return <p>Error: {error.message}</p>; // Display error if there's an issue
+        return <p>{t('event.error')}{error.message}</p>; // Translated error message
     }
 
-    // Social share URLs
     const facebookShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${currentUrl}`;
     const twitterShareUrl = `https://twitter.com/intent/tweet?url=${currentUrl}&text=${encodeURIComponent(event.title)}`;
     const linkedinShareUrl = `https://www.linkedin.com/shareArticle?mini=true&url=${currentUrl}&title=${encodeURIComponent(event.title)}`;
 
+    // Helper function to get the translated title and description based on the current language
+    const getTranslatedContent = (key) => {
+        const currentLang = i18n.language;
+        const translation = event.translations?.find(trans => trans.language === currentLang);
+        return translation ? translation[key] : event[key];
+    };
+
     return (
-        <div className="flex flex-col items-center p-8 bg-white text-gray-800 ">
-            <div className="lg:max-w-7xl w-full flex flex-col lg:flex-row bg-white shadow-lg overflow-hidden ">
-                {/* Left Section: Title and Date */}
-                <div className="flex-1 bg-neutral-200 p-6 flex flex-col justify-between">
-                    <div>
-                        <h2 className="text-3xl  mb-4 py-6 px-6 text-gray-700 lg:font-arabic ">{event.title}</h2>
-                        <div className="flex items-center text-gray-700 text-xl mb-4">
-                            <CiCalendar className="mr-2" />
-                            <span>
-                                {new Date(event.startTime).toLocaleDateString('en-UK', {
-                                    year: 'numeric',
-                                    month: 'long',
-                                    day: 'numeric',
-                                })}
-                            </span>
-                        </div>
+        < >
+            <div className={`flex flex-col items-center p-8 ${isArabic ? 'text-right ' : ' '} bg-white text-gray-800 `}>
+                <div className="lg:max-w-7xl w-full flex flex-col lg:flex-row bg-white  overflow-hidden ">
+                    {/* Left Section: Title and Date */}
+                    <div className="flex-1 bg-neutral-200 p-6 flex flex-col justify-between">
+                        <div>
+                            <h2 className="text-3xl  mb-4 py-6 px-6 text-gray-700 lg:font-arabic ">
+                                {getTranslatedContent('title')}
+                            </h2>
+                            <div className="flex items-center text-gray-700 text-xl mb-4">
+                                <CiCalendar className="mr-2" />
+                                <span>
+                                    {new Date(event.startTime).toLocaleDateString('en-UK', {
+                                        year: 'numeric',
+                                        month: 'long',
+                                        day: 'numeric',
+                                    })}
+                                </span>
+                            </div>
 
-                        <a className="flex items-center text-gray-700 text-xl mb-4"> link  href={`${event.link}`}</a>
-                        {/* Share on social media links */}
-                        <div className="flex items-center space-x-2 mt-2">
-                            <span className="text-sky-950 font-bold" >Share</span>
-                            <a href={facebookShareUrl} target="_blank" rel="noopener noreferrer" className="text-sky-950 hover:text-teal-600">
-                                <FaFacebookF size={18} />
+                            <a className="flex items-center text-gray-700 text-xl mb-4" href={`${event.link}`}>
+                                {t('events.event-link')}
                             </a>
-                            <a href={twitterShareUrl} target="_blank" rel="noopener noreferrer" className="text-sky-950 hover:text-teal-600">
-                                <FaTwitter size={18} />
-                            </a>
-                            <a href={linkedinShareUrl} target="_blank" rel="noopener noreferrer" className="text-sky-950 hover:text-teal-600">
-                                <FaLinkedinIn size={18} />
-                            </a>
+                            {/* Share on social media links */}
+                            <div className="flex items-center space-x-2 mt-2">
+                                <span className="text-sky-950 font-bold">{t('event.share')}</span>
+                                <a href={facebookShareUrl} target="_blank" rel="noopener noreferrer" className="text-sky-950 hover:text-teal-600">
+                                    <FaFacebookF size={18} />
+                                </a>
+                                <a href={twitterShareUrl} target="_blank" rel="noopener noreferrer" className="text-sky-950 hover:text-teal-600">
+                                    <FaTwitter size={18} />
+                                </a>
+                                <a href={linkedinShareUrl} target="_blank" rel="noopener noreferrer" className="text-sky-950 hover:text-teal-600">
+                                    <FaLinkedinIn size={18} />
+                                </a>
+                            </div>
                         </div>
+                        <div className="flex-1"></div>
                     </div>
-                    {/* Keep height equal to image */}
-                    <div className="flex-1"></div> {/* This helps stretch the left section to match the height of the image */}
-                </div>
 
-                {/* Right Section: Image and Event Details */}
-                <div className="flex-1 flex flex-col">
-                    {/* Event Image */}
-                    {event.image && (
-                        <img
-                            src={event.image}
-                            alt={event.title}
-                            className=" h-60 object-stretch"
-                        />
-                    )}
+                    {/* Right Section: Image and Event Details */}
+                    <div className="flex-1 flex flex-col">
+                        {event.image && (
+                            <img
+                                src={event.image}
+                                alt={event.title}
+                                className="h-60 object-cover w-full lg:h-full"
+                            />
+                        )}
 
-                    {/* Event Details (location, start/end time) */}
-                    <div className="bg-sky-950 text-white p-6 h-30 w-50">
-                        <div className="mb-4">
-                            <IoLocationOutline className="inline-block mr-2" />
-                            <span>{event.location}</span>
-                        </div>
-                        <div className="mb-4 flex items-center">
-                            <IoMdTime className="inline-block mr-2" />
-                            <span>
-                                {new Date(event.startTime).toLocaleTimeString('en-UK', {
-                                    hour: '2-digit',
-                                    minute: '2-digit',
-                                    hour12: true,
-                                })} -{' '}
-                                {new Date(event.endTime).toLocaleTimeString('en-UK', {
-                                    hour: '2-digit',
-                                    minute: '2-digit',
-                                    hour12: true,
-                                })}
-                            </span>
-                        </div>
+                        {/* Event Details (location, start/end time) */}
+
                     </div>
                 </div>
             </div>
+            <div className={`flex flex-col  p-8 ${isArabic ? 'text-right ' : ' '} bg-white text-gray-800  lg:min-w-80 items-center `}>
+                <div className={`bg-sky-950 flex items-center  flex-col text-white p-3 h-[200px] w-[200px]`}>
+                    <div className="mb-4">
+                        <IoLocationOutline className="inline-block mr-2" />
+                        <span>{event.location}</span>
+                    </div>
+                    <div className={`mb-4 flex ${isArabic ? 'text-left' : ''} items-center `}>
+                        <IoMdTime className="inline-block mr-2" />
+                        <span>
+                            {new Date(event.startTime).toLocaleTimeString(isArabic ? 'ar-LY' : 'en-UK', {
+                                hour: '2-digit',
+                                minute: '2-digit',
+                                hour12: true,
+                            })} -{' '}
+                            {new Date(event.endTime).toLocaleTimeString(isArabic ? 'ar-LY' : 'en-UK', {
+                                hour: '2-digit',
+                                minute: '2-digit',
+                                hour12: true,
+                            })}
+                        </span>
+                    </div>
+                </div>
+                {/* Description Section */}
+                <div className="max-w-6xl w-full bg-white p-6 mt-6 border-b border-sky-950 ">
+                    <p className="text-gray-800 text-sm mb-6 leading-relaxed">
+                        {getTranslatedContent('description')}
+                    </p>
+                </div>
 
-            {/* Description Section (below the image and event details) */}
-            <div className="max-w-6xl w-full bg-white  p-6 mt-6 border-b border-sky-950 ">
-                <p className="text-gray-800 text-sm mb-6 leading-relaxed">
-                    {event.description.includes('.') ? (
-                        event.description.split('.').map((sentence, index) => (
-                            <span key={index}>
-                                {sentence.trim()}{sentence && '.'} {/* Add the period back after trimming */}
-                                <br /> {/* Start a new line */}
-                            </span>
-                        ))
-                    ) : (
-                        <span>{event.description}</span>
-                    )}
-
-                </p>
-
-
-            </div>
-
-            <FutureEvents />
-        </div>
+                <FutureEvents /></div>
+        </>
     );
 };
 

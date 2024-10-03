@@ -2,7 +2,6 @@
   "home": "main page",
   "publications": "Publications",
   "projects": "Projects",
-  "events": "Events",
   "contact": "Contact Us",
   "follow_us": "Follow Us",
   "arabic": "Arabic",
@@ -69,7 +68,8 @@
   
   "events": {
     "title": "Events",
-    "description": "Explore our events"
+    "description": "Explore our events",
+    "event-link": "To participate in the event"
   },
   
   "contactUs": {

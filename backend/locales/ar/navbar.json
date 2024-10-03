@@ -2,7 +2,6 @@
   "home": "الرئيسية",
   "publications": "المنشورات",
   "projects": "المشاريع",
-  "events": "الأحداث",
   "contact": "تواصل معنا",
   "follow_us": "تابعنا",
   "arabic": "العربية",
@@ -67,7 +66,9 @@
   
     "events": {
       "title": "الأحداث",
-      "description": "استكشف أحداثنا"
+      "description": "استكشف أحداثنا",
+      "event-link": "للمشاركة في الحدث"
+
     },
   
     "contactUs": {

@@ -73,7 +73,10 @@ const UpcomingEvent = () => {
                                     <FaMapMarkerAlt className="mr-2" /> {sortedEvents[currentSlide]?.location}
                                 </p>
                                 <p className="text-sky-950 mb-4 flex items-center lg:font-arabic">
-                                    <FaCalendarAlt className="mr-2" /> {new Date(sortedEvents[currentSlide]?.startTime).toLocaleDateString()} {t('at')} {new Date(sortedEvents[currentSlide]?.startTime).toLocaleTimeString()}
+                                    <FaCalendarAlt className="mr-2" /> {new Date(sortedEvents[currentSlide]?.startTime).toLocaleDateString(
+                                        isArabic ? 'ar-LY' : 'en-UK',
+                                        { year: 'numeric', month: 'short', day: 'numeric' }
+                                    )} {t('at')} {new Date(sortedEvents[currentSlide]?.startTime).toLocaleTimeString(isArabic ? 'ar-LY' : 'en-UK', { hour: '2-digit', minute: '2-digit' })}
                                 </p>
                             </div>
                             <Link to={`/events/${sortedEvents[currentSlide]?.id}`} className={` bg-teal-600 lg:text-lg lg:font-arabic ssm:font-arabic md:font-arabic ssm:text-lg ssm:font-medium lg:font-extralight text-white border-white rounded-full hover:bg-sky-950 hover:text-white ssm:py-3 lg:py-2 px-8 font-sans hover:border-none`}>
