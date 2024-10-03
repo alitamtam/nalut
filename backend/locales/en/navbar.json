@@ -49,6 +49,10 @@
   "about": {
     "title": "About us",
     "welcomeMessage": "Welcome to EduLibya, where education and innovation meet. We aim to provide students, teachers, and educators with the best tools and resources for learning and growth. Our mission is to foster an environment of creativity, engagement, and critical thinking.",
+    "welcomeMessage2": "Where education and innovation meet. We strive to provide students, teachers and educators with the best tools and resources to learn and grow. Our mission is to foster an environment of creativity, engagement and critical thinking",
+
+    "welcomeMessage3": "A network of educators interested in various dimensions of education across Libya",
+
     "description": "Learn more about EduLibya",
     "members": "Members"
   },
