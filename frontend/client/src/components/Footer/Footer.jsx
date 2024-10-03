@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 import { FaFacebookF, FaLinkedinIn } from 'react-icons/fa';
 import { CiMail } from "react-icons/ci";
 import BackToTop from '../BackToTop';
@@ -12,11 +14,11 @@ const Footer = () => {
             <div className="container mx-auto px-4 lg:px-8 flex flex-col lg:flex-row justify-between items-center space-y-8 lg:space-y-0">
                 {/* Navigation Links on the left */}
                 <ul className="flex flex-col lg:flex-row lg:space-x-6 space-y-3 lg:space-y-0 text-center lg:text-left font-semibold font-arabic uppercase text-lg">
-                    <li><a href="/" className=" text-teal-600 font-extrabold  hover:text-teal-600">{t('home')}</a></li>
-                    <li><a href="/about" className=" hover:text-teal-600">{t('about.title')}</a></li>
-                    <li><a href="/publications" className=" hover:text-teal-600">{t('publications.title')}</a></li>
-                    <li><a href="/projects" className=" hover:text-teal-600">{t('projects.title')}</a></li>
-                    <li><a href="/events/view-all" className=" hover:text-teal-600">{t('events.title')}</a></li>
+                    <li><Link to="/" className=" text-teal-600 font-extrabold  hover:text-teal-600">{t('home')}</Link></li>
+                    <li><Link to="/about" className=" hover:text-teal-600">{t('about.title')}</Link></li>
+                    <li><Link to="/publications" className=" hover:text-teal-600">{t('publications.title')}</Link></li>
+                    <li><Link to="/projects" className=" hover:text-teal-600">{t('projects.title')}</Link></li>
+                    <li><Link to="/events/view-all" className=" hover:text-teal-600">{t('events.title')}</Link></li>
                 </ul>
                 {/* Empty middle space for balance */}
                 <div className="hidden lg:block flex-1"></div>
