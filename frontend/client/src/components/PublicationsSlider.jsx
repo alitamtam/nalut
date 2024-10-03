@@ -8,8 +8,7 @@ const PublicationsSlider = () => {
     const { data: publications = [], isLoading, isError } = useGetPublications();
     const [activeIndex, setActiveIndex] = useState(0);
     const { t, i18n } = useTranslation('navbar'); // Use the hook to get the translation function
-    const isArabic = i18n.language === 'ar';
-
+    const isArabic = i18n.language === 'ar'; // Check if the language is Arabic
     const recentPublications = publications.slice(0, 3);
 
     if (isLoading) return <p>{t('loading_publications')}</p>;
@@ -32,7 +31,7 @@ const PublicationsSlider = () => {
     };
 
     return (
-        <div className="relative lg:w-[800px] ssm:w-auto h-auto mx-auto overflow-hidden capitalize">
+        <div className={`relative lg:w-[800px] ssm:w-auto h-auto mx-auto ${isArabic ? 'lg:text-right flex-row-reverse ' : ''} overflow-hidden capitalize`}>
             <TECarousel
                 className="relative h-[550px] object-cover w-[stretch]"
                 showControls
@@ -81,35 +80,51 @@ const PublicationsSlider = () => {
                 }
             >
                 {recentPublications.map((pub, index) => {
-                    const translation = pub.translations[0]; // Assuming one translation per language
+                    const translation = pub.translations.find(t => t.language === i18n.language) || {};
+                    const profileTranslation = pub.owner.profile.translations.find(t => t.language === i18n.language) || {};
+                    const topicTranslation = pub.topic.translations.find(t => t.language === i18n.language) || {};
+                    // Use translated title or fallback to default
+                    const publicationTitle = translation.title || pub.title;
+
+                    // Use translated names or fallback to defaults
+                    const arabicName = profileTranslation.title
+                    const EnglishName = `${pub.owner.firstName} ${pub.owner.lastName}`;
+
 
                     return (
                         <TECarouselItem
                             key={pub.id}
                             itemID={pub.id}
-                            className={`absolute top-0 left-0 lg:w-full lg:h-full transition-opacity duration-500 ease-in-out ${activeIndex === index ? "opacity-100" : "opacity-0"}`}
+                            className={`absolute top-0 left-0 lg:w-full lg:h-full transition-opacity duration-500 ease-in-out ${activeIndex === index ? "opacity-100" : "opacity-0"} `}
                         >
                             {/* Image Section */}
-                            <div className="relative">
+                            <div className={`relative ${isArabic ? 'lg:text-right' : ''}`}>
                                 <img
                                     src={pub.image || "https://via.placeholder.com/600x400"}
                                     className="block w-full h-[435px] object-cover"
-                                    alt={pub.title}
+                                    alt={publicationTitle}
                                 />
-                                <span className="absolute bottom-4 left-2 text-white px-2 py-1 text-xl font-serif text-shad">
+                                <span className="absolute bottom-4 left-2 text-gray-100 px-2 py-1 text-3xl lg:shadow-black  text-shad font-arabic">
                                     <Link to={`/publications/${pub.id}`}>
-                                        {translation?.title}
+                                        {publicationTitle}
                                     </Link>
                                 </span>
                             </div>
 
                             {/* Slide Details Section */}
-                            <div className="bg-white p-4 text-black py-1">
-                                <h5 className="flex text-lg font-normal text-sky-950 hover:text-teal-500 py-2">
-                                    {translation?.topic?.name} <p className="text-gray-400 px-2"> | {new Date(translation?.createdAt).toLocaleDateString(isArabic ? 'ar-EG' : 'en-UK', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
+                            <div className={`bg-white p-4 ${isArabic ? 'lg:text-right  ' : ''} text-black py-1 `}>
+                                <h5 className={`flex text-lg font-normal ${isArabic ? 'lg:text-right' : ''} text-sky-950 hover:text-teal-500 py-2`}>
+                                    {topicTranslation.name}
+                                    <p className="text-gray-600 px-2 text-bold">
+                                        {" | "}
+                                        {new Date(pub?.createdAt).toLocaleDateString(
+                                            isArabic ? 'ar-LY' : 'en-UK',
+                                            { day: 'numeric', month: 'long', year: 'numeric' }
+                                        )}
+                                    </p>
                                 </h5>
-                                <p className="text-sm mt-1 font-bold capitalize text-orange-400 hover:text-teal-500">
-                                    <span className="text-gray-500">{t('by')}</span> {translation?.owner?.firstName} {translation?.owner?.lastName}
+                                <p className={`text-sm mt-1 ${isArabic ? 'text-right ' : ''} font-bold capitalize text-orange-400 hover:text-teal-600 z-0`}>
+                                    <span className={` text-gray-500 ${isArabic ? '' : ''}`}>{t('By')} : </span> {isArabic ? `${arabicName}` : `${EnglishName}`}
                                 </p>
                             </div>
                         </TECarouselItem>
@@ -117,12 +132,12 @@ const PublicationsSlider = () => {
                 })}
 
                 {/* Indicators */}
-                <div className="absolute bottom-0 w-full py-2 flex justify-center space-x-2 border-b-4 border-gray-100 shadow-lg px-4">
+                <div className={`absolute bottom-0 w-full py-2 flex ${isArabic ? 'text-right' : ''} justify-center space-x-2 border-b-4 border-gray-100 shadow-lg px-4`}>
                     {recentPublications.map((_, index) => (
                         <button
                             key={index}
                             onClick={() => handleIndicatorClick(index)}
-                            className={`h-3 w-3 rounded-full transition-all duration-300 ${activeIndex === index ? "bg-sky-950" : "bg-gray-300"}`}
+                            className={`h-3 w-3 rounded-full transition-all ${isArabic ? 'text-right' : ''} duration-300 ${activeIndex === index ? "bg-sky-950" : "bg-gray-300"}`}
                         ></button>
                     ))}
                 </div>

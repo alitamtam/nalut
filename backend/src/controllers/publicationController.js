@@ -8,7 +8,13 @@ const publicationController = {
       const publications = await prisma.publication.findMany({
         orderBy: { createdAt: "desc" },
         include: {
-          topic: true,
+          topic: {
+            select: {
+              name: true,
+              iconClass: true,
+              translations: { where: { language: lang } },
+            },
+          },
           owner: {
             select: {
               firstName: true,
@@ -18,6 +24,7 @@ const publicationController = {
                   bio: true,
                   image: true,
                   id: true,
+                  translations: { where: { language: lang } },
                 },
               },
             },
