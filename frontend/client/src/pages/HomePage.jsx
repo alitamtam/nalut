@@ -20,7 +20,7 @@ const HomePage = () => {
                     </div>
 
                     {/* Right Side - About Us Text */}
-                    <div className={` flex  justify-center flex-col bg-teal-600  pb-6 font-arabic mb-12 px-5 text-white break-before-auto text-pretty  ${isArabic ? ' lg:text-lg ssm:text-lg ssm:font-normal text-right font-medium' : ''}  text-lg pt-0`}>
+                    <div className={` flex  justify-center flex-col bg-teal-600  pb-6 font-arabic mb-12 px-5 text-white break-before-auto text-pretty  ${isArabic ? ' lg:text-lg ssm:text-lg ssm:font-normal text-right font-medium lg:px-8' : ''}  text-lg pt-0`}>
                         <h2 className={`lg:text-3xl ssm:text-2xl lg:font-arabic ssm:font-arabic md:font-arabic px-6 font-bold mb-2 ${isArabic ? ' lg:text-3x1  ssm:text-4xl ssm:font-arabic text-right' : ''} text-white ssm:pt-4 font-arabic ssm:text-sky-950 ssm:text-4xl`}>{t('about.title')}</h2>
                         <p className='py-2'>{t('about.welcomeMessage')}</p>
                         <p className='py-2'>{t('about.welcomeMessage2')}</p>

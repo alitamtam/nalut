@@ -104,27 +104,27 @@ const PublicationsSlider = () => {
                                     className="block w-full h-[435px] object-cover"
                                     alt={publicationTitle}
                                 />
-                                <span className="absolute bottom-4 left-2 text-gray-100 px-2 py-1 text-3xl lg:shadow-black  text-shad font-arabic">
-                                    <Link to={`/publications/${pub.id}`}>
+                                <span className={`absolute bottom-4  text-white  px-2  ${isArabic ? 'ssm:text-right ssm:flex ssm:flex-row-reverse  ' : 'ssm:text-left'} py-1 lg:text-lg ssm:text-lg  shadow-slate-600 font-arabic`}>
+                                    <Link to={`/publications/${pub.id}`} >
                                         {publicationTitle}
                                     </Link>
                                 </span>
                             </div>
 
                             {/* Slide Details Section */}
-                            <div className={`bg-white p-4 ${isArabic ? 'lg:text-right  ' : ''} text-black py-1 `}>
-                                <h5 className={`flex text-lg font-normal ${isArabic ? 'lg:text-right' : ''} text-sky-950 hover:text-teal-500 py-2`}>
-                                    {topicTranslation.name}
-                                    <p className="text-gray-600 px-2 text-bold">
-                                        {" | "}
-                                        {new Date(pub?.createdAt).toLocaleDateString(
-                                            isArabic ? 'ar-LY' : 'en-UK',
-                                            { day: 'numeric', month: 'long', year: 'numeric' }
-                                        )}
-                                    </p>
-                                </h5>
-                                <p className={`text-sm mt-1 ${isArabic ? 'text-right ' : ''} font-bold capitalize text-orange-400 hover:text-teal-600 z-0`}>
-                                    <span className={` text-gray-500 ${isArabic ? '' : ''}`}>{t('By')} : </span> {isArabic ? `${arabicName}` : `${EnglishName}`}
+                            <div className={`bg-white p-2 ${isArabic ? 'text-right  ' : ''} text-black hover:text-teal-600 `}>
+                                <h5 className={`flex text-lg font-normal ${isArabic ? 'text-right flex flex-row-reverse lg:text-base' : ''} text-sky-950 hover:text-teal-600 py-1`}>
+                                    {topicTranslation.name}</h5>
+                                <p className={`text-gray-600 text-bold ${isArabic ? 'text-right  ' : ''} ssm:flex-row-reverse`}>
+                                    {" "}
+                                    {new Date(pub?.createdAt).toLocaleDateString(
+                                        isArabic ? 'ar-LY' : 'en-UK',
+                                        { day: 'numeric', month: 'short', year: 'numeric' }
+                                    )}
+                                </p>
+
+                                <p className={`text-sm mt-1 ${isArabic ? 'text-right ' : ''} font-bold capitalize text-orange-400 hover:text-teal-600 z-10`}>
+                                    <span className={` text-gray-500 ${isArabic ? '' : ''}`}>{t('By')} : </span><Link to={`/profileDisplay/${pub.owner.profile.id}`}> {isArabic ? `${arabicName}` : `${EnglishName}`}</Link>
                                 </p>
                             </div>
                         </TECarouselItem>

@@ -56,7 +56,7 @@ const UpcomingEvent = () => {
             </div>
 
             {/* Event Details and Slider */}
-            <div className=" mx-auto px-4 lg:py-8 flex flex-col-reverse lg:flex-row justify-between items-center lg:mx-80">
+            <div className=" mx-auto px-4 lg:pb-20 flex flex-col-reverse lg:flex-row justify-between items-center lg:mx-80">
                 <div className='pt-20 m-auto'>
                     <Link to='events/view-all' className="border-2 text-teal-600 font-arabic ssm:text-lg  border-teal-600 rounded-full hover:bg-teal-600 hover:text-white ssm:py-1 px-14 mb-4 lg:mb-0 lg:hidden md:block ssm:block">
                         {t('topics.view_all')}
@@ -91,7 +91,7 @@ const UpcomingEvent = () => {
                                 <img
                                     src={event.image || '/default-event-image.jpg'}
                                     alt={getTranslatedTitle(event)} // Use the translated title for alt text
-                                    className="lg:w-full h-60 lg:h-full object-cover"
+                                    className="lg:w-full h-60 lg:h-[340px] object-cover"
                                 />
                             </div>
                         ))}
