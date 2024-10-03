@@ -5,7 +5,6 @@ import { IoLocationOutline } from "react-icons/io5";
 import { IoMdTime } from "react-icons/io";
 import { FaFacebookF, FaTwitter, FaLinkedinIn } from "react-icons/fa"; // Icons for social media
 import FutureEvents from './FutureEvents';
-
 const EventDetails = () => {
     const { id } = useParams(); // Get the event ID from the URL
     const { data: event, isLoading, error } = useGetEventById(id); // Fetch event by ID
@@ -42,6 +41,7 @@ const EventDetails = () => {
                             </span>
                         </div>
 
+                        <a className="flex items-center text-gray-700 text-xl mb-4"> link  href={`${event.link}`}</a>
                         {/* Share on social media links */}
                         <div className="flex items-center space-x-2 mt-2">
                             <span className="text-sky-950 font-bold" >Share</span>

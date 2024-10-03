@@ -7,7 +7,9 @@ import { useGetPublications } from "./hooks/useGetPublications";
 import { useGetTopics } from "./hooks/useGetTopics";
 import ManageTopics from "./ManageTopics";
 const PublicationsList = () => {
-    const { data: publications = [], isPending, error } = useGetPublications();
+    const { data, isPending, error } = useGetPublications();
+    const publications = data || []; // Default to an empty array if data is undefined
+
     const addPublication = useAddPublications();
     const editPublication = useEditPublications();
     const deletePublication = useDeletePublications();
@@ -206,7 +208,7 @@ const PublicationsList = () => {
                 </div>
                 <div className="mb-4">
                     <textarea
-                        name="content option"
+                        name="content2"
                         value={formData.content2}
                         onChange={handleChange}
                         placeholder="Content"
@@ -215,7 +217,7 @@ const PublicationsList = () => {
                 </div>
                 <div className="mb-4">
                     <textarea
-                        name="content option"
+                        name="content3"
                         value={formData.content3}
                         onChange={handleChange}
                         placeholder="Content"
@@ -236,7 +238,7 @@ const PublicationsList = () => {
                 </div>
                 <div className="mb-4">
                     <textarea
-                        name="arabicContent option"
+                        name="arabicContent2"
                         value={formData.arabicContent2}
                         onChange={handleChange}
                         placeholder="Arabic Content"
@@ -245,7 +247,7 @@ const PublicationsList = () => {
                 </div>
                 <div className="mb-4">
                     <textarea
-                        name="arabicContent option"
+                        name="arabicContent3"
                         value={formData.arabicContent3}
                         onChange={handleChange}
                         placeholder="Arabic Content"

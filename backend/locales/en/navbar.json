@@ -16,9 +16,9 @@
   "no_results": "No Results",
   "email": "info@edulibya.ly",
   "Read More": "Read More",
-  "topic area": "Topic Area",
-  "publication area": "Publication Area",
-  "projects area": "Projects Area",
+  "topic area": "Topics",
+  "publication area": "Publications",
+  "projects area": "Projects",
   "upcoming events": "Upcoming Events",
   "our team": "Our Team",
   "our partners": "Our Partners",
@@ -143,7 +143,7 @@
     "Student Wellbeing and Enrichment": "Student Wellbeing and Enrichment",
     "Assessment and Examination": "Assessment and Examination",
     "view_all": "View All",
-    "topic area": "Topics Area"
+    "topic area": "Topics"
   },
   
   "joinUs": {
