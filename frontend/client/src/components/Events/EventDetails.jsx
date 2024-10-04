@@ -6,12 +6,13 @@ import { IoMdTime } from "react-icons/io";
 import { FaFacebookF, FaTwitter, FaLinkedinIn } from "react-icons/fa";
 import FutureEvents from './FutureEvents';
 import { useTranslation } from 'react-i18next'; // Import useTranslation
+import { FiExternalLink } from "react-icons/fi";
 
 const EventDetails = () => {
     const { id } = useParams();
     const { data: event, isLoading, error } = useGetEventById(id);
     const currentUrl = window.location.href;
-    const { t, i18n } = useTranslation(); // Use i18n for translations
+    const { t, i18n } = useTranslation('navbar'); // Use i18n for translations
     const isArabic = i18n.language === 'ar'; // Check if the current language is Arabic
     if (isLoading) {
         return <p>{t('event.loading')}</p>; // Translated loading message
@@ -34,7 +35,7 @@ const EventDetails = () => {
 
     return (
         < >
-            <div className={`flex flex-col items-center p-8 ${isArabic ? 'text-right ' : ' '} bg-white text-gray-800 `}>
+            <div className={`flex flex-col items-center p-8 ${isArabic ? 'text-right flex-row-reverse' : ' '} bg-white text-gray-800 `}>
                 <div className="lg:max-w-7xl w-full flex flex-col lg:flex-row bg-white  overflow-hidden ">
                     {/* Left Section: Title and Date */}
                     <div className="flex-1 bg-neutral-200 p-6 flex flex-col justify-between">
@@ -42,23 +43,25 @@ const EventDetails = () => {
                             <h2 className="text-3xl  mb-4 py-6 px-6 text-gray-700 lg:font-arabic ">
                                 {getTranslatedContent('title')}
                             </h2>
-                            <div className="flex items-center text-gray-700 text-xl mb-4">
-                                <CiCalendar className="mr-2" />
-                                <span>
-                                    {new Date(event.startTime).toLocaleDateString('en-UK', {
+                            <div className={`${isArabic ? 'text-gray-700 flex flex-row-reverse ' : ' flex  text-left '} text-gray-700 text-base `}>
+                                <CiCalendar className={`  ${isArabic ? 'lg:text-right ml-2' : ' text-left mr-2'} mt-1`} />
+                                <span className={`mb-2${isArabic ? ' ' : ' '}`}>
+
+                                    {new Date(event.startTime).toLocaleDateString(isArabic ? 'ar-LY' : 'en-UK', {
                                         year: 'numeric',
-                                        month: 'long',
+                                        month: 'short',
                                         day: 'numeric',
                                     })}
                                 </span>
                             </div>
 
-                            <a className="flex items-center text-gray-700 text-xl mb-4" href={`${event.link}`}>
+                            <a className={`flex items-center text-gray-700 text-xs font-bold mb-12 uppercase ${isArabic ? 'lg:text-right flex-row-reverse font-arabic' : ' text-left'}`} href={`${event.link}`}><FiExternalLink className={`  ${isArabic ? 'lg:text-right ml-2' : ' text-left mr-2'}`} />
+
                                 {t('events.event-link')}
                             </a>
                             {/* Share on social media links */}
-                            <div className="flex items-center space-x-2 mt-2">
-                                <span className="text-sky-950 font-bold">{t('event.share')}</span>
+                            <div className={`flex items-center space-x-2 mt-2 ${isArabic ? 'lg:text-right flex-row-reverse font-arabic' : ' text-left'}`}>
+                                <span className="text-sky-950  font-arabic font-bold text-xs uppercase">{t('events.share')}</span>
                                 <a href={facebookShareUrl} target="_blank" rel="noopener noreferrer" className="text-sky-950 hover:text-teal-600">
                                     <FaFacebookF size={18} />
                                 </a>
@@ -88,7 +91,7 @@ const EventDetails = () => {
                     </div>
                 </div>
             </div>
-            <div className={`flex flex-col  p-8 ${isArabic ? 'text-right ' : ' '} bg-white text-gray-800  lg:min-w-80 items-center `}>
+            <div className={`flex flex-col  p-8 ${isArabic ? 'text-right flex-row-reverse' : 'text-left '} bg-white text-gray-800  lg:min-w-80 items-center `}>
                 <div className={`bg-sky-950 flex items-center  flex-col text-white p-3 h-[200px] w-[200px]`}>
                     <div className="mb-4">
                         <IoLocationOutline className="inline-block mr-2" />
@@ -111,8 +114,8 @@ const EventDetails = () => {
                     </div>
                 </div>
                 {/* Description Section */}
-                <div className="max-w-6xl w-full bg-white p-6 mt-6 border-b border-sky-950 ">
-                    <p className="text-gray-800 text-sm mb-6 leading-relaxed">
+                <div className={`max-w-6xl w-full bg-white p-6 mt-6 border-b ${isArabic ? 'text-right flex-row-reverse' : 'text-left '} border-sky-950 `}>
+                    <p className={`text-gray-800 text-sm mb-6 leading-relaxed  text-pretty ${isArabic ? 'lg:text-right ' : 'text-left '}`}>
                         {getTranslatedContent('description')}
                     </p>
                 </div>

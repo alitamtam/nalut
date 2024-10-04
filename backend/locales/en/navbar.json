@@ -69,7 +69,8 @@
   "events": {
     "title": "Events",
     "description": "Explore our events",
-    "event-link": "To participate in the event"
+    "event-link": "To participate in the event",
+    "share": "share"
   },
   
   "contactUs": {
