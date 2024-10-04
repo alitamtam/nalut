@@ -67,6 +67,7 @@
     "events": {
       "title": "الأحداث",
       "description": "استكشف أحداثنا",
+      "last-events":" آخر الأحداث",
       "event-link": "للمشاركة في الحدث",
       "share": "شارك "
 

@@ -36,18 +36,18 @@ const EventDetails = () => {
     return (
         < >
             <div className={` flex flex-col lg:mx-80 items-center  lg:py-4 ${isArabic ? 'text-right flex-row-reverse' : ' '} bg-white text-gray-800 `}>
-                <div className="lg:max-w-7xl w-full flex flex-col lg:flex-row bg-white  overflow-hidden ">
+                <div className="lg:max-w-7xl w-full lg:h-[300px] flex flex-col lg:flex-row bg-white  overflow-hidden ">
                     {/* Left Section: Title and Date */}
                     <div className="flex-1 bg-neutral-200 p-6 flex flex-col justify-between">
                         <div>
-                            <h2 className="text-3xl  mb-4 py-6 px-6 text-gray-700 lg:font-arabic ">
+                            <h2 className="text-lg capitalize mb-4 py-6 px-6 text-gray-700 lg:font-arabic ">
                                 {getTranslatedContent('title')}
                             </h2>
                             <div className={`${isArabic ? 'text-gray-700 flex flex-row-reverse ' : ' flex  text-left '} text-gray-700 text-base `}>
                                 <CiCalendar className={`  ${isArabic ? 'lg:text-right ml-2' : ' text-left mr-2'} mt-1`} />
                                 <span className={`mb-2${isArabic ? ' ' : ' '}`}>
 
-                                    {new Date(event.startTime).toLocaleDateString(isArabic ? 'ar-LY' : 'en-UK', {
+                                    {new Date(event.startTime).toLocaleDateString(isArabic ? 'ar-LY' : 'en-UK', { timeZone: 'UTC' }, {
                                         year: 'numeric',
                                         month: 'short',
                                         day: 'numeric',
@@ -55,7 +55,7 @@ const EventDetails = () => {
                                 </span>
                             </div>
 
-                            <a className={`flex items-center text-gray-700 text-xs font-bold mb-12 uppercase ${isArabic ? 'lg:text-right flex-row-reverse font-arabic' : ' text-left'}`} href={`${event.link}`}><FiExternalLink className={`  ${isArabic ? 'lg:text-right ml-2' : ' text-left mr-2'}`} />
+                            <a className={`flex items-center text-gray-700 text-xs font-bold mb-12 uppercase hover:text-teal-600 hover:underline ${isArabic ? 'lg:text-right flex-row-reverse font-arabic' : ' text-left'}`} href={`${event.link}`}><FiExternalLink className={`  ${isArabic ? 'lg:text-right ml-2' : ' text-left mr-2'}`} />
 
                                 {t('events.event-link')}
                             </a>
@@ -92,13 +92,13 @@ const EventDetails = () => {
                 </div>
             </div>
             <div className={`flex flex-col  lg:mx-80 ${isArabic ? 'text-right flex-row-reverse' : 'text-left '} bg-white text-gray-800   items-end `}>
-                <div className={`bg-sky-950 flex items-end  flex-col text-white p-3 h-[200px] w-[200px]`}>
+                <div className={`bg-sky-950 flex items-center  flex-col text-white py-5 h-[100px] w-[200px]`}>
                     <div className="mb-4">
-                        <IoLocationOutline className="inline-block mr-2" />
-                        <span>{event.location}</span>
+                        <IoLocationOutline className="inline-block mr-1 mb-1" />
+                        <span>{getTranslatedContent('location')}</span>
                     </div>
                     <div className={`mb-4 flex  ${isArabic ? 'text-left ' : ''} items-end `}>
-                        <IoMdTime className="inline-block mr-2" />
+                        <IoMdTime className="inline-block mr-1 mb-1" />
                         <span>
                             {new Date(event.startTime).toLocaleTimeString(isArabic ? 'ar-LY' : 'en-UK', {
                                 hour: '2-digit',
@@ -114,8 +114,8 @@ const EventDetails = () => {
                     </div>
                 </div>
                 {/* Description Section */}
-                <div className={`max-w-6xl w-full bg-white p-6 mt-6 border-b ${isArabic ? 'text-right flex-row-reverse' : 'text-left '} border-sky-950 `}>
-                    <p className={`text-gray-600 text-ssm mb-6 leading-relaxed  text-pretty ${isArabic ? 'lg:text-left  flex flex-row-reverse ' : 'text-left '}`}>
+                <div className={` w-full bg-white py-6 mt-6 border-b ${isArabic ? 'text-right flex-row-reverse' : 'text-left '} border-sky-950 `}>
+                    <p className={`text-gray-600 text-ssm mb-6 leading-relaxed  text-pretty ${isArabic ? 'lg:text-left  flex flex-row-reverse ' : 'text-left '} max-w-6xl`}>
                         {getTranslatedContent('description')}
                     </p>
                 </div>

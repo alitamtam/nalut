@@ -53,8 +53,8 @@ const Navbar = () => {
                 </div>
 
                 {/* Desktop Menu */}
-                <div className={`hidden lg:flex space-x-8 mx-auto uppercase font-body text-xl  ${isArabic ? ' gap-10 lg:font-arabic lg:text-lg flex-row-reverse  ' : 'flex-row'}  `}>
-                    <Link to="/" className="text-orange-500 font-bold">
+                <div className={`hidden lg:flex lg:space-x-20 mx-auto uppercase font-sm text-base  ${isArabic ? ' lg:gap-10 lg:font-arabic lg:text-lg flex-row-reverse  ' : 'flex-row'}  `}>
+                    <Link to="/" className="text-orange-500 lg:font-semibold hover:underline">
                         {t('home')}
                     </Link>
                     <Link to="/about" className="text-white hover:text-orange-500 ">

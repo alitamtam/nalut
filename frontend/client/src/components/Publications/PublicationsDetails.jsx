@@ -85,7 +85,7 @@ const PublicationDetails = () => {
                         to={`/profileDisplay/${publication.owner.profile?.id}`}
                         className="text-gray-600 mb-2 capitalize font-bold hover:text-teal-600 py-5"
                     >
-                        {publication.owner.firstName} {publication.owner.lastName}
+                        {publication.owner.profile.FullName} {publication.owner.lastName}
                     </Link>  |  {/* Add a separator between author and date */}
                     <span className="text-gray-500 mb-2 capitalize font-normal">
                         {new Date(publication.createdAt).toLocaleDateString('en-UK', { day: 'numeric', month: 'numeric', year: 'numeric' })}
