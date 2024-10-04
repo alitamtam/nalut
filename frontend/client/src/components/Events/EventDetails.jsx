@@ -35,7 +35,7 @@ const EventDetails = () => {
 
     return (
         < >
-            <div className={`flex flex-col items-center p-8 ${isArabic ? 'text-right flex-row-reverse' : ' '} bg-white text-gray-800 `}>
+            <div className={` flex flex-col lg:mx-80 items-center  lg:py-4 ${isArabic ? 'text-right flex-row-reverse' : ' '} bg-white text-gray-800 `}>
                 <div className="lg:max-w-7xl w-full flex flex-col lg:flex-row bg-white  overflow-hidden ">
                     {/* Left Section: Title and Date */}
                     <div className="flex-1 bg-neutral-200 p-6 flex flex-col justify-between">
@@ -91,13 +91,13 @@ const EventDetails = () => {
                     </div>
                 </div>
             </div>
-            <div className={`flex flex-col  p-8 ${isArabic ? 'text-right flex-row-reverse' : 'text-left '} bg-white text-gray-800  lg:min-w-80 items-center `}>
-                <div className={`bg-sky-950 flex items-center  flex-col text-white p-3 h-[200px] w-[200px]`}>
+            <div className={`flex flex-col  lg:mx-80 ${isArabic ? 'text-right flex-row-reverse' : 'text-left '} bg-white text-gray-800   items-end `}>
+                <div className={`bg-sky-950 flex items-end  flex-col text-white p-3 h-[200px] w-[200px]`}>
                     <div className="mb-4">
                         <IoLocationOutline className="inline-block mr-2" />
                         <span>{event.location}</span>
                     </div>
-                    <div className={`mb-4 flex ${isArabic ? 'text-left' : ''} items-center `}>
+                    <div className={`mb-4 flex  ${isArabic ? 'text-left ' : ''} items-end `}>
                         <IoMdTime className="inline-block mr-2" />
                         <span>
                             {new Date(event.startTime).toLocaleTimeString(isArabic ? 'ar-LY' : 'en-UK', {
@@ -115,7 +115,7 @@ const EventDetails = () => {
                 </div>
                 {/* Description Section */}
                 <div className={`max-w-6xl w-full bg-white p-6 mt-6 border-b ${isArabic ? 'text-right flex-row-reverse' : 'text-left '} border-sky-950 `}>
-                    <p className={`text-gray-800 text-sm mb-6 leading-relaxed  text-pretty ${isArabic ? 'lg:text-right ' : 'text-left '}`}>
+                    <p className={`text-gray-600 text-ssm mb-6 leading-relaxed  text-pretty ${isArabic ? 'lg:text-left  flex flex-row-reverse ' : 'text-left '}`}>
                         {getTranslatedContent('description')}
                     </p>
                 </div>

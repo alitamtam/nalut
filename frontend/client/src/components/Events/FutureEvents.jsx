@@ -24,7 +24,7 @@ const FutureEvents = () => {
     // Get the last 3 events
     const lastThreeEvents = events.slice(-3);
     return (
-        <div>
+        <div >
             <div className="flex flex-col items-center lg:flex-row lg:justify-between lg:mx-80 py-4 ">
                 <h2 className="text-3xl font-bold mb-4 text-center capitalise  font-sans text-gray-800">
                     {t('events.description')}
