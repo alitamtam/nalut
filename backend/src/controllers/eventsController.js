@@ -1,6 +1,5 @@
 import prisma from "../../prisma/index.js";
 
-const prisma = new PrismaClient();
 const eventsController = {
   async findAllEvents(req, res) {
     const lang = req.query.lang || "ar"; // Default to 'en' if no language is specified
