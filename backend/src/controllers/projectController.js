@@ -79,7 +79,7 @@ const projectsController = {
             create: translations.map((translation) => ({
               language: translation.language,
               title: translation.title,
-              content: translation.content,
+              content1: translation.content1,
               content2: translation.content2 || null,
               content3: translation.content3 || null,
             })),
@@ -121,33 +121,34 @@ const projectsController = {
           content2,
           content3,
           projectImage,
-          creatorId, // Map each user ID
+          creatorId,
           // Update translations
           translations: {
             upsert: translations.map((translation) => ({
               where: {
-                publicationId_language: {
-                  publicationId: parseInt(id, 10),
+                projectId_language: {
+                  // Using composite key (projectId and language)
+                  projectId: parseInt(id, 10),
                   language: translation.language,
                 },
               },
               update: {
                 title: translation.title,
-                content: translation.content,
+                content1: translation.content1,
                 content2: translation.content2 || null,
                 content3: translation.content3 || null,
               },
               create: {
                 language: translation.language,
                 title: translation.title,
-                content: translation.content,
+                content1: translation.content1,
                 content2: translation.content2 || null,
                 content3: translation.content3 || null,
               },
             })),
           },
-          unclude: {
-            translations: true,
+          include: {
+            translations: true, // Ensure that translations are included
           },
         },
       });

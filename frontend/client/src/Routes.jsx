@@ -20,13 +20,13 @@ import PublicationsCards from './components/Publications/PublicationsCards';
 import ProfileDetails from './components/Profiles/ProfileDetails';
 import ProfileDisplay from './components/About/ProfileDisplay';
 import DeleteUsers from './components/Admin/Dashboard/DeleteUser';
-import ViewAllEvents from './components/Events/VIewAllEvents';
+import ViewAllEvents from './components/Events/ViewAllEvents';
 import EventDetails from './components/Events/EventDetails';
 import SearchResultPage from './pages/SearchResultPage';
 import ProjectDetails from './components/projects/ProjectDetails';
 import ProjectsArea from './components/projects/ProjectsArea';
 import ViewAllProjects from './components/projects/ViewAllProjects';
-import ProjectForm from './components/Admin/Dashboard/ProjectForm';
+import ManageProject from './components/Admin/Dashboard/ManageProjects';
 import ErrorPage from './pages/ErrorPage';
 
 
@@ -67,7 +67,7 @@ const AppRouter = createBrowserRouter([
             { path: 'articles', element: <ArticlesList /> },
             { path: 'events', element: <ManageEvents /> },
             { path: 'publications', element: <PublicationsList /> },
-            { path: 'projects', element: <ProjectForm /> },
+            { path: 'projects', element: <ManageProject /> },
             { path: 'register', element: <RegisterUser /> }, // Admin-specific
             { path: 'users', element: <DeleteUsers /> },    // Admin-specific
             { path: 'editProfile', element: <EditProfile /> },
@@ -86,7 +86,7 @@ const AppRouter = createBrowserRouter([
             { path: 'articles', element: <ArticlesList /> },
             { path: 'events', element: <ManageEvents /> },
             { path: 'publications', element: <PublicationsList /> },
-            { path: 'projects', element: <ProjectForm /> },
+            { path: 'projects', element: <ManageProject /> },
             { path: 'editProfile', element: <EditProfile /> },
             { path: '*', element: <NotFound /> },
         ],

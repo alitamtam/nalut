@@ -1,10 +1,9 @@
 import { useState } from "react";
-import { useCreateProject } from "../../Admin/Dashboard/hooks/projectsHooks/useCreateProject";
-import { useDeleteProject } from "../../Admin/Dashboard/hooks/projectsHooks/useDeleteProject";
-import { useGetProjects } from "../../Admin/Dashboard/hooks/projectsHooks/useGetProjects";
-import { useUpdateProject } from "../../Admin/Dashboard/hooks/projectsHooks/useUpdateProject";
+import { useCreateProject } from "./hooks/projectsHooks/useCreateProject";
+import { useDeleteProject } from "./hooks/projectsHooks/useDeleteProject";
+import { useGetProjects } from "./hooks/projectsHooks/useGetProjects";
+import { useUpdateProject } from "./hooks/projectsHooks/useUpdateProject";
 import { useSettingsStore } from "../../../store/useSettingsStore";
-
 
 const ManageProjects = () => {
     const { data: projects, isPending, error } = useGetProjects();
@@ -23,6 +22,10 @@ const ManageProjects = () => {
         content3: "",
         projectImage: "",
         link: "",
+        arabicTitle: "", // Arabic Title
+        arabicContent1: "", // Arabic Content 1
+        arabicContent2: "", // Arabic Content 2
+        arabicContent3: "", // Arabic Content 3
     });
     const [currentEditId, setCurrentEditId] = useState(null);
 
@@ -62,6 +65,22 @@ const ManageProjects = () => {
             projectImage: formData.projectImage,
             link: formData.link,
             creatorId: userId,
+            translations: [
+                {
+                    language: "en",
+                    title: formData.title,
+                    content1: formData.content1,
+                    content2: formData.content2 || null,
+                    content3: formData.content3 || null,
+                },
+                {
+                    language: "ar",
+                    title: formData.arabicTitle,
+                    content1: formData.arabicContent1,
+                    content2: formData.arabicContent2 || null,
+                    content3: formData.arabicContent3 || null,
+                },
+            ],
         };
         console.log('Form Data: ', updatedFormData); // Debugging to see if title is set correctly
 
@@ -71,7 +90,18 @@ const ManageProjects = () => {
             createProject.mutate(updatedFormData);
         }
 
-        setFormData({ title: "", content1: "", content2: "", content3: "", projectImage: "", link: "" });
+        setFormData({
+            title: "",
+            content1: "",
+            content2: "",
+            content3: "",
+            projectImage: "",
+            link: "",
+            arabicTitle: "", // Reset Arabic Title
+            arabicContent1: "", // Reset Arabic Content 1
+            arabicContent2: "", // Reset Arabic Content 2
+            arabicContent3: "", // Reset Arabic Content 3
+        });
         setIsEditing(false);
     };
 
@@ -85,6 +115,10 @@ const ManageProjects = () => {
             content3: project.content3,
             projectImage: project.projectImage, // Prepopulate base64 image
             link: project.link,
+            arabicTitle: project.translations.find(t => t.language === "ar")?.title || "", // Prepopulate Arabic Title
+            arabicContent1: project.translations.find(t => t.language === "ar")?.content1 || "", // Prepopulate Arabic Content 1
+            arabicContent2: project.translations.find(t => t.language === "ar")?.content2 || "", // Prepopulate Arabic Content 2
+            arabicContent3: project.translations.find(t => t.language === "ar")?.content3 || "", // Prepopulate Arabic Content 3
         });
     };
 
@@ -164,61 +198,71 @@ const ManageProjects = () => {
                     {formData.projectImage && <p className="mt-2 text-sm">Image ready for upload.</p>}
                 </div>
 
-                <button type="submit" className="bg-blue-500 text-white w-full py-2 rounded">
-                    {isEditing ? "Update Project" : "Add Project"}
+                {/* Arabic Translation Inputs */}
+                <h3 className="text-xl font-bold mt-4 mb-2">Arabic Translation</h3>
+                <label className="block mb-1">Arabic Title</label>
+                <div className="mb-4">
+                    <input
+                        type="text"
+                        name="arabicTitle"
+                        value={formData.arabicTitle}
+                        onChange={handleChange}
+                        placeholder="Arabic Title"
+                        className="w-full p-2 border border-gray-300 rounded"
+                    />
+                </div>
+
+                <label className="block mb-1">Arabic Content 1</label>
+                <div className="mb-4">
+                    <textarea
+                        name="arabicContent1"
+                        value={formData.arabicContent1}
+                        onChange={handleChange}
+                        placeholder="Arabic Content 1"
+                        className="w-full p-2 border border-gray-300 rounded"
+                    />
+                </div>
+
+                <label className="block mb-1">Arabic Content 2</label>
+                <div className="mb-4">
+                    <textarea
+                        name="arabicContent2"
+                        value={formData.arabicContent2}
+                        onChange={handleChange}
+                        placeholder="Arabic Content 2 (Optional)"
+                        className="w-full p-2 border border-gray-300 rounded"
+                    />
+                </div>
+
+                <label className="block mb-1">Arabic Content 3</label>
+                <div className="mb-4">
+                    <textarea
+                        name="arabicContent3"
+                        value={formData.arabicContent3}
+                        onChange={handleChange}
+                        placeholder="Arabic Content 3 (Optional)"
+                        className="w-full p-2 border border-gray-300 rounded"
+                    />
+                </div>
+
+                <button type="submit" className="bg-blue-500 text-white w-full p-2 rounded">
+                    {isEditing ? "Update Project" : "Create Project"}
                 </button>
             </form>
 
-            {/* Projects Table */}
-            <table className="min-w-full bg-white">
-                <thead>
-                    <tr className="bg-gray-200">
-                        <th className="text-left py-2">Title</th>
-                        <th className="text-left py-2">Link</th>
-                        <th className="text-left py-2">Actor</th>
-                        <th className="text-left py-2">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {projects?.map((project) => (
-                        <tr key={project.id}>
-                            <td className="border px-4 py-2">{project.title}</td>
-                            <td className="border px-4 py-2">
-                                <a href={project.link} target="_blank" rel="noopener noreferrer" className="text-blue-500">
-                                    {project.link ? "View Project" : "No Link"}
-                                </a>
-                            </td>
-                            <td className="border px-4 py-2">{project.creator.firstName} {project.creator.lastName}</td>
-                            <td className="border px-4 py-2">
-                                {project.projectImage ? (
-                                    <img
-                                        alt="project"
-                                        src={project.projectImage} // Include the base64 prefix here
-                                        className="h-16 w-16 object-cover rounded-full"
-                                    />
-                                ) : (
-                                    <p>No Image</p> // Fallback if no image is provided
-                                )}
-                            </td>
-
-                            <td className="border px-4 py-2">
-                                <button
-                                    onClick={() => handleEdit(project)}
-                                    className="bg-yellow-500 text-white px-3 py-1 rounded-md mr-2 hover:bg-yellow-600"
-                                >
-                                    Edit
-                                </button>
-                                <button
-                                    onClick={() => handleDelete(project.id)}
-                                    className="bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600"
-                                >
-                                    Delete
-                                </button>
-                            </td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
+            {/* Projects List */}
+            <h3 className="text-xl font-bold mb-2">Existing Projects</h3>
+            <ul>
+                {projects.map((project) => (
+                    <li key={project.id} className="mb-4 border p-4 rounded">
+                        <h4 className="font-bold">{project.title}</h4>
+                        <p>{project.content1}</p>
+                        <p>{project.link && <a href={project.link} target="_blank" rel="noopener noreferrer">View Project</a>}</p>
+                        <button onClick={() => handleEdit(project)} className="bg-yellow-500 text-white p-2 rounded mr-2">Edit</button>
+                        <button onClick={() => handleDelete(project.id)} className="bg-red-500 text-white p-2 rounded">Delete</button>
+                    </li>
+                ))}
+            </ul>
         </div>
     );
 };
