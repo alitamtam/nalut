@@ -3,6 +3,8 @@ import prisma from "../../prisma/index.js";
 const projectsController = {
   async getProjects(req, res) {
     try {
+      const lang = req.query.lang || "en"; // Default to 'en' if no language is specified
+
       const projects = await prisma.project.findMany({
         include: {
           creator: {
@@ -13,6 +15,7 @@ const projectsController = {
               profile: true, // Include the profile object
             },
           },
+          translations: { where: { language: lang } },
         },
       });
       res.json(projects);
@@ -22,6 +25,8 @@ const projectsController = {
   },
   async getProjectById(req, res) {
     const { id } = req.params;
+    const lang = req.query.lang || "en"; // Default to 'en' if no language is specified
+
     try {
       const project = await prisma.project.findUnique({
         where: { id: parseInt(id, 10) }, // Use parseInt with radix
@@ -34,6 +39,7 @@ const projectsController = {
               profile: true, // Include the profile object
             },
           },
+          translations: { where: { language: lang } },
         },
       });
 
@@ -57,6 +63,7 @@ const projectsController = {
         content3,
         projectImage,
         creatorId,
+        translations,
       } = req.body; // Add content2, content3, projectImage, and creator
 
       const project = await prisma.project.create({
@@ -68,6 +75,15 @@ const projectsController = {
           content3,
           projectImage, // Update the field name to match the schema
           creatorId, // Map each user ID
+          translations: {
+            create: translations.map((translation) => ({
+              language: translation.language,
+              title: translation.title,
+              content: translation.content,
+              content2: translation.content2 || null,
+              content3: translation.content3 || null,
+            })),
+          },
         },
       });
       res.json(project);
@@ -88,6 +104,7 @@ const projectsController = {
       content3,
       projectImage,
       creatorId,
+      translations,
     } = req.body || {};
 
     if (!title) {
@@ -105,6 +122,33 @@ const projectsController = {
           content3,
           projectImage,
           creatorId, // Map each user ID
+          // Update translations
+          translations: {
+            upsert: translations.map((translation) => ({
+              where: {
+                publicationId_language: {
+                  publicationId: parseInt(id, 10),
+                  language: translation.language,
+                },
+              },
+              update: {
+                title: translation.title,
+                content: translation.content,
+                content2: translation.content2 || null,
+                content3: translation.content3 || null,
+              },
+              create: {
+                language: translation.language,
+                title: translation.title,
+                content: translation.content,
+                content2: translation.content2 || null,
+                content3: translation.content3 || null,
+              },
+            })),
+          },
+          unclude: {
+            translations: true,
+          },
         },
       });
       res.json(updatedProject);
