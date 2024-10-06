@@ -6,6 +6,7 @@ const projectsController = {
       const lang = req.query.lang || "en"; // Default to 'en' if no language is specified
 
       const projects = await prisma.project.findMany({
+        take: 100, // Limit to 100 events
         include: {
           creator: {
             // Use 'creator' to match the relation name

@@ -89,7 +89,11 @@ const adminController = {
 
   async getAllUsers(req, res) {
     try {
-      const users = await prisma.user.findMany();
+      const users = await prisma.user.findMany(
+        {
+          limit: 100,
+        } // Limit the number of users returned
+      );
       res.status(200).json(users);
     } catch (error) {
       console.error(error);

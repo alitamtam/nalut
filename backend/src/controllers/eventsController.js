@@ -6,6 +6,7 @@ const eventsController = {
 
     try {
       const events = await prisma.event.findMany({
+        take: 100, // Limit to 100 events
         include: {
           translations: true, // Fetch all translations for the event
         },

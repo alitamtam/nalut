@@ -4,6 +4,8 @@ const profileController = {
   async getAllProfiles(req, res) {
     try {
       const profiles = await prisma.profile.findMany({
+        take: 100, // Limit to 100 events
+
         include: {
           translations: true, // Fetch all translations for the event
 
