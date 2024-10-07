@@ -11,6 +11,8 @@ i18n
   .use(initReactI18next)
   .init({
     fallbackLng: "en",
+    supportedLngs: ["en", "ar"], // Add supported languages
+
     debug: isDevelopment, // Enable debug in development only
     interpolation: {
       escapeValue: false,
