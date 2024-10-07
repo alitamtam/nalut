@@ -1,12 +1,12 @@
-import { PrismaClient } from "@prisma/client";
+import prisma from "../../prisma/index.js";
 
-const prisma = new PrismaClient();
 const eventsController = {
   async findAllEvents(req, res) {
     const lang = req.query.lang || "ar"; // Default to 'en' if no language is specified
 
     try {
       const events = await prisma.event.findMany({
+        take: 100, // Limit to 100 events
         include: {
           translations: true, // Fetch all translations for the event
         },

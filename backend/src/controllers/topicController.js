@@ -5,6 +5,7 @@ const topicsController = {
   async findAllTopics(req, res, next) {
     try {
       const topics = await prisma.topic.findMany({
+        take: 100, // Limit to 100 topics
         orderBy: { id: "asc" }, // Order topics by ID or another field
         include: {
           publications: true, // Include related publications if needed

@@ -7,6 +7,9 @@ import routes from "./src/routes/index.js"; // Assuming your routes are in ./src
 
 const app = express();
 
+// CORS configuration
+app.use(cors());
+
 // Fix for __dirname in ES modules
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);

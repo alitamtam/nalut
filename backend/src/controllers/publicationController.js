@@ -6,6 +6,8 @@ const publicationController = {
     try {
       const lang = req.query.lang || "en"; // Default to 'en' if no language is specified
       const publications = await prisma.publication.findMany({
+        take: 500, // Limit to 100 events
+
         orderBy: { createdAt: "desc" },
         include: {
           topic: {
