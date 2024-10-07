@@ -10,6 +10,7 @@ i18n
   .use(initReactI18next)
   .init({
     fallbackLng: "en", // Default language
+    supportedLngs: ["en", "ar"], // Add supported languages
     debug: true, // Set to false in production
     interpolation: {
       escapeValue: false, // React already escapes values
