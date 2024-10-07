@@ -4,7 +4,7 @@ const publicationController = {
   // Fetch and return a list of publications
   async findAllPublications(req, res, next) {
     try {
-      const publications = await prisma.publications.findMany({
+      const publications = await prisma.publication.findMany({
         orderBy: { created_at: "desc" },
         include: {
           topic: true,
