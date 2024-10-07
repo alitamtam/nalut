@@ -8,7 +8,7 @@
     "seed": "node prisma/seed.js",
     "postinstall": "npx prisma migrate deploy",
     "dev": "nodemon server.js",
-    "start": "NODE_ENV=production  server.js",
+    "start": "NODE_ENV=production node  server.js",
     "prisma:migrate": "npx prisma migrate deploy",
     "prisma:generate": "npx prisma generate"
   },
