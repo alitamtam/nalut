@@ -1,15 +1,8 @@
 {
   "home": "main page",
-  "publications": "Publications",
-  "projects": "Projects",
-  "contact": "Contact Us",
+   "contact": "Contact Us",
   "follow_us": "Follow Us",
-  "arabic": "Arabic",
-  "english": "English",
-  "login": "Login",
-  "logout": "Logout",
-  "view_all": "View All",
-  "search": "Search",
+    "view_all": "View All",
   "search_placeholder": "Search for...",
   "search_results": "Search Results",
   "no_results": "No Results",
@@ -29,8 +22,6 @@
     "No Icon": "No Icon",
     "By": "By",
     "translated to": "translated to",
-
-
   "eduLibyaDescription": {
   "part1": "All of us in EduLibya are connected to the education sector as students, teachers, parents, workshop leaders, researchers, social-psychological practitioners, and so on.",
   "part2": "We are a network of educators interested in various dimensions of education across Libya.",
@@ -43,7 +34,6 @@
   "part7": "We are not seeking to offer solutions to problems; instead, we aim to create deeper connections between each other and between our ideas and practices, hoping to see ourselves more clearly and to suggest ways to face our future.",
   "part8": "EduLibya moves through time and space organically, with ever-changing members communicating around ever-changing needs. The intentionally ambiguous nature of this space is the co-construction of a community that can build a shared language for change and movement in any desired direction."
 },
-
   
   "about": {
     "title": "About us",

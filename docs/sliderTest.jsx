@@ -70,7 +70,8 @@ const TopicsSlider2 = () => {
     return (
         <div className="relative w-full pb-10 px-7 mb-40 border-teal-500 border-b">
             <Slider {...settings}>
-                {topics.map((topic, index) => (
+                {/* Ensure topics is defined and is an array */}
+                {(topics && topics.length > 0 ? topics : []).map((topic, index) => (
                     <div
                         key={index}
                         className="flex-shrink-0 w-48 h-56 mx-0 flex flex-col items-center justify-center bg-gray-100 shadow-lg p-0 transition-transform duration-300 hover:scale-105 hover:bg-sky-900 hover:text-white md:w-60 md:h-72"
@@ -86,6 +87,7 @@ const TopicsSlider2 = () => {
             </Slider>
         </div>
     );
+
 };
 
 export default TopicsSlider2;

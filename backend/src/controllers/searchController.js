@@ -12,7 +12,7 @@ export const searchDatabase = async (req, res) => {
 
   try {
     const results = await Promise.all([
-      prisma.projects.findMany({
+      prisma.project.findMany({
         where: {
           OR: [
             { title: { contains: searchTerm, mode: "insensitive" } },
@@ -46,7 +46,7 @@ export const searchDatabase = async (req, res) => {
           ],
         },
       }),
-      prisma.publications.findMany({
+      prisma.publication.findMany({
         where: {
           OR: [
             { title: { contains: searchTerm, mode: "insensitive" } },

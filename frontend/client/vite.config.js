@@ -2,7 +2,6 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "tailwindcss";
 import autoprefixer from "autoprefixer";
-import process from "process";
 
 export default defineConfig(({ mode }) => {
   const isProduction = mode === "production";
@@ -11,7 +10,7 @@ export default defineConfig(({ mode }) => {
     plugins: [react()],
     resolve: {
       alias: {
-        "@": "/src", // Aliasing to easily import from the src folder
+        "@": "/src", // Alias for easy imports
       },
     },
     css: {
@@ -20,27 +19,36 @@ export default defineConfig(({ mode }) => {
       },
     },
     define: {
-      // Map VITE_API_URL based on the environment (development or production)
-      "import.meta.env": {
-        VITE_API_URL: JSON.stringify(
-          process.env.VITE_API_URL || "http://localhost:3000"
-        ),
-      },
+      // Use Vite's built-in env variable system to map environment variables
+      "import.meta.env.VITE_API_URL": JSON.stringify(
+        isProduction
+          ? "https://www.edulibya.ly" // API URL in production
+          : "http://localhost:3000" // API URL for development
+      ),
     },
     server: {
       proxy: {
+        // Proxy API requests in development
         "/api": {
-          target: "http://localhost:3000", // Local backend API for development
+          target: "http://localhost:3000", // Local API for dev
           changeOrigin: true,
-          secure: false, // Keep this false for local development (HTTP)
-          rewrite: (path) => path.replace(/^\/api/, ""), // Remove "/api" from the request path
+          secure: false, // Disable SSL check for local dev
+          rewrite: (path) => path.replace(/^\/api/, ""), // Strip /api prefix
+        },
+        // Proxy for locales (i18n translations)
+        "/locales": {
+          target: "http://localhost:3000", // Local backend for locales
+          changeOrigin: true,
+          secure: false, // Disable SSL check for local dev
+          rewrite: (path) => path.replace(/^\/locales/, ""), // Strip /locales prefix
         },
       },
     },
     build: {
-      outDir: "dist", // Specify the output directory for the production build
-      sourcemap: isProduction, // Enable source maps for production if needed
+      outDir: "dist", // Output directory for production build
+      sourcemap: !isProduction, // Only generate source maps in development
+      minify: isProduction ? "terser" : false, // Only minify in production
     },
-    base: isProduction ? "https://edulibya.ly/" : "/", // Use base path based on the environment
+    base: isProduction ? "https://www.edulibya.ly/" : "/", // Base path based on environment
   };
 });

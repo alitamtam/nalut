@@ -10,16 +10,16 @@ i18n
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
-    fallbackLng: "en",
+    fallbackLng: "en", // Fallback language
+    supportedLngs: ["en", "ar"], // Supported languages
     debug: isDevelopment, // Enable debug in development only
     interpolation: {
       escapeValue: false,
     },
     backend: {
-      // Dynamically switch the loadPath based on the environment
       loadPath: isDevelopment
-        ? "http://www.localhost:3000/locales/{{lng}}/{{ns}}.json" // Local path for development
-        : "https://edulibya.ly/locales/{{lng}}/{{ns}}.json", // Full URL for production
+        ? "http://localhost:3000/locales/{{lng}}/{{ns}}.json" // Local path for development
+        : "https://www.edulibya.ly/locales/{{lng}}/{{ns}}.json", // Full URL for production
     },
     cache: {
       enabled: !isDevelopment, // Disable cache in development, enable in production
