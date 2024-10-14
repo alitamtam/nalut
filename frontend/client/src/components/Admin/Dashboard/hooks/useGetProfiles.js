@@ -8,7 +8,10 @@ export const useAllProfiles = () => {
   return useQuery({
     queryKey: ["profiles", i18n.language],
     queryFn: async () => {
-      const response = await api.get(`/api/profiles?lang=${i18n.language}`);
+      const response = await api.get(
+        `${import.meta.env.VITE_API_URL}/api/profiles`
+      );
+      console.log("API Response:", response.data); // Log response data
 
       return response.data;
     },

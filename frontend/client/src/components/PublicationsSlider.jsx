@@ -9,7 +9,7 @@ const PublicationsSlider = () => {
     const [activeIndex, setActiveIndex] = useState(0);
     const { t, i18n } = useTranslation('navbar'); // Use the hook to get the translation function
     const isArabic = i18n.language === 'ar'; // Check if the language is Arabic
-    const recentPublications = publications.slice(0, 3);
+    const recentPublications = Array.isArray(publications) ? publications.slice(0, 3) : []; // Ensure it's an array
 
     if (isLoading) return <p>{t('loading_publications')}</p>;
     if (isError) return <p>{t('error_fetching_publications')}</p>;
@@ -79,17 +79,13 @@ const PublicationsSlider = () => {
                     </span>
                 }
             >
-                {recentPublications.map((pub, index) => {
+                {recentPublications.length > 0 ? recentPublications.map((pub, index) => {
                     const translation = pub.translations.find(t => t.language === i18n.language) || {};
                     const profileTranslation = pub.owner.profile.translations.find(t => t.language === i18n.language) || {};
                     const topicTranslation = pub.topic.translations.find(t => t.language === i18n.language) || {};
-                    // Use translated title or fallback to default
                     const publicationTitle = translation.title || pub.title;
-
-                    // Use translated names or fallback to defaults
-                    const arabicName = profileTranslation.title
+                    const arabicName = profileTranslation.title || '';
                     const EnglishName = `${pub.owner.firstName} ${pub.owner.lastName}`;
-
 
                     return (
                         <TECarouselItem
@@ -114,9 +110,9 @@ const PublicationsSlider = () => {
                             {/* Slide Details Section */}
                             <div className={`bg-white p-2 ${isArabic ? 'text-right  ' : ''} text-black hover:text-teal-600 `}>
                                 <h5 className={`flex text-lg font-normal ${isArabic ? 'text-right flex flex-row-reverse lg:text-base' : ''} text-sky-950 hover:text-teal-600 py-1`}>
-                                    {topicTranslation.name}</h5>
+                                    {topicTranslation.name || ''}
+                                </h5>
                                 <p className={`text-gray-600 text-bold ${isArabic ? 'text-right  ' : ''} ssm:flex-row-reverse`}>
-                                    {" "}
                                     {new Date(pub?.createdAt).toLocaleDateString(
                                         isArabic ? 'ar-LY' : 'en-UK',
                                         { day: 'numeric', month: 'short', year: 'numeric' }
@@ -124,16 +120,21 @@ const PublicationsSlider = () => {
                                 </p>
 
                                 <p className={`text-sm mt-1 ${isArabic ? 'text-right ' : ''} font-bold capitalize text-orange-400 hover:text-teal-600 z-10`}>
-                                    <span className={` text-gray-500 ${isArabic ? '' : ''}`}>{t('By')} : </span><Link to={`/profileDisplay/${pub.owner.profile.id}`}> {isArabic ? `${arabicName}` : `${EnglishName}`}</Link>
+                                    <span className={` text-gray-500 ${isArabic ? '' : ''}`}>{t('By')} : </span>
+                                    <Link to={`/profileDisplay/${pub.owner.profile.id}`}> {isArabic ? `${arabicName}` : `${EnglishName}`}</Link>
                                 </p>
                             </div>
                         </TECarouselItem>
                     );
-                })}
+                }) : (
+                    <div className="text-center text-gray-600">
+                        <p>{t('no_publications_found')}</p> {/* Optional message when there are no publications */}
+                    </div>
+                )}
 
                 {/* Indicators */}
                 <div className={`absolute bottom-0 w-full py-2 flex ${isArabic ? 'text-right' : ''} justify-center space-x-2 border-b-4 border-gray-100 shadow-lg px-4`}>
-                    {recentPublications.map((_, index) => (
+                    {recentPublications.length > 0 && recentPublications.map((_, index) => (
                         <button
                             key={index}
                             onClick={() => handleIndicatorClick(index)}
