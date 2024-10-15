@@ -31,7 +31,7 @@ const PublicationsSlider = () => {
     };
 
     return (
-        <div className={`relative lg:w-[800px] ssm:w-auto h-auto mx-auto ${isArabic ? 'lg:text-right flex-row-reverse ' : ''} overflow-hidden capitalize`}>
+        <div className={`relative  ${isArabic ? 'lg:text-right flex-row-reverse ' : ''} overflow-hidden capitalize`}>
             <TECarousel
                 className="relative h-[550px] object-cover w-[stretch]"
                 showControls

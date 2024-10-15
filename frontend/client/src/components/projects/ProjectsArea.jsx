@@ -32,6 +32,7 @@ const ProjectsArea = () => {
                     slidesToScroll: 1,
                 }
             },
+
             {
                 breakpoint: 600,
                 settings: {
@@ -48,7 +49,7 @@ const ProjectsArea = () => {
 
     return (
         <div className="p-4 ">
-            <div className={`flex flex-col items-center ${isArabic ? 'lg:text-base lg:font-arabic ssm:font-arabic md:font-arabic ssm:text-2xl ssm:font-bold lg:flex-row-reverse' : ''} lg:flex-row lg:justify-between lg:mx-80 py-4`}>
+            <div className={`flex flex-col items-center ${isArabic ? 'lg:text-base lg:font-arabic ssm:font-arabic md:font-arabic ssm:text-2xl ssm:font-bold lg:flex-row-reverse' : ''} lg:flex-row lg:justify-between xxl:mx-80 xl:mx-20 lg:mx-20 py-4`}>
                 <h2 className={`text-3xl font-bold mb-4 text-center capitalize ${isArabic ? 'lg:text-2xl lg:font-arabic ssm:font-arabic md:font-arabic ssm:text-2xl ssm:font-bold' : ''} font-sans text-sky-950`}>
                     {t('projects.title')}
                 </h2>
@@ -56,17 +57,17 @@ const ProjectsArea = () => {
                     {t('view_all')}
                 </Link>
             </div>
-            <div className="bg-white text-gray-800 lg:h-4/5 border-b border-teal-600 pb-12 mb-12 w-full max-w-full overflow-x-hidden">
-                <div className="lg:mx-80 bg-white w-auto">
+            <div className="bg-white text-gray-800 xxl:h-4/5 border-b border-teal-600 xxl:pb-12 xxl:mb-12 w-full max-w-full overflow-x-hidden">
+                <div className="xxl:mx-80 lg:mx-20 xl:mx-20 bg-white w-auto">
                     {lastThreeProjects.length === 0 ? (
                         <div className="flex items-center justify-center text-gray-500">{t('noProjectsAvailable')}</div>
                     ) : (
                         <Slider {...settings}>
                             {lastThreeProjects.map((project) => (
-                                <div key={project.id} className="py-12 px-1">
-                                    <div className="bg-neutral-100 p-6">
+                                <div key={project.id} className="xxl:py-12 px-1">
+                                    <div className="bg-neutral-100 p-4">
                                         <div>
-                                            <Link to={`/projects/${project.id}`} className="lg:text-ssm font-semibold capitalize hover:text-teal-600 py-6">
+                                            <Link to={`/projects/${project.id}`} className="lg:text-ssm font-semibold capitalize hover:text-teal-600 xxl:py-6">
                                                 <p className="h-12 mb-6">{project.title}</p>
                                             </Link>
                                         </div>

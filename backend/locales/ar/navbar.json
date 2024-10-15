@@ -19,6 +19,7 @@
   "Publication not found": "النشر غير موجود",
   "No Icon": "لا توجد أيقونة",
   "By": "بواسطة",
+  "at": "في",
   "translated to": "مترجم إلى",
   "our team": "فريقنا",
   "our partners": "شركاؤنا",
@@ -55,7 +56,7 @@
   
     "projects": {
       "title": "المشاريع",
-      "description": "استكشاف مشاريعنا"
+      "description": "إكتشف مشاريعنا"
     },
   
     "events": {

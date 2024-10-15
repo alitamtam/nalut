@@ -47,9 +47,9 @@ const UpcomingEvent = () => {
     };
 
     return (
-        <div className='lg:w-full lg:h-auto'>
+        <div className='xxl:w-full xxl:h-auto'>
             {/* Heading and View All Button */}
-            <div className={`flex flex-col items-center ${isArabic ? 'lg:flex-row-reverse' : 'lg:flex-row'} lg:justify-between lg:mx-80 py-4`}>
+            <div className={`flex flex-col items-center ${isArabic ? 'lg:flex-row-reverse' : 'lg:flex-row'} lg:justify-between xxl:mx-80 lg:mx-20 py-4`}>
                 <h2 className={`text-3xl font-bold mb-4 text-center capitalize ${isArabic ? 'lg:text-2xl' : ''} font-sans text-sky-950`}>
                     {t('upcoming events')}
                 </h2>
@@ -59,7 +59,7 @@ const UpcomingEvent = () => {
             </div>
 
             {/* Event Details and Slider */}
-            <div className="mx-auto px-4 lg:pb-20 flex flex-col-reverse lg:flex-row justify-between items-center lg:mx-80">
+            <div className="mx-auto px-4 lg:pb-20 flex flex-col-reverse lg:flex-row justify-between items-center xxl:mx-80 lg:mx-20">
                 <div className='pt-20 m-auto'>
                     <Link to='events/view-all' className="border-2 text-teal-600 font-arabic ssm:text-lg border-teal-600 rounded-full hover:bg-teal-600 hover:text-white ssm:py-1 px-14 mb-4 lg:mb-0 lg:hidden md:block ssm:block">
                         {t('topics.view_all')}
@@ -78,8 +78,8 @@ const UpcomingEvent = () => {
                                 </p>
                                 <p className="text-sky-950 mb-4 flex items-center">
                                     <FaCalendarAlt className="mr-2" /> {new Date(sortedEvents[currentSlide]?.startTime).toLocaleDateString(
-                                        isArabic ? 'ar-LY' : 'en-UK',
-                                        { year: 'numeric', month: 'short', day: 'numeric' }
+                                        isArabic ? 'en-UK' : 'en-UK',
+                                        { year: 'numeric', month: 'numeric', day: 'numeric' }
                                     )} {t('at')} {new Date(sortedEvents[currentSlide]?.startTime).toLocaleTimeString(isArabic ? 'ar-LY' : 'en-UK', { hour: '2-digit', minute: '2-digit' })}
                                 </p>
                             </div>

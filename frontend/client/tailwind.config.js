@@ -12,6 +12,8 @@ export default {
         sm: "640px", // Mobile
         md: "768px", // Tablet
         lg: "1024px", // Laptop/Desktop
+        xl: "1280px", // Large Desktop
+        xxl: "1536px", // Extra Large Desktop
       },
       fontFamily: {
         // Setting Almarai-Regular as the default sans-serif font for the whole project

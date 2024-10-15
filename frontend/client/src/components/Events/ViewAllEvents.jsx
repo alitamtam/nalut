@@ -36,11 +36,11 @@ const AllEvents = () => {
                 {t('events.last-events')}
             </h2>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 lg:px-80 gap-4 justify-center mx-auto py-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xxl:px-80 lg:mx-20 xl:mx-20 gap-4 justify-center mx-auto xxl:py-6">
                 {events.map((event) => (
                     <div
                         key={event.id}
-                        className="rounded-none overflow-hidden bg-gray-100 hover:shadow-lg transition-shadow duration-300 w-96"
+                        className="rounded-none overflow-hidden bg-gray-100 hover:shadow-lg transition-shadow duration-300 xxl:w-96"
                     >
                         <div className="w-full h-56">
                             {/* Event image with consistent sizing */}

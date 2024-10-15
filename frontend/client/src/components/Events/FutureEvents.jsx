@@ -34,7 +34,7 @@ const FutureEvents = () => {
 
     return (
         <div>
-            <div className={`flex flex-col items-center lg:justify-between lg:mx-80 pt-6 ${isArabic ? 'text-right' : 'text-left'}`}>
+            <div className={`flex flex-col items-center lg:justify-between  xxl:mx-80 lg:mx-20 xl:mx-20 pt-6 ${isArabic ? 'text-right' : 'text-left'}`}>
                 <h2 className="text-3xl font-bold mb-4 text-center capitalize font-sans text-gray-800">
                     {t('events.description')}
                 </h2>
@@ -46,12 +46,12 @@ const FutureEvents = () => {
                 </Link>
             </div>
 
-            <div className="flex flex-col items-center p-12 bg-white text-gray-800 h-4/5 border-b border-teal-600 pb-12 mb-12">
+            <div className="flex flex-col items-center xxl:p-12 bg-white text-gray-800 h-4/5 border-b border-teal-600 pb-12 mb-12">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center mx-auto space-x-3">
                     {lastThreeEvents.map((event) => (
                         <div
                             key={event.id}
-                            className="rounded-none overflow-hidden shadow-md bg-gray-100 hover:shadow-lg transition-shadow duration-300 w-96"
+                            className="rounded-none overflow-hidden shadow-md bg-gray-100 hover:shadow-lg transition-shadow duration-300 xxl:w-96"
                         >
                             <div className="w-full h-56">
                                 {/* Event image with consistent sizing */}

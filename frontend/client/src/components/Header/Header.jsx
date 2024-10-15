@@ -41,7 +41,7 @@ const Header = () => {
     };
 
     return (
-        <header className="bg-white lg:mx-80 lg:py-4">
+        <header className="bg-white lg:mx-20  xxl:mx-80 xl:mx-20 lg:py-4">
             <div className="px-4 py-4 flex items-center justify-between">
                 <a href="/" className="flex lg:items-center ssm:items-start ssm:pr-14">
                     <img

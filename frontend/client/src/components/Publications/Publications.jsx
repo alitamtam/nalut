@@ -29,7 +29,7 @@ const Publications = () => {
     const sortedPublications = [...validPublications].sort((a, b) => new Date(b.date) - new Date(a.date));
 
     return (
-        <div className="lg:mx-80 bg-slate-100 p-6 rounded-none shadow-md h-full">
+        <div className="xxl:mx-80 lg:mx-20 xl:mx-20 bg-slate-100 p-6 rounded-none shadow-md h-full">
             <h1 className="text-3xl font-bold mb-6 capitalize text-center text-sky-950">{t('publications.title')}</h1>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
                 {sortedPublications.map(publication => (

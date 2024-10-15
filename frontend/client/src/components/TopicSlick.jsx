@@ -72,8 +72,23 @@ const TopicsSlick = () => {
             {
                 breakpoint: 1024,
                 settings: {
-                    slidesToShow: 2,
+                    slidesToShow: 4,
                     slidesToScroll: 1,
+                },
+            },
+            {
+                breakpoint: 1280,
+                settings: {
+                    slidesToShow: 5,
+                    slidesToScroll: 1,
+                },
+            },
+            {
+                breakpoint: 1536,
+                settings: {
+                    slidesToShow: 7,
+                    slidesToScroll: 1,
+
                 },
             },
             {
@@ -87,12 +102,12 @@ const TopicsSlick = () => {
         ],
     };
 
-    if (isLoading) return <div className="flex items-center justify-center bg-green-100 border lg:mx-80 border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">Loading ...</div>;
+    if (isLoading) return <div className="flex items-center justify-center  bg-green-100 border  border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">Loading ...</div>;
     if (error) return <div className="flex items-center justify-center bg-red-100 border lg:mx-80 border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">Error loading topics</div>;
 
     return (
         <div >
-            <div className={`flex flex-col items-center  ${isArabic ? ' lg:text-base lg:font-arabic ssm:font-arabic md:font-arabic ssm:text-2xl ssm:font-bold lg:flex-row-reverse ' : ''} lg:flex-row lg:justify-between lg:mx-80 py-4`}>
+            <div className={`flex flex-col items-center  ${isArabic ? ' lg:text-base lg:font-arabic ssm:font-arabic md:font-arabic ssm:text-2xl ssm:font-bold lg:flex-row-reverse ' : ''} lg:flex-row lg:justify-between xxl:mx-80  lg:mx-40 py-4`}>
                 <h2 className={`text-3xl font-bold mb-4 text-center capitalise  ${isArabic ? ' lg:text-2xl lg:font-arabic ssm:font-arabic md:font-arabic ssm:text-2xl ssm:font-bold' : ''} font-sans text-sky-950`}>
                     {t('topics.topic area')}
                 </h2>
@@ -100,7 +115,7 @@ const TopicsSlick = () => {
                     {t('view_all')}
                 </Link>
             </div>
-            <div className="relative w-full pb-12 lg:px-7  border-teal-500 border-b ">
+            <div className="relative w-full pb-12 lg:px-12  border-teal-500 border-b items-center justify-center ">
                 <div>
                     <Slider {...settings}>
                         {Array.isArray(topics) && topics.length > 0 ? (
@@ -113,11 +128,11 @@ const TopicsSlick = () => {
                                 return (
                                     <div
                                         key={topic.id || Math.random()}
-                                        className={`${isArabic ? 'font-arabic text-lg' : 'font-arabic'} flex-shrink-0 w-48 h-56 ssm:h-[200px] ssm:w-full mx-none flex flex-col text-center bg-gray-100 shadow-lg lg:p-4 transition-transform duration-300 hover:scale-105 hover:bg-sky-900 hover:text-white md:w-60 md:h-72 group`}
+                                        className={`${isArabic ? 'font-arabic text-lg' : 'font-arabic'} flex-shrink-0 md:w-60 md:h-72 xxl:w-60 ssm:h-[200px] ssm:w-full  flex flex-col   bg-gray-100 shadow-lg lg:p-4 transition-transform duration-300 hover:scale-105 hover:bg-sky-900 hover:text-white  group`}
                                         onClick={() => topic.name && navigate(`/topics/${topic.name}`)} // Guard to ensure topic.name exists
                                     >
                                         {/* Icon Section */}
-                                        <div className="lg:text-6xl text-teal-600 group-hover:text-white py-4 pl-20 lg:pt-10 ssm:pt-8 lg:border lg:rounded-full">
+                                        <div className="lg:text-6xl text-teal-600 group-hover:text-white lg:px-16 xxl:px-20 lg:pt-10 ssm:px-12 sm:px-12 ssm:pt-8 font-arabic  ">
                                             {iconMap[topic.iconClass] || <LiaChalkboardTeacherSolid className="text-6xl" />}
                                         </div>
 

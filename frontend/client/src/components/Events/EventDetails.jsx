@@ -35,7 +35,7 @@ const EventDetails = () => {
 
     return (
         < >
-            <div className={` flex flex-col lg:mx-80 items-center  lg:py-4 ${isArabic ? 'text-right flex-row-reverse' : ' '} bg-white text-gray-800 `}>
+            <div className={` flex flex-col xxl:mx-80 lg:mx-20 xl:mx-20 items-center  lg:py-4 ${isArabic ? 'text-right flex-row-reverse' : ' '} bg-white text-gray-800 `}>
                 <div className="lg:max-w-7xl w-full lg:h-[300px] flex flex-col lg:flex-row bg-white  overflow-hidden ">
                     {/* Left Section: Title and Date */}
                     <div className="flex-1 bg-neutral-200 p-6 flex flex-col justify-between">
@@ -91,7 +91,7 @@ const EventDetails = () => {
                     </div>
                 </div>
             </div>
-            <div className={`flex flex-col  lg:mx-80 ${isArabic ? 'text-right flex-row-reverse' : 'text-left '} bg-white text-gray-800   items-end `}>
+            <div className={`flex flex-col  xxl:mx-80 lg:mx-20 xl:mx-20 ${isArabic ? 'text-right flex-row-reverse' : 'text-left '} bg-white text-gray-800   items-end `}>
                 <div className={`bg-sky-950 flex items-center  flex-col text-white py-5 h-[100px] w-[200px]`}>
                     <div className="mb-4">
                         <IoLocationOutline className="inline-block mr-1 mb-1" />

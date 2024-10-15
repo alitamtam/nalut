@@ -6,7 +6,7 @@ import BackToTop from './components/BackToTop';
 
 function App() {
   return (
-    <div className="App lg:w-full items-center justify-center"> {/* Full width wrapper */}
+    <div className="App lg:w-full xxl:w-full xl:w-full items-center justify-center"> {/* Full width wrapper */}
       <AppRouter /> {/* Routes handle everything including the homepage */}
       <BackToTop />
       <Footer />
