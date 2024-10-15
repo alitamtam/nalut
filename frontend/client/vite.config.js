@@ -3,35 +3,6 @@ import react from "@vitejs/plugin-react";
 import tailwindcss from "tailwindcss";
 import autoprefixer from "autoprefixer";
 
-<<<<<<< HEAD
-// Vite configuration
-export default defineConfig({
-  plugins: [react()],
-  resolve: {
-    alias: {
-      "@": "/src",
-    },
-  },
-  css: {
-    postcss: {
-      plugins: [tailwindcss(), autoprefixer()],
-    },
-  },
-  define: {
-    "import.meta.env": {
-      VITE_API_URL: JSON.stringify(process.env.VITE_API_URL),
-    },
-  },
-  server: {
-    proxy: {
-      "/api": {
-        target: "http://localhost:3000", // Ensure this URL is correct
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, ""),
-      },
-    },
-  },
-=======
 export default defineConfig(({ mode }) => {
   const isProduction = mode === "production";
 
@@ -80,5 +51,4 @@ export default defineConfig(({ mode }) => {
     },
     base: isProduction ? "https://www.edulibya.ly/" : "/", // Base path based on environment
   };
->>>>>>> prod-env
 });

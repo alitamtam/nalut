@@ -4,13 +4,12 @@ import app from "./app.js";
 
 const PORT = process.env.PORT || 3000;
 
-<<<<<<< HEAD
-console.log(`Starting server in ${process.env.NODE_ENV} mode on port ${PORT}`);
-
-=======
->>>>>>> prod-env
 const httpServer = createServer(app);
 
-httpServer.listen(PORT, () => {
-  console.log(`🚀 HTTP Server launched at http://localhost:${PORT} 🎉`);
+httpServer.listen(PORT, "0.0.0.0", () => {
+  if (process.env.NODE_ENV !== "production") {
+    console.log(`🚀 HTTP Server launched at http://localhost:${PORT} 🚀`);
+  } else {
+    console.log(`🚀 Server running in production mode on port ${PORT}`);
+  }
 });
