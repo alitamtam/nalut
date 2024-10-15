@@ -46,7 +46,7 @@ export const searchDatabase = async (req, res) => {
           ],
         },
       }),
-      prisma.publications.findMany({
+      prisma.publication.findMany({
         where: {
           OR: [
             { title: { contains: searchTerm, mode: "insensitive" } },

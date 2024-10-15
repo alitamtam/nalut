@@ -263,7 +263,7 @@ const EventsList = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {events?.map(event => (
+                    {Array.isArray(events) && events.map(event => (
                         <tr key={event.id} className="border-t">
                             <td className="py-2 px-4">{event.title}</td>
                             <td className="py-2 px-4">{event.location}</td>
@@ -276,6 +276,7 @@ const EventsList = () => {
                         </tr>
                     ))}
                 </tbody>
+
             </table>
         </div>
     );

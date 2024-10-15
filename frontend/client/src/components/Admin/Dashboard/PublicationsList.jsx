@@ -6,6 +6,7 @@ import { useEditPublications } from "./hooks/useEditPublications";
 import { useGetPublications } from "./hooks/useGetPublications";
 import { useGetTopics } from "./hooks/useGetTopics";
 import ManageTopics from "./ManageTopics";
+
 const PublicationsList = () => {
     const { data, isPending, error } = useGetPublications();
     const publications = data || []; // Default to an empty array if data is undefined
@@ -35,7 +36,6 @@ const PublicationsList = () => {
     const [currentEditId, setCurrentEditId] = useState(null);
     const [isNewTopic, setIsNewTopic] = useState(false);
 
-    // Handle image upload and conversion to base64
     const handleImageUpload = (e) => {
         const file = e.target.files[0];
         if (file) {
@@ -93,7 +93,21 @@ const PublicationsList = () => {
             addPublication.mutate(updatedFormData);
         }
 
-        setFormData({ title: "", topicId: "", topic: "", content: "", content2: "", content3: "", image: "", iconClass: "", arabicTitle: "", arabicContent: "", arabicContent2: "", arabicContent3: "" });
+        // Reset form data
+        setFormData({
+            title: "",
+            topicId: "",
+            topic: "",
+            content: "",
+            content2: "",
+            content3: "",
+            image: "",
+            iconClass: "",
+            arabicTitle: "",
+            arabicContent: "",
+            arabicContent2: "",
+            arabicContent3: "",
+        });
         setIsEditing(false);
         setIsNewTopic(false);
     };
@@ -108,8 +122,8 @@ const PublicationsList = () => {
             content: publication.content,
             image: publication.image,
             iconClass: publication.iconClass,
-            arabicTitle: publication.translations.find(t => t.language === 'ar')?.title || "", // Prepopulate Arabic title
-            arabicContent: publication.translations.find(t => t.language === 'ar')?.content || "", // Prepopulate Arabic content
+            arabicTitle: publication.translations.find(t => t.language === 'ar')?.title || "",
+            arabicContent: publication.translations.find(t => t.language === 'ar')?.content || "",
         });
     };
 
@@ -119,9 +133,8 @@ const PublicationsList = () => {
 
     if (isPending) return <div>Loading...</div>;
 
-
     if (error) {
-        if (error) return <div>Error loading publications.</div>;
+        return <div>Error loading publications: {error.message}</div>;
     }
 
     return (
@@ -188,7 +201,7 @@ const PublicationsList = () => {
                         className="mb-4 w-full p-2 border border-gray-300 rounded"
                     >
                         <option value="">Select Topic</option>
-                        {topics.map((topic) => (
+                        {topics?.map((topic) => (
                             <option key={topic.id} value={topic.id}>
                                 {topic.name}
                             </option>
@@ -256,7 +269,12 @@ const PublicationsList = () => {
                 </div>
 
                 <label className="block mb-1">Image</label>
-                <input type="file" onChange={handleImageUpload} className="mb-4" />
+                <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleImageUpload}
+                    className="mb-4"
+                />
 
                 <label className="block mb-1">Icon Class</label>
                 <input
@@ -268,53 +286,39 @@ const PublicationsList = () => {
                     className="w-full p-2 border border-gray-300 rounded"
                 />
 
-                <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded">
-                    {isEditing ? "Edit Publication" : "Add Publication"}
+                <button type="submit" className="bg-blue-500 text-white p-2 rounded">
+                    {isEditing ? "Update Publication" : "Add Publication"}
                 </button>
             </form>
 
-            <table className="min-w-full border-collapse">
-                <thead>
-                    <tr>
-                        <th className="text-left py-2">Title</th>
-                        <th className="text-left py-2">Arabic Title</th>
-                        <th className="text-left py-2">Content</th>
-                        <th className="text-left py-2">Arabic Content</th>
-                        <th className="text-left py-2">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {publications?.length > 0 ? (
-                        publications.map((publication) => (
-                            <tr key={publication.id} className="border-b">
-                                <td className="p-2">{publication.id}</td>
-                                <td className="p-2">{publication.title}</td>
-                                <td className="p-2">
-                                    <button
-                                        onClick={() => handleEdit(publication)}
-                                        className="bg-yellow-500 text-white px-3 py-1 rounded-md mr-2 hover:bg-yellow-600"
-                                    >
-                                        Edit
-                                    </button>
-                                    <button
-                                        onClick={() => handleDelete(publication.id)}
-                                        className="bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600"
-                                    >
-                                        Delete
-                                    </button>
-                                </td>
-                            </tr>
-                        ))
-                    ) : (
-                        <tr>
-                            <td colSpan="3" className="p-2 text-center">No publications found.</td>
-                        </tr>
-                    )}
-                </tbody>
-            </table>
+            {/* Publications List */}
+            <ul className="list-disc pl-5">
+                {publications.length > 0 ? (
+                    publications.map((publication) => (
+                        <li key={publication.id} className="mb-4">
+                            <h3 className="text-xl font-semibold">{publication.title}</h3>
+                            <p>{publication.content}</p>
+                            <p className="text-sm text-gray-500">{publication.date}</p>
+                            <button
+                                onClick={() => handleEdit(publication)}
+                                className="bg-yellow-500 text-white p-1 rounded mr-2"
+                            >
+                                Edit
+                            </button>
+                            <button
+                                onClick={() => handleDelete(publication.id)}
+                                className="bg-red-500 text-white p-1 rounded"
+                            >
+                                Delete
+                            </button>
+                        </li>
+                    ))
+                ) : (
+                    <li>No publications found.</li>
+                )}
+            </ul>
             <div>
                 ManageTopics: <ManageTopics />
-
             </div>
         </div>
     );

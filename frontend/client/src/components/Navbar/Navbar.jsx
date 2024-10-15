@@ -1,5 +1,6 @@
+/* eslint-disable no-unused-vars */
 import { Link } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import { IoIosArrowDown } from 'react-icons/io';
 import { useTranslation } from 'react-i18next'; // Import the hook

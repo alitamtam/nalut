@@ -1,13 +1,7 @@
 {
   "home": "الرئيسية",
-  "publications": "المنشورات",
-  "projects": "المشاريع",
   "contact": "تواصل معنا",
   "follow_us": "تابعنا",
-  "arabic": "العربية",
-  "english": "الإنجليزية",
-  "login": "تسجيل الدخول",
-  "logout": "تسجيل الخروج",
   "view_all": "عرض الكل",
   "search": "بحث",
   "search_placeholder": "ابحث عن...",
@@ -113,7 +107,7 @@
       "description": "عرض التفاصيل"
     },
   
-    "search": {
+    "searchSection": {
       "title": "بحث",
       "description": "البحث عن العناصر"
     },
@@ -165,12 +159,7 @@
           "contact": "   لمزيد من المعلومات أو للبدء، تواصل معنا على "
         }
       
-     
         
-         
-      
-    
-    
   }
   
 

@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+/* eslint-disable no-unused-vars */
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 const PublicationForm = ({ onSubmit, initialData, onCancel, topics }) => {
