@@ -48,20 +48,29 @@ const TopicPublications = () => {
 
             {/* Other Publications */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {otherPublications.map((publication) => (
-                    <div key={publication.id} className="border rounded-lg shadow-lg p-4">
-                        <img
-                            src={publication.image || '/default-image.jpg'}
-                            alt={publication.title}
-                            className="w-full h-48 object-cover rounded-lg mb-4"
-                        />
-                        <h4 className="text-xl font-bold">{publication.title}</h4>
-                        <p className="text-sm text-gray-500">By {publication.author} | {new Date(publication.date).toLocaleDateString()}</p>
-                        <Link to={`/publications/${publication.id}`} className="text-teal-500 hover:underline mt-2 inline-block">
-                            Read More
-                        </Link>
-                    </div>
-                ))}
+                {Array.isArray(otherPublications) && otherPublications.length > 0 ? (
+                    otherPublications.map((publication) => (
+                        <div key={publication.id || Math.random()} className="border rounded-lg shadow-lg p-4">
+                            <img
+                                src={publication.image || '/default-image.jpg'}
+                                alt={publication.title || 'Untitled Publication'}
+                                className="w-full h-48 object-cover rounded-lg mb-4"
+                            />
+                            <h4 className="text-xl font-bold">
+                                {publication.title || 'Untitled'}
+                            </h4>
+                            <p className="text-sm text-gray-500">
+                                By {publication.author || 'Unknown Author'} | {publication.date ? new Date(publication.date).toLocaleDateString() : 'Unknown Date'}
+                            </p>
+                            <Link to={`/publications/${publication.id || ''}`} className="text-teal-500 hover:underline mt-2 inline-block">
+                                Read More
+                            </Link>
+                        </div>
+                    ))
+                ) : (
+                    <p className="flex items-center justify-center bg-green-100 border lg:mx-80 border-yellow-400 text-yellow-700 px-4 py-3 rounded relative">No publications available at the moment.</p>
+                )}
+
             </div>
         </div>
     );

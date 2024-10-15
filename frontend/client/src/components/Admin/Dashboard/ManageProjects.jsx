@@ -6,7 +6,7 @@ import { useUpdateProject } from "./hooks/projectsHooks/useUpdateProject";
 import { useSettingsStore } from "../../../store/useSettingsStore";
 
 const ManageProjects = () => {
-    const { data: projects, isPending, error } = useGetProjects();
+    const { data: projects, isPending, error } = useGetProjects([]);
     const createProject = useCreateProject();
     const updateProject = useUpdateProject();
     const deleteProject = useDeleteProject();
@@ -253,14 +253,13 @@ const ManageProjects = () => {
             {/* Projects List */}
             <h3 className="text-xl font-bold mb-2">Existing Projects</h3>
             <ul>
-                {projects.map((project) => (
-                    <li key={project.id} className="mb-4 border p-4 rounded">
-                        <h4 className="font-bold">{project.title}</h4>
-                        <p>{project.content1}</p>
-                        <p>{project.link && <a href={project.link} target="_blank" rel="noopener noreferrer">View Project</a>}</p>
-                        <button onClick={() => handleEdit(project)} className="bg-yellow-500 text-white p-2 rounded mr-2">Edit</button>
-                        <button onClick={() => handleDelete(project.id)} className="bg-red-500 text-white p-2 rounded">Delete</button>
-                    </li>
+                {Array.isArray(projects) && projects.map((project) => (<li key={project.id} className="mb-4 border p-4 rounded">
+                    <h4 className="font-bold">{project.title}</h4>
+                    <p>{project.content1}</p>
+                    <p>{project.link && <a href={project.link} target="_blank" rel="noopener noreferrer">View Project</a>}</p>
+                    <button onClick={() => handleEdit(project)} className="bg-yellow-500 text-white p-2 rounded mr-2">Edit</button>
+                    <button onClick={() => handleDelete(project.id)} className="bg-red-500 text-white p-2 rounded">Delete</button>
+                </li>
                 ))}
             </ul>
         </div>

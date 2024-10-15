@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+/* eslint-disable no-unused-vars */
+import React, { useState, useEffect } from 'react';
 import { IoIosArrowDropupCircle } from "react-icons/io";
 import '../index.css'; // Ensure this imports the correct CSS
 

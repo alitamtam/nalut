@@ -1,9 +1,10 @@
+/* eslint-disable no-unused-vars */
 import { useDeleteProfile } from '../Dashboard/hooks/useDeleteProfile'; // Adjust the path
 import { useEditProfiles } from '../Dashboard/hooks/useEditProfile'; // Adjust the path
 import { useGetProfileById } from './hooks/useGetProfileById';
 import { useSettingsStore } from '../../../store/useSettingsStore'; // Adjust the path
 import { toast } from 'react-toastify'; // Import toast for notifications
-import { useEffect, useState } from 'react'; // Import useEffect and useState
+import React, { useEffect, useState } from 'react'; // Import useEffect and useState
 
 const EditProfile = () => {
     const { user } = useSettingsStore(state => ({ user: state.user }));

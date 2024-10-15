@@ -103,34 +103,38 @@ const TopicsSlick = () => {
             <div className="relative w-full pb-12 lg:px-7  border-teal-500 border-b ">
                 <div>
                     <Slider {...settings}>
-                        {topics?.map((topic) => {
-                            const translation = topic.translations.find(tr => tr.language === i18n.language)?.name || topic.name;
-                            console.log("Current Topic:", topic.translations);
-                            console.log("Translation found:", translation);
+                        {Array.isArray(topics) && topics.length > 0 ? (
+                            topics.map((topic) => {
+                                const translation = topic.translations?.find(tr => tr.language === i18n.language)?.name || topic.name || 'No Name';
 
-                            return (
-                                <div
-                                    key={topic.id}
-                                    className={`${isArabic ? 'font-arabic text-lg' : 'font-arabic'}  flex-shrink-0 w-48 h-56 ssm:h-[200px] ssm:w-full mx-none flex flex-col text-center  bg-gray-100 shadow-lg lg:p-4 transition-transform duration-300 hover:scale-105 hover:bg-sky-900 hover:text-white md:w-60 md:h-72 group`}
-                                    onClick={() => navigate(`/topics/${topic.name}`)} // Navigate on click
-                                >
-                                    {/* Content goes here */}
+                                console.log("Current Topic Translations:", topic.translations);
+                                console.log("Translation found:", translation);
 
-                                    <div className="lg:text-6xl text-teal-600 group-hover:text-white py-4 pl-20  lg:pt-10 ssm:pt-8 lg:border lg:rounded-full  ">
-                                        {/* Dynamically render the icon based on iconClass */}
-                                        {iconMap[topic.iconClass] || <LiaChalkboardTeacherSolid className="text-6xl " />}
-                                    </div>
-                                    <div className="flex-col py-6">
-                                        {topic.translations && (
+                                return (
+                                    <div
+                                        key={topic.id || Math.random()}
+                                        className={`${isArabic ? 'font-arabic text-lg' : 'font-arabic'} flex-shrink-0 w-48 h-56 ssm:h-[200px] ssm:w-full mx-none flex flex-col text-center bg-gray-100 shadow-lg lg:p-4 transition-transform duration-300 hover:scale-105 hover:bg-sky-900 hover:text-white md:w-60 md:h-72 group`}
+                                        onClick={() => topic.name && navigate(`/topics/${topic.name}`)} // Guard to ensure topic.name exists
+                                    >
+                                        {/* Icon Section */}
+                                        <div className="lg:text-6xl text-teal-600 group-hover:text-white py-4 pl-20 lg:pt-10 ssm:pt-8 lg:border lg:rounded-full">
+                                            {iconMap[topic.iconClass] || <LiaChalkboardTeacherSolid className="text-6xl" />}
+                                        </div>
+
+                                        {/* Translation Section */}
+                                        <div className="flex-col py-6">
                                             <p className={`${isArabic ? 'lg:text-xl lg:font-arabic ssm:font-arabic md:font-arabic ssm:text-sm ssm:font-bold' : ''} lg:mt-4 text-teal-700 ssm:text-xs lg:text-sm font-body tracking-wider uppercase text-center group-hover:text-white pb-10`}>
-                                                {translation}
+                                                {translation || 'No Translation Available'}
                                             </p>
-                                        )}
-
+                                        </div>
                                     </div>
-                                </div>
-                            );
-                        })}                    </Slider>
+                                );
+                            })
+                        ) : (
+                            <p>No topics available at the moment.</p>
+                        )}
+
+                    </Slider>
 
                 </div>
                 <div className='pt-5 w-[200px]  m-auto'>

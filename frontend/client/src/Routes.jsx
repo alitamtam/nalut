@@ -27,14 +27,12 @@ import ProjectDetails from './components/projects/ProjectDetails';
 import ProjectsArea from './components/projects/ProjectsArea';
 import ViewAllProjects from './components/projects/ViewAllProjects';
 import ManageProject from './components/Admin/Dashboard/ManageProjects';
-import ErrorPage from './pages/ErrorPage';
 
 
 const AppRouter = createBrowserRouter([
     {
         path: '/',
         element: <Layout />,
-        errorElement: <ErrorPage />,
         children: [
             { index: true, element: <HomePage /> },
             { path: 'about', element: <AboutUsPage /> },
@@ -53,7 +51,9 @@ const AppRouter = createBrowserRouter([
             { path: '/search-results', element: <SearchResultPage /> },
             { path: 'login', element: <Login /> },
             { path: '*', element: <NotFound /> },
+
         ],
+
     },
     {
         path: 'admin',

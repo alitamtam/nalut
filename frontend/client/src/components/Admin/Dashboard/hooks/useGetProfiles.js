@@ -9,6 +9,7 @@ export const useAllProfiles = () => {
     queryKey: ["profiles", i18n.language],
     queryFn: async () => {
       const response = await api.get(`/api/profiles?lang=${i18n.language}`);
+      console.log("API Response:", response.data); // Log response data
 
       return response.data;
     },

@@ -1,0 +1,161 @@
+{
+  "home": "main page",
+   "contact": "Contact Us",
+  "follow_us": "Follow Us",
+    "view_all": "View All",
+  "search_placeholder": "Search for...",
+  "search_results": "Search Results",
+  "no_results": "No Results",
+  "email": "info@edulibya.ly",
+  "Read More": "Read More",
+  "topic area": "Topics",
+  "publication area": "Publications",
+  "projects area": "Projects",
+  "upcoming events": "Upcoming Events",
+  "our team": "Our Team",
+  "our partners": "Our Partners",
+  "join us": "Join Us",
+     "Loading publication...": "Loading publication...",
+    "Error!": "Error!",
+    "Error loading publication.": "Error loading publication.",
+    "Publication not found": "Publication not found",
+    "No Icon": "No Icon",
+    "By": "By",
+    "translated to": "translated to",
+  "eduLibyaDescription": {
+  "part1": "All of us in EduLibya are connected to the education sector as students, teachers, parents, workshop leaders, researchers, social-psychological practitioners, and so on.",
+  "part2": "We are a network of educators interested in various dimensions of education across Libya.",
+  "part3": "We are a community of people who care enough to try and make a change in our society by making our educational system more meaningful for students and teachers. The value we create is for the community, not for us as individuals.",
+  "part4": "The network aims to remain flexible and responsive — it is constantly waiting for you and all of us to decide what it will become.",
+  "part5": "Before you commit to this network and choose a suitable time for our first meeting (see below), let me share some important details:",
+  "point1": "1. There is no financial reward for joining this network. Most of the work we will do will be voluntary (because we believe it is vital and part of what we already do), but there will be no pressure to dedicate more time and effort than you can.",
+  "point2": "2. This is not an accredited network or organization with certification authority. Attending workshops, meetings, and online discussions will not grant you a certificate. We attend these meetings because we want to learn and improve our thinking and practice in the field of education.",
+  "part6": "At the heart of EduLibya lies a commitment to dialogue and community-building around the role of education in Libya. We see education as part of a larger ecosystem of human practices in society — education (whether formal or informal) interacts with various threads that form the fabric of our Libyan culture.",
+  "part7": "We are not seeking to offer solutions to problems; instead, we aim to create deeper connections between each other and between our ideas and practices, hoping to see ourselves more clearly and to suggest ways to face our future.",
+  "part8": "EduLibya moves through time and space organically, with ever-changing members communicating around ever-changing needs. The intentionally ambiguous nature of this space is the co-construction of a community that can build a shared language for change and movement in any desired direction."
+},
+  
+  "about": {
+    "title": "About us",
+    "welcomeMessage": "Welcome to EduLibya, where education and innovation meet. We aim to provide students, teachers, and educators with the best tools and resources for learning and growth. Our mission is to foster an environment of creativity, engagement, and critical thinking.",
+    "welcomeMessage2": "Where education and innovation meet. We strive to provide students, teachers and educators with the best tools and resources to learn and grow. Our mission is to foster an environment of creativity, engagement and critical thinking",
+
+    "welcomeMessage3": "A network of educators interested in various dimensions of education across Libya",
+
+    "description": "Learn more about EduLibya",
+    "members": "Members"
+  },
+  
+  "publications": {
+    "title": "Publications",
+    "description": "Explore our publications"
+  },
+  
+  "projects": {
+    "title": "Projects",
+    "description": "Explore our projects"
+  },
+  
+  "events": {
+    "title": "Events",
+    "description": "Explore our events",
+    "last-events": "Our Latest  Events",
+    "event-link": "To participate in the event",
+    "share": "share"
+  },
+  
+  "contactUs": {
+    "title": "Contact Us",
+    "description": "Get in touch with us"
+  },
+  
+  "followUs": {
+    "title": "Follow Us",
+    "description": "Follow us on social media"
+  },
+  
+  "arabic": {
+    "title": "Arabic",
+    "description": "Switch to Arabic"
+  },
+  
+  "english": {
+    "title": "English",
+    "description": "Switch to English"
+  },
+  
+  "login": {
+    "title": "Login",
+    "description": "Login to your account"
+  },
+  
+  "logout": {
+    "title": "Logout",
+    "description": "Logout from your account"
+  },
+  
+  "viewAll": {
+    "title": "View All",
+    "description": "View all items"
+  },
+  "viewDetails": {
+    "title": "View Details",
+    "description": "View details"
+  },
+  
+  
+  "search": {
+    "title": "Search",
+    "description": "Search for items"
+  },
+  
+  "searchPlaceholder": {
+    "title": "Search for...",
+    "description": "Search for items"
+  },
+  
+  "searchResults": {
+    "title": "Search Results",
+    "description": "Search results"
+  },
+  
+  "noResults": {
+    "title": "No Results",
+    "description": "No search results"
+  },
+
+  
+  
+  "topics": {
+    "Teacher Education": "Teacher Education",
+    "Teacher Professional Development": "Teacher Professional Development",
+    "School Governance": "School Governance",
+    "Ministry of Education": "Ministry of Education",
+    "Buildings and Facilities": "Buildings and Facilities",
+    "Quality Assurance": "Quality Assurance",
+    "Educational Research": "Educational Research",
+    "Information Technology in Schools": "Information Technology in Schools",
+    "Inclusion and Neuro-divergence": "Inclusion and Neuro-divergence",
+    "Student Wellbeing and Enrichment": "Student Wellbeing and Enrichment",
+    "Assessment and Examination": "Assessment and Examination",
+    "view_all": "View All",
+    "topic area": "Topics"
+  },
+  
+  "joinUs": {
+    "header": "How to Collaborate with EduLibya",
+    "sharePublications": "Share Your Publications",
+    "description": " EduLibya is dedicated to fostering a community of knowledge and learning. We welcome contributions in the form of publications, research, and educational materials that align with our mission.",
+    "steps": {
+      "description": "To share your publications with us, follow these steps:",
+      "submitYourWork": "Submit Your Work:",
+      "reviewProcess": "Review Process: Our team will review your submission and reach out if any additional information is needed.",
+      "publicationDisplay": "Publication Display: Accepted publications will be displayed on our platform, allowing others to benefit from your work."
+    },
+  
+    "contribution": "By sharing your publications with us, you are contributing to a wider exchange of knowledge and helping to enhance educational and cultural initiatives.",
+
+    "contact": "For more information or to get started, contact us at {' '}" 
+  }
+ 
+}
