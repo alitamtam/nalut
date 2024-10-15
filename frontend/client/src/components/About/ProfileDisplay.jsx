@@ -21,7 +21,7 @@ const ProfileDetails = () => {
     if (!Profile || !Profile.user) return <div>{t('profile_not_found')}</div>;
 
     return (
-        <div className="lg:mx-80 bg-white p-4">
+        <div className="xxl:mx-80 lg:mx-20 xl:mx-20 bg-white p-4">
             {/* Profile Details Layout */}
             <div className="flex flex-col md:flex-row items-start ssm:items-center md:items-center justify-between lg:mb-6 lg:pt-6">
                 {/* Left Section: Image, Name, and Title */}

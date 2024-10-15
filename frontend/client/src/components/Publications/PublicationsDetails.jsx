@@ -48,7 +48,7 @@ const PublicationDetails = () => {
     };
 
     return (
-        <div className="lg:mx-80 bg-[#f1f1f1] p-6">
+        <div className="xxl:mx-80 lg:mx-20 xl:mx-20 bg-[#f1f1f1] p-6">
             <h1 className="text-3xl font-bold mb-4">{translation?.title || publication.title}</h1>
 
             {/* Flex container for image and author details */}

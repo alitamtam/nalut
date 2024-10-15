@@ -53,7 +53,7 @@ const AboutUsPage = () => {
     }, [sections]);
 
     return (
-        <div className="xxl:mx-80 lg:mx-20 xl:mx-20 font-arabic text-sky-950">
+        <div className="xxl:mx-80 lg:mx-15 xl:mx-20 font-arabic text-sky-950">
             <div className={`flex ${isArabic ? 'text-right  flex-row-reverse' : ''}`}>
                 {!isMobile && <Sidebar sections={sections} onSectionClick={handleSectionClick} />}
                 <div className="p-8 w-full">
