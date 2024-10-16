@@ -21,7 +21,7 @@ const ProfileDetails = () => {
     if (!Profile || !Profile.user) return <div>{t('profile_not_found')}</div>;
 
     return (
-        <div className="xxl:mx-80 lg:mx-20 xl:mx-20 bg-white p-4">
+        <div className="xxl:mx-80 lg:mx-20 xl:mx-20  p-4">
             {/* Profile Details Layout */}
             <div className="flex flex-col md:flex-row items-start ssm:items-center md:items-center justify-between lg:mb-6 lg:pt-6">
                 {/* Left Section: Image, Name, and Title */}
@@ -41,7 +41,7 @@ const ProfileDetails = () => {
 
                 {/* Right Section: Bio */}
                 <div className={`lg:w-full md:w-1/2 ssm:my-3 lg:mx-6 ${isArabic ? ' text-right ' : ''}`}>
-                    <p className="text-gray-600 font-arabic font-light md:text-ssm leading-relaxed mb-4 p-4 border-white border bg-white">
+                    <p className="text-gray-600 font-arabic font-light md:text-ssm leading-relaxed mb-4 p-4  ">
                         {translation?.bio || t('no_bio_available')} {/* Display bio or fallback */}
                     </p>
                 </div>

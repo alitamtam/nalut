@@ -8,13 +8,13 @@ const Sidebar = ({ sections, onSectionClick }) => {
     const isArabic = i18n.language === 'ar';
 
     return (
-        <div className={` bg-gray-100 p-4 ${isArabic ? 'text-right  ' : ''} shadow-lg w-[200px]  `}>
+        <div className={` bg-[#e2dfd8] p-4 ${isArabic ? 'text-right  ' : ''} shadow-lg w-[200px]  `}>
             <ul>
                 {sections.map((section, index) => (
                     <li key={index} className="mb-2">
                         <button
                             onClick={() => onSectionClick(section.name)}
-                            className={`text-gray-600 text-base font-bold hover:text-teal-800 font-arabic hover:underline-offset-1`}
+                            className={`text-sky-950 text-base font-bold hover:text-teal-600 font-arabic hover:underline`}
                         >
                             {section.name}
                         </button>
