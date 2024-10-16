@@ -13,7 +13,14 @@ const projectsController = {
             select: {
               firstName: true,
               lastName: true,
-              profile: true, // Include the profile object
+              profile: {
+                select: {
+                  bio: true,
+                  image: true,
+                  id: true,
+                  translations: { where: { language: lang } },
+                },
+              },
             },
           },
           translations: { where: { language: lang } },
@@ -37,7 +44,14 @@ const projectsController = {
             select: {
               firstName: true,
               lastName: true,
-              profile: true, // Include the profile object
+              profile: {
+                select: {
+                  bio: true,
+                  image: true,
+                  id: true,
+                  translations: { where: { language: lang } },
+                },
+              },
             },
           },
           translations: { where: { language: lang } },
