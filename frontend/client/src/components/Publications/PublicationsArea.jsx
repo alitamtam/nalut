@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 import { useGetPublications } from '../Admin/Dashboard/hooks/useGetPublications';
 import { useIconOptions } from '../Admin/Dashboard/hooks/useIconOptions';
 import { useTranslation } from 'react-i18next';
-import { ImPencil2 } from "react-icons/im";
 
 const PublicationsArea = () => {
     const { data, isLoading, error } = useGetPublications();
@@ -44,7 +43,9 @@ const PublicationsArea = () => {
                         const topicName = publication.topic?.name || "Unknown Topic";
                         const topicIcon = iconOptions.find(option => option.name === topicName)?.icon || null;
                         const translation = publication.translations[0]; // Assuming only one translation per language
-
+                        const profileTranslation = publication.owner.profile.translations.find(t => t.language === i18n.language) || {};
+                        const arabicName = profileTranslation.title || '';
+                        const EnglishName = `${publication.owner.firstName} ${publication.owner.lastName}`;
                         return (
                             <div key={publication.id} className="rounded-none overflow-hidden shadow-md bg-gray-100 hover:shadow-lg transition-shadow duration-300  xxl:w-80 gap-2">
                                 <div className="w-full h-56">
@@ -75,9 +76,10 @@ const PublicationsArea = () => {
                                     )}
                                     <div>
                                         <p className="flex space-x-2 text-ssm capitalize font-bold">
-                                            <span className="text-sky-950  pt-0 pb-0 mt-1"><ImPencil2 /></span>
-                                            <Link to={`/profileDisplay/${publication.owner.profile?.id}`} className="capitalize text-orange-600 hover:underline">
-                                                {publication.owner.firstName} {publication.owner.lastName}
+                                            <Link to={`/profileDisplay/${publication.owner.profile?.id}`} className={`text-sm mt-1 font-bold capitalize text-orange-400 hover:text-teal-600 ${isArabic ? 'text-right ' : ''}`}>
+                                                <span className="text-gray-500 font-thin">{t('By')} :</span>
+
+                                                <span className="text-orange-600 hover:underline hover:text-teal-600"> {isArabic ? `${arabicName}` : `${EnglishName}`}</span>
                                             </Link>
                                         </p>
                                     </div>

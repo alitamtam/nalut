@@ -13,8 +13,8 @@ const Footer = () => {
             <BackToTop />
             <div className="container mx-auto px-4 lg:px-8 flex flex-col lg:flex-row justify-between items-center space-y-8 lg:space-y-0">
                 {/* Navigation Links on the left */}
-                <ul className="flex flex-col lg:flex-row lg:space-x-6 space-y-3 lg:space-y-0 text-center lg:text-left font-semibold font-arabic uppercase text-lg">
-                    <li><Link to="/" className=" text-teal-600 font-extrabold  hover:text-teal-600">{t('home')}</Link></li>
+                <ul className="flex flex-col lg:flex-row lg:space-x-6 space-y-3 lg:space-y-0 text-center lg:text-left  font-arabic uppercase text-base">
+                    <li><Link to="/" className=" text-orange-600 font-extrabold  hover:text-teal-600">{t('home')}</Link></li>
                     <li><Link to="/about" className=" hover:text-teal-600">{t('about.title')}</Link></li>
                     <li><Link to="/publications" className=" hover:text-teal-600">{t('publications.title')}</Link></li>
                     <li><Link to="/projects" className=" hover:text-teal-600">{t('projects.title')}</Link></li>
