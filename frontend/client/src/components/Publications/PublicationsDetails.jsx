@@ -42,8 +42,9 @@ const PublicationDetails = () => {
     // Find the icon based on the publication's topic name
     const topicIcon = iconOptions.find(option => option.name === publication.topic.name)?.icon || null;
     const translation = publication.translations[0]; // Assuming only one translation per language
-    const profileTranslation = publication.owner.profile.translations.find(t => t.language === i18n.language) || {};
-
+    const profileTranslation = publication?.owner?.profile?.translations
+        ? publication.owner.profile.translations.find(t => t.language === i18n.language)
+        : {};
     const arabicName = profileTranslation.title || '';
     const EnglishName = `${publication.owner.firstName} ${publication.owner.lastName}`;
     const formatContent = (content) => {
