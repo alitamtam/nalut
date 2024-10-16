@@ -128,17 +128,17 @@ const TopicsSlick = () => {
                                 return (
                                     <div
                                         key={topic.id || Math.random()}
-                                        className={`${isArabic ? 'font-arabic text-lg' : 'font-arabic'} flex-shrink-0 md:w-60 md:h-72 xxl:w-60 ssm:h-[200px] ssm:w-full  flex flex-col   bg-gray-100 shadow-lg lg:p-4 transition-transform duration-300 hover:scale-105 hover:bg-sky-900 hover:text-white  group`}
+                                        className={`${isArabic ? 'font-arabic text-lg ' : 'font-arabic'} flex-shrink-0 md:w-60 md:h-72 xxl:w-60 ssm:h-[200px] ssm:w-full  sm:py-10 sm:text-xl  flex flex-col   bg-[#e2dfd8] shadow-lg lg:p-4 transition-transform duration-300 hover:scale-105 hover:bg-sky-900 hover:text-white  group`}
                                         onClick={() => topic.name && navigate(`/topics/${topic.name}`)} // Guard to ensure topic.name exists
                                     >
                                         {/* Icon Section */}
-                                        <div className="lg:text-6xl text-teal-600 group-hover:text-white lg:px-16 xxl:px-20 lg:pt-10 ssm:px-12 sm:px-12 ssm:pt-8 font-arabic  ">
+                                        <div className="lg:text-6xl text-teal-600 group-hover:text-white lg:px-16 xxl:px-20 lg:pt-10 ssm:px-16 sm:px-20  ssm:pt-8 font-arabic  ">
                                             {iconMap[topic.iconClass] || <LiaChalkboardTeacherSolid className="text-6xl" />}
                                         </div>
 
                                         {/* Translation Section */}
                                         <div className="flex-col py-6">
-                                            <p className={`${isArabic ? 'lg:text-xl lg:font-arabic ssm:font-arabic md:font-arabic ssm:text-sm ssm:font-bold' : ''} lg:mt-4 text-teal-700 ssm:text-xs lg:text-sm font-body tracking-wider uppercase text-center group-hover:text-white pb-10`}>
+                                            <p className={`${isArabic ? 'lg:text-xl lg:font-arabic ssm:font-arabic md:font-arabic ssm:text-base ssm:font-bold sm:text-lg' : ''} lg:mt-4 text-teal-700  sm:text-lg ssm:text-sm lg:text-sm font-ubuntu tracking-wider uppercase text-center group-hover:text-white pb-10`}>
                                                 {translation || 'No Translation Available'}
                                             </p>
                                         </div>

@@ -31,7 +31,7 @@ const AllEvents = () => {
     }
 
     return (
-        <div className="flex flex-col items-center py-12 bg-white text-gray-800 h-4/5">
+        <div className="flex flex-col items-center py-12  text-gray-800 h-4/5">
             <h2 className="text-3xl font-bold mb-4 items-start capitalise font-sans text-gray-800">
                 {t('events.last-events')}
             </h2>

@@ -5,8 +5,7 @@ import useSearch from '../Admin/Dashboard/hooks/useSearch';
 import { useTranslation } from 'react-i18next'; // Import useTranslation hook
 import i18n from 'i18next'; // Import i18n
 import logo from '../../assets/img/logo.png';
-import { RiEnglishInput } from "react-icons/ri";
-import { GiLibya } from "react-icons/gi";
+
 
 const Header = () => {
     const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -41,7 +40,7 @@ const Header = () => {
     };
 
     return (
-        <header className="bg-white lg:mx-20  xxl:mx-80 xl:mx-20 lg:py-4">
+        <header className=" lg:mx-20  xxl:mx-80 xl:mx-20 lg:py-4">
             <div className="px-4 py-4 flex items-center justify-between">
                 <a href="/" className="flex lg:items-center ssm:items-start ssm:pr-14">
                     <img
@@ -78,19 +77,18 @@ const Header = () => {
                     </div>
 
                     {/* Language Switcher */}
-                    <div className="flex items-center space-x-2">
+                    <div className="flex items-center space-x-2 ">
                         <button
                             onClick={() => handleLanguageChange('en')}
-                            className={`p-1 rounded-full ${language === 'en' ? 'bg-teal-600' : ''}`}
+                            className={`p-1 rounded  hover:bg-sky-950 hover:text-white ${language === 'en' ? 'bg-teal-600 ' : ' '}`}
                         >
-                            <RiEnglishInput className="text-xl" title="English" />
+                            <p className="text-xs font-arabic" title="Arabic">EN</p>
                         </button>
                         <button
                             onClick={() => handleLanguageChange('ar')}
-                            className={`p-1 rounded-full text-white ${language === 'ar' ? 'bg-teal-600  ' : ''}`}
+                            className={`px-1 m-0 rounded hover:bg-sky-950 hover:text-white ${language === 'ar' ? 'bg-teal-600    ' : ''}`}
                         >
-                            <GiLibya
-                                className="text-xl text-sky-950" title="Libya" />
+                            <p className="text-sm font-arabic px-1 inline-block align-top" title="Arabic">ع</p>
                         </button>
                     </div>
 

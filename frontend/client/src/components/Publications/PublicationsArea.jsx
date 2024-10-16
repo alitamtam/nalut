@@ -38,7 +38,7 @@ const PublicationsArea = () => {
                 </Link>
             </div>
 
-            <div className={`flex flex-col items-center  xxl:p-12 bg-white text-gray-800 xxl:h-4/5 xl:h-4/5 border-b border-teal-600 xxl:pb-12 xxl:mb-12 w-full max-w-full overflow-x-hidden ${isArabic ? 'text-right' : ''}`}>
+            <div className={`flex flex-col items-center  xxl:p-12  text-gray-800 xxl:h-4/5 xl:h-4/5 border-b border-teal-600 xxl:pb-12 xxl:mb-12 w-full max-w-full overflow-x-hidden ${isArabic ? 'text-right' : ''}`}>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xxl:px-80 lg:mx-20 xxl:gap-3 lg:gap-3 ssm:gap-3 justify-center mx-auto">
                     {lastThreePublications.map((publication) => {
                         const topicName = publication.topic?.name || "Unknown Topic";

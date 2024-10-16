@@ -5,7 +5,7 @@ const AboutUsContent = () => {
     const isArabic = i18n.language === 'ar';
 
     return (
-        <section className="bg-white text-gray-500 rounded-lg p-6 mb-8 lg:font-arabic ssm:font-arabic md:font-arabic">
+        <section className=" text-gray-500  p-6 mb-8 lg:font-arabic ssm:font-arabic md:font-arabic">
             <p className={`mb-4 lg:font-arabic ssm:font-arabic md:font-arabic ${isArabic ? 'text-right text-lg' : 'text-left'}`}>
                 {t('eduLibyaDescription.part1')}.
             </p>

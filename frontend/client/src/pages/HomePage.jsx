@@ -15,25 +15,25 @@ const HomePage = () => {
     return (
         <>
             {/* Section 1: Publications and About Us */}
-            <section className="lg:mx-20 xxl:mx-80 md:mx-16 sm:mx-4 ssm:mx-2 items-center justify-center">
+            <section className="lg:mx-20 xxl:mx-80 xl:mx-20 md:mx-0  items-center justify-center">
                 <div className="flex flex-col lg:flex-row md:flex-row ssm:flex-col justify-center ">
                     {/* Left Side - Publications Slider */}
-                    <div className="lg:w-2/3 md:w-full sm:w-full ssm:w-full">
+                    <div className="lg:w-2/3 md:w-full xxl:w-full  xl:w-full sm:w-full ssm:w-full">
                         <PublicationsSlider />
                     </div>
 
                     {/* Right Side - About Us Text */}
-                    <div className={`bg-teal-600 lg:w-[30rem] md:w-full sm:w-full ssm:w-full pb-6 px-5 text-white text-lg ${isArabic ? 'text-right' : ''} flex-col`}>
-                        <h2 className={`lg:text-3xl sm:text-2xl ssm:text-xl font-bold mb-2 ${isArabic ? 'text-right' : ''}`}>
+                    <div className={`bg-teal-600 xxl:h-[550px] md:h-[550px] lg:w-[25rem] xxl:w-[40rem] xl:w-[35rem] md:w-[40rem] sm:w-full ssm:w-full pb-6 px-5 py-10 text-white xxl:text-lg lg:text-base md:text-base lg:leading-relaxed ${isArabic ? 'text-right sm:leading-loose md:leading-loose  lg:leading-loose' : ''} flex-col`}>
+                        <h2 className={`lg:text-xl sm:text-2xl ssm:text-xl font-bold mb-1 ${isArabic ? 'text-right' : ''}`}>
                             {t('about.title')}
                         </h2>
-                        <p className="py-2">{t('about.welcomeMessage')}</p>
-                        <p className="py-2">{t('about.welcomeMessage2')}</p>
-                        <p className="py-2">{t('about.welcomeMessage3')}</p>
-                        <div className="py-6 px-0 lg:px-10">
+                        <p className="py-1">{t('about.welcomeMessage')}</p>
+                        <p className="py-1">{t('about.welcomeMessage2')}</p>
+                        <p className="py-1">{t('about.welcomeMessage3')}</p>
+                        <div className="py-6 px-0 xxl:px-10">
                             <Link
                                 to="/about"
-                                className={`border-2 text-white border-white rounded-full hover:bg-sky-950 hover:text-white py-3 px-8 ${isArabic ? 'text-right' : ''} uppercase`}
+                                className={`border-2 text-white border-white rounded-full hover:bg-sky-950 hover:text-white hover:border-none  py-3 px-8 ${isArabic ? 'text-right' : ''} uppercase`}
                             >
                                 {t('Read More')}
                             </Link>

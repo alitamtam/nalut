@@ -49,11 +49,11 @@ const UpcomingEvent = () => {
     return (
         <div className='xxl:w-full xxl:h-auto'>
             {/* Heading and View All Button */}
-            <div className={`flex flex-col items-center ${isArabic ? 'lg:flex-row-reverse' : 'lg:flex-row'} lg:justify-between xxl:mx-80 lg:mx-20 py-4`}>
+            <div className={`flex flex-col items-center ${isArabic ? 'lg:flex-row-reverse' : 'lg:flex-row'} lg:justify-between xxl:mx-80 lg:mx-20 xl:mx-20 py-4`}>
                 <h2 className={`text-3xl font-bold mb-4 text-center capitalize ${isArabic ? 'lg:text-2xl' : ''} font-sans text-sky-950`}>
                     {t('upcoming events')}
                 </h2>
-                <Link to='events/view-all' className={`border-2 text-teal-600 font-body lg:text-base border-teal-600 rounded-full hover:bg-teal-600 hover:text-white ssm:py-1 lg:py-2 px-8 mb-4 lg:mb-0 hidden lg:block`}>
+                <Link to='events/view-all' className={`border-2 text-teal-600 font-arabic lg:text-base border-teal-600 rounded-full hover:bg-teal-600 hover:text-white ssm:py-1 lg:py-2 px-8 mb-4 lg:mb-0 hidden lg:block`}>
                     {t('view_all')}
                 </Link>
             </div>
@@ -69,7 +69,7 @@ const UpcomingEvent = () => {
                 {sortedEvents.length > 0 ? (
                     <>
                         <div className="w-full lg:w-1/2 bg-[#e2dfd8] lg:h-[340px] px-4 py-6 lg:px-8 lg:py-12 lg:mb-0 h-full">
-                            <Link to={`/events/${sortedEvents[currentSlide]?.id}`} className={`text-gray-800 font-serif text-xl ${isArabic ? 'lg:text-2xl' : ''} font-bold mb-6 hover:text-teal-600 block capitalize`}>
+                            <Link to={`/events/${sortedEvents[currentSlide]?.id}`} className={`text-gray-800 text-xl ${isArabic ? 'lg:text-2xl font-arabic' : ''} font-arabic mb-6 hover:text-teal-600 block capitalize`}>
                                 {getTranslatedTitle(sortedEvents[currentSlide])}
                             </Link>
                             <div className='mb-6'>

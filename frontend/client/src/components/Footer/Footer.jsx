@@ -9,7 +9,7 @@ const Footer = () => {
     const { t } = useTranslation('navbar'); // Use the hook to get the translation function
 
     return (
-        <div className="bg-neutral-200 text-gray-600 py-12 lg:py-16">
+        <div className="bg-sky-950 text-white py-12 lg:py-16">
             <BackToTop />
             <div className="container mx-auto px-4 lg:px-8 flex flex-col lg:flex-row justify-between items-center space-y-8 lg:space-y-0">
                 {/* Navigation Links on the left */}
@@ -25,8 +25,8 @@ const Footer = () => {
 
                 {/* Contact and Social Icons on the right */}
                 <div className="flex flex-col items-center lg:items-end space-y-4 font-arabic">
-                    <p className="flex text-center lg:text-right"><CiMail className='text-lg mr-2 mt-1 text-sky-950' />  <a href="mailto:contact@edulibya.ly" className="hover:underline text-gray-500 hover:text-teal-600"> contact@edulibya.ly</a></p>
-                    <ul className="flex space-x-2 text-lg lg:pr-10"> <span className='text-gray-500 py-0 mb-2'></span>
+                    <p className="flex text-center lg:text-right"><CiMail className='text-lg mr-2 mt-1 text-sky-950' />  <a href="mailto:contact@edulibya.ly" className="hover:underline text-white hover:text-teal-600"> contact@edulibya.ly</a></p>
+                    <ul className="flex space-x-2 text-lg lg:pr-10"> <span className='text-white py-0 mb-2'></span>
                         <li><a href="https://www.facebook.com/groups/527521202798857/"><FaFacebookF className='hover:text-teal-600' /></a></li>
                         {/* <li><a href="#"><FaTwitter /></a></li> */}
                         <li><a href="https://www.linkedin.com/groups/12856663/"><FaLinkedinIn className='hover:text-teal-600' /></a></li>
@@ -36,7 +36,7 @@ const Footer = () => {
             </div>
 
             {/* Footer Bottom Text */}
-            <div className="text-center mt-8 text-gray-500 font-arabic">
+            <div className="text-center mt-8 text-white font-arabic">
                 <p>&copy; {new Date().getFullYear()} EduLibya | All Rights Reserved</p>
             </div>
         </div>
