@@ -42,11 +42,18 @@ const PublicationDetails = () => {
     // Find the icon based on the publication's topic name
     const topicIcon = iconOptions.find(option => option.name === publication.topic.name)?.icon || null;
     const translation = publication.translations[0]; // Assuming only one translation per language
-    const profileTranslation = publication?.owner?.profile?.translations
-        ? publication.owner.profile.translations.find(t => t.language === i18n.language)
-        : {};
-    const arabicName = profileTranslation.title || '';
-    const EnglishName = `${publication.owner.firstName} ${publication.owner.lastName}`;
+    // Safely check if translations exist and are an array, otherwise default to an empty array
+    const profileTranslations = Array.isArray(publication?.owner?.profile?.translations)
+        ? publication.owner.profile.translations
+        : [];
+
+    // Use filter and get the first match, or return an empty object as fallback
+    const profileTranslation = profileTranslations.filter(t => t.language === i18n.language)[0] || {};
+
+    // Safely extract names
+    const arabicName = profileTranslation?.title || '';
+    const EnglishName = `${publication?.owner?.firstName || ''} ${publication?.owner?.lastName || ''}`;
+
     const formatContent = (content) => {
         const regex = /(?<=\.) (?=[A-Z])/g; // Split content based on dot followed by a capital letter
         const lines = content.split(regex).filter(line => line.trim() !== '');
