@@ -31,7 +31,7 @@ const PublicationsSlider = () => {
     };
 
     return (
-        <div className={`relative  ${isArabic ? 'lg:text-right flex-row-reverse ' : ''} overflow-hidden capitalize`}>
+        <div className={`relative bg-white shadow-md ${isArabic ? 'lg:text-right flex-row-reverse ' : ''} overflow-hidden capitalize`}>
             <TECarousel
                 className="relative h-[550px] object-cover w-[stretch]"
                 showControls
@@ -133,12 +133,12 @@ const PublicationsSlider = () => {
                 )}
 
                 {/* Indicators */}
-                <div className={`absolute bottom-0 w-full py-2 flex ${isArabic ? 'text-right' : ''} justify-center space-x-2 border-b-4 border-gray-100 shadow-lg px-4`}>
+                <div className={`absolute bottom-0 w-full  flex ${isArabic ? 'text-right' : ''} justify-center space-x-2 border-b-4 border-white shadow-lg px-4`}>
                     {recentPublications.length > 0 && recentPublications.map((_, index) => (
                         <button
                             key={index}
                             onClick={() => handleIndicatorClick(index)}
-                            className={`h-3 w-3 rounded-full transition-all ${isArabic ? 'text-right' : ''} duration-300 ${activeIndex === index ? "bg-sky-950" : "bg-gray-300"}`}
+                            className={`h-3 w-3 rounded-full transition-all ${isArabic ? 'text-right' : ''} duration-300 ${activeIndex === index ? "bg-sky-950" : "bg-gray-400"}`}
                         ></button>
                     ))}
                 </div>
