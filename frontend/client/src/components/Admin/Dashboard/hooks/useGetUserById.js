@@ -5,15 +5,15 @@ export const useGetUserById = (id) => {
   return useQuery({
     queryKey: ["userById", id], // More descriptive queryKey
     queryFn: async () => {
-      try {
+      {
         const response = await api.get(`/api/users/user/${id}`);
+
+        if (!response.data) {
+          throw new Error("user not found");
+        }
+
         return response.data;
-      } catch (error) {
-        throw new Error(
-          error.response?.data?.message || "Failed to fetch user data"
-        );
       }
     },
-    enabled: !!id, // Only run the query if id is defined
   });
 };

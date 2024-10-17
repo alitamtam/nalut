@@ -9,7 +9,7 @@ const Sidebar = () => {
     };
 
     return (
-        <nav className="w-64 bg-gray-800 text-white h-screen p-4">
+        <nav className="w-64 bg-sky-950 text-white h-screen p-4">
             <title>Sidebar</title>
 
             <ul className="text-center capitalize font-arabic space-y-2">

@@ -3,6 +3,7 @@ import { useGetPublications } from "./Admin/Dashboard/hooks/useGetPublications";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useTranslation } from 'react-i18next'; // Import the hook
+import { FaExclamationTriangle, FaSpinner } from 'react-icons/fa'; // Import relevant icons
 
 const PublicationsSlider = () => {
     const { data: publications = [], isLoading, isError } = useGetPublications();
@@ -11,9 +12,23 @@ const PublicationsSlider = () => {
     const isArabic = i18n.language === 'ar'; // Check if the language is Arabic
     const recentPublications = Array.isArray(publications) ? publications.slice(0, 3) : []; // Ensure it's an array
 
-    if (isLoading) return <p>{t('loading_publications')}</p>;
-    if (isError) return <p>{t('error_fetching_publications')}</p>;
+    if (isLoading) return (
+        <div className="flex items-center justify-center h-full">
+            <FaSpinner className="animate-spin text-3xl text-teal-600 mr-2" />
+            <p>{t('loading_publications')}</p>
+        </div>
 
+    );
+
+    if (isError) {
+        console.error('Error fetching member:', isError);
+        return (
+            <div className="flex items-center justify-center h-full text-red-500">
+                <FaExclamationTriangle className="mr-2 text-3xl" /> Error icon
+                <p>{t('error_fetching_publications')}</p>
+            </div>
+        );
+    }
     const handleNext = () => {
         setActiveIndex((prevIndex) =>
             prevIndex === recentPublications.length - 1 ? 0 : prevIndex + 1

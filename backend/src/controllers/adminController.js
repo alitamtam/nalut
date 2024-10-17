@@ -107,6 +107,14 @@ const adminController = {
     try {
       const user = await prisma.user.findUnique({
         where: { id: userId },
+        select: {
+          password: false, // Exclude the password from the response
+          username: true,
+          firstName: true,
+          lastName: true,
+          email: true,
+          role: true,
+        },
       });
 
       if (!user) {
