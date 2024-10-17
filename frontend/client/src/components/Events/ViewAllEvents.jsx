@@ -49,6 +49,8 @@ const AllEvents = () => {
                                     src={event.image} // Image source
                                     alt={getTranslatedContent(event, 'title')} // Accessible alt text with translated title
                                     className="w-full h-full object-fit" // Full width, height, and object-cover to maintain aspect ratio
+                                    loading="lazy"
+
                                 />
                             )}
                         </div>

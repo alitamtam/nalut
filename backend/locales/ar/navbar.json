@@ -3,8 +3,13 @@
   "contact": "تواصل معنا",
   "follow_us": "تابعنا",
   "view_all": "عرض الكل",
-  "search": "بحث",
-  "search_placeholder": "ابحث عن...",
+"search": {
+    "title": "بحث",
+    "description": "البحث عن العناصر",  
+    "search_placeholder": "..ابحث عن",
+    "search_results": "نتائج البحث"
+  },
+    "search_placeholder": "ابحث عن...",
   "search_results": "نتائج البحث",
   "no_results": "لا توجد نتائج",
   "email": "info@edulibya.com",
@@ -13,7 +18,8 @@
   "publication area": "المنشورات",
   "projects area": "ساحة المشاريع",
   "upcoming events": "الأحداث القادمة",
-  "Loading publication...": "جارٍ تحميل النشر...",
+  "loading_publications": "جارٍ تحميل النشر...",
+  "loading": "جارٍ التحميل...",
   "Error!": "خطأ!",
   "Error loading publication.": "حدث خطأ أثناء تحميل النشر.",
   "Publication not found": "النشر غير موجود",
@@ -23,6 +29,11 @@
   "translated to": "مترجم إلى",
   "our team": "فريقنا",
   "our partners": "شركاؤنا",
+  "language_selector": "اختر اللغة",
+  "all_rights_reserved": "جميع الحقوق محفوظة",
+  "social_media": "وسائل التواصل الاجتماعي",
+  "open menu": "فتح القائمة",
+  "navbar.title": "إديو ليبيا",
   "join us": "انضم إلينا",
 
   "eduLibyaDescription": {

@@ -50,7 +50,9 @@ const PublicationsArea = () => {
                             <div key={publication.id} className="rounded-none overflow-hidden shadow-md bg-gray-100 hover:shadow-lg transition-shadow duration-300  xxl:w-80 gap-2">
                                 <div className="w-full h-56">
                                     {publication.image ? (
-                                        <img src={publication.image} alt={translation?.title || publication.title} className="w-full h-64 object-cover " />
+                                        <img src={publication.image} alt={translation?.title || publication.title} className="w-full h-64 object-cover "
+                                            loading="lazy"
+                                        />
                                     ) : (
                                         <div className="w-full h-64 flex items-center justify-center bg-gray-100 border-t-8 border-b-8 border-teal-600 rounded-none p-6">
                                             <div className="flex-shrink-1 text-teal-600 text-9xl md:text-9xl mr-6">

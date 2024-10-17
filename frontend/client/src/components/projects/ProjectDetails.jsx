@@ -60,6 +60,8 @@ const ProjectDetails = () => {
                     src={project.projectImage}
                     alt={translation?.title || project.title}
                     className={`w-full md:w-1/2 h-64 object-cover ${isArabic ? 'order-2' : ''}`}
+                    loading="lazy"
+
                 />
 
                 {/* Separator line */}

@@ -20,6 +20,8 @@ const ProfileDetails = () => {
                         src={`data:image/jpeg;base64,${publication.owner.Profile?.image || '/default-profile.jpg'}`}  // Check if image exists, otherwise show default
                         alt='profile'
                         className="w-48 h-48 object-cover rounded-full mb-4"
+                        loading="lazy"
+
                     />
                     <h2 className="text-2xl font-bold text-gray-800 capitalize">
                         {publication.owner.firstName} {publication.owner.lastName}

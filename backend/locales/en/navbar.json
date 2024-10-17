@@ -15,13 +15,19 @@
   "our team": "Our Team",
   "our partners": "Our Partners",
   "join us": "Join Us",
-     "Loading publication...": "Loading publication...",
+  "loading": "Loading...",
+    "loading_publications": "Loading publication...",
     "Error!": "Error!",
     "Error loading publication.": "Error loading publication.",
     "Publication not found": "Publication not found",
     "No Icon": "No Icon",
     "By": "By",
     "at": "at",
+    "language_selector": "Select Language",
+    "all_rights_reserved": "All Rights Reserved",
+    "social_media": "Social Media",
+    "open menu": "Open Menu",
+    "navbar.title": "EduLibya",
     "translated to": "translated to",
   "eduLibyaDescription": {
   "part1": "All of us in EduLibya are connected to the education sector as students, teachers, parents, workshop leaders, researchers, social-psychological practitioners, and so on.",
@@ -107,13 +113,12 @@
   
   "search": {
     "title": "Search",
-    "description": "Search for items"
+    "description": "Search for items",
+    "searchPlaceholder": "Search for...",
+    "searchResults": "Search Results"
   },
   
-  "searchPlaceholder": {
-    "title": "Search for...",
-    "description": "Search for items"
-  },
+ 
   
   "searchResults": {
     "title": "Search Results",

@@ -99,6 +99,8 @@ const PublicationsSlider = () => {
                                     src={pub.image || "https://via.placeholder.com/600x400"}
                                     className="block w-full h-[435px] object-cover"
                                     alt={publicationTitle}
+                                    loading="lazy"
+
                                 />
                                 <span className={`absolute bottom-4  text-white  px-2  ${isArabic ? 'ssm:text-right ssm:flex ssm:flex-row-reverse  ' : 'ssm:text-left'} py-1 lg:text-lg ssm:text-lg  shadow-slate-600 font-arabic`}>
                                     <Link to={`/publications/${pub.id}`} >
@@ -142,7 +144,9 @@ const PublicationsSlider = () => {
                         ></button>
                     ))}
                 </div>
+
             </TECarousel>
+
         </div>
     );
 };

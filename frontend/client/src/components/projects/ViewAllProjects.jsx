@@ -46,6 +46,8 @@ const ViewAllProjects = () => {
                                     src={project.projectImage}
                                     alt={translation?.title || project.title}
                                     className="w-full h-40 object-cover mt-4"
+                                    loading="lazy"
+
                                 />
                             )}
                             <div className="mt-4 text-center py-5">

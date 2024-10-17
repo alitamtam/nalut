@@ -83,6 +83,8 @@ const EventDetails = () => {
                                 src={event.image}
                                 alt={event.title}
                                 className="h-60 object-cover w-full lg:h-full"
+                                loading="lazy"
+
                             />
                         )}
 

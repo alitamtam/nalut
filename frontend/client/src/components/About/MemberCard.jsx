@@ -15,6 +15,8 @@ const MemberCard = ({ member }) => {
                 src={`data:image/jpeg;base64,${member.image}`} // Handle missing photo
                 alt={member.fullName || 'Member Photo'} // Use fullName for alt attribute
                 className="w-32 h-32 mx-auto rounded-full object-cover"
+                loading="lazy"
+
             />
             <h3 className="mt-4 ">
                 {isArabic ? translation?.title || member.fullName : member.fullName || 'Name not available'}
