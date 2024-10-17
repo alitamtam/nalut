@@ -85,17 +85,17 @@ const Header = () => {
                     <nav aria-label={t('language_selector')} className="flex items-center space-x-2">
                         <button
                             onClick={() => handleLanguageChange('en')}
-                            className={`p-1 rounded hover:bg-sky-950 hover:text-white ${language === 'en' ? 'bg-teal-600' : ''}`}
+                            className={`p-1 rounded hover:bg-sky-950 hover:text-white ${language === 'en' ? 'bg-teal-600 text-white' : ''}`}
                             aria-label="Switch to English"
                         >
                             <p className="text-xs font-arabic">EN</p>
                         </button>
                         <button
                             onClick={() => handleLanguageChange('ar')}
-                            className={`px-1 m-0 rounded hover:bg-sky-950 hover:text-white ${language === 'ar' ? 'bg-teal-600' : ''}`}
+                            className={`px-1 m-0 rounded hover:bg-sky-950 hover:text-white  ${language === 'ar' ? 'bg-teal-600 text-white' : ''}`}
                             aria-label="Switch to Arabic"
                         >
-                            <p className="text-sm font-arabic px-1">ع</p>
+                            <p className="text-sm font-arabic px-1 inline-block align-top  " title="Arabic">ع</p>
                         </button>
                     </nav>
 

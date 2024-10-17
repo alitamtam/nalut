@@ -33,7 +33,7 @@ const NextArrow = ({ onClick }) => (
     <button
         onClick={onClick}
         aria-label="Next"
-        className="absolute ssm:mx-4 md:mx-4 md:my-6 right-0 top-1/2 transform -translate-y-1/2 bg-sky-950 lg:p-2 rounded-full shadow-md hover:bg-teal-600 z-10"
+        className="absolute ssm:mx-4 md::mx-4 md:my-6 right-0   ssm:-top-1/4 top-1/2 transform -translate-y-1/2 bg-sky-950 lg:p-2 rounded-full shadow-md hover:bg-teal-600 z-10"
     >
         <IoIosArrowForward className="text-3xl text-white" />
     </button>
@@ -44,7 +44,7 @@ const PrevArrow = ({ onClick }) => (
     <button
         onClick={onClick}
         aria-label="Previous"
-        className="absolute ssm:mx-4 md:mx-4 md:my-6 left-0 top-1/2 transform -translate-y-1/2 bg-sky-950 lg:p-2 rounded-full shadow-md hover:bg-teal-600 z-10"
+        className="absolute ssm:mx-4 md::mx-4 md:my-6 left-0  ssm:-top-1/4 top-1/2 transform -translate-y-1/2 bg-sky-950 lg:p-2 rounded-full shadow-md hover:bg-teal-600 z-10"
     >
         <IoIosArrowBack className="text-3xl text-white" />
     </button>
@@ -118,7 +118,7 @@ const TopicsSlick = () => {
                     )}
                 </Slider>
                 <div className="pt-5 w-[200px] m-auto">
-                    <Link to="topics/view-all" className={`border-2 text-teal-600 font-body border-teal-600 rounded-full hover:bg-teal-600 hover:text-white py-2 text-center lg:text-base ssm:text-lg lg:mb-0 md:block ssm:block`}>
+                    <Link to="topics/view-all" className={`border-2 text-teal-600 font-body border-teal-600 rounded-full hover:bg-teal-600 hover:text-white py-2 text-center mb-4 lg:text-base lg:font-arabic ssm:py-1 ssm:font-arabic md:font-arabic ssm:text-lg lg:mb-0 lg:hidden md:block ssm:block`}>
                         {t('view_all')}
                     </Link>
                 </div>

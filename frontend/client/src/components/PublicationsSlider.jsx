@@ -140,6 +140,8 @@ const PublicationsSlider = () => {
                         <button
                             key={index}
                             onClick={() => handleIndicatorClick(index)}
+                            aria-label={`Indicator ${index + 1}`} // Optional aria-label
+
                             className={`h-3 w-3 rounded-full transition-all ${isArabic ? 'text-right' : ''} duration-300 ${activeIndex === index ? "bg-sky-950" : "bg-gray-400"}`}
                         ></button>
                     ))}
