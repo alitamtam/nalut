@@ -41,6 +41,8 @@ const ProfileList = () => {
                                             alt="profile"
                                             src={`data:image/jpeg;base64,${profile.image}`} // Include the base64 prefix here
                                             className="h-16 w-16 object-cover rounded-full"
+                                            loading="lazy"
+
                                         />
                                     ) : (
                                         <p>No Image</p> // Fallback if no image is provided

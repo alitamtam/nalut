@@ -60,6 +60,8 @@ const FutureEvents = () => {
                                         src={event.image}
                                         alt={getTranslatedContent(event, 'title')} // Use translated title for alt text
                                         className="min-w-full h-full object-none"
+                                        loading="lazy"
+
                                     />
                                 )}
                             </div>

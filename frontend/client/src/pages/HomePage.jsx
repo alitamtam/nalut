@@ -14,6 +14,23 @@ const HomePage = () => {
 
     return (
         <>
+            {/* SEO for HomePage */}
+            <title>EduLibya - Education Network</title>
+            <meta name="description" content="EduLibya is a network for improving the educational sector across Libya. Join our community for conversations on education reform." />
+            <meta name="keywords" content="Libya, education, EduLibya, education reform, community" />
+
+            {/* Open Graph Meta Tags */}
+            <meta property="og:title" content="EduLibya - Education Network in Libya" />
+            <meta property="og:description" content="EduLibya is a community-driven network focused on education reform in Libya." />
+            <meta property="og:image" content="/path-to-og-image.jpg" />
+            <meta property="og:type" content="website" />
+            <meta property="og:url" content="https://www.edulibya.ly" />
+
+            {/* Twitter Card Meta Tags */}
+            <meta name="twitter:card" content="summary_large_image" />
+            <meta name="twitter:title" content="EduLibya - Education Network" />
+            <meta name="twitter:description" content="Join EduLibya in conversations about education reform." />
+            <meta name="twitter:image" content="/path-to-twitter-image.jpg" />
             {/* Section 1: Publications and About Us */}
             <section className="lg:mx-20 xxl:mx-80 xl:mx-20 md:mx-0  items-center justify-center">
                 <div className="flex flex-col lg:flex-row md:flex-row ssm:flex-col justify-center ">

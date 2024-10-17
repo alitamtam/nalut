@@ -92,6 +92,8 @@ const PublicationDetails = () => {
                         src={publication.image}
                         alt={publication.title}
                         className="w-full md:w-2/3 h-[300px] object-cover border-b border-gray-300 rounded-none"
+                        loading="lazy"
+
                     />
                 ) : (
                     <div className="w-full md:w-1/2 h-64 flex items-center justify-center bg-gray-100 border-t-8 border-b-8 border-sky-950 rounded-none p-4">

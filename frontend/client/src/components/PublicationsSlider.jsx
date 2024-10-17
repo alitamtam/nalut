@@ -99,6 +99,8 @@ const PublicationsSlider = () => {
                                     src={pub.image || "https://via.placeholder.com/600x400"}
                                     className="block w-full h-[435px] object-cover"
                                     alt={publicationTitle}
+                                    loading="lazy"
+
                                 />
                                 <span className={`absolute bottom-4  text-white  px-2  ${isArabic ? 'ssm:text-right ssm:flex ssm:flex-row-reverse  ' : 'ssm:text-left'} py-1 lg:text-lg ssm:text-lg  shadow-slate-600 font-arabic`}>
                                     <Link to={`/publications/${pub.id}`} >
@@ -138,11 +140,15 @@ const PublicationsSlider = () => {
                         <button
                             key={index}
                             onClick={() => handleIndicatorClick(index)}
+                            aria-label={`Indicator ${index + 1}`} // Optional aria-label
+
                             className={`h-3 w-3 rounded-full transition-all ${isArabic ? 'text-right' : ''} duration-300 ${activeIndex === index ? "bg-sky-950" : "bg-gray-400"}`}
                         ></button>
                     ))}
                 </div>
+
             </TECarousel>
+
         </div>
     );
 };

@@ -34,6 +34,8 @@ const TopicPublications = () => {
                         src={recentPublication.image || '/default-image.jpg'}
                         alt={recentPublication.title}
                         className="w-full md:w-1/3 object-cover rounded-lg mb-4 md:mb-0"
+                        loading="lazy"
+
                     />
                     <div className="md:ml-6">
                         <h4 className="text-xl font-bold">{recentPublication.title}</h4>
@@ -55,6 +57,8 @@ const TopicPublications = () => {
                                 src={publication.image || '/default-image.jpg'}
                                 alt={publication.title || 'Untitled Publication'}
                                 className="w-full h-48 object-cover rounded-lg mb-4"
+                                loading="lazy"
+
                             />
                             <h4 className="text-xl font-bold">
                                 {publication.title || 'Untitled'}

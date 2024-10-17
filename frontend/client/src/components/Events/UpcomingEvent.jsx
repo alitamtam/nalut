@@ -97,6 +97,8 @@ const UpcomingEvent = () => {
                                             src={event.image || '/default-event-image.jpg'}
                                             alt={getTranslatedTitle(event)}
                                             className="lg:w-full h-60 lg:h-[340px] object-cover"
+                                            loading="lazy"
+
                                         />
                                     </div>
                                 ))}

@@ -81,6 +81,8 @@ const ProjectsArea = () => {
                                                             src={project.projectImage}
                                                             alt={projectTitle}
                                                             className="w-[480px] lg:h-60 object-cover mt-2 my-4"
+                                                            loading="lazy"
+
                                                         />
                                                     </div>
                                                 </Link>
