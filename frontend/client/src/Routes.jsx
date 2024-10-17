@@ -27,6 +27,7 @@ import ProjectDetails from './components/projects/ProjectDetails';
 import ProjectsArea from './components/projects/ProjectsArea';
 import ViewAllProjects from './components/projects/ViewAllProjects';
 import ManageProject from './components/Admin/Dashboard/ManageProjects';
+import UpdateUserAccount from './components/Admin/Dashboard/UpdateUserAccount';
 
 
 const AppRouter = createBrowserRouter([
@@ -72,6 +73,7 @@ const AppRouter = createBrowserRouter([
             { path: 'users', element: <DeleteUsers /> },    // Admin-specific
             { path: 'editProfile', element: <EditProfile /> },
             { path: '*', element: <NotFound /> },
+            { path: 'update-account', element: < UpdateUserAccount /> },
         ],
     },
     {

@@ -5,7 +5,6 @@ const ProfileList = () => {
 
     // Ensure profiles is always an array
     const profiles = Array.isArray(responseData) ? responseData : [];
-    console.log('Profiles:', profiles); // Log profiles data
 
     if (isPending) {
         return <p>Loading...</p>;

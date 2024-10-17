@@ -91,7 +91,7 @@ const adminController = {
     try {
       const users = await prisma.user.findMany(
         {
-          limit: 100,
+          take: 100,
         } // Limit the number of users returned
       );
       res.status(200).json(users);
@@ -121,13 +121,53 @@ const adminController = {
   },
 
   async updateUser(req, res) {
-    const userId = parseInt(req.params.id);
-    const { firstName, lastName, username, email } = req.body;
+    const { id } = req.params;
+    const { firstName, lastName, username, email, oldPassword, newPassword } =
+      req.body;
 
     try {
+      // Validate the user ID
+      const userId = parseInt(id, 10);
+      if (isNaN(userId)) {
+        return res.status(400).json({ message: "Invalid user ID" });
+      }
+
+      // Fetch the existing user data
+      const user = await prisma.user.findUnique({
+        where: { id: userId },
+      });
+
+      // Check if user exists
+      if (!user) {
+        return res.status(404).json({ message: "User not found" });
+      }
+
+      // Only update password if both oldPassword and newPassword are provided
+      let hashedPassword = user.password;
+      if (oldPassword && newPassword) {
+        const isPasswordValid = await bcrypt.compare(
+          oldPassword,
+          user.password
+        );
+        if (!isPasswordValid) {
+          return res.status(400).json({ message: "Old password is incorrect" });
+        }
+        hashedPassword = await bcrypt.hash(newPassword, 10);
+      }
+
+      // Build the data object with only fields that are present in the request
+      const updateData = {
+        firstName: firstName || user.firstName,
+        lastName: lastName || user.lastName,
+        username: username || user.username,
+        email: email || user.email,
+        password: hashedPassword,
+      };
+
+      // Update the user
       const updatedUser = await prisma.user.update({
         where: { id: userId },
-        data: { firstName, lastName, username, email },
+        data: updateData,
       });
 
       res
@@ -138,7 +178,6 @@ const adminController = {
       res.status(500).json({ message: "Error updating user" });
     }
   },
-
   async deleteUser(req, res) {
     try {
       const userId = parseInt(req.params.id);

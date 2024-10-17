@@ -81,7 +81,6 @@ const eventsController = {
         },
       });
 
-      console.log(req.body);
       res.status(201).json(newEvent); // Success response with new event data
     } catch (error) {
       console.error(error);

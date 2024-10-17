@@ -6,10 +6,7 @@ const ProtectedRoute = ({ children, roles }) => {
     const { user } = useSettingsStore();  // Access user from the store
     const role = user?.role || '';  // Default to empty string if undefined
 
-    // Log user information for debugging
-    console.log('User object:', user);
-    console.log('User role:', role);
-    console.log('Expected roles:', roles);
+
 
     // Check if the user is logged in and if their role is authorized
     if (!user || !role || !roles.includes(role)) {

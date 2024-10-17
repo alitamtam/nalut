@@ -9,13 +9,11 @@ const BackToTop = () => {
     // Show or hide button based on scroll position
     const handleScroll = () => {
         // Log scroll position for debugging
-        console.log('Scroll Y:', window.scrollY);
         setIsVisible(window.scrollY > 300); // Toggle visibility based on scroll position
     };
 
     // Scroll to top with smooth behavior
     const scrollToTop = () => {
-        console.log("Scrolling to top...");
         window.scrollTo({
             top: 0,
             behavior: 'smooth',

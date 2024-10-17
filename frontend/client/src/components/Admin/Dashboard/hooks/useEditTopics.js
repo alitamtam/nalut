@@ -7,7 +7,6 @@ export const useEditTopics = () => {
     mutationKey: ["editTopics"],
 
     mutationFn: async (id, formData) => {
-      console.log("id", id, "data", formData);
       const response = await api.put(`/api/topics/topic/${id}`, formData, {
         headers: {
           "Content-Type": "application/json",

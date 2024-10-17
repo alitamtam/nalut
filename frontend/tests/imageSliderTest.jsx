@@ -12,7 +12,6 @@ const PublicationsSlider = () => {
     // Handle loading and error states
     if (isLoading) return <p>Loading publications...</p>;
     if (isError) return <p>Error fetching publications</p>;
-    console.log(recentPublications.map((pub) => pub.image));
     return (
         <TECarousel
             className="h-[400px] w-[600px]"

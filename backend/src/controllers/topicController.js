@@ -50,7 +50,6 @@ const topicsController = {
 
     try {
       // Log the incoming request body for debugging
-      console.log("Request Body:", req.body);
 
       // Validate input data
       if (!name) {

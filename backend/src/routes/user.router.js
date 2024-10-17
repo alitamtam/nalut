@@ -18,6 +18,8 @@ router.post("/login", adminController.logIn); // User login
 
 router.post("/logout", authenticate, adminController.logout); // User logout
 
+router.put("/user/:id", authenticate, adminController.updateUser); // Update a user
+
 router.delete(
   "/user/:id",
   authenticate,
@@ -25,9 +27,8 @@ router.delete(
   adminController.deleteUser
 ); // Delete a user
 
-router.put("/users/:id", authenticate, adminController.updateUser); // Update a user
-
-// Article management routes
-
 router.get("/users", authenticate, adminController.getAllUsers); // Get all users
+
+router.get("/user/:id", authenticate, adminController.getUserById); // Get user by ID
+
 export default router;
