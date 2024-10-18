@@ -55,7 +55,13 @@ const publicationController = {
       const publication = await prisma.publication.findUnique({
         where: { id: parseInt(id, 10) }, // Use parseInt with radix
         include: {
-          topic: true,
+          topic: {
+            select: {
+              name: true,
+              iconClass: true,
+              translations: { where: { language: lang } },
+            },
+          },
           owner: {
             select: {
               firstName: true,

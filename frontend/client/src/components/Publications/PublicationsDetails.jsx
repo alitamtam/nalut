@@ -105,7 +105,7 @@ const PublicationDetails = () => {
                             )}
                         </div>
                         <h3 className="text-2xl font-bold text-gray-700 text-center whitespace-normal break-words">
-                            {publication.topic.name}
+                            {isArabic ? publication.topic.translations[0].name : publication.topic.name}
                         </h3>
                     </div>
                 )}

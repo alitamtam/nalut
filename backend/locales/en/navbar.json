@@ -55,7 +55,10 @@
   
   "publications": {
     "title": "Publications",
-    "description": "Explore our publications"
+    "description": "Explore our publications",
+    "Featured Publications": "Featured Publications",
+    "Latest Publications": "Latest Publications",
+    "Read Full Publication": "Read Full Publication"
   },
   
   "projects": {

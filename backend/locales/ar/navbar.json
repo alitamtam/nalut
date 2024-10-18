@@ -62,7 +62,10 @@
   
     "publications": {
       "title": "المنشورات",
-      "description": "استكشاف منشوراتنا"
+      "description": "استكشاف منشوراتنا",
+      "Featured Publications": "المنشورات المميزة",
+      "Latest Publications": "أحدث المنشورات",
+      "Read Full Publication": "اقرأ المنشور الكامل"
     },
   
     "projects": {
