@@ -5,11 +5,11 @@ const Header = () => {
 
     const { user } = useSettingsStore();
     return (
-        <header className="bg-gray-900 text-white p-4 flex justify-between items-center">
-            <h1 className="text-lg font-bold">Admin Dashboard</h1>
+        <header className="bg-sky-950 text-white p-4 flex justify-between items-center">
+            <h1 className="text-lg  border p-2">Admin Dashboard</h1>
             <div>
                 {/* You can add links or user-related actions here */}
-                <span>{`Welcome ${user.username}`}</span>
+                <span className="text-base capitalize">{`Welcome ${user.username}`}</span>
             </div>
         </header>
     );

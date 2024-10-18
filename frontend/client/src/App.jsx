@@ -1,15 +1,18 @@
-// path client/src/App.jsx
 import Footer from './components/Footer/Footer';
 import AppRouter from './Routes';
 import './index.css';
 import BackToTop from './components/BackToTop';
+// import { Toaster } from 'react-hot-toast';
+import 'react-toastify/dist/ReactToastify.css';  // Import toastify CSS
 
 function App() {
   return (
-    <div className="App lg:w-full xxl:w-full xl:w-full items-center justify-center"> {/* Full width wrapper */}
-      <AppRouter /> {/* Routes handle everything including the homepage */}
+    <div className="App lg:w-full xxl:w-full xl:w-full items-center justify-center">
+      <AppRouter />
       <BackToTop />
       <Footer />
+
+
     </div>
   );
 }

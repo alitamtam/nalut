@@ -6,6 +6,7 @@ import { useEditPublications } from "./hooks/useEditPublications";
 import { useGetPublications } from "./hooks/useGetPublications";
 import { useGetTopics } from "./hooks/useGetTopics";
 import ManageTopics from "./ManageTopics";
+import { toast, Toaster } from 'react-hot-toast'; // Imported toast and Toaster
 
 const PublicationsList = () => {
     const { data, isPending, error } = useGetPublications();
@@ -78,7 +79,6 @@ const PublicationsList = () => {
                 },
             ],
         };
-
         if (formData.topicId) {
             updatedFormData.topicId = parseInt(formData.topicId, 10);
         }
@@ -88,9 +88,21 @@ const PublicationsList = () => {
         }
 
         if (isEditing) {
-            editPublication.mutate({ id: currentEditId, formData: updatedFormData });
+            editPublication.mutate(
+                { id: currentEditId, formData: updatedFormData },
+                {
+                    onSuccess: () => toast.success('Publication edited successfully!'),
+                    onError: () => toast.error('Failed to edit publication.')
+                }
+            );
         } else {
-            addPublication.mutate(updatedFormData);
+            addPublication.mutate(
+                updatedFormData,
+                {
+                    onSuccess: () => toast.success('Publication added successfully!'),
+                    onError: () => toast.error('Failed to add publication.')
+                }
+            );
         }
 
         // Reset form data
@@ -128,7 +140,14 @@ const PublicationsList = () => {
     };
 
     const handleDelete = (id) => {
-        deletePublication.mutate(id);
+        deletePublication.mutate(id,
+
+            {
+                onSuccess: () => toast.success('Publication deleted successfully!'),
+                onError: () => toast.error('Failed to delete publication.')
+            }
+
+        );
     };
 
     if (isPending) return <div>Loading...</div>;
@@ -139,6 +158,8 @@ const PublicationsList = () => {
 
     return (
         <div>
+            <Toaster /> {/* Place the Toaster component somewhere globally */}
+
             <h2 className="text-2xl font-bold mb-4">Publications List</h2>
 
             {/* Form for Add/Edit */}

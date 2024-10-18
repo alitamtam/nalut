@@ -2,8 +2,7 @@ import { useState, useEffect } from "react";
 import { useUpdateUser } from "./hooks/useUpdateUser"; // Adjust the path if necessary
 import { useGetUserById } from './hooks/useGetUserById'; // Hook to get user details by ID
 import { useSettingsStore } from '../../../store/useSettingsStore'; // Adjust the path if necessary
-import { toast } from 'react-toastify'; // For notifications
-import 'react-toastify/dist/ReactToastify.css';
+import toast, { Toaster } from 'react-hot-toast'; // Imported toast and Toaster
 
 const UpdateUserAccount = () => {
     const { user } = useSettingsStore(state => ({ user: state.user }));
@@ -28,6 +27,7 @@ const UpdateUserAccount = () => {
             setEmail(userData.email || "");
         }
     }, [userData]);
+
     // Handle form submission
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -54,6 +54,7 @@ const UpdateUserAccount = () => {
             },
             {
                 onSuccess: () => {
+                    console.log("User updated successfully!"); // Debugging
                     toast.success("User updated successfully!");
                 },
                 onError: (error) => {
@@ -81,8 +82,6 @@ const UpdateUserAccount = () => {
 
     return (
         <>
-
-
             <div className="max-w-md mx-auto p-6 rounded-lg ">
                 <h2 className="text-2xl font-semibold mb-4">Update {user.username} Account</h2>
                 <form onSubmit={handleSubmit}>
@@ -109,27 +108,24 @@ const UpdateUserAccount = () => {
                     </div>
 
                     <div className="mb-4">
-                        <td>{user.username}</td>
-
                         <label htmlFor="username" className="block text-sm font-medium text-gray-700">Username</label>
                         <input
                             type="text"
                             id="username"
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
-                            className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring focus:ring-blue-500"
+                            className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring focus:ring-sky-900"
                         />
                     </div>
 
                     <div className="mb-4">
-                        {user.email}
                         <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
                         <input
                             type="email"
                             id="email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
-                            className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring focus:ring-blue-500"
+                            className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring focus:ring-sky-900"
                         />
                     </div>
 
@@ -141,7 +137,7 @@ const UpdateUserAccount = () => {
                             id="oldPassword"
                             value={oldPassword}
                             onChange={(e) => setOldPassword(e.target.value)}
-                            className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring focus:ring-blue-500"
+                            className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring focus:ring-sky-900"
                         />
                     </div>
 
@@ -152,7 +148,7 @@ const UpdateUserAccount = () => {
                             id="newPassword"
                             value={newPassword}
                             onChange={(e) => setNewPassword(e.target.value)}
-                            className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring focus:ring-blue-500"
+                            className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring focus:ring-sky-900"
                         />
                     </div>
 
@@ -163,14 +159,14 @@ const UpdateUserAccount = () => {
                             id="confirmPassword"
                             value={confirmPassword}
                             onChange={(e) => setConfirmPassword(e.target.value)}
-                            className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring focus:ring-blue-500"
+                            className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring focus:ring-sky-900"
                         />
                     </div>
 
                     <button
                         type="submit"
                         disabled={updateUserMutation.isLoading}
-                        className="w-full bg-blue-500 text-white font-semibold py-2 rounded-md hover:bg-blue-600 transition"
+                        className="w-full bg-sky-900 text-white font-button py-2 rounded-none hover:bg-blue-600 transition"
                     >
                         {updateUserMutation.isLoading ? "Updating..." : "Update User"}
                     </button>
@@ -181,6 +177,9 @@ const UpdateUserAccount = () => {
                         </p>
                     )}
                 </form>
+
+                {/* Add Toaster component for displaying toast notifications */}
+                <Toaster position="top-center" reverseOrder={false} gutter={24} />
             </div>
         </>
     );
