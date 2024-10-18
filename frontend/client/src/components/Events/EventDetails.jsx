@@ -47,15 +47,15 @@ const EventDetails = () => {
                                 <CiCalendar className={`  ${isArabic ? 'lg:text-right ml-2' : ' text-left mr-2'} mt-1`} />
                                 <span className={`mb-2${isArabic ? ' ' : ' '}`}>
 
-                                    {new Date(event.startTime).toLocaleDateString(isArabic ? 'ar-LY' : 'en-UK', { timeZone: 'UTC' }, {
+                                    {new Date(event.startTime).toLocaleDateString('en-UK', { timeZone: 'UTC' }, {
                                         year: 'numeric',
-                                        month: 'short',
+                                        month: 'numeric',
                                         day: 'numeric',
                                     })}
                                 </span>
                             </div>
 
-                            <a className={`flex items-center text-gray-700 text-xs font-bold mb-12 uppercase hover:text-teal-600 hover:underline ${isArabic ? 'lg:text-right flex-row-reverse font-arabic' : ' text-left'}`} href={`${event.link}`}><FiExternalLink className={`  ${isArabic ? 'lg:text-right ml-2' : ' text-left mr-2'}`} />
+                            <a className={`flex items-center text-gray-700 text-sm font-bold mb-12 uppercase hover:text-teal-600  ${isArabic ? 'lg:text-right flex-row-reverse font-arabic' : ' text-left'}`} href={`${event.link}`}><FiExternalLink className={`  ${isArabic ? 'lg:text-right ml-2' : ' text-left mr-2'}`} />
 
                                 {t('events.event-link')}
                             </a>
