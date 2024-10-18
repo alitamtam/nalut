@@ -11,6 +11,7 @@ import { toast, Toaster } from 'react-hot-toast'; // Imported toast and Toaster
 const PublicationsList = () => {
     const { data, isPending, error } = useGetPublications();
     const publications = data || []; // Default to an empty array if data is undefined
+    console.log(publications);
 
     const addPublication = useAddPublications();
     const editPublication = useEditPublications();
@@ -25,14 +26,12 @@ const PublicationsList = () => {
         topicId: "",
         topic: "",
         content: "",
-        content2: "",
-        content3: "",
+
         image: "",
         iconClass: "",
         arabicTitle: "", // Arabic title
         arabicContent: "", // Arabic content
-        arabicContent2: "", // Arabic content 2
-        arabicContent3: "", // Arabic content 3
+
     });
     const [currentEditId, setCurrentEditId] = useState(null);
     const [isNewTopic, setIsNewTopic] = useState(false);
@@ -111,14 +110,11 @@ const PublicationsList = () => {
             topicId: "",
             topic: "",
             content: "",
-            content2: "",
-            content3: "",
             image: "",
             iconClass: "",
             arabicTitle: "",
             arabicContent: "",
-            arabicContent2: "",
-            arabicContent3: "",
+
         });
         setIsEditing(false);
         setIsNewTopic(false);
@@ -139,6 +135,7 @@ const PublicationsList = () => {
         });
     };
 
+
     const handleDelete = (id) => {
         deletePublication.mutate(id,
 
@@ -155,194 +152,243 @@ const PublicationsList = () => {
     if (error) {
         return <div>Error loading publications: {error.message}</div>;
     }
+    console.log(formData);
 
     return (
-        <div>
+        <div className="p-6">
             <Toaster /> {/* Place the Toaster component somewhere globally */}
 
-            <h2 className="text-2xl font-bold mb-4">Publications List</h2>
+            <h2 className="text-3xl font-bold mb-6">Publications List</h2>
 
             {/* Form for Add/Edit */}
-            <form onSubmit={handleSubmit} className="mb-6">
-                <label className="block mb-1">Title</label>
-                <div className="mb-4">
-                    <input
-                        type="text"
-                        name="title"
-                        value={formData.title}
-                        onChange={handleChange}
-                        placeholder="Title"
-                        className="w-full p-2 border border-gray-300 rounded"
-                    />
-                </div>
+            <form onSubmit={handleSubmit} className="space-y-6">
+                {/* English Title */}
+                <div className="grid grid-cols-2 gap-4">
+                    <div>
+                        <label htmlFor="title" className="block mb-1 text-sm font-medium text-gray-700">
+                            English Title
+                        </label>
+                        <input
+                            id="title"
+                            type="text"
+                            name="title"
+                            value={formData.title}
+                            onChange={handleChange}
+                            className="w-full p-3 border border-gray-300 rounded focus:ring focus:ring-blue-300"
+                            placeholder="Enter English Title"
+                        />
+                    </div>
 
-                {/* Arabic Title */}
-                <label className="block mb-1">Arabic Title</label>
-                <div className="mb-4">
-                    <input
-                        type="text"
-                        name="arabicTitle"
-                        value={formData.arabicTitle}
-                        onChange={handleChange}
-                        placeholder="Arabic Title"
-                        className="w-full p-2 border border-gray-300 rounded"
-                    />
+                    {/* Arabic Title */}
+                    <div>
+                        <label htmlFor="arabicTitle" className="block mb-1 text-sm font-medium text-gray-700">
+                            Arabic Title
+                        </label>
+                        <input
+                            id="arabicTitle"
+                            type="text"
+                            name="arabicTitle"
+                            value={formData.arabicTitle}
+                            onChange={handleChange}
+                            className="w-full p-3 border border-gray-300 rounded focus:ring focus:ring-blue-300"
+                            placeholder="أدخل العنوان باللغة العربية"
+                        />
+                    </div>
                 </div>
 
                 {/* Topic Handling */}
-                <div className="mb-4">
-                    <label className="block mb-1">Topic</label>
-                    <div className="flex items-center">
+                <div className="grid grid-cols-2 gap-4">
+                    <div className="flex items-center space-x-3">
                         <input
                             type="checkbox"
                             checked={isNewTopic}
                             onChange={() => setIsNewTopic((prev) => !prev)}
-                            className="mr-2"
+                            className="form-checkbox h-5 w-5 text-blue-600"
                         />
-                        <span>Create new topic</span>
+                        <label className="text-sm font-medium text-gray-700">Create new topic</label>
                     </div>
+
+                    {isNewTopic ? (
+                        <div>
+                            <label htmlFor="newTopic" className="block mb-1 text-sm font-medium text-gray-700">
+                                New Topic Name
+                            </label>
+                            <input
+                                id="newTopic"
+                                type="text"
+                                name="topic"
+                                value={formData.topic}
+                                onChange={handleChange}
+                                className="w-full p-3 border border-gray-300 rounded focus:ring focus:ring-blue-300"
+                                placeholder="Enter new topic name"
+                            />
+                        </div>
+                    ) : (
+                        <div>
+                            <label htmlFor="topicId" className="block mb-1 text-sm font-medium text-gray-700">
+                                Select Topic
+                            </label>
+                            <select
+                                id="topicId"
+                                name="topicId"
+                                value={formData.topicId}
+                                onChange={handleChange}
+                                className="w-full p-3 border border-gray-300 rounded focus:ring focus:ring-blue-300"
+                            >
+                                <option value="">Select Topic</option>
+                                {topics?.map((topic) => (
+                                    <option key={topic.id} value={topic.id}>
+                                        {topic.name}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+                    )}
                 </div>
 
-                {isNewTopic ? (
-                    <div className="mb-4">
-                        <input
-                            type="text"
-                            name="topic"
-                            value={formData.topic}
-                            onChange={handleChange}
-                            placeholder="New Topic Name"
-                            className="w-full p-2 border border-gray-300 rounded"
-                        />
-                    </div>
-                ) : (
-                    <select
-                        name="topicId"
-                        value={formData.topicId}
-                        onChange={handleChange}
-                        className="mb-4 w-full p-2 border border-gray-300 rounded"
-                    >
-                        <option value="">Select Topic</option>
-                        {topics?.map((topic) => (
-                            <option key={topic.id} value={topic.id}>
-                                {topic.name}
-                            </option>
-                        ))}
-                    </select>
-                )}
-
-                <label className="block mb-1">Content</label>
-                <div className="mb-4">
+                {/* English Content */}
+                <div>
+                    <label htmlFor="content" className="block mb-1 text-sm font-medium text-gray-700">
+                        Publication Content (English)
+                    </label>
                     <textarea
+                        id="content"
                         name="content"
                         value={formData.content}
                         onChange={handleChange}
-                        placeholder="Content"
-                        className="w-full p-2 border border-gray-300 rounded"
-                    />
-                </div>
-                <div className="mb-4">
-                    <textarea
-                        name="content2"
-                        value={formData.content2}
-                        onChange={handleChange}
-                        placeholder="Content"
-                        className="w-full p-2 border border-gray-300 rounded"
-                    />
-                </div>
-                <div className="mb-4">
-                    <textarea
-                        name="content3"
-                        value={formData.content3}
-                        onChange={handleChange}
-                        placeholder="Content"
-                        className="w-full p-2 border border-gray-300 rounded"
+                        className="w-full p-3 border border-gray-300 rounded focus:ring focus:ring-blue-300"
+                        placeholder="Enter English content"
                     />
                 </div>
 
-                {/* Arabic Content */}
-                <label className="block mb-1">Arabic Content</label>
-                <div className="mb-4">
+                <div>
+                    <label htmlFor="arabicContent" className="block mb-1 text-sm font-medium text-gray-700">
+                        المنشور باللغة العربية
+                    </label>
                     <textarea
+                        id="arabicContent"
                         name="arabicContent"
                         value={formData.arabicContent}
                         onChange={handleChange}
-                        placeholder="Arabic Content"
-                        className="w-full p-2 border border-gray-300 rounded"
+                        className="w-full p-3 border border-gray-300 rounded focus:ring focus:ring-blue-300"
+                        placeholder="أدخل المحتوى باللغة العربية"
                     />
                 </div>
-                <div className="mb-4">
-                    <textarea
-                        name="arabicContent2"
-                        value={formData.arabicContent2}
+
+                {/* File Upload */}
+                <div>
+                    <label htmlFor="image" className="block mb-1 text-sm font-medium text-gray-700">
+                        Image
+                    </label>
+                    <input
+                        id="image"
+                        type="file"
+                        accept="image/*"
+                        onChange={handleImageUpload}
+                        className="block w-full p-3 text-gray-600 border border-gray-300 rounded cursor-pointer focus:ring focus:ring-blue-300"
+                    />
+                </div>
+
+                {/* Icon Class */}
+                <div>
+                    <label htmlFor="iconClass" className="block mb-1 text-sm font-medium text-gray-700">
+                        Icon Class
+                    </label>
+                    <input
+                        id="iconClass"
+                        type="text"
+                        name="iconClass"
+                        value={formData.iconClass}
                         onChange={handleChange}
-                        placeholder="Arabic Content"
-                        className="w-full p-2 border border-gray-300 rounded"
-                    />
-                </div>
-                <div className="mb-4">
-                    <textarea
-                        name="arabicContent3"
-                        value={formData.arabicContent3}
-                        onChange={handleChange}
-                        placeholder="Arabic Content"
-                        className="w-full p-2 border border-gray-300 rounded"
+                        className="w-full p-3 border border-gray-300 rounded focus:ring focus:ring-blue-300"
+                        placeholder="Enter Icon Class"
                     />
                 </div>
 
-                <label className="block mb-1">Image</label>
-                <input
-                    type="file"
-                    accept="image/*"
-                    onChange={handleImageUpload}
-                    className="mb-4"
-                />
-
-                <label className="block mb-1">Icon Class</label>
-                <input
-                    type="text"
-                    name="iconClass"
-                    value={formData.iconClass}
-                    onChange={handleChange}
-                    placeholder="Icon Class"
-                    className="w-full p-2 border border-gray-300 rounded"
-                />
-
-                <button type="submit" className="bg-blue-500 text-white p-2 rounded">
+                {/* Submit Button */}
+                <button
+                    type="submit"
+                    className="w-full bg-blue-600 text-white p-3 rounded hover:bg-blue-700 focus:ring focus:ring-blue-300"
+                >
                     {isEditing ? "Update Publication" : "Add Publication"}
                 </button>
             </form>
 
             {/* Publications List */}
-            <ul className="list-disc pl-5">
-                {publications.length > 0 ? (
-                    publications.map((publication) => (
-                        <li key={publication.id} className="mb-4">
-                            <h3 className="text-xl font-semibold">{publication.title}</h3>
-                            <p>{publication.content}</p>
-                            <p className="text-sm text-gray-500">{publication.date}</p>
-                            <button
-                                onClick={() => handleEdit(publication)}
-                                className="bg-yellow-500 text-white p-1 rounded mr-2"
-                            >
-                                Edit
-                            </button>
-                            <button
-                                onClick={() => handleDelete(publication.id)}
-                                className="bg-red-500 text-white p-1 rounded"
-                            >
-                                Delete
-                            </button>
-                        </li>
-                    ))
-                ) : (
-                    <li>No publications found.</li>
-                )}
-            </ul>
-            <div>
-                ManageTopics: <ManageTopics />
+            <div className="mt-6">
+                <table className="min-w-full bg-white border border-gray-200">
+                    <thead>
+                        <tr className="bg-gray-200 text-left">
+                            <th className="p-2 border-b">ID</th>
+                            <th className="p-2 border-b">Name</th>
+                            <th className="p-2 border-b">Topic Name</th>
+                            <th className="p-2 border-b">Created At</th>
+                            <th className="p-2 border-b">Author</th>
+                            <th className="p-2 border-b">    Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {publications.length > 0 ? (
+
+                            publications.map((publication) => (
+
+                                <tr key={publication.id} className="border-b hover:bg-gray-100 transition-colors">
+                                    <td className="p-2">{publication.id}</td>
+                                    <td className="p-2 text-base font-base">{publication.title}</td>
+                                    <td className="p-2 text-center">
+                                        {/* Replace with the actual icon or a default if none exists */}
+                                        {publication.topic.name ? (
+                                            <div className="flex justify-center">{publication.topic.name}</div>
+                                        ) : (
+                                            <div className="text-gray-300">No Icon</div>
+                                        )}
+                                    </td>
+                                    <td className="p-2">
+                                        {new Date(publication.createdAt).toLocaleDateString('en-UK', {
+                                            year: 'numeric',
+                                            month: 'long', // You can use 'short' if preferred
+                                            day: 'numeric'
+                                        }).replace(/[\u200E\u200F]/g, '')} {/* Remove any LTR/RTL marks if any */}
+                                    </td>
+                                    <td className="p-2">{publication.owner.firstName} {publication.owner.lastName}</td>
+                                    <td className="p-2">
+                                        <div className="flex space-x-2 justify-center">
+                                            <button
+                                                onClick={() => handleEdit(publication)}
+                                                className="bg-yellow-500 text-white p-2 rounded hover:bg-yellow-600"
+                                            >
+                                                Edit
+                                            </button>
+                                            <button
+                                                onClick={() => handleDelete(publication.id)}
+                                                className="bg-red-500 text-white p-2 rounded hover:bg-red-600"
+                                            >
+                                                Delete
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            ))
+                        ) : (
+                            <tr>
+                                <td colSpan="6" className="text-center p-4 text-gray-600">
+                                    No publications found.
+                                </td>
+                            </tr>
+                        )}
+                    </tbody>
+                </table>
+            </div>
+
+
+            {/* Manage Topics */}
+            <div className="mt-8">
+                <h3 className="text-2xl font-bold mb-4">Manage Topics</h3>
+                <ManageTopics />
             </div>
         </div>
     );
+
 };
 
 export default PublicationsList;

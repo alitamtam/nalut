@@ -94,14 +94,19 @@ const UpcomingEvent = () => {
                                 {sortedEvents.map((event, index) => (
                                     <div key={index}>
                                         <img
-                                            src={event.image || '/default-event-image.jpg'}
+                                            src={event.image ||
+                                                // when there is no image for the event show the default style with event name 
+
+                                                '/default-event-image.jpg'}
                                             alt={getTranslatedTitle(event)}
                                             className="lg:w-full h-60 lg:h-[340px] object-cover"
                                             loading="lazy"
 
                                         />
                                     </div>
-                                ))}
+                                )
+
+                                )}
                             </Slider>
                         </div>
                     </>

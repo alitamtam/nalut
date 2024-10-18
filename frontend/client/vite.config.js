@@ -19,6 +19,11 @@ export default defineConfig(({ mode }) => {
       },
     },
     define: {
+      global: {
+        // Define global variables
+        setImmediate: false,
+      },
+
       // Use Vite's built-in env variable system to map environment variables
       "import.meta.env.VITE_API_URL": JSON.stringify(
         isProduction
