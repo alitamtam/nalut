@@ -35,17 +35,18 @@ const PublicationCard = ({ publication }) => {
                     {new Date(createdAt).toLocaleDateString()}
                 </h1>
 
-                <h2 className="text-base font-medium text-gray-800 mb-2">
-                    {isArabic ? translations[0].title : title}
+                <h2 className="text-base font-normal text-sky-900 mb-2">
+                    {t('topics.title.title')} :  {isArabic ? translations[0].title : title}
                 </h2>
-                <h3 className="text-lg font-medium text-gray-600 mb-4">
-                    {isArabic ? topic?.translations[0]?.name : topicName}
+
+                <h3 className="text-base font-medium text-gray-600 mb-4">
+                    {t('topics.title')} : {isArabic ? topic?.translations[0]?.name : topicName}
                 </h3>
 
                 <div className="mt-auto"> {/* Ensures button stays at the bottom */}
                     <Link
                         to={`/publications/${id}`}
-                        className="text-teal-600 border-2 border-teal-600 text-center text-lg rounded-full hover:bg-sky-950 bg-gray-50 hover:text-white py-2 px-8 font-arabic hover:border-none"
+                        className=" border-teal-600 text-center text-lg  hover:bg-sky-950 bg-teal-600  text-white py-2 px-8 font-arabic hover:border-none"
                     >
                         {t('viewDetails.title')}
                     </Link>

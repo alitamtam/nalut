@@ -66,7 +66,7 @@ const TopicPublications = () => {
                             loading="lazy"
                         />
                     ) : (
-                        <div className="w-1/2 ssm:w-full md:w-full h-64 flex items-center justify-center bg-white border-t-8 border-b-8 border-teal-700 rounded-none p-4">
+                        <div className="xxl:w-1/2  ssm:w-full md:w-full h-64 flex items-center justify-center bg-white border-t-8 border-b-8 border-teal-700 rounded-none p-4">
                             <div className="flex-shrink-1 text-teal-600 text-9xl md:text-9xl mr-6 border-gray-200">
                                 {topicIcon ? (
                                     <div className="mb-2">{topicIcon}</div>
@@ -79,13 +79,16 @@ const TopicPublications = () => {
                             </h3>
                         </div>
                     )}
-                    <div className={`${isArabic ? 'text-right items-end' : 'text-left'}`}>
-                        <h4 className="text-xl font-bold">{isArabic ? recentPublication.translations[0].title : recentPublication.title}</h4>
-                        <p className="text-sm text-orange-500 capitalize">
-                            By: {isArabic ? arabicName : EnglishName} | {new Date(recentPublication.createdAt).toLocaleDateString()}
-                        </p>
+                    <div className={` py-3 ${isArabic ? 'text-right items-end' : 'text-left'}`}>
+                        <h4 className="py-3 text-xl font-bold">{isArabic ? recentPublication.translations[0].title : recentPublication.title}</h4>
+                        <Link
+                            to={`/profileDisplay/${recentPublication.owner.profile?.id}`}
+                            className="text-gray-600 mb-2 capitalize font-bold hover:text-teal-600 py-5"
+                        >
+                            {t('By')} : <span className="text-orange-600 hover:underline hover:text-teal-600"> {isArabic ? `${arabicName}` : `${EnglishName}`}</span>
+                        </Link>
                         <p className="mt-4 text-gray-700">{recentPublication.summary}</p>
-                        <Link to={`/publications/${recentPublication.id}`} className="text-teal-500 hover:underline mt-4 inline-block">
+                        <Link to={`/publications/${recentPublication.id}`} className="text-white hover:bg-sky-950 mt-2 inline-block text-lg border bg-teal-600 px-4 py-1">
                             {t('publications.Read Full Publication')}
                         </Link>
                     </div>
@@ -114,16 +117,17 @@ const TopicPublications = () => {
                                                 <div className="text-6xl text-gray-300">{t('No Icon')}</div>
                                             )}
                                         </div>
-                                        <h3 className="text-2xl font-bold text-gray-700 text-center whitespace-normal break-words">
+                                        <h3 className="text-2xl font-thin text-gray-700 text-center whitespace-normal break-words ">
                                             {isArabic ? publication.topic.translations[0].name : publication.topic.name}
                                         </h3>
                                     </div>
                                 )}
                             </div>
-                            <h4 className="text-xl font-bold">{isArabic ? publication.translations[0].title : publication.title || 'Untitled'}</h4>
+                            <h4 className="text-xl font-thin py-2 text-gray-700">{isArabic ? publication.translations[0].title : publication.title || 'Untitled'}</h4>
                             <p className="text-sm text-gray-500">
-                                {t('By')}: {isArabic ? arabicName : EnglishName} | {publication.createdAt ? new Date(publication.createdAt).toLocaleDateString() : 'Unknown Date'}
+                                {t('By')}: <span className='text-orange-500'>{isArabic ? arabicName : EnglishName}</span>
                             </p>
+                            <p className="text-sm text-gray-500 py-1"> {publication.createdAt ? new Date(publication.createdAt).toLocaleDateString() : 'Unknown Date'}</p>
                             <Link to={`/publications/${publication.id || ''}`} className="text-white hover:bg-sky-950 mt-2 inline-block text-lg border bg-teal-600 px-4 py-1">
                                 {t('Read More')}
                             </Link>

@@ -148,7 +148,10 @@
     "Student Wellbeing and Enrichment": "Student Wellbeing and Enrichment",
     "Assessment and Examination": "Assessment and Examination",
     "view_all": "View All",
-    "topic area": "Topics"
+    "topic area": "Topics",
+    "title": "Topic",
+    "title.title": "Subject"
+
   },
   
   "joinUs": {
