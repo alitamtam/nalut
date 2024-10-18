@@ -68,7 +68,7 @@ const UpcomingEvent = () => {
 
                 {sortedEvents.length > 0 ? (
                     <>
-                        <div className="w-full lg:w-1/2 bg-[#e2dfd8] lg:h-[340px] px-4 py-6 lg:px-8 lg:py-12 lg:mb-0 h-full">
+                        <div className="w-full lg:w-1/2 bg-[#e2dfd8] lg:h-[340px] px-4 py-6 lg:px-8 lg:py-12 lg:mb-0 h-full capitalize">
                             <Link to={`/events/${sortedEvents[currentSlide]?.id}`} className={`text-gray-800 text-xl ${isArabic ? 'lg:text-2xl font-arabic' : ''} font-arabic mb-6 hover:text-teal-600 block capitalize`}>
                                 {getTranslatedTitle(sortedEvents[currentSlide])}
                             </Link>

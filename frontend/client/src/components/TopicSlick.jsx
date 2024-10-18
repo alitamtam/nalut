@@ -99,14 +99,15 @@ const TopicsSlick = () => {
                             return (
                                 <div
                                     key={topic.id || Math.random()}
-                                    className={`flex-shrink-0 md:w-60 md:h-72 ssm:h-[200px] ssm:w-full flex flex-col bg-[#e2dfd8] shadow-lg lg:p-4 transition-transform duration-300 hover:scale-105 hover:bg-sky-900 hover:text-white group ${isArabic ? 'font-arabic' : 'font-ubuntu'} `}
+                                    className={`flex-shrink-0 md:w-60 md:h-72 ssm:h-[200px] ssm:w-full flex flex-col border-none bg-[#e2dfd8] shadow-lg lg:p-4 transition-transform duration-300 hover:scale-105 hover:bg-sky-900 hover:text-white group ${isArabic ? 'font-arabic' : 'font-ubuntu'} `}
                                     onClick={() => topic.name && navigate(`/topics/${topic.name}`)}
                                 >
-                                    <div className="lg:text-6xl text-teal-600 group-hover:text-white lg:px-16 ssm:px-16 sm:px-20 ssm:pt-8">
+                                    <div className="lg:text-6xl text-teal-600 group-hover:text-white xxl:px-0 xxl:flex xxl:justify-center lg:px-16 ssm:px-16 sm:px-20 ssm:pt-8 border-none">
                                         {iconMap[topic.iconClass] || <LiaChalkboardTeacherSolid className="text-6xl" />}
                                     </div>
+
                                     <div className="flex-col py-6">
-                                        <p className={`lg:mt-4 text-teal-700 sm:text-lg ssm:text-sm lg:text-sm text-center group-hover:text-white ${isArabic ? 'lg:text-xl font-arabic' : 'font-ubuntu tracking-wider uppercase'}`}>
+                                        <p className={`lg:mt-4 text-teal-700 sm:text-lg ssm:text-base lg:text-base text-center group-hover:text-white ${isArabic ? 'lg:text-xl font-arabic' : 'font-ubuntu tracking-wider uppercase'}`}>
                                             {translation || 'No Translation Available'}
                                         </p>
                                     </div>

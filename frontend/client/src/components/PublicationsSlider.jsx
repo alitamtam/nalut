@@ -3,6 +3,8 @@ import { useGetPublications } from "./Admin/Dashboard/hooks/useGetPublications";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useTranslation } from 'react-i18next'; // Import the hook
+import { RiChatThreadLine } from "react-icons/ri";
+
 import { FaExclamationTriangle, FaSpinner } from 'react-icons/fa'; // Import relevant icons
 
 const PublicationsSlider = () => {
@@ -108,15 +110,21 @@ const PublicationsSlider = () => {
                             itemID={pub.id}
                             className={`absolute top-0 left-0 lg:w-full lg:h-full transition-opacity duration-500 ease-in-out ${activeIndex === index ? "opacity-100" : "opacity-0"} `}
                         >
-                            {/* Image Section */}
                             <div className={`relative ${isArabic ? 'lg:text-right' : ''}`}>
-                                <img
-                                    src={pub.image || "https://via.placeholder.com/600x400"}
-                                    className="block w-full h-[435px] object-cover"
-                                    alt={publicationTitle}
-                                    loading="lazy"
-
-                                />
+                                {pub.image ? (
+                                    <img
+                                        src={pub.image}
+                                        className="block w-full h-[435px] object-cover"
+                                        alt={publicationTitle}
+                                        loading="lazy"
+                                    />
+                                ) : (
+                                    <div className=" w-full h-[435px] bg-[#e2dfd8] flex flex-col items-center justify-center text-sky-900">
+                                        <RiChatThreadLine
+                                            className="text-6xl mb-4 text-teal-600" />
+                                        <h3 className="text-xl font-semibold text-center">{publicationTitle}</h3>
+                                    </div>
+                                )}
                                 <span className={`absolute bottom-4  text-white  px-2  ${isArabic ? 'ssm:text-right ssm:flex ssm:flex-row-reverse  ' : 'ssm:text-left'} py-1 lg:text-lg ssm:text-lg  shadow-slate-600 font-arabic`}>
                                     <Link to={`/publications/${pub.id}`} >
                                         {publicationTitle}
