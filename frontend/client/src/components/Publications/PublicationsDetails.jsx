@@ -140,7 +140,6 @@ const PublicationDetails = () => {
                         <a
                             href={publication.content3}
                             className="block w-full px-4 py-2 text-center text-white bg-teal-700 font-arabic uppercase transition-colors duration-200 hover:bg-sky-950"
-                            style={{ borderRadius: "0px" }} // Ensures no rounded corners
                         >
                             {t('Read More')} : {isArabic ? translation.title : publication.title}
                         </a>
