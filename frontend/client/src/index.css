@@ -101,3 +101,11 @@ main {
 .back-to-top-btn:hover {
   background-color: #555; /* Change background on hover */
 }
+
+.text-right {
+  text-align: right;
+}
+
+.text-left {
+  text-align: left;
+}

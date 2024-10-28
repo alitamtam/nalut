@@ -40,13 +40,15 @@ const HomePage = () => {
                     </div>
 
                     {/* Right Side - About Us Text */}
-                    <div className={`bg-teal-600 xxl:h-[550px] md:h-[550px] lg:w-[25rem] xxl:w-[40rem] xl:w-[35rem] md:w-[40rem] sm:w-full ssm:w-full pb-6 px-5 py-10 text-white xxl:text-lg lg:text-base md:text-base lg:leading-relaxed ${isArabic ? 'text-right sm:leading-loose md:leading-loose  lg:leading-loose' : ''} flex-col`}>
-                        <h2 className={`lg:text-xl sm:text-2xl ssm:text-xl font-bold mb-1 ${isArabic ? 'text-right' : ''}`}>
+                    <div className={`bg-teal-600 xxl:h-[550px] md:h-[550px] lg:w-[25rem] xxl:w-[40rem] xl:w-[35rem] md:w-[25rem] sm:w-full ssm:w-full pb-6 px-5 py-5 text-white xxl:text-base lg:text-sm md:text-sm lg:leading-relaxed ${isArabic ? 'text-right sm:leading-loose md:leading-loose  lg:leading-loose' : ''} flex-col`}>
+                        <h2 className={`lg:text-xl sm:text-2xl ssm:text-xl font-arabic mb-1 ${isArabic ? 'text-right' : ''}`}>
                             {t('about.title')}
                         </h2>
-                        <p className="py-1">{t('about.welcomeMessage')}</p>
-                        <p className="py-1">{t('about.welcomeMessage2')}</p>
-                        <p className="py-1">{t('about.welcomeMessage3')}</p>
+                        <div dir={isArabic ? "rtl" : "ltr"}>
+                            <li className={`p-1`}>{t('about.welcomeMessage')} </li>
+                            <li className={`p-1 `}>{t('about.welcomeMessage2')}</li>
+                            <li className={`p-1 `}>{t('about.welcomeMessage3')}</li>
+                        </div>
                         <div className="py-6 px-0 xxl:px-10">
                             <Link
                                 to="/about"

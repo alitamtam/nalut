@@ -76,7 +76,7 @@ const PublicationDetails = () => {
 
     const topicIcon = iconOptions.find(option => option.name === publication.topic.name)?.icon || null;
     return (
-        <div className={`xxl:mx-80 lg:mx-20 xl:mx-20 bg-[#f1f1f1] p-6 ${isArabic ? 'text-right flex-row-reverse' : 'text-left '}`}>
+        <div dir={isArabic ? "rtl" : "ltr"} className={`xxl:mx-80 lg:mx-20 xl:mx-20 bg-[#f1f1f1] p-6 ${isArabic ? 'text-right flex-row-reverse' : 'text-left '}`}>
             <h1 className="text-lg font-arabic mb-4 text-gray-600">{translation?.title || publication.title}</h1>
             <div className="w-auto justify-center ssm:py-3">
                 <span className="text-gray-500 font-thin">{t('By')} :</span>

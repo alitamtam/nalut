@@ -5,12 +5,12 @@ const JoinOrCommission = () => {
     const isArabic = i18n.language === 'ar';
 
     return (
-        <div className={`lg:font-arabic ssm:font-arabic md:font-arabic container mx-auto px-4 py-6 ${isArabic ? 'direction-rtl text-right' : 'direction-ltr '}`}>
+        <div dir={isArabic ? "rtl" : "ltr"} className={`lg:font-arabic ssm:font-arabic md:font-arabic container mx-auto px-4 py-6 ${isArabic ? 'direction-rtl text-right' : 'direction-ltr '}`}>
             <h2 className={`text-3xl font-bold text-gray-600 mb-6 ${isArabic ? 'text-right' : ''}`}>
                 {t('joinUs.header')}
             </h2>
 
-            <div className={`text-2xl font-semibold text-gray-600 mb-4 ${isArabic ? 'text-right' : ''}`}>
+            <div dir={isArabic ? "rtl" : "ltr"} className={`text-2xl font-semibold text-gray-600 mb-4 ${isArabic ? 'text-right' : ''}`}>
                 <h3 className={`text-2xl font-semibold text-gray-700 mb-4 ${isArabic ? 'text-right' : ''}`}>
                     {t('joinUs.sharePublications')}
                 </h3>
@@ -20,9 +20,9 @@ const JoinOrCommission = () => {
                 <p className={`text-lg text-gray-600 mb-4 ${isArabic ? 'text-right' : ''}`}>
                     {t('joinUs.steps.description')}
                 </p>
-                <ul className={`list-disc list-inside text-lg text-gray-600 mb-4 ${isArabic ? 'text-right' : ''}`}>
-                    <li>
-                        <strong>{t('joinUs.steps.submitYourWork')}</strong>
+                <ul dir={isArabic ? "rtl" : "ltr"} className={`list-disc list-inside text-lg text-gray-600 mb-4 ${isArabic ? '' : ''}`}>
+                    <li dir={isArabic ? "rtl" : "ltr"}>
+                        <strong dir={isArabic ? "rtl" : "ltr"}>{t('joinUs.steps.submitYourWork')}</strong>
                     </li>
                     <li>
                         <strong>{t('joinUs.steps.reviewProcess')}</strong>
@@ -33,7 +33,7 @@ const JoinOrCommission = () => {
                 </ul>
             </div>
 
-            <div>
+            <div dir={isArabic ? "rtl" : "ltr"}>
                 <p className={`text-lg text-gray-600 mb-4 ${isArabic ? 'text-right' : ''}`}>
                     {t('joinUs.contribution')}
                 </p>

@@ -7,6 +7,7 @@ import { FaFacebookF, FaTwitter, FaLinkedinIn } from "react-icons/fa";
 import FutureEvents from './FutureEvents';
 import { useTranslation } from 'react-i18next'; // Import useTranslation
 import { FiExternalLink } from "react-icons/fi";
+import { FaExclamationTriangle, FaSpinner } from 'react-icons/fa'; // Import relevant icons
 
 const EventDetails = () => {
     const { id } = useParams();
@@ -15,11 +16,15 @@ const EventDetails = () => {
     const { t, i18n } = useTranslation('navbar'); // Use i18n for translations
     const isArabic = i18n.language === 'ar'; // Check if the current language is Arabic
     if (isLoading) {
-        return <p>{t('event.loading')}</p>; // Translated loading message
+        return <div className="flex items-center justify-center bg-green-100 border lg:mx-80 border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
+            <FaSpinner className="animate-spin text-3xl text-teal-600 mr-2" />
+            {t('loading')}...</div>;
     }
 
     if (error) {
-        return <p>{t('event.error')}{error.message}</p>; // Translated error message
+        return <p className="flex items-center justify-center bg-red-100 border lg:mx-80 border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+            <FaExclamationTriangle className="mr-2 text-3xl" />
+            {t('errorFetchingEvents')}{error.message}</p>; // Translated error message
     }
 
     const facebookShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${currentUrl}`;

@@ -7,6 +7,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import './sliderStyle.css';
 import { useTranslation } from 'react-i18next';
+import { FaExclamationTriangle, FaSpinner } from 'react-icons/fa'; // Import relevant icons
 
 const UpcomingEvent = () => {
     const { data: events, isLoading, isError } = useGetEvents();
@@ -27,11 +28,15 @@ const UpcomingEvent = () => {
 
     // Loading state
     if (isLoading) {
-        return <div className="flex items-center justify-center bg-green-100 border lg:mx-80 border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">{t('loading')}...</div>;
+        return <div className="flex items-center justify-center bg-green-100 border lg:mx-80 border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
+            <FaSpinner className="animate-spin text-3xl text-teal-600 mr-2" />
+            {t('loading')}...</div>;
     }
     // Error state
     if (isError) {
-        return <div className="flex items-center justify-center bg-red-100 border lg:mx-80 border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">{t('errorFetchingEvents')}</div>;
+        return <div className="flex items-center justify-center bg-red-100 border lg:mx-80 border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+            <FaExclamationTriangle className="mr-2 text-3xl" />
+            {t('errorFetchingEvents')}</div>;
     }
 
     // Ensure events exist and sort them

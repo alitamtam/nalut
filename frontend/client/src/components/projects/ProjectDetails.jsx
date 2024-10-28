@@ -35,7 +35,7 @@ const ProjectDetails = () => {
     const arabicName = profileTranslation.title || '';
     const EnglishName = `${project.creator.firstName} ${project.creator.lastName}`;
     return (
-        <div className={`xxl:mx-80 xl:mx-20 lg:mx-20  p-6 ${isArabic ? 'font-arabic text-right xxl:flex-col-reverse justify-end' : ''}`}>
+        <div dir={isArabic ? "rtl" : "ltr"} className={`xxl:mx-80 xl:mx-20 lg:mx-20  p-6 ${isArabic ? 'font-arabic text-right xxl:flex-col-reverse justify-end' : ''}`}>
 
             <h1 className={`text-3xl font-bold mb-4 ${isArabic ? 'text-right' : ''}`}>
                 {translation?.title || project.title}
