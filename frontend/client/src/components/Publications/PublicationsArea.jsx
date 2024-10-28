@@ -47,7 +47,7 @@ const PublicationsArea = () => {
                         const arabicName = profileTranslation.title || '';
                         const EnglishName = `${publication.owner.firstName} ${publication.owner.lastName}`;
                         return (
-                            <div key={publication.id} className="rounded-none overflow-hidden shadow-md bg-gray-100 hover:shadow-lg transition-shadow duration-300  xxl:w-80 gap-2">
+                            <div key={publication.id} className="rounded-none overflow-hidden shadow-md bg-gray-100 hover:shadow-lg transition-shadow duration-300  xxl:w-full gap-2">
                                 <div className="w-full h-56">
                                     {publication.image ? (
                                         <img src={publication.image} alt={translation?.title || publication.title} className="w-full h-64 object-cover "
