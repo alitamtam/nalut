@@ -26,7 +26,7 @@ const PublicationsList = () => {
         topicId: "",
         topic: "",
         content: "",
-
+        content3: "", // Add this line to include content3
         image: "",
         iconClass: "",
         arabicTitle: "", // Arabic title
@@ -67,6 +67,7 @@ const PublicationsList = () => {
         const updatedFormData = {
             title: formData.title,
             content: formData.content,
+            content3: formData.content3, // Add this line to include content3
             image: formData.image,
             ownerId: userId,
             iconClass: formData.iconClass || "default-icon-class",
@@ -110,6 +111,7 @@ const PublicationsList = () => {
             topicId: "",
             topic: "",
             content: "",
+            content3: "",
             image: "",
             iconClass: "",
             arabicTitle: "",
@@ -128,6 +130,7 @@ const PublicationsList = () => {
             topicId: publication.topic.id,
             topic: publication.topic.name,
             content: publication.content,
+            content3: publication.content3, // Add this line to include content3
             image: publication.image,
             iconClass: publication.iconClass,
             arabicTitle: publication.translations.find(t => t.language === 'ar')?.title || "",
@@ -286,6 +289,20 @@ const PublicationsList = () => {
                         accept="image/*"
                         onChange={handleImageUpload}
                         className="block w-full p-3 text-gray-600 border border-gray-300 rounded cursor-pointer focus:ring focus:ring-blue-300"
+                    />
+                </div>
+                <div>
+                    <label htmlFor="content3" className="block mb-1 text-sm font-medium text-gray-700">
+                        Link (content3)
+                    </label>
+                    <input
+                        id="content3"
+                        type="url"
+                        name="content3"
+                        value={formData.content3} // Bind this to your form data
+                        onChange={handleChange}
+                        className="w-full p-3 border border-gray-300 rounded focus:ring focus:ring-blue-300"
+                        placeholder="Enter a URL"
                     />
                 </div>
 

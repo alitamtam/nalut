@@ -103,6 +103,7 @@ const publicationController = {
         topic,
         iconClass,
         content,
+        content3,
         image,
         ownerId,
         translations,
@@ -136,6 +137,7 @@ const publicationController = {
         data: {
           title,
           content,
+          content3,
           image,
           createdAt: new Date(),
           owner: { connect: { id: ownerId } },
@@ -163,7 +165,8 @@ const publicationController = {
   async updatePublication(req, res, next) {
     try {
       const { id } = req.params;
-      const { title, topicName, content, image, translations } = req.body;
+      const { title, topicName, content, content3, image, translations } =
+        req.body;
 
       let topicId = null;
 
@@ -188,6 +191,7 @@ const publicationController = {
         data: {
           title,
           content,
+          content3,
           image, // Storing base64 image string
           ...(topicId && { topicId }), // Only update topicId if it's valid
           // Update translations

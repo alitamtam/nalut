@@ -135,7 +135,22 @@ const PublicationDetails = () => {
                 <p className={`"text-gray-700 mb-4 ${isArabic ? 'xxl:text-right xxl:flex-col-reverse ' : 'text-left '}`}>
                     {formatContent(translation?.content || publication.content)}
                 </p>
+                <td className="p-2">
+                    {publication.content3 ? (
+                        <a
+                            href={publication.content3}
+                            className="text-blue-600 underline hover:text-teal-600 font-semibold transition-colors duration-200"
+                        >
+                            {publication.content3}
+                        </a>
+                    ) : (
+                        <span className="text-gray-300">No Link</span>
+                    )}
+                </td>
+
             </div>
+
+
         </div>
     );
 };
