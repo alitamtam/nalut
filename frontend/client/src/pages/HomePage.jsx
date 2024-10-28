@@ -40,7 +40,7 @@ const HomePage = () => {
                     </div>
 
                     {/* Right Side - About Us Text */}
-                    <div className={`bg-teal-600 xxl:h-[550px] md:h-[550px] lg:w-[25rem] xxl:w-[40rem] xl:w-[35rem] md:w-[25rem] sm:w-full ssm:w-full pb-6 px-5 py-5 text-white xxl:text-base lg:text-sm md:text-sm lg:leading-relaxed ${isArabic ? 'text-right sm:leading-loose md:leading-loose  lg:leading-loose' : ''} flex-col`}>
+                    <div className={`bg-teal-600 xxl:h-[550px] md:h-[550px] lg:w-[25rem] xxl:w-[40rem] xl:w-[35rem] md:w-[30rem] sm:w-full ssm:w-full pb-6 px-5 py-5 text-white xxl:text-base lg:text-sm md:text-sm lg:leading-relaxed ${isArabic ? 'text-right sm:leading-loose md:leading-relaxed  lg:leading-loose' : ''} flex-col`}>
                         <h2 className={`lg:text-xl sm:text-2xl ssm:text-xl font-arabic mb-1 ${isArabic ? 'text-right' : ''}`}>
                             {t('about.title')}
                         </h2>
