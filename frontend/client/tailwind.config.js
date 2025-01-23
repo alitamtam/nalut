@@ -7,6 +7,7 @@ export default {
   ],
   theme: {
     extend: {
+      // Breakpoints for responsiveness
       screens: {
         ssm: "320px", // Super small devices
         sm: "640px", // Mobile
@@ -15,15 +16,22 @@ export default {
         xl: "1280px", // Large Desktop
         xxl: "1536px", // Extra Large Desktop
       },
+      // Fonts configuration
       fontFamily: {
-        // Setting Almarai-Regular as the default sans-serif font for the whole project
-        sans: ["Almarai-Regular", "sans-serif"],
-        arabic: ["Almarai-Regular", "sans-serif"],
+        sans: ["Almarai-Regular", "sans-serif"], // Default font
+        arabic: ["Almaghreb-Regular", "sans-serif"],
         ubuntu: ["Ubuntu-Bold", "sans-serif"],
         button: ["Almarai-Light", "sans-serif"],
         body: ["Ubuntu-Medium", "sans-serif"],
       },
+      // Colors configuration
+      colors: {
+        primary: "#ca8a04", // yellow-600
+        secondary: "#000000", // black
+        neutral: "#E8E8E8", // neutral gray
+      },
     },
+    // Container settings
     container: {
       center: true,
       padding: {
@@ -34,9 +42,10 @@ export default {
       },
     },
   },
+  // Plugins configuration
   plugins: [
     twElementsReactPlugin,
-    // Adding a plugin for text direction
+    // Custom utilities plugin
     function ({ addUtilities }) {
       const newUtilities = {
         ".text-start": {

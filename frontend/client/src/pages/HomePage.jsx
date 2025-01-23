@@ -15,22 +15,23 @@ const HomePage = () => {
     return (
         <>
             {/* SEO for HomePage */}
-            <title>EduLibya - Education Network</title>
-            <meta name="description" content="EduLibya is a network for improving the educational sector across Libya. Join our community for conversations on education reform." />
-            <meta name="keywords" content="Libya, education, EduLibya, education reform, community" />
+            <title>Nalut Together - Connecting Communities</title>
+            <meta name="description" content="Nalut Together is a platform that connects citizens, organizations, and the municipality of Nalut to collaborate and build a better future for the city." />
+            <meta name="keywords" content="Nalut, Libya, community, collaboration, culture, future, Nalut Together" />
 
             {/* Open Graph Meta Tags */}
-            <meta property="og:title" content="EduLibya - Education Network in Libya" />
-            <meta property="og:description" content="EduLibya is a community-driven network focused on education reform in Libya." />
+            <meta property="og:title" content="Nalut Together - Connecting Communities in Nalut" />
+            <meta property="og:description" content="Nalut Together is a community-driven platform for fostering collaboration, cultural heritage, and initiatives to improve Nalut." />
             <meta property="og:image" content="/path-to-og-image.jpg" />
             <meta property="og:type" content="website" />
-            <meta property="og:url" content="https://www.edulibya.ly" />
+            <meta property="og:url" content="https://www.nalut.ly" />
 
             {/* Twitter Card Meta Tags */}
             <meta name="twitter:card" content="summary_large_image" />
-            <meta name="twitter:title" content="EduLibya - Education Network" />
-            <meta name="twitter:description" content="Join EduLibya in conversations about education reform." />
+            <meta name="twitter:title" content="Nalut Together - Connecting Communities" />
+            <meta name="twitter:description" content="Join Nalut Together to collaborate and build a brighter future for the city of Nalut." />
             <meta name="twitter:image" content="/path-to-twitter-image.jpg" />
+
             {/* Section 1: Publications and About Us */}
             <section className="lg:mx-20 xxl:mx-80 xl:mx-20 md:mx-0  items-center justify-center">
                 <div className="flex flex-col lg:flex-row md:flex-row ssm:flex-col justify-center ">
@@ -40,7 +41,7 @@ const HomePage = () => {
                     </div>
 
                     {/* Right Side - About Us Text */}
-                    <div className={`bg-teal-600 xxl:h-[550px] md:h-[550px] lg:w-[25rem] xxl:w-[40rem] xl:w-[35rem] md:w-[30rem] sm:w-full ssm:w-full pb-6 px-5 py-5 text-white xxl:text-sm lg:text-sm md:text-sm lg:leading-relaxed ${isArabic ? 'text-right sm:leading-loose md:leading-relaxed  lg:leading-loose' : ''} flex-col`}>
+                    <div className={`bg-gray-800 xxl:h-[550px] md:h-[550px] lg:w-[25rem] xxl:w-[40rem] xl:w-[35rem] md:w-[30rem] sm:w-full ssm:w-full pb-6 px-5 py-5 text-white xxl:text-sm lg:text-sm md:text-sm lg:leading-relaxed ${isArabic ? 'text-right sm:leading-loose md:leading-relaxed  lg:leading-loose' : ''} flex-col`}>
                         <h2 className={`lg:text-xl sm:text-2xl ssm:text-xl font-arabic mb-1 ${isArabic ? 'text-right' : ''}`}>
                             {t('about.title')}
                         </h2>
@@ -52,7 +53,7 @@ const HomePage = () => {
                         <div className="py-6 px-0 xxl:px-10">
                             <Link
                                 to="/about"
-                                className={`border-2 text-white border-white rounded-full hover:bg-sky-950 hover:text-white hover:border-none  py-3 px-8 ${isArabic ? 'text-right' : ''} uppercase`}
+                                className={`border-2 text-white border-primary rounded-full hover:bg-primary hover:text-gray-800 hover:border-none  py-3 px-8 ${isArabic ? 'text-right' : ''} uppercase`}
                             >
                                 {t('Read More')}
                             </Link>

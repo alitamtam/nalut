@@ -33,7 +33,7 @@ const NextArrow = ({ onClick }) => (
     <button
         onClick={onClick}
         aria-label="Next"
-        className="absolute ssm:mx-4 md::mx-4 md:my-6 right-0   ssm:-top-1/4 top-1/2 transform -translate-y-1/2 bg-sky-950 lg:p-2 rounded-full shadow-md hover:bg-teal-600 z-10"
+        className="absolute ssm:mx-4 md::mx-4 md:my-6 right-0   ssm:-top-1/4 top-1/2 transform -translate-y-1/2 bg-primary lg:p-2 rounded-full shadow-md hover:bg-teal-600 z-10"
     >
         <IoIosArrowForward className="text-3xl text-white" />
     </button>
@@ -44,7 +44,7 @@ const PrevArrow = ({ onClick }) => (
     <button
         onClick={onClick}
         aria-label="Previous"
-        className="absolute ssm:mx-4 md::mx-4 md:my-6 left-0  ssm:-top-1/4 top-1/2 transform -translate-y-1/2 bg-sky-950 lg:p-2 rounded-full shadow-md hover:bg-teal-600 z-10"
+        className="absolute ssm:mx-4 md::mx-4 md:my-6 left-0  ssm:-top-1/4 top-1/2 transform -translate-y-1/2 bg-primary lg:p-2 rounded-full shadow-md hover:bg-teal-600 z-10"
     >
         <IoIosArrowBack className="text-3xl text-white" />
     </button>
@@ -86,11 +86,11 @@ const TopicsSlick = () => {
                 <h2 className={`text-3xl font-bold text-center ${isArabic ? 'lg:text-2xl font-arabic' : ''} font-sans text-sky-950`}>
                     {t('topics.topic area')}
                 </h2>
-                <Link to="topics/view-all" className={`border-2 text-teal-600 font-body ${isArabic ? 'lg:text-base font-arabic' : ''} border-teal-600 rounded-full hover:bg-teal-600 hover:text-white py-2 px-8 mb-4 lg:mb-0 hidden lg:block`}>
+                <Link to="topics/view-all" className={`border-2 text-gray-600 font-body ${isArabic ? 'lg:text-base font-arabic' : ''} border-gray-600 rounded-full hover:bg-primary hover:text-gray-600 py-2 px-8 mb-4 lg:mb-0 hidden lg:block`}>
                     {t('view_all')}
                 </Link>
             </div>
-            <div className="relative w-full pb-12 lg:px-12 border-b border-teal-500">
+            <div className="relative w-full pb-12 lg:px-12 border-b border-secondary">
                 <Slider {...settings}>
                     {Array.isArray(topics) && topics.length > 0 ? (
                         topics.map((topic) => {
@@ -99,15 +99,15 @@ const TopicsSlick = () => {
                             return (
                                 <div
                                     key={topic.id || Math.random()}
-                                    className={`flex-shrink-0 md:w-60 md:h-72 ssm:h-[200px] ssm:w-full flex flex-col border-none bg-[#e2dfd8] shadow-lg lg:p-4 transition-transform duration-300 hover:scale-105 hover:bg-sky-900 hover:text-white group ${isArabic ? 'font-arabic' : 'font-ubuntu'} `}
+                                    className={`flex-shrink-0 md:w-60 md:h-72 ssm:h-[200px] ssm:w-full flex flex-col border-none bg-yellow-600 shadow-lg lg:p-4 transition-transform duration-300 hover:scale-105 hover:bg-sky-900 hover:text-white group ${isArabic ? 'font-arabic' : 'font-ubuntu'} `}
                                     onClick={() => topic.name && navigate(`/topics/${topic.name}`)}
                                 >
-                                    <div className="lg:text-6xl text-teal-600 group-hover:text-white xxl:px-0 xxl:flex xxl:justify-center lg:px-16 ssm:px-16 sm:px-20 ssm:pt-8 border-none">
+                                    <div className="lg:text-6xl text-gray-700 group-hover:text-white xxl:px-0 xxl:flex xxl:justify-center lg:px-16 ssm:px-16 sm:px-20 ssm:pt-8 border-none">
                                         {iconMap[topic.iconClass] || <LiaChalkboardTeacherSolid className="text-6xl" />}
                                     </div>
 
                                     <div className="flex-col py-6">
-                                        <p className={`lg:mt-4 text-teal-700 sm:text-lg ssm:text-base lg:text-base text-center group-hover:text-white ${isArabic ? 'lg:text-xl font-arabic' : 'font-ubuntu tracking-wider uppercase'}`}>
+                                        <p className={`lg:mt-4 text-gray-700 sm:text-lg ssm:text-base lg:text-base text-center group-hover:text-white ${isArabic ? 'lg:text-xl font-arabic' : 'font-ubuntu tracking-wider uppercase'}`}>
                                             {translation || 'No Translation Available'}
                                         </p>
                                     </div>

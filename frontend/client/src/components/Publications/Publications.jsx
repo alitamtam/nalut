@@ -8,7 +8,7 @@ const Publications = () => {
 
     if (isLoading) {
         return (
-            <div className="flex items-center justify-center bg-green-100 border lg:mx-80 border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
+            <div className="flex items-center justify-center bg-primary border lg:mx-80 bg-primary text-green-700 px-4 py-3 rounded relative" role="alert">
                 Loading publications...
             </div>
         );
@@ -29,7 +29,7 @@ const Publications = () => {
     const sortedPublications = [...validPublications].sort((a, b) => new Date(b.date) - new Date(a.date));
 
     return (
-        <div className="xxl:mx-80 lg:mx-20 xl:mx-20 bg-slate-100 p-6 rounded-none shadow-md h-full">
+        <div className="xxl:mx-80 lg:mx-20 xl:mx-20 bg-primary p-6 rounded-none shadow-md h-full">
             <h1 className="text-3xl font-bold mb-6 capitalize text-center text-sky-950">{t('publications.title')}</h1>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
                 {sortedPublications.map(publication => (

@@ -38,7 +38,7 @@ const Navbar = () => {
     }, [isOpen]); // Add isOpen as a dependency so it runs when the menu is open
 
     return (
-        <nav aria-label={t('navbar.title')} className="bg-yellow-600 lg:mx-20 xxl:mx-80 md:max-w-full lg:py-4">
+        <nav aria-label={t('navbar.title')} className="bg-primary lg:mx-20 xxl:mx-80 md:max-w-full lg:py-4">
             <div className={`flex ${isArabic ? 'flex-row-reverse' : 'flex-row'} container mx-auto px-4 lg:py-8 ssm:py-4 justify-between items-center`}>
                 <Link to="/" className="text-slate-500 font-bold text-base lg:hidden shadow-sm" aria-label={t('home')}>
                     Menu

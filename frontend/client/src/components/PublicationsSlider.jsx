@@ -16,7 +16,7 @@ const PublicationsSlider = () => {
 
     if (isLoading) return (
         <div className="flex items-center justify-center h-full">
-            <FaSpinner className="animate-spin text-3xl text-teal-600 mr-2" />
+            <FaSpinner className="animate-spin text-3xl text-yellow-600 mr-2" />
             <p>{t('loading_publications')}</p>
         </div>
 

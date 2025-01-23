@@ -4,8 +4,8 @@
 @import 'slick-carousel/slick/slick-theme.css';
 /* src/fonts/fonts.css */
 @font-face {
-  font-family: 'Almarai-Regular';
-  src: url('../src/fonts/Almarai-Regular.ttf') format('truetype');
+  font-family: 'Almaghreb-Regular';
+  src: url('../src/fonts/arabswell_1.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
