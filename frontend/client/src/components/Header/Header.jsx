@@ -51,21 +51,21 @@ const Header = () => {
                     />
                 </a>
 
-                <div className="flex items-center space-x-4 lg:border-gray-200 lg:border-y lg:gap-4 lg:py-4">
-                    <p className="hover:text-teal-500 text-gray-500 hidden md:block lg:block">
+                <div className="flex items-center space-x-4 lg:border-yellow-600 lg:border-y lg:gap-4 lg:py-4">
+                    <p className="hover:text-teal-500 text-yellow-500 hidden md:block lg:block">
                         <a href="mailto:info@edulibya.ly">{t('email')}</a>
                     </p>
 
                     <div className="relative">
                         <button
-                            className="text-gray-800 text-xl focus:outline-none"
+                            className="text-yellow-800 text-xl focus:outline-none"
                             onClick={toggleSearch}
                             aria-label={t('search.title')}
                         >
                             <FaSearch className="hover:text-teal-500" />
                         </button>
                         {isSearchOpen && (
-                            <div className="absolute right-0 mt-2 w-full sm:w-64 bg-white border border-gray-300 shadow-xl p-2 ssm:w-64">
+                            <div className="absolute right-0 mt-2 w-full sm:w-64 bg-yellow-600 border border-yellow-300 shadow-xl p-2 ssm:w-64">
                                 <label htmlFor="search-input" className="sr-only">{t('search_placeholder')}</label>
                                 <input
                                     id="search-input"
@@ -74,7 +74,7 @@ const Header = () => {
                                     value={searchTerm}
                                     onChange={(e) => setSearchTerm(e.target.value)}
                                     onKeyDown={handleSearch}
-                                    className="w-full p-2 border bg-gray-100 rounded-none focus:outline-none hover:text-teal-500"
+                                    className="w-full p-2 border bg-yellow-100 rounded-none focus:outline-none hover:text-teal-500"
                                     aria-label={t('search')}
                                 />
                             </div>
@@ -85,7 +85,7 @@ const Header = () => {
                     <nav aria-label={t('language_selector')} className="flex items-center space-x-2">
                         <button
                             onClick={() => handleLanguageChange('en')}
-                            className={`p-1 rounded hover:bg-sky-950 hover:text-white ${language === 'en' ? 'bg-teal-600 text-white' : ''}`}
+                            className={`p-1 rounded hover:bg-yellow-950 hover:text-white ${language === 'en' ? 'bg-teal-600 text-white' : ''}`}
                             aria-label="Switch to English"
                         >
                             <p className="text-xs font-arabic">EN</p>
@@ -101,7 +101,7 @@ const Header = () => {
 
                     {/* Social Icons */}
                     <nav aria-label={t('social_media')} className="flex items-center space-x-4">
-                        <h1 className="text-gray-500 hidden md:block lg:block">{t('follow_us')}</h1>
+                        <h1 className="text-yellow-500 hidden md:block lg:block">{t('follow_us')}</h1>
                         <div className="hidden sm:flex space-x-4 ssm:hidden">
                             <a
                                 href="https://www.facebook.com/groups/527521202798857/"
@@ -109,7 +109,7 @@ const Header = () => {
                                 rel="nofollow noopener noreferrer"
                                 aria-label="Facebook"
                             >
-                                <FaFacebookF className="text-gray-800 text-lg hover:text-teal-500" />
+                                <FaFacebookF className="text-yellow-800 text-lg hover:text-teal-500" />
                             </a>
                             <a
                                 href="https://www.linkedin.com/groups/12856663/"
@@ -117,7 +117,7 @@ const Header = () => {
                                 rel="nofollow noopener noreferrer"
                                 aria-label="LinkedIn"
                             >
-                                <FaLinkedin className="text-gray-900 text-lg hover:text-teal-500" />
+                                <FaLinkedin className="text-yellow-900 text-lg hover:text-teal-500" />
                             </a>
                         </div>
                     </nav>
