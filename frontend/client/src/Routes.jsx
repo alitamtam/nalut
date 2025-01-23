@@ -13,7 +13,7 @@ import MemberDetails from './components/About/MemberDetails';
 import NotFound from './pages/NotFound';
 import RegisterUser from './components/Admin/RegisterUser';
 import EditProfile from './components/Admin/Dashboard/EditProfile';
-import TopicPublications from './components/publications/TopicPublications';
+import TopicPublications from './components/Publications/TopicPublications'
 import PublicationDetails from './components/Publications/PublicationsDetails';
 import Publications from './components/Publications/Publications';
 import PublicationsCards from './components/Publications/PublicationsCards';
