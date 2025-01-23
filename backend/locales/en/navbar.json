@@ -6,7 +6,7 @@
   "search_placeholder": "Search for...",
   "search_results": "Search Results",
   "no_results": "No Results",
-  "email": "info@edulibya.ly",
+  "email": "info@nalut.ly",
   "Read More": "Read More",
   "topic area": "Topics",
   "publication area": "Publications",
@@ -30,28 +30,27 @@
     "navbar.title": "EduLibya",
     "translated to": "translated to",
   "eduLibyaDescription": {
-  "part1": "All of us in EduLibya are connected to the education sector as students, teachers, parents, workshop leaders, researchers, social-psychological practitioners, and so on.",
-  "part2": "We are a network of educators interested in various dimensions of education across Libya.",
-  "part3": "We are a community of people who care enough to try and make a change in our society by making our educational system more meaningful for students and teachers. The value we create is for the community, not for us as individuals.",
-  "part4": "The network aims to remain flexible and responsive — it is constantly waiting for you and all of us to decide what it will become.",
-  "part5": "Before you commit to this network and choose a suitable time for our first meeting (see below), let me share some important details:",
-  "point1": "1. There is no financial reward for joining this network. Most of the work we will do will be voluntary (because we believe it is vital and part of what we already do), but there will be no pressure to dedicate more time and effort than you can.",
-  "point2": "2. This is not an accredited network or organization with certification authority. Attending workshops, meetings, and online discussions will not grant you a certificate. We attend these meetings because we want to learn and improve our thinking and practice in the field of education.",
-  "part6": "At the heart of EduLibya lies a commitment to dialogue and community-building around the role of education in Libya. We see education as part of a larger ecosystem of human practices in society — education (whether formal or informal) interacts with various threads that form the fabric of our Libyan culture.",
-  "part7": "We are not seeking to offer solutions to problems; instead, we aim to create deeper connections between each other and between our ideas and practices, hoping to see ourselves more clearly and to suggest ways to face our future.",
-  "part8": "EduLibya moves through time and space organically, with ever-changing members communicating around ever-changing needs. The intentionally ambiguous nature of this space is the co-construction of a community that can build a shared language for change and movement in any desired direction."
+  "part1": "At Nalut Together, we are deeply connected to our historical roots as Amazigh people, taking pride in our rich cultural heritage that is an integral part of Libya’s national identity. We strive to build a community that celebrates diversity and honors our traditions.",
+  "part2": "We form a network of individuals and organizations working to advance the cultural, economic, and social development of Nalut City.",
+  "part3": "We are a community focused on the future, working together to build a better city that highlights the beauty of Nalut and promotes the Amazigh and Libyan identity both locally and globally.",
+  "part4": "This initiative aims to keep Nalut resilient and adaptable to the needs of its community. It is an open invitation for all residents to take part in shaping its future.",
+  "part5": "Before becoming part of this initiative, here are some important details to consider:",
+  "point1": "1. This initiative is built on voluntary efforts. Every contribution is an expression of our love for Nalut and our commitment to creating a brighter future for it.",
+  "point2": "2. This network does not provide formal certifications or accreditations. We believe that true value comes from learning and working together to advance our shared vision for Nalut.",
+  "part6": "At the heart of Nalut Together is our commitment to dialogue and community building, centered around our history, culture, and aspirations for the future. We see the Amazigh heritage and Libyan cultural fabric as key pillars for building a strong and cohesive community.",
+  "part7": "We do not claim to offer ready-made solutions; instead, we aim to forge deeper connections among community members and organizations, hoping to face the future with solidarity and cooperation.",
+  "part8": "Nalut Together is a dynamic and evolving platform, inviting everyone to contribute their ideas and perspectives to achieve real and sustainable change in our city."
 },
   
-  "about": {
-    "title": "About us",
-    "welcomeMessage": "EduLibya is an online pedagogical initiative connecting Libyans concerned with societal transitions through diverse forms of education. EduLibya engages with formal education and schooling, as well as nonformal and extra-curricular pedagogical experiences.",
-    "welcomeMessage2": "At the heart of EduLibya is a commitment to conversation and community-building around the state and role of education in Libya. We see education as part of a greater ecology of human practices in society – it is just one dimension that interacts with and interrelates to other dimensions in Libyan socio-cultural fabric. ",
+ "about": {
+  "title": "About Us",
+  "welcomeMessage": "Nalut Together is a community-driven initiative connecting the people of Nalut, organizations, and local authorities to foster collaboration and development across the city. Our goal is to empower citizens, promote local initiatives, and provide a platform for cooperation and shared growth.",
+  "welcomeMessage2": "At the heart of Nalut Together is a commitment to building bridges between all parts of the community. We believe that through cooperation, dialogue, and mutual support, we can strengthen the social, cultural, and economic fabric of Nalut.",
+  "welcomeMessage3": "We do not claim to have all the answers; instead, we aim to create deeper connections among citizens, organizations, and local leadership to work together in building a better future for Nalut City.",
+  "description": "Learn more about Nalut Together",
+  "members": "Members"
+},
 
-    "welcomeMessage3": "We do not aim to offer solutions to problems; instead, we aim to make deeper connections between each other, our thoughts and our practices in the hope of proposing ways to ‘face what is yet to come.",
-
-    "description": "Learn more about EduLibya",
-    "members": "Members"
-  },
   
   "publications": {
     "title": "Publications",
@@ -136,38 +135,39 @@
   
   
   "topics": {
-    "Teacher Education": "Teacher Education",
-    "Teacher Professional Development": "Teacher Professional Development",
-    "School Governance": "School Governance",
-    "Ministry of Education": "Ministry of Education",
-    "Buildings and Facilities": "Buildings and Facilities",
-    "Quality Assurance": "Quality Assurance",
-    "Educational Research": "Educational Research",
-    "Information Technology in Schools": "Information Technology in Schools",
-    "Inclusion and Neuro-divergence": "Inclusion and Neuro-divergence",
-    "Student Wellbeing and Enrichment": "Student Wellbeing and Enrichment",
-    "Assessment and Examination": "Assessment and Examination",
-    "view_all": "View All",
-    "topic area": "Topics",
-    "title": "Topic",
-    "title.title": "Subject"
-
+  "Local Government": "Local Government",
+  "Public Services": "Public Services",
+  "Tourism and Heritage": "Tourism and Heritage",
+  "Cultural Activities": "Cultural Activities",
+  "Health and Wellness": "Health and Wellness",
+  "Education and Schools": "Education and Schools",
+  "Environmental Initiatives": "Environmental Initiatives",
+  "Youth and Sports": "Youth and Sports",
+  "Business and Economy": "Business and Economy",
+  "Transportation and Infrastructure": "Transportation and Infrastructure",
+  "Community Events": "Community Events",
+  "Emergency Services": "Emergency Services",
+  "Housing and Urban Planning": "Housing and Urban Planning",
+  "Technology and Innovation": "Technology and Innovation",
+  "view_all": "View All",
+  "topic area": "Topics",
+  "title": "Topic",
+  "title.title": "Title"
+},
+  
+"joinUs": {
+  "header": "How to Collaborate with (Nalut Together)",
+  "sharePublications": "Share Your Ideas and Initiatives",
+  "description": "We are committed to fostering collaboration among all components of Nalut City. Contributions in the form of ideas, projects, or initiatives that benefit the community are welcome.",
+  "steps": {
+    "description": "To participate, please follow these steps:",
+    "submitYourWork": "Send your ideas or projects via email or the form available on the website",
+    "reviewProcess": "Review Process: Our team will review the submissions and contact you if additional information is needed",
+    "publicationDisplay": "Display Contributions: Accepted ideas and initiatives will be showcased on the website to support their implementation"
   },
-  
-  "joinUs": {
-    "header": "How to Collaborate with EduLibya",
-    "sharePublications": "Share Your Publications",
-    "description": " EduLibya is dedicated to fostering a community of knowledge and learning. We welcome contributions in the form of publications, research, and educational materials that align with our mission.",
-    "steps": {
-      "description": "To share your publications with us, follow these steps:",
-      "submitYourWork": "Submit Your Work:",
-      "reviewProcess": "Review Process: Our team will review your submission and reach out if any additional information is needed.",
-      "publicationDisplay": "Publication Display: Accepted publications will be displayed on our platform, allowing others to benefit from your work."
-    },
-  
-    "contribution": "By sharing your publications with us, you are contributing to a wider exchange of knowledge and helping to enhance educational and cultural initiatives.",
+  "contribution": "By collaborating with us, you contribute to the growth of Nalut City's community and the advancement of developmental and social initiatives.",
+  "contact": "For more information or to get involved, contact us via email or social media."
+}
 
-    "contact": "For more information or to get started, contact us at {' '}" 
-  }
  
 }
