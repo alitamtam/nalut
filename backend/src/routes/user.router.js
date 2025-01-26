@@ -9,8 +9,7 @@ const router = express.Router();
 // User management routes
 router.post(
   "/register",
-  authenticate,
-  authorizeAdmin,
+
   adminController.registerUser
 ); // Create a user
 // api for login API/USERS/LOGIN

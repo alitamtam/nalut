@@ -1,146 +1,116 @@
 generator client {
   provider = "prisma-client-js"
-
 }
 
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
-  
-}
-
-model Project {
-  id              Int                 @id @default(autoincrement())
-  title           String
-  link            String?             // Column for storing project links
-  content1        String               // Main content
-  content2        String?              // Additional content
-  content3        String?              // Additional content
-  projectImage    String?              // Column for storing the base64 image
-  createdAt       DateTime            @default(now()) @db.Timestamptz(6)
-  updatedAt       DateTime?           @db.Timestamptz(6)
-  creatorId       Int
-  creator         User                @relation(fields: [creatorId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  translations    ProjectTranslation[]
-}
-
-model ProjectTranslation {
-  id          Int       @id @default(autoincrement())
-  projectId   Int
-  language    String    // e.g., 'en' or 'ar'
-  title       String
-  content1    String
-  content2    String?
-  content3    String?   // Additional content
-  project     Project   @relation(fields: [projectId], references: [id], onDelete: Cascade)
-  @@unique([projectId, language]) // Composite unique constraint
 }
 
 model User {
-  id            Int        @id @default(autoincrement())
-  firstName     String
-  lastName      String
-  username      String     @unique
-  email         String     @unique
-  password      String
-  description   String?
-  createdAt     DateTime   @default(now()) @db.Timestamptz(6)
-  updatedAt     DateTime?  @db.Timestamptz(6)
-  role          String     @default("member")
-  profile       Profile?
-  projects      Project[]  // One-to-many relationship with Project
-  events        Event[]    // One-to-many relationship with Event
-  publications  Publication[] // One-to-many relationship with Publication
+  id             Int          @id @default(autoincrement())
+  username       String       @unique
+  email          String       @unique
+  password       String
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+  
+  userRoles      UserRole[]
+  Story          Story[]
+  Poll           Poll[]
+  Incident       Incident[]
+  Vehicle        Vehicle[]
 }
 
-model Profile {
-  id          Int     @id @default(autoincrement())
-  bio         String?
-  title       String?
-  image       String?  // Column for storing the base64 image
-  userId     Int     @unique
-  user       User    @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  translations ProfileTranslation[]
+model Role {
+  id             Int          @id @default(autoincrement())
+  name           String       @unique
+  description    String?
+  hierarchyLevel Int          // Determines the role's authority level
+  defaultRole    Boolean      @default(false) // Determines if it is a default role
+
+  userRoles      UserRole[]
+  permissions    Permission[]
 }
 
-model ProfileTranslation {
-  id          Int       @id @default(autoincrement())
-  profileId   Int
-  language    String    @default("ar") // e.g., 'en' or 'ar'
-  bio         String
-  title       String?
-  profile     Profile   @relation(fields: [profileId], references: [id], onDelete: Cascade)
-  @@unique([profileId, language]) // Composite unique constraint
+model UserRole {
+  id             Int          @id @default(autoincrement())
+  userId         Int
+  roleId         Int
+  user           User         @relation(fields: [userId], references: [id])
+  role           Role         @relation(fields: [roleId], references: [id])
+}
+
+model Permission {
+  id             Int          @id @default(autoincrement())
+  roleId         Int
+  section        String       // E.g., "stories", "events"
+  action         String       // E.g., "create", "read", "update", "delete"
+  granted        Boolean      @default(false)
+  role           Role         @relation(fields: [roleId], references: [id])
+}
+
+model Organization {
+  id             Int          @id @default(autoincrement())
+  name           String       @unique
+  type           String
+  version        String?
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+
+  Event          Event[]
+}
+
+model Story {
+  id             Int          @id @default(autoincrement())
+  title          String
+  content        String
+  authorId       Int
+  author         User         @relation(fields: [authorId], references: [id])
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
 }
 
 model Event {
-  id          Int       @id @default(autoincrement())
-  title       String
-  description String?
-  location    String?
-  startTime   DateTime
-  endTime     DateTime
-  ownerId     Int
-  owner       User      @relation(fields: [ownerId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  image       String?   // Column for storing event images
-  link        String?   // Column for storing event links
-  translations EventTranslation[]
+  id             Int          @id @default(autoincrement())
+  title          String
+  description    String
+  date           DateTime
+  location       String
+  organizerId    Int
+  organizer      Organization @relation(fields: [organizerId], references: [id])
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
 }
 
-model EventTranslation {
-  id          Int       @id @default(autoincrement())
-  eventId     Int
-  language    String    @default("ar") // e.g., 'en' or 'ar'
-  title       String
-  description String?
-  location    String?
-  event       Event     @relation(fields: [eventId], references: [id], onDelete: Cascade)
-    @@unique([eventId, language]) // Composite unique constraint
-
+model Poll {
+  id             Int          @id @default(autoincrement())
+  question       String
+  options        Json
+  createdById    Int
+  createdBy      User         @relation(fields: [createdById], references: [id])
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
 }
 
-model Topic {
-  id          Int      @id @default(autoincrement())
-  name        String   @unique
-  iconClass   String   // Class name for icon styling
-  publications Publication[] // One-to-many relationship with Publication
-  translations TopicTranslation[] // Relation for translations
-  
+model Incident {
+  id             Int          @id @default(autoincrement())
+  type           String
+  description    String
+  date           DateTime
+  location       String
+  reportedById   Int
+  reportedBy     User         @relation(fields: [reportedById], references: [id])
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
 }
 
-model TopicTranslation {
-  id          Int       @id @default(autoincrement())
-  topicId     Int
-  language    String    @default("ar") // e.g., 'en' or 'ar'
-  name        String
-  topic       Topic     @relation(fields: [topicId], references: [id], onDelete: Cascade)
-  @@unique([topicId, language]) // Composite unique constraint
-
-}
-
-model Publication {
-  id          Int       @id @default(autoincrement())
-  title       String
-  topicId     Int       // Foreign key to Topic
-  topic       Topic      @relation(fields: [topicId], references: [id])
-  content     String 
-  content2    String?   // Additional content
-  content3    String?   // Additional content
-  image       String?   // Column for storing the base64 image
-  createdAt   DateTime  @default(now())
-  ownerId     Int       // Assuming the publication has an owner (User)
-  owner       User      @relation(fields: [ownerId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  translations PublicationTranslation[] // Relation for translations
-}
-
-model PublicationTranslation {
-  id               Int       @id @default(autoincrement())
-  publicationId    Int
-  language         String    @default("ar") // e.g., 'en' or 'ar'
-  title            String
-  content          String
-  content2         String?   // Additional content
-  content3         String?   // Additional content
-  publication      Publication @relation(fields: [publicationId], references: [id], onDelete: Cascade)
-  @@unique([publicationId, language])  // Composite unique constraint
+model Vehicle {
+  id             Int          @id @default(autoincrement())
+  type           String
+  licensePlate   String       @unique
+  ownerId        Int
+  owner          User         @relation(fields: [ownerId], references: [id])
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
 }

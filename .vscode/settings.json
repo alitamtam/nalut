@@ -6,5 +6,17 @@
         "tailwindcss",
         "tanstack"
     ],
-    "cSpell.enabled": false
+    "cSpell.enabled": false,
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 5432,
+            "driver": "PostgreSQL",
+            "name": "nalut25",
+            "database": "nalut25",
+            "username": "postgres",
+            "password": ""
+        }
+    ]
 }

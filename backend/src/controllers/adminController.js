@@ -6,10 +6,18 @@ import { generateToken } from "../middleware/auth.middleware.js";
 const adminController = {
   async registerUser(req, res) {
     try {
-      const { firstName, lastName, username, email, password, role } = req.body; // Include role in destructuring
+      const {
+        firstName,
+        lastName,
+        username,
+        email,
+        password,
+        roleId,
+        organizationId,
+      } = req.body;
       const hashedPassword = await bcrypt.hash(password, 10);
 
-      // Create the user
+      // Create the user with role and organization
       const registeredUser = await prisma.user.create({
         data: {
           firstName,
@@ -17,28 +25,17 @@ const adminController = {
           username,
           email,
           password: hashedPassword,
-          role, // Save the role to the user data
-        },
-      });
-
-      // Automatically create a profile for the registered user
-      const userId = registeredUser.id;
-      const bio = ""; // You can adjust the bio data or take it from the request
-      const image = ""; // You can adjust the image data or take it from the request
-      await prisma.profile.create({
-        data: {
-          userId,
-          bio,
-          image,
+          roleId,
+          organizationId,
         },
       });
 
       res
         .status(201)
-        .json({ message: "User and profile created successfully" });
+        .json({ message: "User created successfully", user: registeredUser });
     } catch (error) {
       if (error.code === "P2002") {
-        res.status(409).json({ message: "User already exists" });
+        res.status(409).json({ message: "Username or email already exists" });
       } else {
         console.error(error);
         res.status(500).json({ message: "Internal server error" });
@@ -50,35 +47,35 @@ const adminController = {
     const { username, password } = req.body;
 
     try {
-      // Check if the user exists
-      const user = await userModel.findUserByUsername(username, {
-        include: { role: true }, // Ensure the role is included in the user object
+      const user = await prisma.user.findUnique({
+        where: { username },
+        include: { role: true, organization: true },
       });
 
       if (!user) {
         return res.status(400).json({ error: "Invalid username or password" });
       }
 
-      // Check the password
       const validPassword = await bcrypt.compare(password, user.password);
       if (!validPassword) {
         return res.status(400).json({ error: "Invalid username or password" });
       }
 
-      // Generate JWT token
       const token = generateToken(user);
 
-      // Respond with token and user data (including the role)
       res.json({
         token,
         user: {
           id: user.id,
           username: user.username,
-          role: user.role, // Assuming the role is in the form of { name: "admin" }
+          email: user.email,
+          role: user.role.name,
+          organization: user.organization.name,
         },
       });
     } catch (error) {
-      res.status(500).json({ error: "Error logging in" });
+      console.error(error);
+      res.status(500).json({ message: "Error logging in" });
     }
   },
 
@@ -89,11 +86,13 @@ const adminController = {
 
   async getAllUsers(req, res) {
     try {
-      const users = await prisma.user.findMany(
-        {
-          take: 100,
-        } // Limit the number of users returned
-      );
+      const users = await prisma.user.findMany({
+        include: {
+          role: true,
+          organization: true,
+        },
+        take: 100,
+      });
       res.status(200).json(users);
     } catch (error) {
       console.error(error);
@@ -107,13 +106,9 @@ const adminController = {
     try {
       const user = await prisma.user.findUnique({
         where: { id: userId },
-        select: {
-          password: false, // Exclude the password from the response
-          username: true,
-          firstName: true,
-          lastName: true,
-          email: true,
+        include: {
           role: true,
+          organization: true,
         },
       });
 
@@ -129,83 +124,67 @@ const adminController = {
   },
 
   async updateUser(req, res) {
-    const { id } = req.params;
-    const { firstName, lastName, username, email, oldPassword, newPassword } =
-      req.body;
+    const userId = parseInt(req.params.id);
+    const {
+      firstName,
+      lastName,
+      username,
+      email,
+      oldPassword,
+      newPassword,
+      roleId,
+      organizationId,
+    } = req.body;
 
     try {
-      // Validate the user ID
-      const userId = parseInt(id, 10);
-      if (isNaN(userId)) {
-        return res.status(400).json({ message: "Invalid user ID" });
-      }
-
-      // Fetch the existing user data
-      const user = await prisma.user.findUnique({
-        where: { id: userId },
-      });
-
-      // Check if user exists
+      const user = await prisma.user.findUnique({ where: { id: userId } });
       if (!user) {
         return res.status(404).json({ message: "User not found" });
       }
 
-      // Only update password if both oldPassword and newPassword are provided
       let hashedPassword = user.password;
       if (oldPassword && newPassword) {
-        const isPasswordValid = await bcrypt.compare(
+        const validOldPassword = await bcrypt.compare(
           oldPassword,
           user.password
         );
-        if (!isPasswordValid) {
+        if (!validOldPassword) {
           return res.status(400).json({ message: "Old password is incorrect" });
         }
         hashedPassword = await bcrypt.hash(newPassword, 10);
       }
 
-      // Build the data object with only fields that are present in the request
-      const updateData = {
-        firstName: firstName || user.firstName,
-        lastName: lastName || user.lastName,
-        username: username || user.username,
-        email: email || user.email,
-        password: hashedPassword,
-      };
-
-      // Update the user
       const updatedUser = await prisma.user.update({
         where: { id: userId },
-        data: updateData,
+        data: {
+          firstName: firstName || user.firstName,
+          lastName: lastName || user.lastName,
+          username: username || user.username,
+          email: email || user.email,
+          password: hashedPassword,
+          roleId: roleId || user.roleId,
+          organizationId: organizationId || user.organizationId,
+        },
       });
 
       res
         .status(200)
-        .json({ message: "User updated successfully", updatedUser });
+        .json({ message: "User updated successfully", user: updatedUser });
     } catch (error) {
       console.error(error);
       res.status(500).json({ message: "Error updating user" });
     }
   },
+
   async deleteUser(req, res) {
+    const userId = parseInt(req.params.id);
+
     try {
-      const userId = parseInt(req.params.id);
-
-      // Use a Prisma transaction to delete the profile first, then the user
-      await prisma.$transaction([
-        prisma.profile.delete({
-          where: { userId: userId },
-        }),
-        prisma.user.delete({
-          where: { id: userId },
-        }),
-      ]);
-
-      res
-        .status(200)
-        .json({ message: "User and profile deleted successfully" });
+      await prisma.user.delete({ where: { id: userId } });
+      res.status(200).json({ message: "User deleted successfully" });
     } catch (error) {
       console.error(error);
-      res.status(500).json({ message: "Error deleting user and profile" });
+      res.status(500).json({ message: "Error deleting user" });
     }
   },
 };

@@ -1,32 +1,50 @@
-// prisma/seed.js
-import prisma from "./index.js";
-import bcrypt from "bcrypt";
+import { PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient();
 
 async function main() {
-  // Check if a default user already exists
-  const existingUser = await prisma.user.findUnique({
-    where: { email: "reembg@gmail.com" },
-  });
+  const roles = [
+    {
+      name: "superuser",
+      description: "Has access to all features",
+      hierarchyLevel: 1,
+      defaultRole: false,
+    },
+    {
+      name: "health-editor",
+      description: "Can manage health-related content",
+      hierarchyLevel: 2,
+      defaultRole: true,
+    },
+    {
+      name: "story-editor",
+      description: "Can manage story-related content",
+      hierarchyLevel: 3,
+      defaultRole: true,
+    },
+    {
+      name: "event-editor",
+      description: "Can manage events",
+      hierarchyLevel: 3,
+      defaultRole: true,
+    },
+    {
+      name: "general-user",
+      description: "Default role for all users",
+      hierarchyLevel: 4,
+      defaultRole: true,
+    },
+  ];
 
-  if (!existingUser) {
-    // Hash the password
-    const hashedPassword = await bcrypt.hash("Edulibya24**", 10);
-
-    // Create a default user
-    await prisma.user.create({
-      data: {
-        firstName: "malak",
-        lastName: "Ben Giaber",
-        username: "malakbg",
-        email: "malakbg@gmail.com",
-        password: hashedPassword, // Store the hashed password
-        role: "admin", // or 'member', based on your needs
-      },
+  for (const role of roles) {
+    await prisma.role.upsert({
+      where: { name: role.name },
+      update: {},
+      create: role,
     });
-    console.log("Default user created");
-  } else {
-    console.log("Default user already exists");
   }
+
+  console.log("Roles seeded successfully");
 }
 
 main()

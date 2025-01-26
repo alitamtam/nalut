@@ -19,9 +19,9 @@ app.use("/locales", express.static(path.join(__dirname, "locales")));
 
 // Define allowed origins for CORS
 const allowedOrigins = [
-  "https://www.edulibya.ly",
-  "https://edulibya.ly",
-  "http://edulibya.ly",
+  "https://www.nalut.ly",
+  "https://nalut.ly",
+  "http://nalut.ly",
   "http://localhost:5173", // Include your local development URL
 ];
 
