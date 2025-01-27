@@ -7,6 +7,8 @@ import topicRoutes from "./topic.router.js";
 import eventsRouter from "./events.router.js";
 import searchRouter from "./search.router.js";
 import projectRouter from "./projects.router.js";
+import newsRouter from "./news.router.js";
+import peopleRouter from "./people.router.js";
 const router = express.Router();
 
 // Middleware to set default response format
@@ -23,4 +25,7 @@ router.use("/profiles", profileRouter);
 router.use("/events", eventsRouter);
 router.use("/search", searchRouter);
 router.use("/projects", projectRouter);
+router.use("/news", newsRouter);
+router.use("/people", peopleRouter);
+
 export default router;

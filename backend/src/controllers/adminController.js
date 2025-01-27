@@ -49,7 +49,7 @@ const adminController = {
     try {
       const user = await prisma.user.findUnique({
         where: { username },
-        include: { role: true, organization: true },
+        include: { userRoles: true },
       });
 
       if (!user) {
@@ -69,8 +69,7 @@ const adminController = {
           id: user.id,
           username: user.username,
           email: user.email,
-          role: user.role.name,
-          organization: user.organization.name,
+          userRoles: user.userRoles,
         },
       });
     } catch (error) {
