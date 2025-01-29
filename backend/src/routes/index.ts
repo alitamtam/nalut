@@ -46,10 +46,10 @@ router.delete("/people/:id", authenticate, authorizeEventEditor, asyncHandler(pe
 
 
 // roles routes (superadmin)
-router.post("/", authenticate, authorizeSuperadmin, RoleController.create);
-router.get("/", authenticate, authorizeSuperadmin, RoleController.getAll);
-router.get("/:id", authenticate, authorizeSuperadmin, RoleController.getOne);
-router.put("/:id", authenticate, authorizeSuperadmin, RoleController.update);
-router.delete("/:id", authenticate, authorizeSuperadmin, RoleController.delete);
+router.post("/role", authenticate, authorizeSuperadmin, RoleController.create);
+router.get("/roles", authenticate, authorizeSuperadmin, RoleController.getAll);
+router.get("/role/:id", authenticate, authorizeSuperadmin, RoleController.getOne);
+router.put("/role/:id", authenticate, authorizeSuperadmin, RoleController.update);
+router.delete("roles/:id", authenticate, authorizeSuperadmin, RoleController.delete);
 
 export default router;
