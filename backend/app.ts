@@ -1,9 +1,9 @@
-import express from "express";
+import express, { Request, Response, NextFunction } from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
 import path from "path";
 import { fileURLToPath } from "url";
-import routes from "./src/routes/index.js";
+import routes from "./src/routes/index"; // This will be updated to `index.ts` later
 
 const app = express();
 
@@ -14,7 +14,7 @@ app.use(cors());
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Serve static files from the "locales" folder (for i18n, translations)
+// Serve static files from the "locales" folder
 app.use("/locales", express.static(path.join(__dirname, "locales")));
 
 // Define allowed origins for CORS
@@ -22,28 +22,25 @@ const allowedOrigins = [
   "https://www.nalut.ly",
   "https://nalut.ly",
   "http://nalut.ly",
-  "http://localhost:5173", // Include your local development URL
+  "http://localhost:5173",
 ];
 
 // CORS configuration in Express
-app.use((req, res, next) => {
-  const origin = req.headers.origin;
-  if (allowedOrigins.includes(origin)) {
-    res.header("Access-Control-Allow-Origin", origin);
-  }
-  res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Content-Type, Authorization, Cache-Control"
-  );
-
-  // Handle preflight requests
-  if (req.method === "OPTIONS") {
-    return res.sendStatus(204);
-  }
-
-  next();
-});
+// Configure CORS
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    methods: ["GET", "POST", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization", "Cache-Control"],
+    credentials: true,
+  })
+);
 
 // Middleware for JSON and URL-encoded requests
 app.use(bodyParser.json({ limit: "10mb" }));
@@ -54,7 +51,7 @@ app.use("/api", routes);
 // Serve static files from the "dist" folder (Vite build output)
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "../frontend/client/dist")));
-  app.get("*", (req, res) => {
+  app.get("*", (req: Request, res: Response) => {
     res.sendFile(
       path.resolve(__dirname, "../frontend/client/dist", "index.html")
     );
@@ -63,7 +60,7 @@ if (process.env.NODE_ENV === "production") {
 
 // Error handling for production
 if (process.env.NODE_ENV === "production") {
-  app.use((err, req, res, next) => {
+  app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
     console.error(err.stack);
     res.status(500).send("Something went wrong! Please try again later.");
   });

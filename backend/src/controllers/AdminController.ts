@@ -1,39 +1,28 @@
-import prisma from "../../prisma/index.js";
+import { Request, Response } from "express";
 import bcrypt from "bcrypt";
-import * as userModel from "../models/userModel.js";
-import { generateToken } from "../middleware/auth.middleware.js";
+import { PrismaClient } from "@prisma/client";
+import { generateToken } from "../middleware/auth.middleware";
+import { User, RegisterUserInput, LoginUserInput, UpdateUserInput } from "../types/user";
 
-const adminController = {
-  async registerUser(req, res) {
+const prisma = new PrismaClient();
+
+const AdminController = {
+  async registerUser(req: Request, res: Response) {
     try {
-      const {
-        firstName,
-        lastName,
-        username,
-        email,
-        password,
-        roleId,
-        organizationId,
-      } = req.body;
+      const { username, email, password }: RegisterUserInput = req.body;
       const hashedPassword = await bcrypt.hash(password, 10);
 
-      // Create the user with role and organization
       const registeredUser = await prisma.user.create({
         data: {
-          firstName,
-          lastName,
           username,
           email,
           password: hashedPassword,
-          roleId,
-          organizationId,
         },
-      });
+      
+      }) as User;
 
-      res
-        .status(201)
-        .json({ message: "User created successfully", user: registeredUser });
-    } catch (error) {
+      res.status(201).json({ message: "User created successfully", user: registeredUser });
+    } catch (error: any) {
       if (error.code === "P2002") {
         res.status(409).json({ message: "Username or email already exists" });
       } else {
@@ -43,33 +32,47 @@ const adminController = {
     }
   },
 
-  async logIn(req, res) {
+  async logIn(req: Request, res: Response): Promise<void> {
     const { username, password } = req.body;
-
+  
     try {
       const user = await prisma.user.findUnique({
         where: { username },
-        include: { userRoles: true },
+        include: {
+          userRoles: {
+            include: {
+              role: true, // Ensure role details are included
+            },
+          },
+        },
       });
-
+  
       if (!user) {
-        return res.status(400).json({ error: "Invalid username or password" });
+        res.status(400).json({ error: "Invalid username or password" });
+        return;
       }
-
+  
       const validPassword = await bcrypt.compare(password, user.password);
       if (!validPassword) {
-        return res.status(400).json({ error: "Invalid username or password" });
+        res.status(400).json({ error: "Invalid username or password" });
+        return;
       }
-
-      const token = generateToken(user);
-
+  
+      // Extract role names correctly
+      const token = generateToken({
+        id: user.id,
+        username: user.username,
+        email: user.email,
+        userRoles: user.userRoles, // Ensure role names are extracted in generateToken
+      });
+  
       res.json({
         token,
         user: {
           id: user.id,
           username: user.username,
           email: user.email,
-          userRoles: user.userRoles,
+          roles: user.userRoles.map((ur) => ur.role.name), // Extract role names explicitly
         },
       });
     } catch (error) {
@@ -78,16 +81,18 @@ const adminController = {
     }
   },
 
-  async logout(req, res) {
+
+
+  async logout(req: Request, res: Response) {
     res.clearCookie("token");
     res.status(200).json({ message: "Logged out successfully" });
   },
 
-  async getAllUsers(req, res) {
+  async getAllUsers(req: Request, res: Response) {
     try {
       const users = await prisma.user.findMany({
         include: {
-          role: true,
+          userRoles: true,
           organization: true,
         },
         take: 100,
@@ -99,20 +104,20 @@ const adminController = {
     }
   },
 
-  async getUserById(req, res) {
+  async getUserById(req: Request, res: Response): Promise<void>  {
     const userId = parseInt(req.params.id);
 
     try {
       const user = await prisma.user.findUnique({
         where: { id: userId },
         include: {
-          role: true,
+          userRoles: true,
           organization: true,
         },
       });
 
       if (!user) {
-        return res.status(404).json({ message: "User not found" });
+         res.status(404).json({ message: "User not found" });
       }
 
       res.status(200).json(user);
@@ -122,33 +127,23 @@ const adminController = {
     }
   },
 
-  async updateUser(req, res) {
+  async updateUser(req: Request, res: Response): Promise<void>  {
     const userId = parseInt(req.params.id);
-    const {
-      firstName,
-      lastName,
-      username,
-      email,
-      oldPassword,
-      newPassword,
-      roleId,
-      organizationId,
-    } = req.body;
+    const { username, email, oldPassword, newPassword }: UpdateUserInput = req.body;
 
     try {
       const user = await prisma.user.findUnique({ where: { id: userId } });
       if (!user) {
-        return res.status(404).json({ message: "User not found" });
+        res.status(404).json({ message: "User not found" });
+        return;
       }
 
       let hashedPassword = user.password;
       if (oldPassword && newPassword) {
-        const validOldPassword = await bcrypt.compare(
-          oldPassword,
-          user.password
-        );
+        const validOldPassword = await bcrypt.compare(oldPassword, user.password);
         if (!validOldPassword) {
-          return res.status(400).json({ message: "Old password is incorrect" });
+          res.status(400).json({ message: "Old password is incorrect" });
+          return;
         }
         hashedPassword = await bcrypt.hash(newPassword, 10);
       }
@@ -156,26 +151,20 @@ const adminController = {
       const updatedUser = await prisma.user.update({
         where: { id: userId },
         data: {
-          firstName: firstName || user.firstName,
-          lastName: lastName || user.lastName,
           username: username || user.username,
           email: email || user.email,
           password: hashedPassword,
-          roleId: roleId || user.roleId,
-          organizationId: organizationId || user.organizationId,
         },
       });
 
-      res
-        .status(200)
-        .json({ message: "User updated successfully", user: updatedUser });
+      res.status(200).json({ message: "User updated successfully", user: updatedUser });
     } catch (error) {
       console.error(error);
       res.status(500).json({ message: "Error updating user" });
     }
   },
 
-  async deleteUser(req, res) {
+  async deleteUser(req: Request, res: Response) {
     const userId = parseInt(req.params.id);
 
     try {
@@ -188,4 +177,5 @@ const adminController = {
   },
 };
 
-export default adminController;
+ export default AdminController;
+;

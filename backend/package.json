@@ -1,13 +1,13 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "main": "app.js",
+  "main": "app.ts",
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "seed": "node prisma/seed.js",
-    "start:dev": "nodemon --watch app --watch libs   server.js",
-    "start:prod": "node server.js",
+    "start:dev": "tsx --env-file .env --watch server.ts",
+    "start:prod": "ts-node-esm server.ts",
     "lint": "eslint . --ext .js",
     "build": "echo \"Build step for production can go here (if needed)\"",
     "start": "NODE_ENV=production npm run start:prod"
@@ -24,15 +24,20 @@
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.21.0",
+    "express-async-handler": "^1.2.0",
     "jsonwebtoken": "^9.0.2",
     "multer": "^1.4.5-lts.1",
     "path": "^0.12.7",
-    "pg": "^8.13.0"
+    "pg": "^8.13.0",
+    "tsx": "^4.19.2"
   },
   "devDependencies": {
     "@eslint/js": "^9.10.0",
+    "@types/bcrypt": "^5.0.2",
+    "@types/cors": "^2.8.17",
     "@types/express": "^5.0.0",
-    "@types/node": "^22.10.10",
+    "@types/jsonwebtoken": "^9.0.8",
+    "@types/node": "^22.12.0",
     "eslint": "^9.10.0",
     "globals": "^15.9.0",
     "nodemon": "^3.1.9",
