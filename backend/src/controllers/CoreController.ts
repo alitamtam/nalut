@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { userModel, storyModel, newsModel, peopleModel } from "../models/CoreModel";
+import { storyModel, newsModel, peopleModel } from "../models/CoreModel";
 
 class CoreController {
   private model: any;

@@ -1,10 +1,9 @@
 import { Request, Response } from "express";
+import prisma from "../../config/db";
 import bcrypt from "bcrypt";
-import { PrismaClient } from "@prisma/client";
 import { generateToken } from "../middleware/auth.middleware";
 import { User, RegisterUserInput, LoginUserInput, UpdateUserInput } from "../types/user";
 
-const prisma = new PrismaClient();
 
 const AdminController = {
   async registerUser(req: Request, res: Response) {

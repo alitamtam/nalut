@@ -1,82 +1,107 @@
-import prisma from "../../prisma/index.js";
-/**
- * Search across multiple tables in the database.
- * @param {Request} req - The request object.
- * @param {Response} res - The response object.
- */
-export const searchDatabase = async (req, res) => {
-  const searchTerm = req.query.term;
-  if (!searchTerm) {
-    return res.status(400).json({ message: "Search term is required" });
-  }
+import { Request, Response } from "express";
+import prisma from "../../config/db";
+import { z } from "zod"; // For input validation
 
+
+// Define search query schema for validation
+const searchSchema = z.object({
+  term: z.string().min(1, "Search term is required"),
+  limit: z.string().optional(),
+  page: z.string().optional(),
+});
+
+/**
+ * Global Search Controller - Searches multiple entities.
+ */
+export const searchDatabase = async (req: Request, res: Response) => {
   try {
-    const results = await Promise.all([
-      prisma.project.findMany({
-        where: {
-          OR: [
-            { title: { contains: searchTerm, mode: "insensitive" } },
-            { content: { contains: searchTerm, mode: "insensitive" } },
-            { link: { contains: searchTerm, mode: "insensitive" } },
-          ],
-        },
-      }),
-      prisma.user.findMany({
-        where: {
-          OR: [
-            { firstName: { contains: searchTerm, mode: "insensitive" } },
-            { lastName: { contains: searchTerm, mode: "insensitive" } },
-            { username: { contains: searchTerm, mode: "insensitive" } },
-            { email: { contains: searchTerm, mode: "insensitive" } },
-            { description: { contains: searchTerm, mode: "insensitive" } },
-          ],
-        },
-      }),
-      prisma.profile.findMany({
-        where: {
-          bio: { contains: searchTerm, mode: "insensitive" },
-        },
-      }),
-      prisma.event.findMany({
-        where: {
-          OR: [
-            { title: { contains: searchTerm, mode: "insensitive" } },
-            { description: { contains: searchTerm, mode: "insensitive" } },
-            { location: { contains: searchTerm, mode: "insensitive" } },
-          ],
-        },
-      }),
-      prisma.publication.findMany({
-        where: {
-          OR: [
-            { title: { contains: searchTerm, mode: "insensitive" } },
-            { content: { contains: searchTerm, mode: "insensitive" } },
-          ],
-        },
-        include: {
-          topic: true,
-        },
-      }),
-      prisma.topic.findMany({
-        where: {
-          OR: [
-            { name: { contains: searchTerm, mode: "insensitive" } },
-            { iconClass: { contains: searchTerm, mode: "insensitive" } },
-          ],
-        },
-      }),
-    ]);
+    // Validate query parameters
+    const { term, limit = "10", page = "1" } = searchSchema.parse(req.query);
+
+    // Convert limit & page to numbers
+    const pageSize = parseInt(limit, 10);
+    const currentPage = parseInt(page, 10);
+    const skip = (currentPage - 1) * pageSize;
+
+    // Entities to search
+    const entitySearches = [
+      {
+        key: "news",
+        query: prisma.news.findMany({
+          where: { OR: [{ title: { contains: term, mode: "insensitive" } }] },
+          take: pageSize,
+          skip,
+        }),
+      },
+      {
+        key: "stories",
+        query: prisma.story.findMany({
+          where: { OR: [{ title: { contains: term, mode: "insensitive" } }] },
+          take: pageSize,
+          skip,
+        }),
+      },
+      {
+        key: "people",
+        query: prisma.user.findMany({
+          where: {
+            OR: [
+            
+              { username: { contains: term, mode: "insensitive" } },
+            ],
+          },
+          take: pageSize,
+          skip,
+        }),
+      },
+      {
+        key: "organizations",
+        query: prisma.organization.findMany({
+          where: { name: { contains: term, mode: "insensitive" } },
+          take: pageSize,
+          skip,
+        }),
+      },
+      {
+        key: "vehicles",
+        query: prisma.vehicle.findMany({
+          where: { licensePlate: { contains: term, mode: "insensitive" } },
+          take: pageSize,
+          skip,
+        }),
+      },
+      {
+        key: "incidents",
+        query: prisma.incident.findMany({
+          where: {
+            OR: [
+              { description: { contains: term, mode: "insensitive" } },
+              { location: { contains: term, mode: "insensitive" } },
+            ],
+          },
+          take: pageSize,
+          skip,
+        }),
+      },
+    ];
+
+    // Execute all queries in parallel
+    const results = await Promise.all(entitySearches.map((search) => search.query));
+
+    // Structure response
+    const response = entitySearches.reduce((acc, search, index) => {
+      acc[search.key] = results[index];
+      return acc;
+    }, {} as Record<string, any[]>);
 
     res.json({
-      projects: results[0],
-      users: results[1],
-      profiles: results[2],
-      events: results[3],
-      publications: results[4],
-      topics: results[5],
+      searchTerm: term,
+      currentPage,
+      pageSize,
+      results: response,
     });
   } catch (error) {
-    console.error("Error during search:", error);
-    res.status(500).json({ message: "Internal server error" });
+    console.error("Search error:", error);
+    res.status(400).json({ error: (error as Error).message });
   }
 };

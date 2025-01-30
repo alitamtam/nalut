@@ -16,6 +16,7 @@ import {
   authorizeNewsEditor,
   } from "middleware/auth.middleware";
 import asyncHandler from "express-async-handler";
+import { searchDatabase } from "../controllers/searchController.js";
 
 const router = express.Router();
 
@@ -65,5 +66,6 @@ router.get("/user/:userId/roles", authenticate, authorizeSuperadmin, RoleControl
 router.get("/role/:roleId/permissions", authenticate, authorizeSuperadmin, RoleController.getRolePermissions);
 
 
-
+// Route to search across multiple tables
+router.get("/search", searchDatabase);
 export default router;

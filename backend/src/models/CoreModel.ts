@@ -1,6 +1,5 @@
-import { PrismaClient } from "@prisma/client";
+import prisma from "../../config/db";
 
-const prisma = new PrismaClient();
 
 class CoreModel<T> {
   private model: any;
