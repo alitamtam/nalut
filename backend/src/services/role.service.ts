@@ -31,4 +31,20 @@ export const RoleService = {
       where: { id },
     });
   },
+
+  async assignRole(userId: number, roleId: number) {
+    return prisma.userRole.create({ data: { userId, roleId } });
+},
+
+async revokeRole(userId: number, roleId: number) {
+    return prisma.userRole.deleteMany({ where: { userId, roleId } });
+},
+
+async getUserRoles(userId: number) {
+    return prisma.userRole.findMany({ where: { userId }, include: { role: true } });
+},
+
+async getRolePermissions(roleId: number) {
+    return prisma.permission.findMany({ where: { roleId } });
+},
 };

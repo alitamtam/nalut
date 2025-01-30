@@ -9,24 +9,24 @@ class CoreModel<T> {
     this.model = model;
   }
 
-  async create(data: T) {
+  async create(data: T): Promise<T> {
     return this.model.create({ data });
   }
 
-  async getAll() {
+  async getAll(): Promise<T[]> {
     return this.model.findMany();
   }
 
-  async getOne(id: number) {
+  async getOne(id: number): Promise<T | null> {
     return this.model.findUnique({ where: { id } });
   }
 
-  async update(id: number, data: Partial<T>) {
+  async update(id: number, data: Partial<T>): Promise<T> {
     return this.model.update({ where: { id }, data });
   }
 
-  async delete(id: number) {
-    return this.model.delete({ where: { id } });
+  async delete(id: number): Promise<void> {
+    await this.model.delete({ where: { id } });
   }
 }
 

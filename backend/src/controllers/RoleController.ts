@@ -49,4 +49,44 @@ export const RoleController = {
         res.status(400).json({ error: (error as Error).message });
     }
   },
+
+  async assignRole(req: Request, res: Response) {
+    try {
+        const { userId, roleId } = req.body;
+        const result = await RoleService.assignRole(userId, roleId);
+        res.json({ message: "Role assigned successfully", result });
+    } catch (error) {
+      res.status(400).json({ error: (error as Error).message });
+    }
+},
+
+async revokeRole(req: Request, res: Response) {
+    try {
+        const { userId, roleId } = req.body;
+        await RoleService.revokeRole(userId, roleId);
+        res.json({ message: "Role revoked successfully" });
+    } catch (error) {
+      res.status(400).json({ error: (error as Error).message });
+    }
+},
+
+async getUserRoles(req: Request, res: Response) {
+    try {
+        const { userId } = req.params;
+        const roles = await RoleService.getUserRoles(Number(userId));
+        res.json(roles);
+    } catch (error) {
+      res.status(400).json({ error: (error as Error).message });
+    }
+},
+
+async getRolePermissions(req: Request, res: Response) {
+    try {
+        const { roleId } = req.params;
+        const permissions = await RoleService.getRolePermissions(Number(roleId));
+        res.json(permissions);
+    } catch (error) {
+      res.status(400).json({ error: (error as Error).message });
+    }
+},
 };

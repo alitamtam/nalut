@@ -32,11 +32,15 @@ router.get("/users", authenticate, AdminController.getAllUsers); // Get all user
 router.get("/user/:id", authenticate, AdminController.getUserById); // Get user by ID
 
 // **Health Editor Routes**
+router.get("/news",  asyncHandler(newsController.getAll));
+router.get("/news/:id", asyncHandler(newsController.getOne));
 router.post("/news", authenticate, authorizeHealthEditor, asyncHandler(newsController.create));
 router.put("/news/:id", authenticate, authorizeHealthEditor, asyncHandler(newsController.update));
 router.delete("/news/:id", authenticate, authorizeHealthEditor, asyncHandler(newsController.delete));
 
 // **Story Editor Routes**
+router.get("/stories", asyncHandler(storyController.getAll));
+router.get("/stories/:id", asyncHandler(storyController.getOne));
 router.post("/stories", authenticate, authorizeStoryEditor, asyncHandler(storyController.create));
 router.put("/stories/:id", authenticate, authorizeStoryEditor, asyncHandler(storyController.update));
 router.delete("/stories/:id", authenticate, authorizeStoryEditor, asyncHandler(storyController.delete));
@@ -53,5 +57,13 @@ router.get("/roles", authenticate, authorizeSuperadmin, RoleController.getAll);
 router.get("/role/:id", authenticate, authorizeSuperadmin, RoleController.getOne);
 router.put("/role/:id", authenticate, authorizeSuperadmin, RoleController.update);
 router.delete("roles/:id", authenticate, authorizeSuperadmin, RoleController.delete);
+
+
+router.post("/assign-role", authenticate, authorizeSuperadmin, RoleController.assignRole);
+router.post("/revoke-role", authenticate, authorizeSuperadmin, RoleController.revokeRole);
+router.get("/user/:userId/roles", authenticate, authorizeSuperadmin, RoleController.getUserRoles);
+router.get("/role/:roleId/permissions", authenticate, authorizeSuperadmin, RoleController.getRolePermissions);
+
+
 
 export default router;
