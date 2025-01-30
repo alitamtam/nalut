@@ -12,7 +12,9 @@ import {
   authorizeHealthEditor,
   authorizeStoryEditor,
   authorizeEventEditor,
-} from "middleware/auth.middleware";
+  authorizePeopleEditor,
+  authorizeNewsEditor,
+  } from "middleware/auth.middleware";
 import asyncHandler from "express-async-handler";
 
 const router = express.Router();
@@ -21,7 +23,7 @@ const router = express.Router();
 
 // **Admin User Management**
 // User management routes
-router.post("/register", AdminController.registerUser); // Create a user
+router.post("/register",authenticate,authorizeSuperadmin, AdminController.registerUser); // Create a user
 router.post("/login", AdminController.logIn); // User login
 router.post("/logout", authenticate, AdminController.logout); // User logout
 router.put("/user/:id", authenticate, AdminController.updateUser); // Update a user
@@ -40,9 +42,9 @@ router.put("/stories/:id", authenticate, authorizeStoryEditor, asyncHandler(stor
 router.delete("/stories/:id", authenticate, authorizeStoryEditor, asyncHandler(storyController.delete));
 
 // **Event Editor Routes**
-router.post("/people", authenticate, authorizeEventEditor, asyncHandler(peopleController.create));
-router.put("/people/:id", authenticate, authorizeEventEditor, asyncHandler(peopleController.update));
-router.delete("/people/:id", authenticate, authorizeEventEditor, asyncHandler(peopleController.delete));
+router.post("/people", authenticate, authorizePeopleEditor, asyncHandler(peopleController.create));
+router.put("/people/:id", authenticate, authorizePeopleEditor, asyncHandler(peopleController.update));
+router.delete("/people/:id", authenticate, authorizePeopleEditor, asyncHandler(peopleController.delete));
 
 
 // roles routes (superadmin)

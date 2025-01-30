@@ -3,7 +3,7 @@ import cors from "cors";
 import bodyParser from "body-parser";
 import path from "path";
 import { fileURLToPath } from "url";
-import routes from "./src/routes/index"; // This will be updated to `index.ts` later
+import routes from "./src/routes/router"; // This will be updated to `index.ts` later
 
 const app = express();
 
@@ -22,6 +22,7 @@ const allowedOrigins = [
   "https://www.nalut.ly",
   "https://nalut.ly",
   "http://nalut.ly",
+  "http://localhost:4000",
   "http://localhost:5173",
 ];
 
