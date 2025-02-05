@@ -1,4 +1,29 @@
-<div class="flex items-center space-x-4">
-    <button mat-button>العربية</button>
-    <button mat-button>English</button>
-</div>
+<mat-toolbar color="primary" class="d-flex justify-content-between">
+    <!-- Left Side (Logo) -->
+    <div>
+        <h2 class="p-4">www.nalut.ly</h2>
+    </div>
+
+    <!-- Desktop Navigation (Visible on Large Screens) -->
+    <div class="d-none d-md-flex gap-3" *ngIf="!isMobile">
+        <a mat-button routerLink="/news">News</a>
+        <a mat-button routerLink="/ngo">NGO</a>
+        <a mat-button routerLink="/mayor-city">My Mayor City</a>
+        <a mat-button routerLink="/discover-nalut">Discover Nalut</a>
+        <a mat-button routerLink="/option2">Option 2</a>
+    </div>
+
+    <!-- Mobile/Tablet Navigation (Dropdown) -->
+    <div *ngIf="isMobile">
+        <button mat-button [matMenuTriggerFor]="mainMenu">
+            <mat-icon>menu</mat-icon>
+        </button>
+        <mat-menu #mainMenu="matMenu">
+            <button mat-menu-item routerLink="/news">News</button>
+            <button mat-menu-item routerLink="/ngo">NGO</button>
+            <button mat-menu-item routerLink="/mayor-city">My Mayor City</button>
+            <button mat-menu-item routerLink="/discover-nalut">Discover Nalut</button>
+            <button mat-menu-item routerLink="/option2">Option 2</button>
+        </mat-menu>
+    </div>
+</mat-toolbar>
