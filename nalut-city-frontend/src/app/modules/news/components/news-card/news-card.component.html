@@ -1,0 +1,17 @@
+<p>news-card works!</p>
+<mat-card *ngFor="let newsItem of newsList" class="news-card">
+    <mat-card-header>
+        <mat-card-title>{{ newsItem.title }}</mat-card-title>
+        <mat-card-subtitle>{{ newsItem.date | date }}</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image [src]="newsItem.imageUrl" alt="{{ newsItem.title }}">
+    <mat-card-content>
+        <p>{{ newsItem.description }}</p>
+    </mat-card-content>
+    <mat-card-actions>
+        <button mat-button>Read More</button>
+    </mat-card-actions>
+</mat-card>
+
+<mat-paginator [length]="totalNews" [pageSize]="pageSize" (page)="onPageChange($event)">
+</mat-paginator>
