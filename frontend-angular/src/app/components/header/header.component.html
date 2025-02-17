@@ -1,0 +1,22 @@
+<mat-toolbar color="primary" class="toolbar">
+  <span class="logo">Nalut City</span>
+  <span class="spacer"></span>
+
+  <a mat-button routerLink="/">Home</a>
+  <a mat-button routerLink="/news">News</a>
+  <a mat-button routerLink="/services">Services</a>
+
+  <!-- Dropdown for Departments -->
+  <div class="dropdown">
+    <button mat-button class="dropbtn">
+      Departments <mat-icon>expand_more</mat-icon>
+    </button>
+    <div class="dropdown-content">
+      <a mat-button routerLink="/departments/health">Health</a>
+      <a mat-button routerLink="/departments/education">Education</a>
+      <a mat-button routerLink="/departments/transport">Transport</a>
+    </div>
+  </div>
+
+  <a mat-button routerLink="/contact">Contact</a>
+</mat-toolbar>
